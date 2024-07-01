@@ -1,0 +1,79 @@
+.card {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 1rem;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: rgba(86, 20, 208, 0.25) 5px 5px 15px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.infoContainer {
+  padding: 1rem;
+  height: 50%;
+  text-align: center;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 1.875rem;
+  background-color: #e5ddfb;
+  color: $primary-color;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.name {
+  margin-top: 0.5rem;
+}
+
+.contactPerson {
+  margin-top: 1rem;
+  color: $primary-color;
+}
+
+.address {
+  margin: 1rem 0;
+  color: #a8a8a8;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) {
+  .card {
+    height: 28.125rem;
+  }
+
+  .infoContainer {
+    text-align: start;
+  }
+
+  .chip {
+    font-size: 0.9rem;
+  }
+
+  .name {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .contactPerson {
+    font-size: 1.1rem;
+  }
+}

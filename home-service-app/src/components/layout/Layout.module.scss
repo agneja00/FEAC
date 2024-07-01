@@ -1,0 +1,17 @@
+.rootContainer {
+  padding: 2rem;
+}
+
+.authContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 117px);
+  background-color: #f9f8fe;
+}
+
+@media only screen and (min-width: 768px) {
+  .rootContainer {
+    padding: 4rem;
+  }
+}
