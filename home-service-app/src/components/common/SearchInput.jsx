@@ -1,22 +1,21 @@
+import PropTypes from "prop-types";
 import styles from "./SearchInput.module.scss";
-import { useState } from "react";
 
-const SearchInput = ({ ...props }) => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
+const SearchInput = ({ value, onChange, ...props }) => {
   return (
     <input
       className={styles.searchInput}
       placeholder="Search"
       value={value}
+      onChange={onChange}
       {...props}
-      onChange={handleChange}
     />
   );
+};
+
+SearchInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default SearchInput;
