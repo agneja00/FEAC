@@ -1,0 +1,49 @@
+.button {
+  padding: 0.8rem;
+  background-color: $primary-color;
+  color: $tertiary-color;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #5b24e7;
+  }
+}
+
+.rounded {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.large {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
+
+.small {
+  padding: 0.5rem 1rem;
+}
+
+.favorite {
+  background-color: $tertiary-color;
+  color: $secondary-color;
+
+  &:hover {
+    background-color: #ab2788;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .button {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .rounded {
+    width: 4rem;
+    height: 4rem;
+  }
+}

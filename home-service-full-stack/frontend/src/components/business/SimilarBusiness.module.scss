@@ -1,0 +1,50 @@
+.title {
+  margin-top: 1.5rem;
+}
+
+.similarContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.similarBusiness {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.businessImg {
+  width: 10rem;
+  border-radius: 10%;
+  object-fit: contain;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-size: 0.85rem;
+  color: #7c7878;
+}
+
+.similarName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $secondary-color;
+}
+
+.contactPerson {
+  color: $primary-color;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .detailsContainer {
+    font-size: 1rem;
+  }
+}
