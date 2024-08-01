@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createBooking, fetchUserBookings } from "./api";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
-import { BookingStatus, BookingWithBusiness } from "./types";
+import { BookingStatus } from "./types";
 
 export const BOOKING_KEY = "BOOKING";
 
@@ -13,7 +13,7 @@ export const useUserBookings = (status: BookingStatus) => {
   return useQuery({
     queryKey: [BOOKING_KEY, userEmail, status],
     queryFn: async () => {
-      const bookings: BookingWithBusiness[] = await fetchUserBookings(userEmail, status);
+      const bookings = await fetchUserBookings(userEmail, status);
       return bookings.filter((booking) => booking.userEmail === userEmail);
     },
   });

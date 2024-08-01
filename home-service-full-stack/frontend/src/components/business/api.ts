@@ -6,7 +6,9 @@ export const fetchBusinesses = async (): Promise<Business[]> => {
   return await response.data;
 };
 
-export const fetchBusinessById = async (businessId: string) => {
+export const fetchBusinessById = async (
+  businessId: string
+): Promise<Business> => {
   try {
     const response = await axiosInstance.get(`/businesses/${businessId}`);
     return response.data;

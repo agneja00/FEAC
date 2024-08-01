@@ -1,6 +1,5 @@
 import styles from "./BookingModal.module.scss";
 import { useContext, useState } from "react";
-import { useSnackbar } from "notistack";
 import { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,17 +19,18 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
   const { currentBusiness } = useCurrentBusiness();
   const { user } = useContext(UserContext);
   const { mutateAsync: postBooking } = useAddBooking();
-  const { enqueueSnackbar } = useSnackbar();
 
   const [dateValue, setDateValue] = useState<Dayjs | null>(null);
-  const [timeSlot, setTimeSlot] = useState<string>("");
+  const [timeSlot, setTimeSlot] = useState("");
 
   const timeSlots = [
+    "8:00 AM",
     "10:00 AM",
     "11:00 AM",
     "11:30 AM",
     "12:00 AM",
     "12:30 AM",
+    "14:00 AM",
     "6:00 PM",
     "7:00 PM",
   ];
@@ -56,14 +56,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
         status: "confirmed",
       };
       await postBooking(booking);
-      enqueueSnackbar("Booking successful", {
-        variant: "success",
-      });
-      console.log(booking);
     } catch (error) {
-      enqueueSnackbar("An error occurred. Please try again.", {
-        variant: "error",
-      });
+      console.error("Error booking:", error);
     }
   };
 
