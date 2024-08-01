@@ -1,0 +1,25 @@
+.buttonContainer {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    display: flex;
+  }
+
+  .infoContainer {
+    margin-right: 10rem;
+  }
+
+  .button {
+    justify-content: center;
+    width: 100%;
+  }
+}
