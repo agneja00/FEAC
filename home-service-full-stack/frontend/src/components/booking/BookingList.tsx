@@ -1,18 +1,18 @@
 import BookingCard from "./BookingCard";
 import { useState } from "react";
 import { useUserBookings } from "./hooks";
-import { BookingStatus, BookingWithBusiness } from "./types";
+import { BookingStatus, Booking } from "./types";
 
 const BookingList: React.FC = () => {
   const [status, setStatus] = useState<BookingStatus>("confirmed");
 
   const { data: bookings } = useUserBookings(status);
-  const bookingsData: BookingWithBusiness[] = bookings ?? [];
+  const businessBookings: Booking[] = bookings ?? [];
 
   return (
     <>
-      {bookingsData.map((booking: BookingWithBusiness) => (
-        <BookingCard key={booking._id} bookingsData={booking} />
+      {businessBookings.map((booking) => (
+        <BookingCard key={booking._id} booking={booking} />
       ))}
     </>
   );

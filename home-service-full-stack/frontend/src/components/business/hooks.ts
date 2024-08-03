@@ -12,11 +12,9 @@ export const useBusinesses = () => {
   });
 };
 
-export const BUSINESS_ID_KEY = "BUSINESS_ID";
-
 export const useBusinessById = (businessId: string) => {
   return useQuery<Business>({
-    queryKey: [BUSINESS_ID_KEY, businessId],
+    queryKey: [BUSINESS_KEY, businessId],
     queryFn: () => fetchBusinessById(businessId),
   });
 };
