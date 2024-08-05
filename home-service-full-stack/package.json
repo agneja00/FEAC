@@ -1,0 +1,17 @@
+{
+    "name": "home-service-full-stack",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+      "start": "cd backend && yarn && yarn build && yarn start",
+      "heroku-postbuild": "cd frontend && yarn && yarn build",
+      "deploy": "git push heroku main"
+    },
+    "engines": {
+      "node": "20.x",
+      "yarn": "1.x"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
