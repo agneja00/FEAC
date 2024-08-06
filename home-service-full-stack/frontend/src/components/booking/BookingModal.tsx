@@ -10,7 +10,6 @@ import { useAddBooking } from "./hooks";
 import { UserContext } from "../context/UserContext";
 import { NewBooking } from "./types";
 import useCurrentBusiness from "../business/hooks";
-import axiosInstance from "@/config/axios";
 
 interface BookingModalProps {
   onClose: () => void;
@@ -56,25 +55,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
         userName: user.name,
         status: "confirmed",
       };
-
-      const response = await postBooking(booking);
-
-      const emailMsg = {
-        to: user.email,
-        from: "homeservicessup@gmail.com",
-        subject: "Rezervacijos patvirtinimas",
-        text: `Gerb. ${user.name}, jūsų rezervacija su ${currentBusiness.name} buvo patvirtinta.`,
-        html: `<p>Gerb. ${user.name}, jūsų rezervacija su <strong>${
-          currentBusiness.name
-        }</strong> <strong>${dateValue?.format(
-          "YYYY-MM-DD"
-        )}</strong> <strong>${timeSlot}</strong> buvo <i>patvirtinta</i>.</p>`,
-      };
-      const emailResponse = await axiosInstance.post(
-        `/businesses/${currentBusiness._id}`,
-        emailMsg
-      );
-      console.log("Email sent:", emailResponse.data.message);
+      await postBooking(booking);
     } catch (error) {
       console.error("Error booking:", error);
     }
