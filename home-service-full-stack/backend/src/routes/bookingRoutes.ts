@@ -1,6 +1,10 @@
 import express from "express";
 import Booking from "../models/Booking";
+import { IBusiness } from "../models/Business";
 import authMiddleware from "../middlewares/authMiddleware";
+import sendEmail from "../utils/sendEmail";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
@@ -17,7 +21,24 @@ router.post("/", authMiddleware, async (req, res) => {
   try {
     const newBooking = new Booking(req.body);
     await newBooking.save();
-    res.status(201).json(newBooking);
+
+    const bookingWithBusiness = await Booking.findById(newBooking._id).populate("businessId");
+    const business = bookingWithBusiness?.businessId as unknown as IBusiness;
+
+    const userEmail = bookingWithBusiness?.userEmail;
+    const userName = bookingWithBusiness?.userName;
+    const businessName = business?.name;
+    const date = bookingWithBusiness?.date.toISOString().split("T")[0];
+    const time = bookingWithBusiness?.time;
+
+    sendEmail({
+      to: userEmail!,
+      from: process.env.FROM_EMAIL!,
+      subject: "Rezervacijos patvirtinimas",
+      text: `Gerb. ${userName}, jūsų rezervacija su ${businessName} buvo patvirtinta.`,
+      html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${businessName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
+    });
+    res.status(201).json(bookingWithBusiness);
   } catch (err) {
     res.status(400).json({
       message: "Error creating booking",

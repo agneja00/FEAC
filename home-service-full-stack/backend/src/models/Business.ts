@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface IBusiness {
+export interface IBusiness {
   name: string;
   about: string;
   address: string;
