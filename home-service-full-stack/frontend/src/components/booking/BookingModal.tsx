@@ -55,7 +55,20 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
         userName: user.name,
         status: "confirmed",
       };
-      await postBooking(booking);
+
+      const response = await postBooking(booking);
+
+      const emailData = {
+        to: user.email,
+        from: "homeservicessup@gmail.com",
+        subject: "Rezervacijos patvirtinimas",
+        text: `Gerb. ${user.name}, jūsų rezervacija su ${currentBusiness.name} buvo patvirtinta.`,
+        html: `<p>Gerb. ${user.name}, jūsų rezervacija su <strong>${
+          currentBusiness.name
+        }</strong> <strong>${dateValue?.format(
+          "YYYY-MM-DD"
+        )}</strong> <strong>${timeSlot}</strong> buvo <i>patvirtinta</i>.</p>`,
+      };
     } catch (error) {
       console.error("Error booking:", error);
     }
