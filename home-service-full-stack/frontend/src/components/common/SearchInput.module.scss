@@ -1,5 +1,7 @@
 .searchInput {
-  transition: box-shadow 100ms ease-in, border 100ms ease-in,
+  transition:
+    box-shadow 100ms ease-in,
+    border 100ms ease-in,
     background-color 100ms ease-in;
   color: #0e0e10;
   padding: 1rem;

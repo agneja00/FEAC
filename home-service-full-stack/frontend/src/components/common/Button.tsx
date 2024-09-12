@@ -24,7 +24,7 @@ const Button = ({
         favorite && styles.favorite,
         small && styles.small,
         large && styles.large,
-        className
+        className,
       )}
       {...props}
     >

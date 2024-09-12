@@ -10,7 +10,7 @@ const SimilarBusiness: React.FC = () => {
   const similarBusiness = businesses?.filter(
     (business) =>
       business.category === currentBusiness?.category &&
-      business._id !== currentBusiness._id
+      business._id !== currentBusiness._id,
   );
   const businessPath =
     similarBusiness && similarBusiness.length > 0

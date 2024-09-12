@@ -23,7 +23,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
       className={classNames(
         styles.card,
         activeCategory === name && styles.active,
-        className
+        className,
       )}
       onClick={() => navigate(categoryPath)}
     >

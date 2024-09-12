@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+  <head>
+    <title>LoginForm.test.tsx</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <script
+      src="..\..\..\..\assets\source-file.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <link
+      href="..\..\..\..\assets\source-file.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div style="margin-top: 3em" class="ui container">
+      <h1 class="ui header">
+        <a href="..\..\..\..\index.html">TypeScript coverage report</a>
+      </h1>
+      <table style="margin-top: 2em" class="ui celled table">
+        <thead class="">
+          <tr class="">
+            <th class="">Filename</th>
+            <th class="">Percent</th>
+            <th class="">Threshold</th>
+            <th class="">Total</th>
+            <th class="">Covered</th>
+            <th class="">Uncovered</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr class="positive">
+            <td class="">src\components\user\LoginForm.test.tsx</td>
+            <td class="">99.38%</td>
+            <td class="">99%</td>
+            <td class="">162</td>
+            <td class="">161</td>
+            <td class="">1</td>
+          </tr>
+        </tbody>
+      </table>
+      <textarea id="editor" readonly="" style="margin-top: 3em">
+import { render, screen, fireEvent, waitFor } from &quot;@testing-library/react&quot;;
+import { BrowserRouter as Router } from &quot;react-router-dom&quot;;
+import { UserContext } from &quot;@/components/context/UserContext&quot;
+import LoginForm from &quot;./LoginForm&quot;;
+import { useLoginUser } from &quot;./hooks&quot;;
+import { ROUTES } from &quot;@/constants/routes&quot;;
+
+jest.mock(&quot;./hooks&quot;, () =&gt; ({
+  useLoginUser: jest.fn(),
+}));
+
+const mockNavigate = jest.fn();
+
+jest.mock(&quot;react-router-dom&quot;, () =&gt; ({
+  ...jest.requireActual(&quot;react-router-dom&quot;),
+  useNavigate: () =&gt; mockNavigate,
+}));
+
+const loginMock = jest.fn();
+
+describe(&quot;LoginForm Component&quot;, () =&gt; {
+  beforeEach(() =&gt; {
+    (useLoginUser as jest.Mock).mockReturnValue({
+      mutateAsync: jest.fn(),
+    });
+  });
+
+  const renderComponent = () =&gt;
+    render(
+      &lt;Router&gt;
+        &lt;UserContext.Provider
+          value={{
+            login: loginMock,
+            logout: jest.fn(),
+            user: null,
+            isLoggedIn: false,
+          }}
+        &gt;
+          &lt;LoginForm /&gt;
+        &lt;/UserContext.Provider&gt;
+      &lt;/Router&gt;
+    );
+
+  test(&quot;renders login form&quot;, () =&gt; {
+    renderComponent();
+    expect(screen.getByPlaceholderText(&quot;Email&quot;)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(&quot;Password&quot;)).toBeInTheDocument();
+    expect(screen.getByText(&quot;Log in&quot;)).toBeInTheDocument();
+  });
+
+  test(&quot;submits form with valid data&quot;, async () =&gt; {
+    const mockLoginUser = (useLoginUser as jest.Mock).mockReturnValue({
+      mutateAsync: jest.fn().mockResolvedValue({ user: &quot;test user&quot; }),
+    });
+
+    renderComponent();
+
+    fireEvent.change(screen.getByPlaceholderText(&quot;Email&quot;), {
+      target: { value: &quot;test@example.com&quot; },
+    });
+    fireEvent.change(screen.getByPlaceholderText(&quot;Password&quot;), {
+      target: { value: &quot;password&quot; },
+    });
+    fireEvent.click(screen.getByText(&quot;Log in&quot;));
+
+    await waitFor(() =&gt; {
+      expect(mockLoginUser().mutateAsync).toHaveBeenCalledWith({
+        email: &quot;test@example.com&quot;,
+        password: &quot;password&quot;,
+      });
+      expect(loginMock).toHaveBeenCalledWith({ user: &quot;test user&quot; });
+      expect(mockNavigate).toHaveBeenCalledWith(ROUTES.HOME);
+    });
+  });
+
+  test(&quot;displays error message on failed login&quot;, async () =&gt; {
+    const errorMessage = &quot;Invalid credentials&quot;;
+    (useLoginUser as jest.Mock).mockReturnValue({
+      mutateAsync: jest.fn().mockRejectedValue({
+        response: { data: { message: errorMessage } },
+      }),
+    });
+
+    renderComponent();
+
+    fireEvent.change(screen.getByPlaceholderText(&quot;Email&quot;), {
+      target: { value: &quot;test@example.com&quot; },
+    });
+    fireEvent.change(screen.getByPlaceholderText(&quot;Password&quot;), {
+      target: { value: &quot;password&quot; },
+    });
+    fireEvent.click(screen.getByText(&quot;Log in&quot;));
+
+    await waitFor(() =&gt; {
+      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+    });
+  });
+
+  test(&quot;shows validation errors for empty fields&quot;, async () =&gt; {
+    renderComponent();
+
+    fireEvent.click(screen.getByText(&quot;Log in&quot;));
+
+    await waitFor(async () =&gt; {
+      const errors = await screen.findAllByText(&quot;Field is required&quot;);
+      expect(errors.length).toBe(2);
+    });
+  });
+});</textarea
+      >
+      <pre id="annotations" style="display: none">
+[{&quot;file&quot;:&quot;src\\components\\user\\LoginForm.test.tsx&quot;,&quot;line&quot;:66,&quot;character&quot;:29,&quot;text&quot;:&quot;mutateAsync&quot;,&quot;kind&quot;:1}]</pre
+      >
+    </div>
+    <p class="footer-text">
+      TypeScript Coverage Report generated by
+      <a href="https://github.com/plantain-00/type-coverage">type-coverage</a>
+      and
+      <a href="https://github.com/alexcanessa/typescript-coverage-report"
+        >typescript-coverage-report</a
+      >
+      at Thu, 12 Sep 2024 09:37:51 GMT
+    </p>
+  </body>
+</html>

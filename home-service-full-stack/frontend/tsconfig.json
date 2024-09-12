@@ -20,6 +20,6 @@
       "@/*": ["*"] // Add this line for import resolving
     }
   },
-  "include": ["src"],
+  "include": ["src", "./jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

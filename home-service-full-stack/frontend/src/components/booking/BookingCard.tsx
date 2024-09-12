@@ -2,7 +2,7 @@ import styles from "./BookingCard.module.scss";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock, HiOutlineLocationMarker } from "react-icons/hi";
 import { FaRegCalendar } from "react-icons/fa";
-import { Booking } from "./types";
+import { Booking } from "./types.ts";
 
 interface BookingCardProps {
   booking: Booking;

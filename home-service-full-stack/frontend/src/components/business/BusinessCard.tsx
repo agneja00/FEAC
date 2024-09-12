@@ -10,7 +10,7 @@ interface BusinessCardProps {
   business: Business;
 }
 
-const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
+const BusinessCard = ({ business }: BusinessCardProps) => {
   const { _id } = business;
   const navigate = useNavigate();
   const businessPath = generatePath(ROUTES.BUSINESS_ID, { id: _id });
@@ -30,11 +30,13 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
 
   return (
     <div className={styles.card}>
-      <img
-        src={business?.imageUrls[0]}
-        alt={business.name}
-        className={styles.image}
-      />
+      {business.imageUrls.length && (
+        <img
+          src={business.imageUrls[0]}
+          alt={business.name}
+          className={styles.image}
+        />
+      )}
       <div className={styles.infoContainer}>
         <span className={styles.chip}>{business.category}</span>
         <h3 className={styles.name}>{business.name}</h3>

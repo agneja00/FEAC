@@ -4,13 +4,13 @@ import { fetchBusinessById } from "../business/api";
 
 export const fetchUserBookings = async (
   userEmail: string,
-  status: BookingStatus
+  status: BookingStatus,
 ): Promise<Booking[]> => {
   const response = await axiosInstance.get<Booking[]>(
     `/bookings/user/${userEmail}`,
     {
       params: { status },
-    }
+    },
   );
   const bookings = response.data;
 
@@ -21,7 +21,7 @@ export const fetchUserBookings = async (
         return { ...booking, businessId: business };
       }
       return booking;
-    })
+    }),
   );
 
   return bookingsWithBusiness;

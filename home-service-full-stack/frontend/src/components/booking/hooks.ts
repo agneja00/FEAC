@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createBooking, fetchUserBookings } from "./api";
-import { UserContext } from "../context/UserContext";
+import { createBooking, fetchUserBookings } from "./api.ts";
+import { UserContext } from "../context/UserContext.tsx";
 import { useContext } from "react";
-import { BookingStatus } from "./types";
+import { BookingStatus } from "./types.ts";
 
 export const BOOKING_KEY = "BOOKING";
 
