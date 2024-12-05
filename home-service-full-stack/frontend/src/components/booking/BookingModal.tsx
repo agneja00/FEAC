@@ -49,7 +49,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
 
       const booking: NewBooking = {
         businessId: currentBusiness._id,
-        date: dateValue ? dateValue.toDate() : null,
+        date: dateValue ? new Date(dateValue.format("YYYY-MM-DD")) : null,
         time: timeSlot,
         userEmail: user.email,
         userName: user.name,
