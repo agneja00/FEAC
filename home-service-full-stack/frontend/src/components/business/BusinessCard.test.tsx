@@ -63,7 +63,7 @@ describe("<BusinessCard />", () => {
     render(<BusinessCard business={mockBusiness} />);
 
     expect(
-      screen.getByRole("button", { name: /Book now/i })
+      screen.getByRole("button", { name: /Book now/i }),
     ).toBeInTheDocument();
   });
 });

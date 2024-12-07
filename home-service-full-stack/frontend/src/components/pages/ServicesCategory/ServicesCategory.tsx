@@ -1,7 +1,7 @@
 import ServicesContent from "../../common/ServicesContent";
 
-const Services: React.FC = () => {
+const ServicesCategory: React.FC = () => {
   return <ServicesContent />;
 };
 
-export default Services;
+export default ServicesCategory;

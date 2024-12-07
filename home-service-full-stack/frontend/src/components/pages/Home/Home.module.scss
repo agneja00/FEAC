@@ -1,4 +1,38 @@
+.hero {
+  text-align: center;
+}
+
 .title {
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.primary {
+  color: $primary-color;
+}
+
+.subtitle {
+  color: #a8a8a8;
+  line-height: 1.5rem;
+  padding: 1rem;
+}
+
+.businessTitle {
   font-size: 1.2rem;
   margin: 2rem 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .hero {
+    padding-top: 2rem;
+  }
+
+  .title {
+    font-size: 3.5rem;
+    line-height: 5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
 }

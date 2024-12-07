@@ -7,7 +7,7 @@ import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 import Home from "./components/pages/Home/Home";
 import About from "./components/pages/About/About";
 import Login from "./components/pages/Login/Login";
-import SearchCategory from "./components/pages/SearchCategory/SearchCategory";
+import ServicesCategory from "./components/pages/ServicesCategory/ServicesCategory";
 import BusinessPage from "./components/pages/BusinessPage/BusinessPage";
 import BookingsPage from "./components/pages/BookingsPage/BookingsPage";
 import AuthLayout from "./components/layout/AuthLayout";
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: ROUTES.SEARCH_CATEGORY,
-        element: <SearchCategory />,
+        path: ROUTES.SERVICES_CATEGORY,
+        element: <ServicesCategory />,
       },
       {
         path: ROUTES.BUSINESS_ID,

@@ -15,7 +15,9 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
   const { name } = category;
   const navigate = useNavigate();
 
-  const categoryPath = generatePath(ROUTES.SEARCH_CATEGORY, { category: name });
+  const categoryPath = generatePath(ROUTES.SERVICES_CATEGORY, {
+    category: name,
+  });
   const activeCategory = params.category;
 
   return (
