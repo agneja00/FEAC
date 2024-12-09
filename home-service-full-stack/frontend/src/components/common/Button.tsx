@@ -2,7 +2,6 @@ import styles from "./Button.module.scss";
 import classNames from "classnames";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  rounded?: boolean;
   favorite?: boolean;
   small?: boolean;
   large?: boolean;
@@ -10,7 +9,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({
   className,
-  rounded,
   favorite,
   small,
   large,
@@ -20,7 +18,6 @@ const Button = ({
     <button
       className={classNames(
         styles.button,
-        rounded && styles.rounded,
         favorite && styles.favorite,
         small && styles.small,
         large && styles.large,

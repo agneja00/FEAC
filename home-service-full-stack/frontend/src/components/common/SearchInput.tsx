@@ -5,7 +5,11 @@ interface SearchInputProps
 
 const SearchInput = ({ ...props }: SearchInputProps) => {
   return (
-    <input className={styles.searchInput} placeholder="Search" {...props} />
+    <input
+      className={styles.searchInput}
+      placeholder="Search service by name..."
+      {...props}
+    />
   );
 };
 

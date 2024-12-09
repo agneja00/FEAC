@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import styles from "./ServicesContent.module.scss";
 import BusinessList from "@/components/business/BusinessList";
 import VerticalCategoryList from "@/components/category/VerticalCategoryList";
-import { SetStateAction, useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import Button from "../common/Button";
+import { useState, useEffect } from "react";
+import { useBusinesses } from "@/components/business/hooks";
+import { Business } from "../business/types";
 import SearchInput from "../common/SearchInput";
 
 type Params = {
@@ -12,22 +12,31 @@ type Params = {
 };
 
 const ServicesContent: React.FC = () => {
+  const { data: allBusinesses } = useBusinesses();
+  const [filteredBusinesses, setFilteredBusinesses] = useState<Business[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const handleChangeValue = (event: {
-    target: { value: SetStateAction<string> };
-  }) => {
+  const { category } = useParams<Params>();
+
+  useEffect(() => {
+    if (allBusinesses) {
+      const filtered = allBusinesses.filter(
+        (bus) =>
+          (!category || bus.category === category) &&
+          bus.name.toLowerCase().includes(searchValue.toLowerCase()),
+      );
+      setFilteredBusinesses(filtered);
+    }
+  }, [allBusinesses, category, searchValue]);
+
+  const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
-  const { category } = useParams<Params>();
 
   return (
     <>
       <div className={styles.searchContainer}>
         <SearchInput value={searchValue} onChange={handleChangeValue} />
-        <Button rounded>
-          <CiSearch fontSize={20} />
-        </Button>
       </div>
       <div className={styles.container}>
         <div className={styles.categories}>
@@ -37,6 +46,7 @@ const ServicesContent: React.FC = () => {
           <BusinessList
             categoryName={category}
             className={styles.businessList}
+            businesses={filteredBusinesses}
           />
         </div>
       </div>
