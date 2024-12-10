@@ -1,33 +1,62 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  line-height: 1.6;
+  padding: 0 1rem 0 1rem;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section {
+  margin-bottom: 1.5rem;
 }
 
 .paragraph {
   color: #958f8f;
-  line-height: 1.5rem;
-}
-
-.button {
-  width: 20%;
+  font-size: 1rem;
+  text-align: justify;
+  margin-bottom: 1rem;
 }
 
 .subtitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
-.requisites,
+.subheading {
+  color: $primary-color;
+  margin: 0.5rem 0;
+}
+
+.requisite {
+  margin: 0.8rem 0;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .address {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  color: #007bff;
 }
 
-.phoneAndEmail {
-  margin-left: 0.5rem;
+.map {
+  width: 100%;
+  height: 15rem;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.buttonContainer {
+  text-align: center;
+}
+
+.expanded {
+  transition: all 0.3s ease-in-out;
 }
