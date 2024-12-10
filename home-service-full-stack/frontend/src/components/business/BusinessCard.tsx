@@ -43,7 +43,9 @@ const BusinessCard = ({ business }: BusinessCardProps) => {
         <p className={styles.contactPerson}>{business.contactPerson}</p>
         <p className={styles.address}>{business.address}</p>
         <div className={styles.buttonContainer}>
-          <Button onClick={() => navigate(businessPath)}>Book now</Button>
+          <Button small onClick={() => navigate(businessPath)}>
+            Book now
+          </Button>
           <Button onClick={toggleFavorite} favorite>
             {bookmarks.includes(_id) ? (
               <FaHeart fontSize={14} />

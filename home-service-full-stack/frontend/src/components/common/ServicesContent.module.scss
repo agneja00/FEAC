@@ -1,7 +1,5 @@
 .searchContainer {
-  display: flex;
   margin: 0.5rem auto;
-  gap: 0.5rem;
 }
 
 .container {
@@ -13,22 +11,16 @@
 .title {
   font-size: 1.5rem;
   text-transform: capitalize;
-  margin-bottom: 2rem;
+  margin: 2rem;
 }
 
 .categoryContainer {
-  width: 70%;
-}
-
-.businessList {
-  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
 }
 
 @media only screen and (min-width: 768px) {
   .searchContainer {
-    margin: 2rem auto;
-    width: 30%;
-    gap: 1rem;
+    margin: 0 auto 3rem auto;
   }
 
   .container {
@@ -36,9 +28,5 @@
   }
   .categories {
     width: 30%;
-  }
-
-  .businessList {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
