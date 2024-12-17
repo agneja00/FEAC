@@ -6,9 +6,10 @@
 
 .sectionDescription {
   line-height: 1.5rem;
+  text-align: justify;
 }
 
-.gallary {
+.gallery {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -16,7 +17,56 @@
 
 .businessImg {
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   border-radius: 5%;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+    transition: transform 0.45s ease-in-out;
+    box-shadow: rgba(86, 20, 208, 0.25) 5px 5px 15px;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+}
+
+.modalImage {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
 }
 
 @media only screen and (min-width: 768px) {
@@ -24,11 +74,32 @@
     font-size: 1.55rem;
   }
 
-  .gallary {
+  .gallery {
     flex-direction: row;
   }
 
   .businessImg {
     width: 15rem;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.5);
+    }
+  }
+
+  .modalContent {
+    min-width: 90%;
+    height: 90%;
+    padding: 2rem;
+  }
+
+  .modalImage {
+    height: 100%;
+  }
+
+  .closeButton {
+    top: 0.3rem;
+    right: 0.3rem;
+    font-size: 1.8rem;
   }
 }
