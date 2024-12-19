@@ -1,10 +1,12 @@
-.bookModal {
+.bookModalContainer {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  color: #7c7878;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
   animation: open-book 0.3s forwards ease-out;
 }
 
@@ -19,27 +21,28 @@
   }
 }
 
-.bookContainer {
-  position: absolute;
+.bookModalContent {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  right: 0;
-  width: 20rem;
-  height: 100vh;
-  padding: 0.2rem 1rem;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  padding: 4rem 2rem;
   background-color: hsl(36deg, 100%, 99%);
+  overflow-y: auto;
 }
 
 .close {
-  align-self: end;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   cursor: pointer;
+  color: #7c7878;
 }
 
 .title {
-  color: $secondary-color;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .title,
@@ -48,19 +51,20 @@
 }
 
 .timeContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
 }
 
 .time {
-  background-color: $tertiary-color;
-  border: 1px solid #bcacac;
-  border-radius: 2.5rem;
-  padding: 0.8rem;
-  width: 30%;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 1.25rem;
+  padding: 0.8rem 0;
+  text-align: center;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: #d8cdcd;
@@ -69,5 +73,15 @@
   &:focus {
     color: $tertiary-color;
     background-color: #505cc5;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .bookModalContent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
   }
 }

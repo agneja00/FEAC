@@ -62,20 +62,22 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div className={styles.bookModal}>
-      <article className={styles.bookContainer}>
+    <div className={styles.bookModalContainer}>
+      <div className={styles.bookModalContent}>
         <IoCloseOutline
           className={styles.close}
-          fontSize={30}
+          fontSize={40}
           onClick={onClose}
         />
         <h3 className={styles.title}>Book an Service</h3>
         <p>Select Date and Time slot to book an service</p>
 
         <h4 className={styles.subtitle}>Select Date</h4>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar value={dateValue} onChange={handleDateChange} />
-        </LocalizationProvider>
+        <div className={styles.calendar}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateCalendar value={dateValue} onChange={handleDateChange} />
+          </LocalizationProvider>
+        </div>
         <div className={styles.timeContainer}>
           {timeSlots.map((time, i) => (
             <button
@@ -89,7 +91,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
           ))}
         </div>
         <Button onClick={handleSubmit}>Reserve Time</Button>
-      </article>
+      </div>
     </div>
   );
 };
