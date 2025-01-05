@@ -62,8 +62,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div className={styles.bookModalContainer}>
-      <div className={styles.bookModalContent}>
+    <div className={styles.modalContainer}>
+      <div className={styles.modalContent}>
         <IoCloseOutline
           className={styles.close}
           fontSize={40}

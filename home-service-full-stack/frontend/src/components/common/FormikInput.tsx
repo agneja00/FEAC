@@ -4,11 +4,17 @@ import Input from "./Input";
 
 interface FormikFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
+  label?: string;
 }
 
-const FormikField = ({ name, ...props }: FormikFieldProps) => {
+const FormikField = ({ name, label, ...props }: FormikFieldProps) => {
   return (
-    <div>
+    <div className={styles.formField}>
+      {label && (
+        <label className={styles.label} htmlFor={name}>
+          {label}
+        </label>
+      )}
       <Field name={name} as={Input} {...props} />
       <ErrorMessage name={name} component="div" className={styles.error} />
     </div>

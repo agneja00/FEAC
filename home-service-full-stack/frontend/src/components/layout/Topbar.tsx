@@ -18,16 +18,16 @@ const Topbar = () => {
 
   const links = [
     {
-      href: ROUTES.HOME,
-      label: "Home",
-    },
-    {
       href: ROUTES.SERVICES,
       label: "Services",
     },
     {
       href: ROUTES.ABOUT_US,
       label: "About Us",
+    },
+    {
+      href: ROUTES.FOR_BUSINESS_PARTNERS,
+      label: "For Business Partners",
     },
   ];
 

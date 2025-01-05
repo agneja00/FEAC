@@ -4,8 +4,13 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
@@ -14,23 +19,27 @@
 }
 
 .paragraph {
-  color: #958f8f;
+  color: #414141;
   font-size: 1rem;
   text-align: justify;
   margin-bottom: 1rem;
 }
 
-.subtitle {
-  font-size: 1.5rem;
-}
-
 .subheading {
   color: $primary-color;
   margin: 0.5rem 0;
+  font-size: 1.1rem;
 }
 
 .requisite {
   margin: 0.8rem 0;
+}
+
+.list {
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .link {
@@ -59,4 +68,31 @@
 
 .expanded {
   transition: all 0.3s ease-in-out;
+}
+
+.boldText {
+  font-weight: 700;
+}
+
+.registerBusinessContainer {
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.4rem;
+  }
+
+  .paragraph,
+  .list {
+    font-size: 1.15rem;
+  }
+
+  .subheading {
+    font-size: 1.3rem;
+  }
 }

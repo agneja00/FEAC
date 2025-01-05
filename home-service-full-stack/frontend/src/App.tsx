@@ -8,6 +8,7 @@ import Home from "./components/pages/Home/Home";
 import About from "./components/pages/About/About";
 import Login from "./components/pages/Login/Login";
 import ServicesCategory from "./components/pages/ServicesCategory/ServicesCategory";
+import BusinessPartnersPage from "./components/pages/BusinessPartnersPage/BusinessPartnersPage";
 import BusinessPage from "./components/pages/BusinessPage/BusinessPage";
 import BookingsPage from "./components/pages/BookingsPage/BookingsPage";
 import AuthLayout from "./components/layout/AuthLayout";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.SERVICES_CATEGORY,
         element: <ServicesCategory />,
+      },
+      {
+        path: ROUTES.FOR_BUSINESS_PARTNERS,
+        element: <BusinessPartnersPage />,
       },
       {
         path: ROUTES.BUSINESS_ID,

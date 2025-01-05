@@ -8,3 +8,5 @@ export interface Business {
   email: string;
   imageUrls: string[];
 }
+
+export type NewBusiness = Omit<Business, "_id" | "imageUrls">;
