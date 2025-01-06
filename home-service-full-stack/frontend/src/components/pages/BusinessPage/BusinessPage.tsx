@@ -12,7 +12,7 @@ import { UserContext } from "@/components/context/UserContext";
 
 const BusinessPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [bookOpen, setBookOpen] = useState<boolean>(false);
+  const [bookOpen, setBookOpen] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
 
   const handleOpenModal = () => setBookOpen(true);

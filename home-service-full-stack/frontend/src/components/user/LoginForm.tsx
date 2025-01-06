@@ -13,7 +13,7 @@ import { ErrorResponse } from "../types/error";
 
 const LoginForm = () => {
   const { login } = useContext(UserContext);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState("");
   const { mutateAsync: loginUser } = useLoginUser();
   const navigate = useNavigate();
 

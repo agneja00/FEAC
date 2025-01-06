@@ -10,7 +10,7 @@ interface ModalProps {
 const Modal = ({ userEmail }: ModalProps) => {
   const bookingPath = generatePath(ROUTES.BOOKINGS, { email: userEmail });
   const { logout } = useContext(UserContext);
-  const [modalOpen, setModalOpen] = useState<boolean>(true);
+  const [modalOpen, setModalOpen] = useState(true);
   return (
     <>
       {modalOpen && (

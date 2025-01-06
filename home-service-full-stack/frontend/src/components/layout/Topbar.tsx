@@ -13,8 +13,8 @@ import Modal from "../common/Modal";
 const Topbar = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const links = [
     {

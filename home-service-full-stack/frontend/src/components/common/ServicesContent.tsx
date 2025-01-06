@@ -14,7 +14,7 @@ type Params = {
 const ServicesContent: React.FC = () => {
   const { data: allBusinesses } = useBusinesses();
   const [filteredBusinesses, setFilteredBusinesses] = useState<Business[]>([]);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState("");
 
   const { category } = useParams<Params>();
 
