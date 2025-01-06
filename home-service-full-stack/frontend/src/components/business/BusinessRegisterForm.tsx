@@ -8,6 +8,7 @@ import {
 } from "./consts";
 import Button from "../common/Button";
 import { NewBusiness } from "./types";
+import { sendBusinessEmail } from "./api";
 
 const BusinessRegisterForm = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -16,10 +17,16 @@ const BusinessRegisterForm = () => {
     formValues: NewBusiness,
     { resetForm }: { resetForm: () => void },
   ) => {
-    enqueueSnackbar("Business registered successfully!", {
-      variant: "success",
-    });
-    resetForm();
+    try {
+      await sendBusinessEmail(formValues);
+      enqueueSnackbar("Email sent successfully!", { variant: "success" });
+      resetForm();
+    } catch (error) {
+      enqueueSnackbar(
+        error instanceof Error ? error.message : "An error occurred.",
+        { variant: "error" },
+      );
+    }
   };
 
   return (
@@ -41,13 +48,19 @@ const BusinessRegisterForm = () => {
           </label>
           <Field as="select" name="category" className={styles.select}>
             <option value="">Select a category:</option>
-            <option value="shifting">Shifting</option>
-            <option value="repair">Repair</option>
-            <option value="plumbing">Plumbing</option>
-            <option value="cleaning">Cleaning</option>
-            <option value="painting">Painting</option>
-            <option value="electric">Electric</option>
-            <option value="decoration">Decoration</option>
+            {[
+              "shifting",
+              "repair",
+              "plumbing",
+              "cleaning",
+              "painting",
+              "electric",
+              "decoration",
+            ].map((category) => (
+              <option key={category} value={category}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </option>
+            ))}
           </Field>
           <ErrorMessage
             name="category"

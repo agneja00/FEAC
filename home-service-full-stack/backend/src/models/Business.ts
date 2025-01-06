@@ -44,7 +44,7 @@ const businessSchema = new mongoose.Schema<IBusiness>({
   imageUrls: [
     {
       type: String,
-      required: true,
+      required: false,
     },
   ],
 });

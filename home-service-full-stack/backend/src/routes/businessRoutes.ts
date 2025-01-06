@@ -1,8 +1,10 @@
 import express from "express";
-import Category from "../models/Category";
 import Business from "../models/Business";
 import Booking from "../models/Booking";
 import authMiddleware from "../middlewares/authMiddleware";
+import sendEmail from "../utils/sendEmail";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
@@ -16,23 +18,41 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", authMiddleware, async (req, res) => {
-  const business = req.body;
+  const {
+    name,
+    about,
+    address,
+    category,
+    contactPerson,
+    email,
+  } = req.body;
 
   try {
-    const categoryExists = await Category.findOne({ name: business.category });
-    if (!categoryExists) {
-      return res.status(400).json({
-        message: "Failed to add business: specified category does not exist.",
-      });
-    }
+    await sendEmail({
+      to: process.env.EMAIL!, 
+      from: process.env.EMAIL!, 
+      subject: `${name} wants to collaborate!`,
+      text: `Business name: ${name},
+      About: ${about},
+      Address: ${address},
+      Category: ${category},
+      Contact Person: ${contactPerson},
+      Email: ${email}.`,
+      html: `<ul>
+        <li><strong>Business name:</strong> ${name}</li>
+        <li><strong>About:</strong> ${about}</li>
+        <li><strong>Address:</strong> ${address}</li>
+        <li><strong>Category:</strong> ${category}</li>
+        <li><strong>Contact Person:</strong> ${contactPerson}</li>
+        <li><strong>Email:</strong> ${email}</li>
+      </ul>`,
+    });
 
-    const newBusiness = new Business(business);
-
-    const savedBusiness = await newBusiness.save();
-    res.status(201).json(savedBusiness);
+    res.status(200).json({ message: "Email sent successfully!" });
   } catch (err) {
+    console.error("Error sending email:", err);
     res.status(500).json({
-      message: "Server error while adding business.",
+      message: "Server error while sending email.",
       error: (err as Error).message,
     });
   }

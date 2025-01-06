@@ -33,9 +33,9 @@ router.post("/", authMiddleware, async (req, res) => {
 
     sendEmail({
       to: userEmail!,
-      from: process.env.FROM_EMAIL!,
+      from: process.env.EMAIL!,
       subject: "Rezervacijos patvirtinimas",
-      text: `Gerb. ${userName}, jūsų rezervacija su ${businessName} buvo patvirtinta.`,
+      text: `Gerb. ${userName}, jūsų rezervacija su ${businessName} ${date} ${time} buvo patvirtinta.`,
       html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${businessName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
     });
     res.status(201).json(bookingWithBusiness);
