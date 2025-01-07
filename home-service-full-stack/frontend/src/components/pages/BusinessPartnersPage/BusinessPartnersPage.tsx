@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import stylesA from "../About/About.module.scss";
 import stylesB from "../../booking/BookingModal.module.scss";
 import BusinessRegisterForm from "@/components/business/BusinessRegisterForm";
 import Button from "@/components/common/Button";
 import { IoCloseOutline } from "react-icons/io5";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const BusinessPartnersPage = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [formOpen, setFormOpen] = useState(false);
+
   const handleOpenModal = () => setFormOpen(true);
-  const handleCloseModal = () => setFormOpen(false);
+  const handleCloseModal = () => {
+    setFormOpen(false);
+    searchParams.delete("openModal");
+    navigate({ search: searchParams.toString() });
+  };
+
+  useEffect(() => {
+    if (searchParams.get("openModal") === "true") {
+      setFormOpen(true);
+    }
+  }, [searchParams]);
 
   return (
     <div className={stylesA.container}>

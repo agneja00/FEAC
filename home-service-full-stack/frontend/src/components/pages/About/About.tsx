@@ -1,4 +1,6 @@
 import styles from "./About.module.scss";
+import { Link } from "react-router-dom";
+import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
 import Button from "@/components/common/Button";
 
@@ -75,9 +77,15 @@ const About = () => {
                   market.
                 </p>
                 <p className={styles.paragraph}>
-                  Interested in partnering with us? Fill out the form to join
-                  our network of trusted professionals and bring your services
-                  to a wider audience. Let’s grow together!
+                  Interested in partnering with us? Fill out the{" "}
+                  <Link
+                    to={`${ROUTES.FOR_BUSINESS_PARTNERS}?openModal=true`}
+                    className={styles.formLink}
+                  >
+                    form
+                  </Link>{" "}
+                  to join our network of trusted professionals and bring your
+                  services to a wider audience. Let’s grow together!
                 </p>
               </div>
             </div>
