@@ -1,9 +1,13 @@
 .topbar {
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1.5rem;
   border-bottom: 0.125rem solid #f1f1f1;
+  width: 100%;
+  background-color: $tertiary-color;
+  z-index: 1;
 }
 
 .leftSide {
@@ -80,7 +84,7 @@
 
 @media only screen and (min-width: 768px) {
   .topbar {
-    padding: 2rem 4rem;
+    padding: 1.5rem 2rem;
   }
 
   .dropdown {
