@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import stylesA from "../About/About.module.scss";
-import stylesB from "../../booking/BookingModal.module.scss";
+import styles from "../About/About.module.scss";
 import BusinessRegisterForm from "@/components/business/BusinessRegisterForm";
 import Button from "@/components/common/Button";
-import { IoCloseOutline } from "react-icons/io5";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Modal from "@/components/common/Modal";
 
 const BusinessPartnersPage = () => {
   const [searchParams] = useSearchParams();
@@ -25,75 +24,65 @@ const BusinessPartnersPage = () => {
   }, [searchParams]);
 
   return (
-    <div className={stylesA.container}>
-      <h1 className={stylesA.title}>For Business Partners</h1>
-      <h2 className={stylesA.subtitle}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>For Business Partners</h1>
+      <h2 className={styles.subtitle}>
         Join Our Network of Home Service Professionals!
       </h2>
-      <p className={stylesA.paragraph}>
+      <p className={styles.paragraph}>
         Welcome to our exclusive network of home service professionals! As a
         trusted provider of quality home maintenance and improvement solutions,
         we invite you to become part of our growing ecosystem of skilled
         tradespeople and service providers.
       </p>
-      <section className={stylesA.section}>
-        <h3 className={stylesA.subheading}>Why Partner with Us?</h3>
-        <ul className={stylesA.list}>
+      <section className={styles.section}>
+        <h3 className={styles.subheading}>Why Partner with Us?</h3>
+        <ul className={styles.list}>
           <li>
-            <span className={stylesA.boldText}>Expand Your Reach:</span> Gain
+            <span className={styles.boldText}>Expand Your Reach:</span> Gain
             access to a large customer base actively seeking home services.
           </li>
           <li>
-            <span className={stylesA.boldText}>Increase Your Revenue:</span>{" "}
+            <span className={styles.boldText}>Increase Your Revenue:</span>{" "}
             Receive bookings directly through our platform and grow your
             business effortlessly.
           </li>
           <li>
-            <span className={stylesA.boldText}>Flexible Opportunities:</span>{" "}
+            <span className={styles.boldText}>Flexible Opportunities:</span>{" "}
             Choose the services you want to offer, set your availability, and
             manage your bookings seamlessly.
           </li>
           <li>
-            <span className={stylesA.boldText}>Support and Tools:</span> Benefit
+            <span className={styles.boldText}>Support and Tools:</span> Benefit
             from marketing, scheduling tools, and customer support to help you
             succeed.
           </li>
         </ul>
       </section>
-      <section className={stylesA.section}>
-        <h3 className={stylesA.subheading}>How It Works</h3>
-        <ul className={stylesA.list}>
+      <section className={styles.section}>
+        <h3 className={styles.subheading}>How It Works</h3>
+        <ul className={styles.list}>
           <li>
-            <span className={stylesA.boldText}>Sign Up:</span> Register your
+            <span className={styles.boldText}>Sign Up:</span> Register your
             business by filling out the form below.
           </li>
           <li>
-            <span className={stylesA.boldText}>Get Verified:</span> Our team
-            will review your application and verify your credentials.
+            <span className={styles.boldText}>Get Verified:</span> Our team will
+            review your application and verify your credentials.
           </li>
           <li>
-            <span className={stylesA.boldText}>Start Receiving Bookings:</span>{" "}
+            <span className={styles.boldText}>Start Receiving Bookings:</span>{" "}
             Once approved, your business will appear in our directory, and
             customers can book your services.
           </li>
         </ul>
       </section>
       {formOpen ? (
-        <div className={stylesB.modalContainer} onClick={handleCloseModal}>
-          <div
-            className={stylesB.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <IoCloseOutline
-              className={stylesB.close}
-              fontSize={40}
-              onClick={handleCloseModal}
-            />
-            <BusinessRegisterForm />
-          </div>
-        </div>
+        <Modal onClose={handleCloseModal} isOpen={true}>
+          <BusinessRegisterForm />
+        </Modal>
       ) : (
-        <div className={stylesA.registerBusinessContainer}>
+        <div className={styles.registerBusinessContainer}>
           <Button onClick={handleOpenModal}>Register Now</Button>
         </div>
       )}

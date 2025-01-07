@@ -1,34 +1,28 @@
 import styles from "./Modal.module.scss";
-import { generatePath, Link } from "react-router-dom";
-import { ROUTES } from "@/constants/routes";
-import { UserContext } from "../context/UserContext";
-import { useContext, useState } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 interface ModalProps {
-  userEmail: string;
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  userEmail?: string;
 }
-const Modal = ({ userEmail }: ModalProps) => {
-  const bookingPath = generatePath(ROUTES.BOOKINGS, { email: userEmail });
-  const { logout } = useContext(UserContext);
-  const [modalOpen, setModalOpen] = useState(true);
+
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
   return (
-    <>
-      {modalOpen && (
-        <ul className={styles.dropdown}>
-          <li className={styles.account}>My account</li>
-          <Link
-            className={styles.link}
-            to={bookingPath}
-            onClick={() => setModalOpen(false)}
-          >
-            My Booking
-          </Link>
-          <Link className={styles.link} to={ROUTES.HOME} onClick={logout}>
-            Logout
-          </Link>
-        </ul>
-      )}
-    </>
+    <div className={styles.modalContainer} onClick={onClose}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <IoCloseOutline
+          className={styles.close}
+          fontSize={40}
+          onClick={onClose}
+        />
+        {children}
+      </div>
+    </div>
   );
 };
+
 export default Modal;

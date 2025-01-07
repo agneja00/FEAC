@@ -1,20 +1,23 @@
 import styles from "./Topbar.module.scss";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, generatePath } from "react-router-dom";
 import Logo from "@/assets/logo.svg";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
 
 const Topbar = () => {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const bookingPath = user?.email
+    ? generatePath(ROUTES.BOOKINGS, { email: user.email })
+    : null;
 
   const links = [
     {
@@ -31,71 +34,77 @@ const Topbar = () => {
     },
   ];
 
+  const renderModal = () => {
+    return modalOpen ? (
+      <Modal
+        userEmail={user?.email}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      >
+        <ul className={styles.dropdown}>
+          <li className={styles.account}>My Account</li>
+          {bookingPath && (
+            <Link
+              className={styles.link}
+              to={bookingPath}
+              onClick={() => setModalOpen(false)}
+            >
+              My Booking
+            </Link>
+          )}
+          <Link className={styles.link} to={ROUTES.HOME} onClick={logout}>
+            Logout
+          </Link>
+        </ul>
+      </Modal>
+    ) : null;
+  };
+
   return (
     <header className={styles.topbar}>
       <div className={styles.leftSide}>
         <Link to={ROUTES.HOME} className={styles.logo}>
           <img src={Logo} alt="logo" />
         </Link>
-        <nav className={styles.navigation}>
+        <nav className={menuOpen ? styles.navigationMobile : styles.navigation}>
           {links.map((link) => (
             <Link key={link.label} to={link.href} className={styles.link}>
               {link.label}
             </Link>
           ))}
         </nav>
-        {menuOpen && (
-          <nav className={styles.navigationMobile}>
-            <ul className={styles.list}>
-              {links.map((link) => (
-                <Link key={link.label} to={link.href} className={styles.link}>
-                  {link.label}
-                </Link>
-              ))}
-            </ul>
-            <div>
-              {user ? (
-                <>
-                  {modalOpen && <Modal userEmail={user.email} />}
-                  <Avatar onClick={() => setModalOpen(!modalOpen)}>
-                    {user.email[0]}
-                  </Avatar>
-                </>
-              ) : (
-                <Button onClick={() => navigate(ROUTES.LOGIN)} large>
-                  Login / Sign Up
-                </Button>
-              )}
-            </div>
-          </nav>
-        )}
       </div>
       <div className={styles.rightSide}>
         {user ? (
-          <>
-            {modalOpen && <Modal userEmail={user.email} />}
+          <div>
+            {renderModal()}
             <Avatar onClick={() => setModalOpen(!modalOpen)}>
-              {user.email[0]}
+              {user?.email?.[0] || "U"}
             </Avatar>
-          </>
+          </div>
         ) : (
           <Button onClick={() => navigate(ROUTES.LOGIN)} large>
             Login / Sign Up
           </Button>
         )}
       </div>
-      {!menuOpen && (
+      {!menuOpen ? (
         <IoMdMenu
           fontSize={32}
           onClick={() => setMenuOpen(true)}
           className={styles.menu}
+          tabIndex={0}
+          aria-label="Open menu"
+          onKeyDown={(e) => e.key === "Enter" && setMenuOpen(true)}
         />
-      )}
-      {menuOpen && (
+      ) : (
         <IoMdClose
           fontSize={32}
           onClick={() => setMenuOpen(false)}
           className={styles.menu}
+          tabIndex={0}
+          aria-label="Close menu"
+          onKeyDown={(e) => e.key === "Enter" && setMenuOpen(false)}
         />
       )}
     </header>

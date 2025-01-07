@@ -1,3 +1,38 @@
+.title {
+  font-size: 1.3rem;
+}
+
+.title,
+.subtitle {
+  font-weight: 800;
+}
+
+.timeContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.time {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 1.25rem;
+  padding: 0.8rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #d8cdcd;
+  }
+
+  &:focus {
+    color: $tertiary-color;
+    background-color: #505cc5;
+  }
+}
+
 .buttonContainer {
   margin: 1rem 0;
   text-align: center;
