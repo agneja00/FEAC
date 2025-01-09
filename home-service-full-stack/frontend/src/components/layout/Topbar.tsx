@@ -66,13 +66,32 @@ const Topbar = () => {
         <Link to={ROUTES.HOME} className={styles.logo}>
           <img src={Logo} alt="logo" />
         </Link>
-        <nav className={menuOpen ? styles.navigationMobile : styles.navigation}>
-          {links.map((link) => (
-            <Link key={link.label} to={link.href} className={styles.link}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <div
+          className={
+            menuOpen
+              ? styles.navigationMobileContainer
+              : styles.navigationLargeContainer
+          }
+        >
+          <nav
+            className={
+              menuOpen
+                ? styles.navigationMobileContent
+                : styles.navigationLargeContent
+            }
+          >
+            {links.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                className={styles.link}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
       <div className={styles.rightSide}>
         {user ? (
