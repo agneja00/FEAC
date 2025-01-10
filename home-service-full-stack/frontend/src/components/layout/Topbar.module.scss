@@ -10,14 +10,10 @@
   z-index: 1;
 }
 
-.leftSide {
+.firstContainer {
   display: flex;
   align-items: center;
   gap: 2rem;
-}
-
-.rightSide {
-  display: none;
 }
 
 .navigationMobileContainer {
@@ -46,10 +42,10 @@
 .navigationMobileContent {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  width: 70%;
+  gap: 3rem;
+  width: 75%;
   height: 100%;
-  padding: 2rem;
+  padding: 4rem 2rem;
   position: absolute;
   top: 0;
   right: 0;
@@ -76,11 +72,22 @@
 
   &:hover {
     color: $primary-color;
+    text-decoration: none;
   }
 }
 
 .menu {
   cursor: pointer;
+}
+
+.navLine {
+  margin: 1.5rem 0;
+}
+
+.userMenuMobileContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .dropdown {
@@ -119,6 +126,10 @@
     }
   }
 
+  .navLine {
+    display: none;
+  }
+
   .dropdown {
     top: 10%;
     left: 90%;
@@ -131,8 +142,7 @@
     display: none;
   }
 
-  .navigationLargeContainer,
-  .rightSide {
+  .navigationLargeContainer {
     display: flex;
   }
 }

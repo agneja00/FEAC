@@ -62,10 +62,11 @@ const Topbar = () => {
 
   return (
     <header className={styles.topbar}>
-      <div className={styles.leftSide}>
+      <div className={styles.firstContainer}>
         <Link to={ROUTES.HOME} className={styles.logo}>
           <img src={Logo} alt="logo" />
         </Link>
+
         <div
           className={
             menuOpen
@@ -90,17 +91,18 @@ const Topbar = () => {
                 {link.label}
               </Link>
             ))}
+            <hr className={styles.navLine} />
           </nav>
         </div>
       </div>
-      <div className={styles.rightSide}>
+      <div className={styles.secondContainer}>
         {user ? (
-          <div>
+          <>
             {renderModal()}
             <Avatar onClick={() => setModalOpen(!modalOpen)}>
-              {user?.email?.[0] || "U"}
+              {user?.email?.[0]}
             </Avatar>
-          </div>
+          </>
         ) : (
           <Button onClick={() => navigate(ROUTES.LOGIN)} large>
             Login / Sign Up
