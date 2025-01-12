@@ -10,7 +10,13 @@ import Button from "../common/Button";
 import { NewBusiness } from "./types";
 import { sendBusinessEmail } from "./api";
 
-const BusinessRegisterForm = () => {
+interface BusinessRegisterFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+const BusinessRegisterForm: React.FC<BusinessRegisterFormProps> = ({
+  onSubmitSuccess,
+}) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (
@@ -21,6 +27,10 @@ const BusinessRegisterForm = () => {
       await sendBusinessEmail(formValues);
       enqueueSnackbar("Email sent successfully!", { variant: "success" });
       resetForm();
+
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
     } catch (error) {
       enqueueSnackbar(
         error instanceof Error ? error.message : "An error occurred.",
@@ -40,7 +50,13 @@ const BusinessRegisterForm = () => {
           Let’s Work Together to Serve More Homes!
         </h2>
         <FormikField label="Business name:" name="name" />
-        <FormikField label="Description of your service:" name="about" />
+        <div className={styles.aboutContainer}>
+          <label className={styles.label} htmlFor="about">
+            Description of your service:
+          </label>
+          <Field as="textarea" name="about" className={styles.textarea} />
+          <ErrorMessage name="about" component="div" className={styles.error} />
+        </div>
         <FormikField label="Company address:" name="address" />
         <div className={styles.selectContainer}>
           <label className={styles.label} htmlFor="category">

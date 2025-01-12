@@ -79,7 +79,7 @@ const BusinessPartnersPage = () => {
       </section>
       {formOpen ? (
         <Modal onClose={handleCloseModal} isOpen={true}>
-          <BusinessRegisterForm />
+          <BusinessRegisterForm onSubmitSuccess={handleCloseModal} />
         </Modal>
       ) : (
         <div className={styles.registerBusinessContainer}>
