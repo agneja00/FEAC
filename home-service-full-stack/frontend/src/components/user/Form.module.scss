@@ -34,34 +34,18 @@
 }
 
 .label {
-  color: #333;
-  font-weight: 600;
+  @include label-style;
 }
 
 .aboutContainer,
 .selectContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.textarea,
-.select {
-  color: #000;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  padding: 0.625rem 1rem;
-  border: 0.125rem solid #67abc2;
-  border-radius: 0.375rem;
-  &:focus {
-    outline: none;
-    border-color: #9147ff;
-  }
+  @include input-container-style;
 }
 
 .textarea {
   resize: none;
   min-width: 100%;
+  @include input-style;
 }
 
 .select {
@@ -74,11 +58,9 @@
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
+  @include input-style;
 }
 
 .error {
-  color: #ff0000;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-top: 0.8rem;
+  @include error-message;
 }
