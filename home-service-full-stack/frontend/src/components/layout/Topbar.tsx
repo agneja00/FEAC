@@ -66,49 +66,60 @@ const Topbar = () => {
         <Link to={ROUTES.HOME} className={styles.logo}>
           <img src={Logo} alt="logo" />
         </Link>
-
         <div
           className={
             menuOpen
-              ? styles.navigationMobileContainer
-              : styles.navigationLargeContainer
+              ? styles.secondMobileContainer
+              : styles.secondLargeContainer
           }
         >
-          <nav
+          <div
             className={
               menuOpen
-                ? styles.navigationMobileContent
-                : styles.navigationLargeContent
+                ? styles.navigationMobileContainer
+                : styles.navigationLargeContainer
             }
           >
-            {links.map((link) => (
-              <Link
-                key={link.label}
-                to={link.href}
-                className={styles.link}
-                onClick={() => setMenuOpen(false)}
+            <nav
+              className={
+                menuOpen
+                  ? styles.navigationMobileContent
+                  : styles.navigationLargeContent
+              }
+            >
+              {links.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={styles.link}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <hr className={styles.navLine} />
+            </nav>
+
+            {user ? (
+              <div>
+                {renderModal()}
+                <Avatar onClick={() => setModalOpen(!modalOpen)}>
+                  {user?.email?.[0]}
+                </Avatar>
+              </div>
+            ) : (
+              <Button
+                className={menuOpen ? styles.buttonMobile : styles.buttonLarge}
+                onClick={() => navigate(ROUTES.LOGIN)}
+                large
               >
-                {link.label}
-              </Link>
-            ))}
-            <hr className={styles.navLine} />
-          </nav>
+                Login / Sign Up
+              </Button>
+            )}
+          </div>
         </div>
       </div>
-      <div className={styles.secondContainer}>
-        {user ? (
-          <>
-            {renderModal()}
-            <Avatar onClick={() => setModalOpen(!modalOpen)}>
-              {user?.email?.[0]}
-            </Avatar>
-          </>
-        ) : (
-          <Button onClick={() => navigate(ROUTES.LOGIN)} large>
-            Login / Sign Up
-          </Button>
-        )}
-      </div>
+
       {!menuOpen ? (
         <IoMdMenu
           fontSize={32}
