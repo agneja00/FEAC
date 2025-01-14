@@ -1,8 +1,6 @@
 .topbar {
   position: fixed;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-style;
   gap: 2rem;
   padding: 1.5rem;
   border-bottom: 0.125rem solid #f1f1f1;
@@ -119,9 +117,7 @@
   }
 
   .navigationLargeContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-style;
     width: 100%;
   }
 }
