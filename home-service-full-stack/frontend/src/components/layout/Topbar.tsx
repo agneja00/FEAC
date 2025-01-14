@@ -62,64 +62,56 @@ const Topbar = () => {
 
   return (
     <header className={styles.topbar}>
-      <div className={styles.firstContainer}>
-        <Link to={ROUTES.HOME} className={styles.logo}>
-          <img src={Logo} alt="logo" />
-        </Link>
+      <Link to={ROUTES.HOME} className={styles.logo}>
+        <img src={Logo} alt="logo" />
+      </Link>
+      <div
+        className={
+          menuOpen
+            ? styles.navigationMobileContainer
+            : styles.navigationLargeContainer
+        }
+      >
+        <nav
+          className={
+            menuOpen
+              ? styles.navigationMobileContent
+              : styles.navigationLargeContent
+          }
+        >
+          {links.map((link) => (
+            <Link
+              key={link.label}
+              to={link.href}
+              className={styles.link}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <hr className={styles.navLine} />
+        </nav>
         <div
           className={
             menuOpen
-              ? styles.secondMobileContainer
-              : styles.secondLargeContainer
+              ? styles.buttonAndAvatarMobile
+              : styles.buttonAndAvatarLarge
           }
         >
-          <div
-            className={
-              menuOpen
-                ? styles.navigationMobileContainer
-                : styles.navigationLargeContainer
-            }
-          >
-            <nav
-              className={
-                menuOpen
-                  ? styles.navigationMobileContent
-                  : styles.navigationLargeContent
-              }
-            >
-              {links.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={styles.link}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <hr className={styles.navLine} />
-            </nav>
-
-            {user ? (
-              <div>
-                {renderModal()}
-                <Avatar onClick={() => setModalOpen(!modalOpen)}>
-                  {user?.email?.[0]}
-                </Avatar>
-              </div>
-            ) : (
-              <Button
-                className={menuOpen ? styles.buttonMobile : styles.buttonLarge}
-                onClick={() => navigate(ROUTES.LOGIN)}
-                large
-              >
-                Login / Sign Up
-              </Button>
-            )}
-          </div>
+          {user ? (
+            <>
+              {renderModal()}
+              <Avatar onClick={() => setModalOpen(!modalOpen)}>
+                {user?.email?.[0]}
+              </Avatar>
+            </>
+          ) : (
+            <Button onClick={() => navigate(ROUTES.LOGIN)} large>
+              Login / Sign Up
+            </Button>
+          )}
         </div>
       </div>
-
       {!menuOpen ? (
         <IoMdMenu
           fontSize={32}
