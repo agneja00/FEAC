@@ -4,11 +4,15 @@ import styles from "./Avatar.module.scss";
 interface AvatarProps {
   children: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ children, onClick }) => {
+const Avatar: React.FC<AvatarProps> = ({ children, onClick, className }) => {
   return (
-    <div className={styles.avatar} onClick={onClick}>
+    <div
+      className={`${styles.avatar} ${className || ""}`.trim()}
+      onClick={onClick}
+    >
       {children}
     </div>
   );

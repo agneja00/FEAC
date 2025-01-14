@@ -51,12 +51,6 @@
   margin: 1.5rem 0;
 }
 
-.userMenuMobileContainer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
 .dropdown {
   position: absolute;
   top: 69%;
@@ -78,11 +72,16 @@
   border-bottom: 0.125rem solid #f1f1f1;
 }
 
-.buttonAndAvatarMobile {
+.avatarMobile,
+.buttonMobile {
   position: absolute;
   top: 50%;
-  left: 45%;
+  left: 57%;
   z-index: 2;
+}
+
+.buttonMobile {
+  left: 40%;
 }
 
 @media only screen and (min-width: 768px) {

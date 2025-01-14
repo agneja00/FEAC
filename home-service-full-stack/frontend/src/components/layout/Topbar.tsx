@@ -91,27 +91,28 @@ const Topbar = () => {
           ))}
           <hr className={styles.navLine} />
         </nav>
-        <div
-          className={
-            menuOpen
-              ? styles.buttonAndAvatarMobile
-              : styles.buttonAndAvatarLarge
-          }
-        >
-          {user ? (
-            <>
-              {renderModal()}
-              <Avatar onClick={() => setModalOpen(!modalOpen)}>
-                {user?.email?.[0]}
-              </Avatar>
-            </>
-          ) : (
-            <Button onClick={() => navigate(ROUTES.LOGIN)} large>
-              Login / Sign Up
-            </Button>
-          )}
-        </div>
+
+        {user ? (
+          <>
+            {renderModal()}
+            <Avatar
+              className={menuOpen ? styles.avatarMobile : styles.avatarLarge}
+              onClick={() => setModalOpen(!modalOpen)}
+            >
+              {user?.email?.[0]}
+            </Avatar>
+          </>
+        ) : (
+          <Button
+            className={menuOpen ? styles.buttonMobile : styles.buttonLarge}
+            onClick={() => navigate(ROUTES.LOGIN)}
+            large
+          >
+            Login / Sign Up
+          </Button>
+        )}
       </div>
+
       {!menuOpen ? (
         <IoMdMenu
           fontSize={32}
