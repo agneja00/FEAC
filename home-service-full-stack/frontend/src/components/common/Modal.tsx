@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import styles from "./Modal.module.scss";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -6,14 +7,32 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   userEmail?: string;
+  accountModal?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  accountModal,
+}) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.modalContainer} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={classNames(
+        styles.modalContainer,
+        accountModal && styles.accountModalContainer,
+      )}
+      onClick={onClose}
+    >
+      <div
+        className={classNames(
+          styles.modalContent,
+          accountModal && styles.accountModalContent,
+        )}
+        onClick={(e) => e.stopPropagation()}
+      >
         <IoCloseOutline
           className={styles.close}
           fontSize={40}

@@ -40,8 +40,9 @@ const Topbar = () => {
         userEmail={user?.email}
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
+        accountModal
       >
-        <ul className={styles.dropdown}>
+        <ul className={styles.accountModalContent}>
           <li className={styles.account}>My Account</li>
           {bookingPath && (
             <Link
