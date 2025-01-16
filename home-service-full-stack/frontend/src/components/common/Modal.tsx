@@ -20,21 +20,21 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className={classNames(
-        styles.modalContainer,
-        accountModal && styles.accountModalContainer,
-      )}
+      className={
+        accountModal ? styles.accountModalContainer : styles.modalContainer
+      }
       onClick={onClose}
     >
       <div
-        className={classNames(
-          styles.modalContent,
-          accountModal && styles.accountModalContent,
-        )}
+        className={
+          accountModal ? styles.accountModalContent : styles.modalContent
+        }
         onClick={(e) => e.stopPropagation()}
       >
         <IoCloseOutline
-          className={styles.close}
+          className={
+            accountModal ? styles.accountCloseButton : styles.closeButton
+          }
           fontSize={40}
           onClick={onClose}
         />

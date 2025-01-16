@@ -3,6 +3,12 @@
   top: 0;
 }
 
+.accountModalContainer {
+  position: absolute;
+  top: 53%;
+  left: 43%;
+}
+
 .modalContent {
   position: absolute;
   top: 69%;
@@ -12,13 +18,13 @@
   gap: 1rem;
   font-size: 0.9rem;
   background-color: $tertiary-color;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   list-style: none;
   box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2px 2px;
 }
 
-.close {
+.closeButton {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
@@ -26,32 +32,18 @@
   color: #7c7878;
 }
 
-.accountModalContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  font-size: 0.9rem;
-  background-color: $tertiary-color;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  list-style: none;
-  box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2px 2px;
-  z-index: 4;
+.accountCloseButton {
+  display: none;
 }
 
-.accountModalContent {
-  position: absolute;
-  top: 0%;
-  left: 37%;
+@media only screen and (min-width: 480px) {
+  .accountModalContainer {
+    left: 46%;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-  .modalContent {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30%;
-    height: 100%;
+  .accountModalContainer {
+    left: 90%;
   }
 }

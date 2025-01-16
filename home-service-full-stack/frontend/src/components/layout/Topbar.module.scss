@@ -33,7 +33,8 @@
   display: none;
 }
 
-.link {
+.navLink,
+.accountLink {
   color: #323232;
   font-size: 1.2rem;
   font-weight: 500;
@@ -52,16 +53,10 @@
   margin: 1.5rem 0;
 }
 
-.account {
-  font-weight: 600;
-  padding: 0.5rem 0;
-  border-bottom: 0.125rem solid #f1f1f1;
-}
-
 .avatarMobile,
 .buttonMobile {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 57%;
   z-index: 2;
 }
@@ -75,11 +70,23 @@
   flex-direction: column;
   gap: 1rem;
   font-size: 0.9rem;
-  padding: 1rem;
+  padding: 1.2rem;
   border-radius: 0.5rem;
   list-style: none;
   box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2px 2px;
-  z-index: 4;
+}
+
+.account {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 0.7rem 0;
+  border-bottom: 0.125rem solid #f1f1f1;
+}
+
+@media only screen and (min-width: 480px) {
+  .buttonMobile {
+    left: 46%;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -87,7 +94,7 @@
     padding: 1.5rem 2rem;
   }
 
-  .link {
+  .navLink {
     margin-right: 1.5rem;
     padding-bottom: 2.1rem;
 

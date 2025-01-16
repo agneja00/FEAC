@@ -46,14 +46,21 @@ const Topbar = () => {
           <li className={styles.account}>My Account</li>
           {bookingPath && (
             <Link
-              className={styles.link}
+              className={styles.accountLink}
               to={bookingPath}
-              onClick={() => setModalOpen(false)}
+              onClick={() => {
+                setModalOpen(false);
+                setMenuOpen(false);
+              }}
             >
               My Booking
             </Link>
           )}
-          <Link className={styles.link} to={ROUTES.HOME} onClick={logout}>
+          <Link
+            className={styles.accountLink}
+            to={ROUTES.HOME}
+            onClick={logout}
+          >
             Logout
           </Link>
         </ul>
@@ -84,7 +91,7 @@ const Topbar = () => {
             <Link
               key={link.label}
               to={link.href}
-              className={styles.link}
+              className={styles.navLink}
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
