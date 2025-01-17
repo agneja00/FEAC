@@ -1,37 +1,28 @@
-import styles from "./BookingsPage.module.scss";
-import Button from "@/components/common/Button";
-import BookingList from "@/components/booking/BookingList";
+import FilteredBusinessList from "@/components/common/FilteredBusinessList";
+import BookingCard from "@/components/booking/BookingCard";
 import { useState } from "react";
-import { BookingStatus } from "@/components/booking/types";
-import classNames from "classnames";
+import { useUserBookings } from "@/components/booking/hooks";
+import { BookingStatus, Booking } from "@/components/booking/types";
 
 const BookingsPage = () => {
   const [status, setStatus] = useState<BookingStatus>("confirmed");
+
+  const { data: bookings } = useUserBookings(status);
+  const businessBookings: Booking[] = bookings ?? [];
+
+  const statuses: BookingStatus[] = ["confirmed", "completed"];
+
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>My Bookings</h1>
-      <div className={styles.buttonsContainer}>
-        <Button
-          className={classNames(styles.button, {
-            [styles.active]: status === "confirmed",
-          })}
-          onClick={() => setStatus("confirmed")}
-        >
-          Booked
-        </Button>
-        <Button
-          className={classNames(styles.button, {
-            [styles.active]: status === "completed",
-          })}
-          onClick={() => setStatus("completed")}
-        >
-          Completed
-        </Button>
-      </div>
-      <div className={styles.bookingsContainer}>
-        <BookingList />
-      </div>
-    </div>
+    <FilteredBusinessList
+      title="My Bookings"
+      items={businessBookings}
+      filters={statuses}
+      activeFilter={status}
+      onFilterChange={(filter: string) => setStatus(filter as BookingStatus)}
+      renderItem={(booking) => (
+        <BookingCard key={booking._id} booking={booking} />
+      )}
+    />
   );
 };
 

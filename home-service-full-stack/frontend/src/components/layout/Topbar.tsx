@@ -15,64 +15,29 @@ const Topbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const bookingPath = user?.email
-    ? generatePath(ROUTES.BOOKINGS, { email: user.email })
-    : null;
+  const generateUserPath = (route: string) =>
+    user?.email ? generatePath(route, { email: user.email }) : null;
+
+  const bookingPath = generateUserPath(ROUTES.BOOKINGS);
+  const favoritePath = generateUserPath(ROUTES.FAVORITES);
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setMenuOpen(false);
+  };
 
   const links = [
-    {
-      href: ROUTES.SERVICES,
-      label: "Services",
-    },
-    {
-      href: ROUTES.ABOUT_US,
-      label: "About Us",
-    },
-    {
-      href: ROUTES.FOR_BUSINESS_PARTNERS,
-      label: "For Business Partners",
-    },
+    { href: ROUTES.SERVICES, label: "Services" },
+    { href: ROUTES.ABOUT_US, label: "About Us" },
+    { href: ROUTES.FOR_BUSINESS_PARTNERS, label: "For Business Partners" },
   ];
-
-  const renderModal = () => {
-    return modalOpen ? (
-      <Modal
-        userEmail={user?.email}
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        accountModal
-      >
-        <ul className={styles.accountModalContent}>
-          <li className={styles.account}>My Account</li>
-          {bookingPath && (
-            <Link
-              className={styles.accountLink}
-              to={bookingPath}
-              onClick={() => {
-                setModalOpen(false);
-                setMenuOpen(false);
-              }}
-            >
-              My Booking
-            </Link>
-          )}
-          <Link
-            className={styles.accountLink}
-            to={ROUTES.HOME}
-            onClick={logout}
-          >
-            Logout
-          </Link>
-        </ul>
-      </Modal>
-    ) : null;
-  };
 
   return (
     <header className={styles.topbar}>
       <Link to={ROUTES.HOME} className={styles.logo}>
         <img src={Logo} alt="logo" />
       </Link>
+
       <div
         className={
           menuOpen
@@ -87,14 +52,14 @@ const Topbar = () => {
               : styles.navigationLargeContent
           }
         >
-          {links.map((link) => (
+          {links.map(({ href, label }) => (
             <Link
-              key={link.label}
-              to={link.href}
+              key={label}
+              to={href}
               className={styles.navLink}
               onClick={() => setMenuOpen(false)}
             >
-              {link.label}
+              {label}
             </Link>
           ))}
           <hr className={styles.navLine} />
@@ -102,7 +67,43 @@ const Topbar = () => {
 
         {user ? (
           <>
-            {renderModal()}
+            {modalOpen && (
+              <Modal
+                userEmail={user?.email}
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                accountModal
+              >
+                <ul className={styles.accountModalContent}>
+                  <li className={styles.account}>My Account</li>
+                  {bookingPath && (
+                    <Link
+                      className={styles.accountLink}
+                      to={bookingPath}
+                      onClick={handleModalClose}
+                    >
+                      My Booking
+                    </Link>
+                  )}
+                  {favoritePath && (
+                    <Link
+                      className={styles.accountLink}
+                      to={favoritePath}
+                      onClick={handleModalClose}
+                    >
+                      My Favorites
+                    </Link>
+                  )}
+                  <Link
+                    className={styles.accountLink}
+                    to={ROUTES.HOME}
+                    onClick={logout}
+                  >
+                    Logout
+                  </Link>
+                </ul>
+              </Modal>
+            )}
             <Avatar
               className={menuOpen ? styles.avatarMobile : styles.avatarLarge}
               onClick={() => setModalOpen(!modalOpen)}
@@ -127,8 +128,7 @@ const Topbar = () => {
           onClick={() => setMenuOpen(true)}
           className={styles.menu}
           tabIndex={0}
-          aria-label="Open menu"
-          onKeyDown={(e) => e.key === "Enter" && setMenuOpen(true)}
+          aria-label="Open navigation menu"
         />
       ) : (
         <IoMdClose
@@ -136,8 +136,7 @@ const Topbar = () => {
           onClick={() => setMenuOpen(false)}
           className={styles.menu}
           tabIndex={0}
-          aria-label="Close menu"
-          onKeyDown={(e) => e.key === "Enter" && setMenuOpen(false)}
+          aria-label="Close navigation menu"
         />
       )}
     </header>

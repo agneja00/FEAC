@@ -1,5 +1,5 @@
 .container,
-.bookingsContainer {
+.itemsContainer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -34,7 +34,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .bookingsContainer {
+  .itemsContainer {
     flex-direction: row;
     flex-wrap: wrap;
   }

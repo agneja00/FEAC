@@ -15,6 +15,7 @@ import AuthLayout from "./components/layout/AuthLayout";
 import Register from "./components/pages/Register/Register";
 import { UserProvider } from "./components/context/UserContext";
 import Services from "./components/pages/Services/Services";
+import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.BOOKINGS,
         element: <BookingsPage />,
+      },
+      {
+        path: ROUTES.FAVORITES,
+        element: <FavoritesPage />,
       },
     ],
   },
