@@ -18,19 +18,12 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", authMiddleware, async (req, res) => {
-  const {
-    name,
-    about,
-    address,
-    category,
-    contactPerson,
-    email,
-  } = req.body;
+  const { name, about, address, category, contactPerson, email } = req.body;
 
   try {
     await sendEmail({
-      to: process.env.EMAIL!, 
-      from: process.env.EMAIL!, 
+      to: process.env.EMAIL!,
+      from: process.env.EMAIL!,
       subject: `${name} wants to collaborate!`,
       text: `Business name: ${name},
       About: ${about},

@@ -1,7 +1,7 @@
 import { useLocalStorage } from "usehooks-ts";
 import { Business } from "@/components/business/types";
 import BusinessCard from "@/components/business/BusinessCard";
-import FilteredBusinessList from "@/components/common/FilteredBusinessList";
+import FilteredList from "@/components/common/FilteredList";
 import { useState } from "react";
 
 const FavoritesPage = () => {
@@ -26,7 +26,7 @@ const FavoritesPage = () => {
       : favoriteBusinesses.filter((b) => b.category === activeCategory);
 
   return (
-    <FilteredBusinessList
+    <FilteredList
       title="My Favorites"
       items={filteredBusinesses}
       filters={categories}

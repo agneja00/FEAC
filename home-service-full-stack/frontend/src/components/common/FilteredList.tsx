@@ -1,8 +1,8 @@
-import styles from "./FilteredBusinessList.module.scss";
+import styles from "./FilteredList.module.scss";
 import Button from "@/components/common/Button";
 import classNames from "classnames";
 
-interface FilteredBusinessListProps<T> {
+interface FilteredListProps<T> {
   title: string;
   items: T[];
   filters: string[];
@@ -11,14 +11,14 @@ interface FilteredBusinessListProps<T> {
   renderItem: (item: T) => React.ReactNode;
 }
 
-const FilteredBusinessList = <T,>({
+const FilteredList = <T,>({
   title,
   items,
   filters,
   activeFilter,
   onFilterChange,
   renderItem,
-}: FilteredBusinessListProps<T>) => {
+}: FilteredListProps<T>) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{title}</h1>
@@ -46,4 +46,4 @@ const FilteredBusinessList = <T,>({
   );
 };
 
-export default FilteredBusinessList;
+export default FilteredList;

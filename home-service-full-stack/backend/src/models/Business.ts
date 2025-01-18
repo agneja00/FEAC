@@ -8,6 +8,7 @@ export interface IBusiness {
   contactPerson: string;
   email: string;
   imageUrls: string[];
+  favorite: boolean;
 }
 
 const businessSchema = new mongoose.Schema<IBusiness>({
@@ -45,6 +46,13 @@ const businessSchema = new mongoose.Schema<IBusiness>({
     {
       type: String,
       required: false,
+    },
+  ],
+  favorite: [
+    {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   ],
 });

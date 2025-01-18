@@ -1,4 +1,4 @@
-import FilteredBusinessList from "@/components/common/FilteredBusinessList";
+import FilteredList from "@/components/common/FilteredList";
 import BookingCard from "@/components/booking/BookingCard";
 import { useState } from "react";
 import { useUserBookings } from "@/components/booking/hooks";
@@ -13,7 +13,7 @@ const BookingsPage = () => {
   const statuses: BookingStatus[] = ["confirmed", "completed"];
 
   return (
-    <FilteredBusinessList
+    <FilteredList
       title="My Bookings"
       items={businessBookings}
       filters={statuses}

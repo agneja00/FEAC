@@ -7,6 +7,7 @@ export interface Business {
   contactPerson: string;
   email: string;
   imageUrls: string[];
+  favorite: boolean;
 }
 
 export type NewBusiness = Omit<Business, "_id" | "imageUrls">;

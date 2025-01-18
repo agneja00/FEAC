@@ -8,5 +8,5 @@ export const ROUTES = {
   REGISTER: "/auth/register",
   BUSINESS_ID: "/business/:id",
   BOOKINGS: "/bookings/user/:email",
-  FAVORITES: "/favorites/user/:email",
+  FAVORITES: "/favorites",
 };
