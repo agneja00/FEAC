@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import styles from "./Modal.module.scss";
 import { IoCloseOutline } from "react-icons/io5";
 

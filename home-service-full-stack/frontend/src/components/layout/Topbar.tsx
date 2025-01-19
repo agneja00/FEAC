@@ -82,7 +82,7 @@ const Topbar = () => {
                       to={bookingPath}
                       onClick={handleModalClose}
                     >
-                      My Booking
+                      My Bookings
                     </Link>
                   )}
                   {favoritePath && (
