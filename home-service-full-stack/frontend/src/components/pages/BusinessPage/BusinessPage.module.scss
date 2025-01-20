@@ -35,12 +35,12 @@
 
 .buttonContainer {
   margin: 1rem 0;
-  text-align: center;
 }
 
 .button {
   display: flex;
   align-items: center;
+  justify-self: center;
   gap: 0.5rem;
 }
 
