@@ -16,6 +16,7 @@ const mockBusinesses: Business[] = [
     address: "123 Street A",
     email: "business@gmail.com",
     about: "good restaurant",
+    favorite: false,
   },
   {
     _id: "2",
@@ -26,6 +27,7 @@ const mockBusinesses: Business[] = [
     address: "456 Street B",
     email: "business1@gmail.com",
     about: "good retail business",
+    favorite: false,
   },
 ];
 
@@ -38,7 +40,7 @@ describe("BusinessList Component", () => {
     render(
       <MemoryRouter>
         <BusinessList />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText("Business 1")).toBeInTheDocument();
@@ -49,7 +51,7 @@ describe("BusinessList Component", () => {
     render(
       <MemoryRouter>
         <BusinessList categoryName="Restaurant" />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText("Business 1")).toBeInTheDocument();
@@ -62,7 +64,7 @@ describe("BusinessList Component", () => {
     render(
       <MemoryRouter>
         <BusinessList />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.queryByText("Business 1")).not.toBeInTheDocument();
