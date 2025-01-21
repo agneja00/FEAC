@@ -19,12 +19,13 @@ export const BusinessRegisterValidationShema: Yup.Schema<NewBusiness> =
           "electric",
           "decoration",
         ],
-        "Invalid category",
+        "Invalid category"
       ),
     contactPerson: Yup.string().required(errorMessage.required),
     email: Yup.string()
       .email(errorMessage.email)
       .required(errorMessage.required),
+    favorite: Yup.boolean().required(errorMessage.required),
   });
 
 export const businessRegisterInitialValues: NewBusiness = {
@@ -34,4 +35,5 @@ export const businessRegisterInitialValues: NewBusiness = {
   category: "",
   contactPerson: "",
   email: "",
+  favorite: false,
 };
