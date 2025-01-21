@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./BusinessInfoSection.module.scss";
 import useCurrentBusiness from "./hooks";
+import Modal from "../common/Modal";
 
 const BusinessInfoSection: React.FC = () => {
   const { currentBusiness } = useCurrentBusiness();
@@ -37,24 +38,15 @@ const BusinessInfoSection: React.FC = () => {
           <p className={styles.noImages}>No images available</p>
         )}
       </div>
-
-      {isModalOpen && selectedImage && (
-        <div className={styles.modalOverlay} onClick={handleCloseModal}>
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              className={styles.modalImage}
-              src={selectedImage}
-              alt="Selected Image"
-            />
-            <button className={styles.closeButton} onClick={handleCloseModal}>
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} imageModal>
+        {selectedImage && (
+          <img
+            className={styles.modalImage}
+            src={selectedImage}
+            alt="Selected Image"
+          />
+        )}
+      </Modal>
     </>
   );
 };

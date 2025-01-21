@@ -8,20 +8,39 @@
   top: 53%;
   left: 43%;
 }
-
 .modalContent {
-  position: absolute;
-  top: 0;
-  left: 37%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  font-size: 0.9rem;
-  background-color: $tertiary-color;
-  padding: 0.5rem;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 4rem;
+  background-color: hsl(36deg, 100%, 99%);
+  overflow-y: auto;
+}
+
+.imageModalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.imageModalContent {
+  position: relative;
+  background: #fff;
   border-radius: 0.5rem;
-  list-style: none;
-  box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2px 2px;
+  padding: 1.7rem;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
 }
 
 .closeButton {
@@ -36,6 +55,17 @@
   display: none;
 }
 
+.imageCloseButton {
+  position: absolute;
+  top: 2%;
+  right: 1%;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
 @media only screen and (min-width: 480px) {
   .accountModalContainer {
     left: 46%;
@@ -44,6 +74,26 @@
 
 @media only screen and (min-width: 768px) {
   .accountModalContainer {
-    left: 90%;
+    left: 89.5%;
+  }
+
+  .modalContent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+  }
+
+  .imageModalContent {
+    min-width: 90%;
+    height: 90%;
+    padding: 2rem;
+  }
+
+  .imageCloseButton {
+    top: 0.3rem;
+    right: 0.3rem;
+    font-size: 1.8rem;
   }
 }
