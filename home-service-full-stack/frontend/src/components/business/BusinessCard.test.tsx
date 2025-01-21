@@ -31,18 +31,17 @@ jest.mock("usehooks-ts", () => ({
   useLocalStorage: jest.fn(() => [[], jest.fn()]),
 }));
 
-test("should navigate to business page when 'Book now' is clicked", () => {
-  const mockNavigate = useNavigate() as jest.Mock;
-  render(<BusinessCard business={mockBusiness} />);
-
-  const bookNowButton = screen.getByText(/Book now/i);
-
-  fireEvent.click(bookNowButton);
-
-  expect(mockNavigate).toHaveBeenCalledWith(`/business/${mockBusiness._id}`); // Assert it navigated to the correct URL
-});
-
 describe("<BusinessCard />", () => {
+  test("should navigate to business page when 'Book now' is clicked", () => {
+    render(<BusinessCard business={mockBusiness} />);
+
+    const bookNowButton = screen.getByText(/Book now/i);
+
+    fireEvent.click(bookNowButton);
+
+    expect(mockNavigate).toHaveBeenCalledWith(`/business/${mockBusiness._id}`); // Assert it navigated to the correct URL
+  });
+
   test("renders Business Card with all details", () => {
     render(<BusinessCard business={mockBusiness} />);
 
