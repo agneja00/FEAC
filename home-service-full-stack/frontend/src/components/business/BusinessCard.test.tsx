@@ -12,6 +12,7 @@ const mockBusiness: Business = {
   category: "Restaurant",
   contactPerson: "John Doe",
   address: "123 Test Street",
+  favorite: false,
 };
 
 const mockBusinessWithoutImage: Business = {
@@ -63,7 +64,7 @@ describe("<BusinessCard />", () => {
     render(<BusinessCard business={mockBusiness} />);
 
     expect(
-      screen.getByRole("button", { name: /Book now/i }),
+      screen.getByRole("button", { name: /Book now/i })
     ).toBeInTheDocument();
   });
 });
