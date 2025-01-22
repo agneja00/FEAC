@@ -1,4 +1,4 @@
-export interface Business {
+export interface Service {
   _id: string;
   name: string;
   about: string;
@@ -10,4 +10,4 @@ export interface Business {
   favorite: boolean;
 }
 
-export type NewBusiness = Omit<Business, "_id" | "imageUrls">;
+export type NewService = Omit<Service, "_id" | "imageUrls">;

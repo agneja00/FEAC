@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./BusinessInfoSection.module.scss";
-import useCurrentBusiness from "./hooks";
+import styles from "./ServiceInfoSection.module.scss";
+import useCurrentService from "./hooks";
 import Modal from "../common/Modal";
 
-const BusinessInfoSection: React.FC = () => {
-  const { currentBusiness } = useCurrentBusiness();
+const ServiceInfoSection: React.FC = () => {
+  const { currentService } = useCurrentService();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -21,15 +21,15 @@ const BusinessInfoSection: React.FC = () => {
   return (
     <>
       <h2 className={styles.title}>Description</h2>
-      <p className={styles.sectionDescription}>{currentBusiness?.about}</p>
+      <p className={styles.sectionDescription}>{currentService?.about}</p>
       <h2 className={styles.title}>Gallery</h2>
       <div className={styles.gallery}>
-        {currentBusiness?.imageUrls?.length ? (
-          currentBusiness.imageUrls.map((imageUrl, index) => (
+        {currentService?.imageUrls?.length ? (
+          currentService.imageUrls.map((imageUrl, index) => (
             <img
-              className={styles.businessImg}
+              className={styles.serviceImg}
               src={imageUrl}
-              alt={`${currentBusiness?.name} photo ${index + 1}`}
+              alt={`${currentService?.name} photo ${index + 1}`}
               key={index}
               onClick={() => handleImageClick(imageUrl)}
             />
@@ -51,4 +51,4 @@ const BusinessInfoSection: React.FC = () => {
   );
 };
 
-export default BusinessInfoSection;
+export default ServiceInfoSection;

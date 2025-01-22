@@ -9,7 +9,7 @@ import About from "./components/pages/About/About";
 import Login from "./components/pages/Login/Login";
 import ServicesCategory from "./components/pages/ServicesCategory/ServicesCategory";
 import BusinessPartnersPage from "./components/pages/BusinessPartnersPage/BusinessPartnersPage";
-import BusinessPage from "./components/pages/BusinessPage/BusinessPage";
+import ServicePage from "./components/pages/ServicePage/ServicePage";
 import BookingsPage from "./components/pages/BookingsPage/BookingsPage";
 import AuthLayout from "./components/layout/AuthLayout";
 import Register from "./components/pages/Register/Register";
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         element: <BusinessPartnersPage />,
       },
       {
-        path: ROUTES.BUSINESS_ID,
-        element: <BusinessPage />,
+        path: ROUTES.SERVICE_ID,
+        element: <ServicePage />,
       },
       {
         path: ROUTES.BOOKINGS,

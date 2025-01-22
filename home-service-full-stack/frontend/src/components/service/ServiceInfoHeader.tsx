@@ -1,39 +1,39 @@
-import styles from "./BusinessInfoHeader.module.scss";
+import styles from "./ServiceInfoHeader.module.scss";
 import Button from "../common/Button";
 import { CiLocationOn } from "react-icons/ci";
 import { CiMail } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock } from "react-icons/hi";
-import useCurrentBusiness from "./hooks";
+import useCurrentService from "./hooks";
 
-const BusinessInfoHeader: React.FC = () => {
-  const { currentBusiness } = useCurrentBusiness();
+const ServiceInfoHeader: React.FC = () => {
+  const { currentService } = useCurrentService();
 
   return (
-    <div className={styles.infoBusinessContainer}>
-      <div className={styles.infoBusinessContainerFirst}>
+    <div className={styles.infoServiceContainer}>
+      <div className={styles.infoServiceContainerFirst}>
         <img
           className={styles.avatar}
-          alt={currentBusiness?.name}
-          src={currentBusiness?.imageUrls[0]}
+          alt={currentService?.name}
+          src={currentService?.imageUrls[0]}
         />
 
         <section className={styles.detailsContainerFirst}>
-          <span className={styles.chip}>{currentBusiness?.category}</span>
-          <h1 className={styles.name}>{currentBusiness?.name}</h1>
+          <span className={styles.chip}>{currentService?.category}</span>
+          <h1 className={styles.name}>{currentService?.name}</h1>
 
           <div className={styles.infoContainer}>
             <CiLocationOn />
-            <p className={styles.address}>{currentBusiness?.address}</p>
+            <p className={styles.address}>{currentService?.address}</p>
           </div>
           <div className={styles.infoContainer}>
             <CiMail />
-            <p className={styles.email}>{currentBusiness?.email}</p>
+            <p className={styles.email}>{currentService?.email}</p>
           </div>
         </section>
       </div>
-      <div className={styles.infoBusinessContainerSecond}>
+      <div className={styles.infoServiceContainerSecond}>
         <div className={styles.detailsContainerSecond}>
           <Button small>
             <IoShareOutline fontSize={20} />
@@ -41,7 +41,7 @@ const BusinessInfoHeader: React.FC = () => {
           <div className={styles.infoContainer}>
             <MdOutlinePersonOutline fontSize={20} color="#8056eb" />
             <p className={styles.contactPerson}>
-              {currentBusiness?.contactPerson}
+              {currentService?.contactPerson}
             </p>
           </div>
           <div className={styles.infoContainer}>
@@ -54,4 +54,4 @@ const BusinessInfoHeader: React.FC = () => {
   );
 };
 
-export default BusinessInfoHeader;
+export default ServiceInfoHeader;

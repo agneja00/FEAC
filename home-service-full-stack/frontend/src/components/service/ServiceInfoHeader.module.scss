@@ -1,11 +1,11 @@
-.infoBusinessContainer {
+.infoServiceContainer {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 3rem;
 }
 
-.infoBusinessContainerFirst {
+.infoServiceContainerFirst {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -57,19 +57,19 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .infoBusinessContainer {
+  .infoServiceContainer {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 4rem;
   }
 
-  .infoBusinessContainerFirst {
+  .infoServiceContainerFirst {
     align-items: center;
     gap: 2rem;
   }
 
-  .infoBusinessContainerSecond {
+  .infoServiceContainerSecond {
     text-align: right;
   }
 

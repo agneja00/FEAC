@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../About/About.module.scss";
-import BusinessRegisterForm from "@/components/business/BusinessRegisterForm";
+import ServiceRegisterForm from "@/components/service/ServiceRegisterForm";
 import Button from "@/components/common/Button";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Modal from "@/components/common/Modal";
@@ -79,7 +79,7 @@ const BusinessPartnersPage = () => {
       </section>
       {formOpen ? (
         <Modal onClose={handleCloseModal} isOpen={true}>
-          <BusinessRegisterForm onSubmitSuccess={handleCloseModal} />
+          <ServiceRegisterForm onSubmitSuccess={handleCloseModal} />
         </Modal>
       ) : (
         <div className={styles.registerBusinessContainer}>

@@ -9,32 +9,32 @@ interface BookingCardProps {
 }
 
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
-  const { businessId, date, time } = booking;
+  const { serviceId, date, time } = booking;
 
-  const business = typeof businessId === "string" ? null : businessId;
+  const service = typeof serviceId === "string" ? null : serviceId;
 
   return (
     <div className={styles.cardContainer}>
-      {business && (
+      {service && (
         <>
           <img
             className={styles.image}
-            src={business.imageUrls?.[0]}
+            src={service.imageUrls?.[0]}
             alt="logo"
           />
           <section className={styles.details}>
-            <h2 className={styles.businessName}>{business.category}</h2>
+            <h2 className={styles.serviceName}>{service.category}</h2>
             <div className={styles.info}>
               <MdOutlinePersonOutline className={styles.icon} fontSize={24} />
               <p className={styles.infoDetails}>
                 <span className={styles.contactPerson}>
-                  {business.contactPerson}
+                  {service.contactPerson}
                 </span>
               </p>
             </div>
             <div className={styles.info}>
               <HiOutlineLocationMarker className={styles.icon} fontSize={24} />
-              <p className={styles.address}>{business.address}</p>
+              <p className={styles.address}>{service.address}</p>
             </div>
             <div className={styles.info}>
               <FaRegCalendar className={styles.icon} fontSize={22} />

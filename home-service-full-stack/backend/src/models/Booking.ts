@@ -1,7 +1,7 @@
 import mongoose, { Types, Document } from "mongoose";
 
 interface IBooking extends Document {
-  businessId: Types.ObjectId;
+  serviceId: Types.ObjectId;
   date: Date;
   time: string;
   userEmail: string;
@@ -10,9 +10,9 @@ interface IBooking extends Document {
 }
 
 const bookingSchema = new mongoose.Schema<IBooking>({
-  businessId: {
+  serviceId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Business",
+    ref: "Service",
     required: true,
   },
   date: {

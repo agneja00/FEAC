@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import styles from "./ServicesContent.module.scss";
-import BusinessList from "@/components/business/BusinessList";
+import ServiceList from "@/components/service/ServiceList";
 import VerticalCategoryList from "@/components/category/VerticalCategoryList";
 import { useState, useEffect } from "react";
-import { useBusinesses } from "@/components/business/hooks";
-import { Business } from "../business/types";
+import { useServices } from "@/components/service/hooks";
+import { Service } from "../service/types";
 import Input from "../common/Input";
 
 type Params = {
@@ -12,22 +12,22 @@ type Params = {
 };
 
 const ServicesContent: React.FC = () => {
-  const { data: allBusinesses } = useBusinesses();
-  const [filteredBusinesses, setFilteredBusinesses] = useState<Business[]>([]);
+  const { data: allServices } = useServices();
+  const [filteredServices, setFilteredServices] = useState<Service[]>([]);
   const [searchValue, setSearchValue] = useState("");
 
   const { category } = useParams<Params>();
 
   useEffect(() => {
-    if (allBusinesses) {
-      const filtered = allBusinesses.filter(
-        (bus) =>
-          (!category || bus.category === category) &&
-          bus.name.toLowerCase().includes(searchValue.toLowerCase()),
+    if (allServices) {
+      const filtered = allServices.filter(
+        (ser) =>
+          (!category || ser.category === category) &&
+          ser.name.toLowerCase().includes(searchValue.toLowerCase()),
       );
-      setFilteredBusinesses(filtered);
+      setFilteredServices(filtered);
     }
-  }, [allBusinesses, category, searchValue]);
+  }, [allServices, category, searchValue]);
 
   const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -48,10 +48,10 @@ const ServicesContent: React.FC = () => {
           <VerticalCategoryList />
         </div>
         <div className={styles.categoryContainer}>
-          <BusinessList
+          <ServiceList
             categoryName={category}
-            className={styles.businessList}
-            businesses={filteredBusinesses}
+            className={styles.serviceList}
+            services={filteredServices}
           />
         </div>
       </div>

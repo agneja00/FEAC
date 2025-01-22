@@ -1,8 +1,8 @@
 import * as Yup from "yup";
-import { NewBusiness } from "./types";
+import { NewService } from "./types";
 import { errorMessage } from "@/constants/errorMessage";
 
-export const BusinessRegisterValidationShema: Yup.Schema<NewBusiness> =
+export const ServiceRegisterValidationShema: Yup.Schema<NewService> =
   Yup.object().shape({
     name: Yup.string().required(errorMessage.required),
     about: Yup.string().required(errorMessage.required),
@@ -19,7 +19,7 @@ export const BusinessRegisterValidationShema: Yup.Schema<NewBusiness> =
           "electric",
           "decoration",
         ],
-        "Invalid category"
+        "Invalid category",
       ),
     contactPerson: Yup.string().required(errorMessage.required),
     email: Yup.string()
@@ -28,7 +28,7 @@ export const BusinessRegisterValidationShema: Yup.Schema<NewBusiness> =
     favorite: Yup.boolean().required(errorMessage.required),
   });
 
-export const businessRegisterInitialValues: NewBusiness = {
+export const serviceRegisterInitialValues: NewService = {
   name: "",
   about: "",
   address: "",

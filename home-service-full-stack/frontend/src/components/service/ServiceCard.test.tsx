@@ -1,22 +1,21 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { useNavigate } from "react-router-dom";
-import BusinessCard from "./BusinessCard";
-import { Business } from "./types";
+import ServiceCard from "./ServiceCard";
+import { Service } from "./types";
 
-const mockBusiness: Business = {
+const mockService: Service = {
   _id: "1",
   about: "test",
   email: "test@gmail.com",
   imageUrls: ["https://example.com/image.jpg"],
-  name: "Test Business",
+  name: "Test Service",
   category: "Restaurant",
   contactPerson: "John Doe",
   address: "123 Test Street",
   favorite: false,
 };
 
-const mockBusinessWithoutImage: Business = {
-  ...mockBusiness,
+const mockServiceWithoutImage: Service = {
+  ...mockService,
   imageUrls: [],
 };
 
@@ -31,39 +30,39 @@ jest.mock("usehooks-ts", () => ({
   useLocalStorage: jest.fn(() => [[], jest.fn()]),
 }));
 
-describe("<BusinessCard />", () => {
-  test("should navigate to business page when 'Book now' is clicked", () => {
-    render(<BusinessCard business={mockBusiness} />);
+describe("<ServiceCard />", () => {
+  test("should navigate to service page when 'Book now' is clicked", () => {
+    render(<ServiceCard service={mockService} />);
 
     const bookNowButton = screen.getByText(/Book now/i);
 
     fireEvent.click(bookNowButton);
 
-    expect(mockNavigate).toHaveBeenCalledWith(`/business/${mockBusiness._id}`); // Assert it navigated to the correct URL
+    expect(mockNavigate).toHaveBeenCalledWith(`/service/${mockService._id}`);
   });
 
-  test("renders Business Card with all details", () => {
-    render(<BusinessCard business={mockBusiness} />);
+  test("renders Service Card with all details", () => {
+    render(<ServiceCard service={mockService} />);
 
-    expect(screen.getByAltText("Test Business")).toBeInTheDocument();
+    expect(screen.getByAltText("Test Service")).toBeInTheDocument();
     expect(screen.getByText("Restaurant")).toBeInTheDocument();
-    expect(screen.getByText("Test Business")).toBeInTheDocument();
+    expect(screen.getByText("Test Service")).toBeInTheDocument();
     expect(screen.getByText("John Doe")).toBeInTheDocument();
     expect(screen.getByText("123 Test Street")).toBeInTheDocument();
     expect(screen.getByText("Book now")).toBeInTheDocument();
   });
 
   test("does not render image if imageUrls array is empty", () => {
-    render(<BusinessCard business={mockBusinessWithoutImage} />);
+    render(<ServiceCard service={mockServiceWithoutImage} />);
 
-    expect(screen.queryByAltText("Test Business")).not.toBeInTheDocument();
+    expect(screen.queryByAltText("Test Service")).not.toBeInTheDocument();
   });
 
   test("renders the 'Book now' button", () => {
-    render(<BusinessCard business={mockBusiness} />);
+    render(<ServiceCard service={mockService} />);
 
     expect(
-      screen.getByRole("button", { name: /Book now/i })
+      screen.getByRole("button", { name: /Book now/i }),
     ).toBeInTheDocument();
   });
 });

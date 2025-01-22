@@ -1,6 +1,6 @@
 import styles from "./Home.module.scss";
 import CategoryList from "@/components/category/CategoryList";
-import BusinessList from "@/components/business/BusinessList";
+import ServiceList from "@/components/service/ServiceList";
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
       </section>
       <CategoryList />
       <h2 className={styles.businessTitle}>Popular businesses</h2>
-      <BusinessList />
+      <ServiceList />
     </>
   );
 };

@@ -3,28 +3,28 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useSnackbar } from "notistack";
 import FormikField from "../common/FormikInput";
 import {
-  BusinessRegisterValidationShema,
-  businessRegisterInitialValues,
+  ServiceRegisterValidationShema,
+  serviceRegisterInitialValues,
 } from "./consts";
 import Button from "../common/Button";
-import { NewBusiness } from "./types";
-import { sendBusinessEmail } from "./api";
+import { NewService } from "./types";
+import { sendServiceEmail } from "./api";
 
-interface BusinessRegisterFormProps {
+interface ServiceRegisterFormProps {
   onSubmitSuccess?: () => void;
 }
 
-const BusinessRegisterForm: React.FC<BusinessRegisterFormProps> = ({
+const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   onSubmitSuccess,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (
-    formValues: NewBusiness,
+    formValues: NewService,
     { resetForm }: { resetForm: () => void },
   ) => {
     try {
-      await sendBusinessEmail(formValues);
+      await sendServiceEmail(formValues);
       enqueueSnackbar("Email sent successfully!", { variant: "success" });
       resetForm();
 
@@ -41,15 +41,15 @@ const BusinessRegisterForm: React.FC<BusinessRegisterFormProps> = ({
 
   return (
     <Formik
-      initialValues={businessRegisterInitialValues}
-      validationSchema={BusinessRegisterValidationShema}
+      initialValues={serviceRegisterInitialValues}
+      validationSchema={ServiceRegisterValidationShema}
       onSubmit={handleSubmit}
     >
       <Form className={styles.form}>
         <h2 className={styles.subtitle}>
           Let’s Work Together to Serve More Homes!
         </h2>
-        <FormikField label="Business name:" name="name" />
+        <FormikField label="Service name:" name="name" />
         <div className={styles.aboutContainer}>
           <label className={styles.label} htmlFor="about">
             Description of your service:
@@ -92,4 +92,4 @@ const BusinessRegisterForm: React.FC<BusinessRegisterFormProps> = ({
   );
 };
 
-export default BusinessRegisterForm;
+export default ServiceRegisterForm;

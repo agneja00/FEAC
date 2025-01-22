@@ -1,39 +1,39 @@
 import { useLocalStorage } from "usehooks-ts";
-import { Business } from "@/components/business/types";
-import BusinessCard from "@/components/business/BusinessCard";
+import { Service } from "@/components/service/types";
+import BusinessCard from "@/components/service/ServiceCard";
 import FilteredList from "@/components/common/FilteredList";
 import { useState } from "react";
 
 const FavoritesPage = () => {
   const [bookmarks] = useLocalStorage<string[]>("bookmarks", []);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [businesses, setBusinesses] = useState<Business[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const favoriteBusinesses = businesses.filter((business) =>
-    bookmarks.includes(business._id),
+  const favoriteServices = services.filter((service) =>
+    bookmarks.includes(service._id),
   );
 
   const categories = [
     "All",
-    ...new Set(favoriteBusinesses.map((b) => b.category)),
+    ...new Set(favoriteServices.map((b) => b.category)),
   ];
 
-  const filteredBusinesses =
+  const filteredServices =
     activeCategory === "All"
-      ? favoriteBusinesses
-      : favoriteBusinesses.filter((b) => b.category === activeCategory);
+      ? favoriteServices
+      : favoriteServices.filter((b) => b.category === activeCategory);
 
   return (
     <FilteredList
       title="My Favorites"
-      items={filteredBusinesses}
+      items={filteredServices}
       filters={categories}
       activeFilter={activeCategory}
       onFilterChange={(filter: string) => setActiveCategory(filter)}
-      renderItem={(business) => (
-        <BusinessCard key={business._id} business={business} />
+      renderItem={(service) => (
+        <BusinessCard key={service._id} service={service} />
       )}
     />
   );

@@ -8,14 +8,14 @@ const BookingsPage = () => {
   const [status, setStatus] = useState<BookingStatus>("confirmed");
 
   const { data: bookings } = useUserBookings(status);
-  const businessBookings: Booking[] = bookings ?? [];
+  const serviceBookings: Booking[] = bookings ?? [];
 
   const statuses: BookingStatus[] = ["confirmed", "completed"];
 
   return (
     <FilteredList
       title="My Bookings"
-      items={businessBookings}
+      items={serviceBookings}
       filters={statuses}
       activeFilter={status}
       onFilterChange={(filter: string) => setStatus(filter as BookingStatus)}

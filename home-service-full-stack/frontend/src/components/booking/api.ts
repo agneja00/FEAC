@@ -1,6 +1,6 @@
 import axiosInstance from "@/config/axios";
 import { Booking, BookingStatus, NewBooking } from "./types";
-import { fetchBusinessById } from "../business/api";
+import { fetchServiceById } from "../service/api";
 
 export const fetchUserBookings = async (
   userEmail: string,
@@ -14,17 +14,17 @@ export const fetchUserBookings = async (
   );
   const bookings = response.data;
 
-  const bookingsWithBusiness = await Promise.all(
+  const bookingsWithService = await Promise.all(
     bookings.map(async (booking) => {
-      if (typeof booking.businessId === "string") {
-        const business = await fetchBusinessById(booking.businessId);
-        return { ...booking, businessId: business };
+      if (typeof booking.serviceId === "string") {
+        const service = await fetchServiceById(booking.serviceId);
+        return { ...booking, serviceId: service };
       }
       return booking;
     }),
   );
 
-  return bookingsWithBusiness;
+  return bookingsWithService;
 };
 
 export const createBooking = async (booking: NewBooking): Promise<Booking> => {

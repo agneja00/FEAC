@@ -1,10 +1,10 @@
-import { Business } from "../business/types";
+import { Service } from "../service/types";
 
 export type BookingStatus = "confirmed" | "pending" | "completed";
 
 export interface Booking {
   _id: string;
-  businessId: string | Business;
+  serviceId: string | Service;
   date: Date | null;
   time: string;
   userEmail: string;

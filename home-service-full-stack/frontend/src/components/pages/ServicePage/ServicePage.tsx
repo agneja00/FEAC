@@ -1,15 +1,15 @@
-import styles from "./BusinessPage.module.scss";
+import styles from "./ServicePage.module.scss";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import BusinessesAndBookingsLayout from "@/components/layout/BusinessesAndBookingsLayout";
+import ServicesAndBookingsLayout from "@/components/layout/ServicesAndBookingsLayout";
 import Button from "@/components/common/Button";
 import { GiNotebook } from "react-icons/gi";
-import BusinessInfoHeader from "@/components/business/BusinessInfoHeader";
-import BusinessInfoSection from "@/components/business/BusinessInfoSection";
-import SimilarBusiness from "@/components/business/SimilarBusiness";
+import ServiceInfoHeader from "@/components/service/ServiceInfoHeader";
+import ServiceInfoSection from "@/components/service/ServiceInfoSection";
+import SimilarService from "@/components/service/SimilarService";
 import Modal from "@/components/common/Modal";
 import { UserContext } from "@/components/context/UserContext";
-import useCurrentBusiness from "@/components/business/hooks";
+import useCurrentService from "@/components/service/hooks";
 import { useAddBooking } from "@/components/booking/hooks";
 import { NewBooking } from "@/components/booking/types";
 import { Dayjs } from "dayjs";
@@ -17,13 +17,13 @@ import { LocalizationProvider, DateCalendar } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useSnackbar } from "notistack";
 
-const BusinessPage = () => {
+const ServicePage = () => {
   const { id } = useParams<{ id: string }>();
   const [bookOpen, setBookOpen] = useState(false);
   const { user } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
 
-  const { currentBusiness } = useCurrentBusiness();
+  const { currentService } = useCurrentService();
   const { mutateAsync: postBooking } = useAddBooking();
 
   const [dateValue, setDateValue] = useState<Dayjs | null>(null);
@@ -54,10 +54,10 @@ const BusinessPage = () => {
 
   const handleSubmit = async () => {
     try {
-      if (!currentBusiness || !user) return;
+      if (!currentService || !user) return;
 
       const booking: NewBooking = {
-        businessId: currentBusiness._id,
+        serviceId: currentService._id,
         date: dateValue ? new Date(dateValue.format("YYYY-MM-DD")) : null,
         time: timeSlot,
         userEmail: user.email,
@@ -103,11 +103,11 @@ const BusinessPage = () => {
           <Button onClick={handleSubmit}>Reserve Time</Button>
         </Modal>
       )}
-      <BusinessesAndBookingsLayout>
-        <BusinessInfoHeader />
+      <ServicesAndBookingsLayout>
+        <ServiceInfoHeader />
         <div className={styles.container}>
           <div className={styles.infoContainer}>
-            <BusinessInfoSection />
+            <ServiceInfoSection />
           </div>
           <div>
             <div className={styles.buttonContainer}>
@@ -127,12 +127,12 @@ const BusinessPage = () => {
                 </Button>
               )}
             </div>
-            <SimilarBusiness />
+            <SimilarService />
           </div>
         </div>
-      </BusinessesAndBookingsLayout>
+      </ServicesAndBookingsLayout>
     </>
   );
 };
 
-export default BusinessPage;
+export default ServicePage;

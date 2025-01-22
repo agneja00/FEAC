@@ -1,19 +1,19 @@
-import styles from "./BusinessCard.module.scss";
+import styles from "./ServiceCard.module.scss";
 import Button from "../common/Button";
-import { Business } from "./types";
+import { Service } from "./types";
 import { ROUTES } from "@/constants/routes";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useLocalStorage } from "usehooks-ts";
 import { useNavigate, generatePath } from "react-router-dom";
 
-interface BusinessCardProps {
-  business: Business;
+interface ServiceCardProps {
+  service: Service;
 }
 
-const BusinessCard = ({ business }: BusinessCardProps) => {
-  const { _id } = business;
+const ServiceCard = ({ service }: ServiceCardProps) => {
+  const { _id } = service;
   const navigate = useNavigate();
-  const businessPath = generatePath(ROUTES.BUSINESS_ID, { id: _id });
+  const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
 
   const [bookmarks, setBookmarks] = useLocalStorage<string[]>("bookmarks", []);
 
@@ -30,20 +30,20 @@ const BusinessCard = ({ business }: BusinessCardProps) => {
 
   return (
     <div className={styles.card}>
-      {business.imageUrls.length && (
+      {service.imageUrls.length && (
         <img
-          src={business.imageUrls[0]}
-          alt={business.name}
+          src={service.imageUrls[0]}
+          alt={service.name}
           className={styles.image}
         />
       )}
       <div className={styles.infoContainer}>
-        <span className={styles.chip}>{business.category}</span>
-        <h3 className={styles.name}>{business.name}</h3>
-        <p className={styles.contactPerson}>{business.contactPerson}</p>
-        <p className={styles.address}>{business.address}</p>
+        <span className={styles.chip}>{service.category}</span>
+        <h3 className={styles.name}>{service.name}</h3>
+        <p className={styles.contactPerson}>{service.contactPerson}</p>
+        <p className={styles.address}>{service.address}</p>
         <div className={styles.buttonContainer}>
-          <Button small onClick={() => navigate(businessPath)}>
+          <Button small onClick={() => navigate(servicePath)}>
             Book now
           </Button>
           <Button onClick={toggleFavorite} favorite>
@@ -59,4 +59,4 @@ const BusinessCard = ({ business }: BusinessCardProps) => {
   );
 };
 
-export default BusinessCard;
+export default ServiceCard;

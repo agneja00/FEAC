@@ -1,6 +1,6 @@
 import express from "express";
 import Booking from "../models/Booking";
-import { IBusiness } from "../models/Business";
+import { IService } from "../models/Service";
 import authMiddleware from "../middlewares/authMiddleware";
 import sendEmail from "../utils/sendEmail";
 import dotenv from "dotenv";
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/", authMiddleware, async (req, res) => {
   try {
-    const bookings = await Booking.find().populate("businessId").exec();
+    const bookings = await Booking.find().populate("serviceId").exec();
     res.json(bookings);
   } catch (err) {
     res.status(500).json({ message: "Error fetching bookings for the user", error: err });
@@ -22,23 +22,23 @@ router.post("/", authMiddleware, async (req, res) => {
     const newBooking = new Booking(req.body);
     await newBooking.save();
 
-    const bookingWithBusiness = await Booking.findById(newBooking._id).populate("businessId");
-    const business = bookingWithBusiness?.businessId as unknown as IBusiness;
+    const bookingWithService = await Booking.findById(newBooking._id).populate("serviceId");
+    const service = bookingWithService?.serviceId as unknown as IService;
 
-    const userEmail = bookingWithBusiness?.userEmail;
-    const userName = bookingWithBusiness?.userName;
-    const businessName = business?.name;
-    const date = bookingWithBusiness?.date.toISOString().split("T")[0];
-    const time = bookingWithBusiness?.time;
+    const userEmail = bookingWithService?.userEmail;
+    const userName = bookingWithService?.userName;
+    const serviceName = service?.name;
+    const date = bookingWithService?.date.toISOString().split("T")[0];
+    const time = bookingWithService?.time;
 
     sendEmail({
       to: userEmail!,
       from: process.env.EMAIL!,
       subject: "Rezervacijos patvirtinimas",
-      text: `Gerb. ${userName}, jūsų rezervacija su ${businessName} ${date} ${time} buvo patvirtinta.`,
-      html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${businessName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
+      text: `Gerb. ${userName}, jūsų rezervacija su ${serviceName} ${date} ${time} buvo patvirtinta.`,
+      html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${serviceName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
     });
-    res.status(201).json(bookingWithBusiness);
+    res.status(201).json(bookingWithService);
   } catch (err) {
     res.status(400).json({
       message: "Error creating booking",

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export interface IBusiness {
+export interface IService {
   name: string;
   about: string;
   address: string;
@@ -11,7 +11,7 @@ export interface IBusiness {
   favorite: boolean;
 }
 
-const businessSchema = new mongoose.Schema<IBusiness>({
+const serviceSchema = new mongoose.Schema<IService>({
   name: {
     type: String,
     required: true,
@@ -57,6 +57,6 @@ const businessSchema = new mongoose.Schema<IBusiness>({
   ],
 });
 
-const Business = mongoose.model<IBusiness>("Business", businessSchema);
+const Service = mongoose.model<IService>("Service", serviceSchema);
 
-export default Business;
+export default Service;

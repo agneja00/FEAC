@@ -3,7 +3,7 @@ import cors from "cors";
 import { connectToDb, PORT } from "./db";
 import authRoutes from "./routes/authRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
-import businessRoutes from "./routes/businessRoutes";
+import serviceRoutes from "./routes/serviceRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import path from "path";
 
@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/auth", authRoutes);
 app.use("/categories", categoryRoutes);
-app.use("/businesses", businessRoutes);
+app.use("/services", serviceRoutes);
 app.use("/bookings", bookingRoutes);
 
 app.get("*", (req, res) => {
