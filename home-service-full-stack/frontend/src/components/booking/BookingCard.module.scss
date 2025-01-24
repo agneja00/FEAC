@@ -23,6 +23,7 @@
 
 .serviceName {
   font-weight: 800;
+  font-size: 1.2rem;
 }
 
 .info {
@@ -31,10 +32,7 @@
   gap: 0.5rem;
 }
 
-.icon {
-  color: $primary-color;
-}
-
+.icon,
 .contactPerson {
   color: $primary-color;
 }
