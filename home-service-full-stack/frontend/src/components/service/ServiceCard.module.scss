@@ -59,6 +59,7 @@
 .buttonContainer {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 @media only screen and (min-width: 768px) {
