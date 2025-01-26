@@ -4,6 +4,17 @@
 }
 
 .accountModalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.accountModalContent {
   position: absolute;
   top: 53%;
   left: 43%;
@@ -22,12 +33,8 @@
 }
 
 .imageModalContainer {
-  position: fixed;
+  @include modal-container;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,15 +74,10 @@
   color: #333;
 }
 
-@media only screen and (min-width: 480px) {
-  .accountModalContainer {
-    left: 46%;
-  }
-}
-
 @media only screen and (min-width: 768px) {
   .accountModalContainer {
-    left: 89.5%;
+    top: -45%;
+    left: 46.5%;
   }
 
   .modalContent {

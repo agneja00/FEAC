@@ -71,7 +71,7 @@ const Topbar = () => {
               <Modal
                 userEmail={user?.email}
                 isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
+                onClose={handleModalClose}
                 accountModal
               >
                 <ul className={styles.accountModalContent}>
@@ -133,7 +133,10 @@ const Topbar = () => {
       ) : (
         <IoMdClose
           fontSize={32}
-          onClick={() => setMenuOpen(false)}
+          onClick={() => {
+            setMenuOpen(false);
+            setModalOpen(false);
+          }}
           className={styles.menu}
           tabIndex={0}
           aria-label="Close navigation menu"
