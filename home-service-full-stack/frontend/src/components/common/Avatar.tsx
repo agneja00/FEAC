@@ -3,7 +3,7 @@ import styles from "./Avatar.module.scss";
 
 interface AvatarProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   className?: string;
 }
 

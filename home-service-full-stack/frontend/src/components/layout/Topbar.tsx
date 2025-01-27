@@ -21,9 +21,23 @@ const Topbar = () => {
   const bookingPath = generateUserPath(ROUTES.BOOKINGS);
   const favoritePath = generateUserPath(ROUTES.FAVORITES);
 
-  const handleModalClose = () => {
-    setModalOpen(false);
-    setMenuOpen(false);
+  const handleModalClose = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (modalOpen && !target.closest(`.${styles.accountModalContent}`)) {
+      setModalOpen(false);
+    } else if (
+      menuOpen &&
+      !target.closest(`.${styles.navigationMobileContent}`) &&
+      !modalOpen
+    ) {
+      setMenuOpen(false);
+    }
+  };
+
+  const handleAvatarClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalOpen(!modalOpen);
   };
 
   const links = [
@@ -34,7 +48,7 @@ const Topbar = () => {
 
   return (
     <header className={styles.topbar}>
-      <Link to={ROUTES.HOME} className={styles.logo}>
+      <Link to={ROUTES.HOME} className={styles.logo} onClick={handleModalClose}>
         <img src={Logo} alt="logo" />
       </Link>
 
@@ -44,6 +58,7 @@ const Topbar = () => {
             ? styles.navigationMobileContainer
             : styles.navigationLargeContainer
         }
+        onClick={handleModalClose}
       >
         <nav
           className={
@@ -71,7 +86,7 @@ const Topbar = () => {
               <Modal
                 userEmail={user?.email}
                 isOpen={modalOpen}
-                onClose={handleModalClose}
+                onClose={() => setModalOpen(false)}
                 accountModal
               >
                 <ul className={styles.accountModalContent}>
@@ -80,7 +95,10 @@ const Topbar = () => {
                     <Link
                       className={styles.accountLink}
                       to={bookingPath}
-                      onClick={handleModalClose}
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setModalOpen(false);
+                      }}
                     >
                       My Bookings
                     </Link>
@@ -89,7 +107,10 @@ const Topbar = () => {
                     <Link
                       className={styles.accountLink}
                       to={favoritePath}
-                      onClick={handleModalClose}
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setModalOpen(false);
+                      }}
                     >
                       My Favorites
                     </Link>
@@ -97,7 +118,11 @@ const Topbar = () => {
                   <Link
                     className={styles.accountLink}
                     to={ROUTES.HOME}
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      setMenuOpen(false);
+                      setModalOpen(false);
+                    }}
                   >
                     Logout
                   </Link>
@@ -106,7 +131,7 @@ const Topbar = () => {
             )}
             <Avatar
               className={menuOpen ? styles.avatarMobile : styles.avatarLarge}
-              onClick={() => setModalOpen(!modalOpen)}
+              onClick={handleAvatarClick}
             >
               {user?.email?.[0]}
             </Avatar>
