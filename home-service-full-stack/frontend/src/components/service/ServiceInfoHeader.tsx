@@ -5,7 +5,7 @@ import { CiMail } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock } from "react-icons/hi";
-import useCurrentService from "./hooks";
+import { useCurrentService } from "./hooks";
 
 const ServiceInfoHeader: React.FC = () => {
   const { currentService } = useCurrentService();

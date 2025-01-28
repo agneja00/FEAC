@@ -1,6 +1,6 @@
 import styles from "./SimilarService.module.scss";
 import { generatePath, Link } from "react-router-dom";
-import useCurrentService, { useServices } from "./hooks";
+import { useServices, useCurrentService } from "./hooks";
 import { ROUTES } from "@/constants/routes";
 
 const SimilarService: React.FC = () => {

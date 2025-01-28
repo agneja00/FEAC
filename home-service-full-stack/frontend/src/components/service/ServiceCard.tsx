@@ -1,36 +1,26 @@
-import styles from "./ServiceCard.module.scss";
-import Button from "../common/Button";
-import { Service } from "./types";
-import { ROUTES } from "@/constants/routes";
+import { Service } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { useLocalStorage } from "usehooks-ts";
-import { useNavigate, generatePath } from "react-router-dom";
+import Button from "../common/Button";
+import styles from "./ServiceCard.module.scss";
+import { useToggleFavorite } from "@/components/service/hooks";
 
 interface ServiceCardProps {
   service: Service;
+  email: string;
+  isFavorite: boolean;
 }
 
-const ServiceCard = ({ service }: ServiceCardProps) => {
+const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
   const { _id } = service;
-  const navigate = useNavigate();
-  const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
+  const { mutate: toggleFavorite } = useToggleFavorite();
 
-  const [bookmarks, setBookmarks] = useLocalStorage<string[]>("bookmarks", []);
-
-  const toggleFavorite = () => {
-    const index = bookmarks.indexOf(_id);
-
-    if (index !== -1) {
-      const newBookmarks = bookmarks.filter((id) => id !== _id);
-      setBookmarks(newBookmarks);
-    } else {
-      setBookmarks([...bookmarks, _id]);
-    }
+  const handleToggleFavorite = () => {
+    toggleFavorite({ email, serviceId: _id });
   };
 
   return (
     <div className={styles.card}>
-      {service.imageUrls.length && (
+      {service.imageUrls?.length > 0 && (
         <img
           src={service.imageUrls[0]}
           alt={service.name}
@@ -43,11 +33,9 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <p className={styles.contactPerson}>{service.contactPerson}</p>
         <p className={styles.address}>{service.address}</p>
         <div className={styles.buttonContainer}>
-          <Button small onClick={() => navigate(servicePath)}>
-            Book now
-          </Button>
-          <Button onClick={toggleFavorite} favorite>
-            {bookmarks.includes(_id) ? (
+          <Button small>Book now</Button>
+          <Button favorite onClick={handleToggleFavorite}>
+            {isFavorite ? (
               <FaHeart fontSize={14} />
             ) : (
               <FaRegHeart fontSize={14} />

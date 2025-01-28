@@ -1,29 +1,43 @@
-import { useLocalStorage } from "usehooks-ts";
-import { Service } from "@/components/service/types";
-import BusinessCard from "@/components/service/ServiceCard";
-import FilteredList from "@/components/common/FilteredList";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchFavoriteServices } from "@/components/service/api";
+import ServiceCard from "@/components/service/ServiceCard";
+import FilteredList from "@/components/common/FilteredList";
+import { SERVICE_KEY } from "@/components/service/hooks";
+import { Service } from "@/components/service/types";
 
-const FavoritesPage = () => {
-  const [bookmarks] = useLocalStorage<string[]>("bookmarks", []);
+interface FavoritesPageProps {
+  email: string;
+}
+
+const FavoritesPage = ({ email }: FavoritesPageProps) => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  const favoriteServices = services.filter((service) =>
-    bookmarks.includes(service._id),
-  );
+  // React Query v5 syntax
+  const {
+    data: favoriteServices = [],
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: [SERVICE_KEY, email],
+    queryFn: () => fetchFavoriteServices(email),
+    enabled: !!email,
+  });
 
+  // Get unique categories
   const categories = [
     "All",
-    ...new Set(favoriteServices.map((b) => b.category)),
+    ...new Set(favoriteServices.map((s) => s.category)),
   ];
 
+  // Filter services by category
   const filteredServices =
     activeCategory === "All"
       ? favoriteServices
-      : favoriteServices.filter((b) => b.category === activeCategory);
+      : favoriteServices.filter((s) => s.category === activeCategory);
+
+  if (isPending) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <FilteredList
@@ -31,9 +45,14 @@ const FavoritesPage = () => {
       items={filteredServices}
       filters={categories}
       activeFilter={activeCategory}
-      onFilterChange={(filter: string) => setActiveCategory(filter)}
+      onFilterChange={setActiveCategory}
       renderItem={(service) => (
-        <BusinessCard key={service._id} service={service} />
+        <ServiceCard
+          key={service._id}
+          service={service}
+          email={email}
+          isFavorite={true}
+        />
       )}
     />
   );

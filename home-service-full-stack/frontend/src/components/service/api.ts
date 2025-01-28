@@ -23,3 +23,24 @@ export const sendServiceEmail = async (formData: NewService): Promise<void> => {
     throw error;
   }
 };
+
+export const fetchFavoriteServices = async (
+  email: string,
+): Promise<Service[]> => {
+  const response = await axiosInstance.get(`/services/user/${email}/favorites`);
+  return response.data;
+};
+
+export const toggleFavorite = async (
+  email: string,
+  serviceId: string,
+): Promise<void> => {
+  try {
+    await axiosInstance.post(`/services/user/${email}/favorites`, {
+      serviceId,
+    });
+  } catch (error) {
+    console.error("Error toggling favorite:", error);
+    throw error;
+  }
+};

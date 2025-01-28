@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { NewService } from "./types";
 import { errorMessage } from "@/constants/errorMessage";
 
-export const ServiceRegisterValidationShema: Yup.Schema<NewService> =
+export const ServiceRegisterValidationSchema: Yup.Schema<NewService> =
   Yup.object().shape({
     name: Yup.string().required(errorMessage.required),
     about: Yup.string().required(errorMessage.required),
@@ -25,7 +25,6 @@ export const ServiceRegisterValidationShema: Yup.Schema<NewService> =
     email: Yup.string()
       .email(errorMessage.email)
       .required(errorMessage.required),
-    favorite: Yup.boolean().required(errorMessage.required),
   });
 
 export const serviceRegisterInitialValues: NewService = {
@@ -35,5 +34,4 @@ export const serviceRegisterInitialValues: NewService = {
   category: "",
   contactPerson: "",
   email: "",
-  favorite: false,
 };

@@ -7,7 +7,7 @@ export interface Service {
   contactPerson: string;
   email: string;
   imageUrls: string[];
-  favorite: boolean;
+  favoritedBy: string[];
 }
 
-export type NewService = Omit<Service, "_id" | "imageUrls">;
+export type NewService = Omit<Service, "_id" | "imageUrls" | "favoritedBy">;

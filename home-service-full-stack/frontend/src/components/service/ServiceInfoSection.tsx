@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./ServiceInfoSection.module.scss";
-import useCurrentService from "./hooks";
+import { useCurrentService } from "./hooks";
 import Modal from "../common/Modal";
 
 const ServiceInfoSection: React.FC = () => {

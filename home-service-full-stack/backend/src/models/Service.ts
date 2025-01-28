@@ -8,7 +8,7 @@ export interface IService {
   contactPerson: string;
   email: string;
   imageUrls: string[];
-  favorite: boolean;
+  favoritedBy: string[];
 }
 
 const serviceSchema = new mongoose.Schema<IService>({
@@ -27,6 +27,7 @@ const serviceSchema = new mongoose.Schema<IService>({
   category: {
     type: String,
     required: true,
+    enum: ["shifting", "repair", "plumbing", "cleaning", "painting", "electric", "decoration"],
   },
   contactPerson: {
     type: String,
@@ -45,17 +46,19 @@ const serviceSchema = new mongoose.Schema<IService>({
   imageUrls: [
     {
       type: String,
-      required: false,
+      default: [],
     },
   ],
-  favorite: [
+  favoritedBy: [
     {
-      type: Boolean,
-      required: true,
-      default: false,
+      type: String,
+      default: [],
     },
   ],
 });
+
+serviceSchema.index({ category: 1 });
+serviceSchema.index({ favoritedBy: 1 });
 
 const Service = mongoose.model<IService>("Service", serviceSchema);
 

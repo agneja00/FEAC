@@ -9,7 +9,7 @@ import ServiceInfoSection from "@/components/service/ServiceInfoSection";
 import SimilarService from "@/components/service/SimilarService";
 import Modal from "@/components/common/Modal";
 import { UserContext } from "@/components/context/UserContext";
-import useCurrentService from "@/components/service/hooks";
+import { useCurrentService } from "@/components/service/hooks";
 import { useAddBooking } from "@/components/booking/hooks";
 import { NewBooking } from "@/components/booking/types";
 import { Dayjs } from "dayjs";

@@ -28,7 +28,12 @@ const ServiceList: React.FC<ServiceListProps> = ({
   return (
     <div className={classNames(styles.container, className)}>
       {filteredService.map((service) => (
-        <ServiceCard key={service._id} service={service} />
+        <ServiceCard
+          key={service._id}
+          service={service}
+          email={""}
+          isFavorite={false}
+        />
       ))}
     </div>
   );

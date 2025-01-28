@@ -3,7 +3,7 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useSnackbar } from "notistack";
 import FormikField from "../common/FormikInput";
 import {
-  ServiceRegisterValidationShema,
+  ServiceRegisterValidationSchema,
   serviceRegisterInitialValues,
 } from "./consts";
 import Button from "../common/Button";
@@ -42,7 +42,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   return (
     <Formik
       initialValues={serviceRegisterInitialValues}
-      validationSchema={ServiceRegisterValidationShema}
+      validationSchema={ServiceRegisterValidationSchema}
       onSubmit={handleSubmit}
     >
       <Form className={styles.form}>
