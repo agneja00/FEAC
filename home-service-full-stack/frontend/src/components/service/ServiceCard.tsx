@@ -1,20 +1,29 @@
+import { useState } from "react";
 import { Service } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Button from "../common/Button";
 import styles from "./ServiceCard.module.scss";
 import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
-import { toggleFavorite } from "./api";
+import { useToggleFavorite } from "./hooks";
 
 interface ServiceCardProps {
   service: Service;
   email: string;
+  isFavorite: boolean;
 }
 
-const ServiceCard = ({ service, email }: ServiceCardProps) => {
+const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
   const { _id } = service;
   const navigate = useNavigate();
+  const { mutate } = useToggleFavorite();
   const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
+  const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
+
+  const handleToggleFavorite = () => {
+    setLocalIsFavorite(!localIsFavorite);
+    mutate({ email, serviceId: _id });
+  };
 
   return (
     <div className={styles.card}>
@@ -36,14 +45,12 @@ const ServiceCard = ({ service, email }: ServiceCardProps) => {
           </Button>
           <Button
             favorite
-            onClick={() => toggleFavorite}
+            onClick={handleToggleFavorite}
             aria-label={
-              service.favoritedBy.includes(email)
-                ? "Remove from favorites"
-                : "Add to favorites"
+              isFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
-            {service.favoritedBy.includes(email) ? (
+            {isFavorite ? (
               <FaHeart fontSize={14} />
             ) : (
               <FaRegHeart fontSize={14} />

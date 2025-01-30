@@ -4,7 +4,6 @@ import { fetchFavoriteServices } from "@/components/service/api";
 import ServiceCard from "@/components/service/ServiceCard";
 import FilteredList from "@/components/common/FilteredList";
 import { SERVICE_KEY } from "@/components/service/hooks";
-import { Service } from "@/components/service/types";
 
 interface FavoritesPageProps {
   email: string;
@@ -13,7 +12,6 @@ interface FavoritesPageProps {
 const FavoritesPage = ({ email }: FavoritesPageProps) => {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // React Query v5 syntax
   const {
     data: favoriteServices = [],
     isPending,
@@ -24,13 +22,11 @@ const FavoritesPage = ({ email }: FavoritesPageProps) => {
     enabled: !!email,
   });
 
-  // Get unique categories
   const categories = [
     "All",
     ...new Set(favoriteServices.map((s) => s.category)),
   ];
 
-  // Filter services by category
   const filteredServices =
     activeCategory === "All"
       ? favoriteServices

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Service } from "./types";
 
 export const SERVICE_KEY = "SERVICE";
+export const FAVORITE_KEY = "FAVORITE";
 
 export const useServices = () => {
   return useQuery<Service[]>({
@@ -34,6 +35,7 @@ export const useToggleFavorite = () => {
       toggleFavorite(email, serviceId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [SERVICE_KEY] });
+      queryClient.invalidateQueries({ queryKey: [FAVORITE_KEY] });
     },
   });
 };
