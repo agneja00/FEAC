@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchServiceById, fetchServices, toggleFavorite } from "./api";
+import {
+  fetchServiceById,
+  fetchServices,
+  toggleFavorite,
+  fetchFavoriteServices,
+} from "./api";
 import { useParams } from "react-router-dom";
 import { Service } from "./types";
 
@@ -23,19 +28,30 @@ export const useServiceById = (serviceId: string) => {
 export const useCurrentService = () => {
   const { id } = useParams<{ id: string }>();
   const { data } = useServiceById(id!);
-
   return { currentService: data };
 };
 
 export const useToggleFavorite = () => {
   const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: ({ email, serviceId }: { email: string; serviceId: string }) =>
       toggleFavorite(email, serviceId),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: [SERVICE_KEY] });
-      queryClient.invalidateQueries({ queryKey: [FAVORITE_KEY] });
+      queryClient.invalidateQueries({
+        queryKey: [FAVORITE_KEY, variables.email],
+        exact: true,
+      });
     },
   });
+};
+
+export const useFavoriteServices = (email: string) => {
+  const query = useQuery<Service[]>({
+    queryKey: [FAVORITE_KEY, email],
+    queryFn: () => fetchFavoriteServices(email),
+    enabled: !!email,
+  });
+
+  return query;
 };

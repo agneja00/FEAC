@@ -146,10 +146,7 @@ router.get("/user/:email/favorites", authMiddleware, async (req: Request, res: R
     const services = await Service.find({ favoritedBy: req.params.email });
     res.json(services);
   } catch (error) {
-    res.status(500).json({
-      message: "Error fetching favorites",
-      error: error instanceof Error ? error.message : error,
-    });
+    res.status(500).json({ message: "Error fetching favorites" });
   }
 });
 
@@ -159,13 +156,9 @@ router.post("/user/:email/favorites", authMiddleware, async (req: Request, res: 
 
   try {
     const service = await Service.findById(serviceId);
-
-    if (!service) {
-      return res.status(404).json({ message: "Service not found" });
-    }
+    if (!service) return res.status(404).json({ message: "Service not found" });
 
     const isFavorite = service.favoritedBy.includes(email);
-
     if (isFavorite) {
       service.favoritedBy = service.favoritedBy.filter((e) => e !== email);
     } else {
@@ -173,17 +166,14 @@ router.post("/user/:email/favorites", authMiddleware, async (req: Request, res: 
     }
 
     await service.save();
-
-    res.status(200).json({
-      message: isFavorite ? "Removed from favorites" : "Added to favorites",
-      favoritedBy: service.favoritedBy,
-    });
+    res
+      .status(200)
+      .json({
+        message: isFavorite ? "Removed from favorites" : "Added to favorites",
+        favoritedBy: service.favoritedBy,
+      });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: "Server error",
-      error: error instanceof Error ? error.message : error,
-    });
+    res.status(500).json({ message: "Server error", error: "error" });
   }
 });
 

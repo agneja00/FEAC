@@ -1,47 +1,48 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchFavoriteServices } from "@/components/service/api";
-import ServiceCard from "@/components/service/ServiceCard";
+import { useContext, useState } from "react";
+import { useFavoriteServices } from "../../service/hooks";
 import FilteredList from "@/components/common/FilteredList";
-import { SERVICE_KEY } from "@/components/service/hooks";
+import ServiceCard from "@/components/service/ServiceCard";
+import { UserContext } from "@/components/context/UserContext";
 
-interface FavoritesPageProps {
-  email: string;
-}
+const FAVORITE_FILTERS = [
+  "All",
+  "Shifting",
+  "Repair",
+  "Plumbing",
+  "Cleaning",
+  "Painting",
+  "Electric",
+  "Decoration",
+];
 
-const FavoritesPage = ({ email }: FavoritesPageProps) => {
-  const [activeCategory, setActiveCategory] = useState("All");
-
+const FavoritesPage = () => {
+  const { user } = useContext(UserContext);
+  const email = user?.email || "";
   const {
-    data: favoriteServices = [],
-    isPending,
+    data: favoriteServices,
+    isLoading,
     error,
-  } = useQuery({
-    queryKey: [SERVICE_KEY, email],
-    queryFn: () => fetchFavoriteServices(email),
-    enabled: !!email,
-  });
+  } = useFavoriteServices(email);
 
-  const categories = [
-    "All",
-    ...new Set(favoriteServices.map((s) => s.category)),
-  ];
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  if (isLoading) return <p>Loading favorites...</p>;
+  if (error) return <p>Error loading favorites</p>;
 
   const filteredServices =
-    activeCategory === "All"
-      ? favoriteServices
-      : favoriteServices.filter((s) => s.category === activeCategory);
-
-  if (isPending) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+    activeFilter === "All"
+      ? favoriteServices || []
+      : (favoriteServices || []).filter(
+          (service: { category: string }) => service.category === activeFilter,
+        );
 
   return (
     <FilteredList
-      title="My Favorites"
+      title="My Favorite Services"
       items={filteredServices}
-      filters={categories}
-      activeFilter={activeCategory}
-      onFilterChange={setActiveCategory}
+      filters={FAVORITE_FILTERS}
+      activeFilter={activeFilter}
+      onFilterChange={setActiveFilter}
       renderItem={(service) => (
         <ServiceCard
           key={service._id}

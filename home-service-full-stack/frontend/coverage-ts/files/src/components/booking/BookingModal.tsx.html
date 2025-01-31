@@ -80,7 +80,7 @@ interface BookingModalProps {
 
 const BookingModal: React.FC&lt;BookingModalProps&gt; = ({ onClose }) =&gt; {
   const { currentBusiness } = useCurrentBusiness();
-  const { user } = useContext(UserContext);
+  const  = useContext(UserContext);
   const { mutateAsync: postBooking } = useAddBooking();
 
   const [dateValue, setDateValue] = useState&lt;Dayjs | null&gt;(null);

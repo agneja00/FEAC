@@ -1,28 +1,42 @@
-import { useState } from "react";
+import { useNavigate, generatePath } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Service } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Button from "../common/Button";
 import styles from "./ServiceCard.module.scss";
-import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { useToggleFavorite } from "./hooks";
 
 interface ServiceCardProps {
-  service: Service;
+  service?: Service;
   email: string;
   isFavorite: boolean;
 }
 
 const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
+  if (!service) {
+    return null;
+  }
+
   const { _id } = service;
   const navigate = useNavigate();
-  const { mutate } = useToggleFavorite();
+  const { mutate, isPending } = useToggleFavorite();
   const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
+
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
 
+  useEffect(() => {
+    setLocalIsFavorite(isFavorite);
+  }, [isFavorite]);
+
   const handleToggleFavorite = () => {
-    setLocalIsFavorite(!localIsFavorite);
-    mutate({ email, serviceId: _id });
+    setLocalIsFavorite((prev) => !prev);
+    mutate(
+      { email, serviceId: _id },
+      {
+        onError: () => setLocalIsFavorite((prev) => !prev),
+      },
+    );
   };
 
   return (
@@ -46,11 +60,12 @@ const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
           <Button
             favorite
             onClick={handleToggleFavorite}
+            disabled={isPending}
             aria-label={
-              isFavorite ? "Remove from favorites" : "Add to favorites"
+              localIsFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
-            {isFavorite ? (
+            {localIsFavorite ? (
               <FaHeart fontSize={14} />
             ) : (
               <FaRegHeart fontSize={14} />
