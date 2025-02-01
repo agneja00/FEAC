@@ -17,13 +17,17 @@ const FAVORITE_FILTERS = [
 
 const FavoritesPage = () => {
   const { user } = useContext(UserContext);
-  const email = user?.email || "";
+  const email = user?.email;
+
+  if (!email) {
+    return <p>Please log in to view your favorites.</p>;
+  }
+
   const {
     data: favoriteServices,
     isLoading,
     error,
   } = useFavoriteServices(email);
-
   const [activeFilter, setActiveFilter] = useState("All");
 
   if (isLoading) return <p>Loading favorites...</p>;

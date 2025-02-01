@@ -34,6 +34,16 @@ export const fetchFavoriteServices = async (
 export const toggleFavorite = async (
   email: string,
   serviceId: string,
-): Promise<void> => {
-  await axiosInstance.post(`/services/user/${email}/favorites`, { serviceId });
+): Promise<Service> => {
+  try {
+    const response = await axiosInstance.post(
+      `/services/user/${email}/favorites`,
+      {
+        serviceId,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to toggle favorite");
+  }
 };

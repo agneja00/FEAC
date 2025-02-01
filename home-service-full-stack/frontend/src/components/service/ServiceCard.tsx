@@ -8,16 +8,12 @@ import { ROUTES } from "@/constants/routes";
 import { useToggleFavorite } from "./hooks";
 
 interface ServiceCardProps {
-  service?: Service;
+  service: Service;
   email: string;
-  isFavorite: boolean;
+  isFavorite?: boolean;
 }
 
 const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
-  if (!service) {
-    return null;
-  }
-
   const { _id } = service;
   const navigate = useNavigate();
   const { mutate, isPending } = useToggleFavorite();
@@ -25,9 +21,13 @@ const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
 
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
 
+  if (!service) {
+    return null;
+  }
+
   useEffect(() => {
     setLocalIsFavorite(isFavorite);
-  }, [isFavorite]);
+  }, [isFavorite, service._id]);
 
   const handleToggleFavorite = () => {
     setLocalIsFavorite((prev) => !prev);

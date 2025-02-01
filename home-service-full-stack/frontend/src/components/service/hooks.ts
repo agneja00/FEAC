@@ -47,11 +47,9 @@ export const useToggleFavorite = () => {
 };
 
 export const useFavoriteServices = (email: string) => {
-  const query = useQuery<Service[]>({
+  return useQuery<Service[]>({
     queryKey: [FAVORITE_KEY, email],
     queryFn: () => fetchFavoriteServices(email),
     enabled: !!email,
   });
-
-  return query;
 };
