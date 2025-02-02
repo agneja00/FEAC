@@ -16,7 +16,7 @@ const mockServices: Service[] = [
     address: "123 Street A",
     email: "business@gmail.com",
     about: "good restaurant",
-    favorite: false,
+    favoritedBy: [""],
   },
   {
     _id: "2",
@@ -27,7 +27,7 @@ const mockServices: Service[] = [
     address: "456 Street B",
     email: "business1@gmail.com",
     about: "good retail business",
-    favorite: false,
+    favoritedBy: [""],
   },
 ];
 
