@@ -13,46 +13,46 @@ interface ServiceCardProps {
   isFavorite?: boolean;
 }
 
-const ServiceCard = ({ service, email, isFavorite }: ServiceCardProps) => {
-  const { _id } = service;
+const ServiceCard = ({
+  service,
+  email,
+  isFavorite = false,
+}: ServiceCardProps) => {
+  if (!service) return null;
+
+  const { _id, name, category, contactPerson, address, imageUrls } = service;
   const navigate = useNavigate();
   const { mutate, isPending } = useToggleFavorite();
   const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
 
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
 
-  if (!service) {
-    return null;
-  }
-
   useEffect(() => {
     setLocalIsFavorite(isFavorite);
-  }, [isFavorite, service._id]);
+  }, [isFavorite]);
 
   const handleToggleFavorite = () => {
-    setLocalIsFavorite((prev) => !prev);
+    const previousIsFavorite = localIsFavorite;
+    setLocalIsFavorite(!previousIsFavorite);
+
     mutate(
       { email, serviceId: _id },
       {
-        onError: () => setLocalIsFavorite((prev) => !prev),
+        onError: () => setLocalIsFavorite(previousIsFavorite),
       },
     );
   };
 
   return (
     <div className={styles.card}>
-      {service.imageUrls?.length > 0 && (
-        <img
-          src={service.imageUrls[0]}
-          alt={service.name}
-          className={styles.image}
-        />
+      {imageUrls?.length > 0 && (
+        <img src={imageUrls[0]} alt={name} className={styles.image} />
       )}
       <div className={styles.infoContainer}>
-        <span className={styles.chip}>{service.category}</span>
-        <h3 className={styles.name}>{service.name}</h3>
-        <p className={styles.contactPerson}>{service.contactPerson}</p>
-        <p className={styles.address}>{service.address}</p>
+        <span className={styles.chip}>{category}</span>
+        <h3 className={styles.name}>{name}</h3>
+        <p className={styles.contactPerson}>{contactPerson}</p>
+        <p className={styles.address}>{address}</p>
         <div className={styles.buttonContainer}>
           <Button small onClick={() => navigate(servicePath)}>
             Book now

@@ -32,7 +32,6 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     res.status(401).send({ error: "Not authenticated" });
     return;
   }
-
   next();
 };
 

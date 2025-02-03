@@ -7,6 +7,8 @@ import {
 } from "./api";
 import { useParams } from "react-router-dom";
 import { Service } from "./types";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 export const SERVICE_KEY = "SERVICE";
 export const FAVORITE_KEY = "FAVORITE";
@@ -40,16 +42,16 @@ export const useToggleFavorite = () => {
       queryClient.invalidateQueries({ queryKey: [SERVICE_KEY] });
       queryClient.invalidateQueries({
         queryKey: [FAVORITE_KEY, variables.email],
-        exact: true,
       });
     },
   });
 };
 
 export const useFavoriteServices = (email: string) => {
+  const { user } = useContext(UserContext);
   return useQuery<Service[]>({
-    queryKey: [FAVORITE_KEY, email],
-    queryFn: () => fetchFavoriteServices(email),
-    enabled: !!email,
+    queryKey: [FAVORITE_KEY, user?.email],
+    queryFn: () => fetchFavoriteServices(user!.email),
+    enabled: !!user?.email,
   });
 };

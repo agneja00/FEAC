@@ -31,16 +31,11 @@ export const fetchFavoriteServices = async (
   return response.data;
 };
 
-export const toggleFavorite = async (
-  email: string,
-  serviceId: string,
-): Promise<Service> => {
+export const toggleFavorite = async (email: string, serviceId: string) => {
   try {
     const response = await axiosInstance.post(
       `/services/user/${email}/favorites`,
-      {
-        serviceId,
-      },
+      { email, serviceId },
     );
     return response.data;
   } catch (error) {

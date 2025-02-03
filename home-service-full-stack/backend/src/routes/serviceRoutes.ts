@@ -151,8 +151,11 @@ router.get("/user/:email/favorites", authMiddleware, async (req: Request, res: R
 });
 
 router.post("/user/:email/favorites", authMiddleware, async (req: Request, res: Response) => {
-  const { email } = req.params;
-  const { serviceId } = req.body;
+  const { email, serviceId } = req.body;
+
+  if (!email || !serviceId) {
+    return res.status(400).json({ message: "Email and serviceId are required" });
+  }
 
   try {
     const service = await Service.findById(serviceId);
@@ -166,14 +169,13 @@ router.post("/user/:email/favorites", authMiddleware, async (req: Request, res: 
     }
 
     await service.save();
-    res
-      .status(200)
-      .json({
-        message: isFavorite ? "Removed from favorites" : "Added to favorites",
-        favoritedBy: service.favoritedBy,
-      });
+    res.status(200).json({
+      message: isFavorite ? "Removed from favorites" : "Added to favorites",
+      favoritedBy: service.favoritedBy,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: "error" });
+    console.error("Error toggling favorite:", error);
+    res.status(500).json({ message: "Server error", error });
   }
 });
 
