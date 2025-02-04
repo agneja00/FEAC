@@ -11,7 +11,7 @@ const mockService: Service = {
   category: "Restaurant",
   contactPerson: "John Doe",
   address: "123 Test Street",
-  favorite: false,
+  favoritedBy: ["ex@gmail.com", "expff@gmail.com"],
 };
 
 const mockServiceWithoutImage: Service = {

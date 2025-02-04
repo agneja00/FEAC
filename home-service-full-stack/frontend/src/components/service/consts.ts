@@ -11,13 +11,13 @@ export const ServiceRegisterValidationSchema: Yup.Schema<NewService> =
       .required(errorMessage.select)
       .oneOf(
         [
-          "shifting",
-          "repair",
-          "plumbing",
-          "cleaning",
-          "painting",
-          "electric",
-          "decoration",
+          "Shifting",
+          "Repair",
+          "Plumbing",
+          "Cleaning",
+          "Painting",
+          "Electric",
+          "Decoration",
         ],
         "Invalid category",
       ),

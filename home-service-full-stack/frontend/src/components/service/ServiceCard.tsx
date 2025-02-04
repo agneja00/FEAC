@@ -1,30 +1,27 @@
 import { useNavigate, generatePath } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Service } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Button from "../common/Button";
 import styles from "./ServiceCard.module.scss";
 import { ROUTES } from "@/constants/routes";
 import { useToggleFavorite } from "./hooks";
+import { UserContext } from "../context/UserContext";
 
 interface ServiceCardProps {
   service: Service;
-  email: string;
   isFavorite?: boolean;
 }
 
-const ServiceCard = ({
-  service,
-  email,
-  isFavorite = false,
-}: ServiceCardProps) => {
-  if (!service) return null;
+const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
+  if (!service || !service._id) return null;
 
   const { _id, name, category, contactPerson, address, imageUrls } = service;
+  const { user } = useContext(UserContext);
+  const email = user?.email;
   const navigate = useNavigate();
   const { mutate, isPending } = useToggleFavorite();
   const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
-
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
 
   useEffect(() => {
@@ -32,13 +29,19 @@ const ServiceCard = ({
   }, [isFavorite]);
 
   const handleToggleFavorite = () => {
+    if (!_id || !email) return;
     const previousIsFavorite = localIsFavorite;
     setLocalIsFavorite(!previousIsFavorite);
 
     mutate(
-      { email, serviceId: _id },
+      { email: user.email, serviceId: _id },
       {
-        onError: () => setLocalIsFavorite(previousIsFavorite),
+        onError: (error) => {
+          setLocalIsFavorite(previousIsFavorite);
+        },
+        onSuccess: (data) => {
+          setLocalIsFavorite(data?.favoritedBy?.includes(email));
+        },
       },
     );
   };

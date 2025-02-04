@@ -48,13 +48,9 @@ const FavoritesPage = () => {
       activeFilter={activeFilter}
       onFilterChange={setActiveFilter}
       renderItem={(service) => (
-        <ServiceCard
-          key={service._id}
-          service={service}
-          email={email}
-          isFavorite={true}
-        />
+        <ServiceCard key={service._id} service={service} isFavorite={true} />
       )}
+      favorite
     />
   );
 };

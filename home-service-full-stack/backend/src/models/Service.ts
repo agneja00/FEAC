@@ -27,7 +27,7 @@ const serviceSchema = new mongoose.Schema<IService>({
   category: {
     type: String,
     required: true,
-    enum: ["shifting", "repair", "plumbing", "cleaning", "painting", "electric", "decoration"],
+    enum: ["Shifting", "Repair", "Plumbing", "Cleaning", "Painting", "Electric", "Decoration"],
   },
   contactPerson: {
     type: String,

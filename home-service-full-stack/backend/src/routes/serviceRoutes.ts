@@ -11,13 +11,8 @@ dotenv.config();
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const { page = 1, limit = 10 } = req.query;
-
   try {
-    const services = await Service.find()
-      .limit(Number(limit))
-      .skip((Number(page) - 1) * Number(limit));
-
+    const services = await Service.find();
     res.json(services);
   } catch (err) {
     res.status(500).json({
@@ -150,33 +145,28 @@ router.get("/user/:email/favorites", authMiddleware, async (req: Request, res: R
   }
 });
 
-router.post("/user/:email/favorites", authMiddleware, async (req: Request, res: Response) => {
+router.post("/user/:email/favorites", authMiddleware, async (req, res) => {
   const { email, serviceId } = req.body;
-
-  if (!email || !serviceId) {
-    return res.status(400).json({ message: "Email and serviceId are required" });
-  }
-
   try {
-    const service = await Service.findById(serviceId);
-    if (!service) return res.status(404).json({ message: "Service not found" });
+    if (!email || !serviceId) {
+      return res.status(400).json({ message: "Missing email or serviceId" });
+    }
 
-    const isFavorite = service.favoritedBy.includes(email);
-    if (isFavorite) {
+    const service = await Service.findById(serviceId);
+    if (!service) {
+      return res.status(404).json({ message: "Service not found" });
+    }
+
+    if (service.favoritedBy.includes(email)) {
       service.favoritedBy = service.favoritedBy.filter((e) => e !== email);
     } else {
       service.favoritedBy.push(email);
     }
 
     await service.save();
-    res.status(200).json({
-      message: isFavorite ? "Removed from favorites" : "Added to favorites",
-      favoritedBy: service.favoritedBy,
-    });
+    res.json(service);
   } catch (error) {
-    console.error("Error toggling favorite:", error);
-    res.status(500).json({ message: "Server error", error });
+    res.status(500).json({ message: "Internal Server Error", error });
   }
 });
-
 export default router;

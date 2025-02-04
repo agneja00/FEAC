@@ -10,8 +10,8 @@ import { Service } from "./types";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-export const SERVICE_KEY = "SERVICE";
-export const FAVORITE_KEY = "FAVORITE";
+export const SERVICE_KEY = "SERVICES";
+export const FAVORITE_KEY = "FAVORITES";
 
 export const useServices = () => {
   return useQuery<Service[]>({
@@ -38,10 +38,28 @@ export const useToggleFavorite = () => {
   return useMutation({
     mutationFn: ({ email, serviceId }: { email: string; serviceId: string }) =>
       toggleFavorite(email, serviceId),
+    onMutate: ({ serviceId }) => {
+      queryClient.setQueryData<Service[]>([SERVICE_KEY], (oldData) => {
+        const data = oldData ?? [];
+        const updatedData = data.map((service) => {
+          const serviceWithFavorite = service as Service & {
+            isFavorite?: boolean;
+          };
+          return serviceWithFavorite._id === serviceId
+            ? {
+                ...serviceWithFavorite,
+                isFavorite: !serviceWithFavorite.isFavorite,
+              }
+            : serviceWithFavorite;
+        });
+        return updatedData;
+      });
+    },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: [SERVICE_KEY] });
       queryClient.invalidateQueries({
         queryKey: [FAVORITE_KEY, variables.email],
+        exact: true,
       });
     },
   });
@@ -50,7 +68,7 @@ export const useToggleFavorite = () => {
 export const useFavoriteServices = (email: string) => {
   const { user } = useContext(UserContext);
   return useQuery<Service[]>({
-    queryKey: [FAVORITE_KEY, user?.email],
+    queryKey: [SERVICE_KEY, email, FAVORITE_KEY],
     queryFn: () => fetchFavoriteServices(user!.email),
     enabled: !!user?.email,
   });

@@ -5,12 +5,20 @@
   gap: 1rem;
 }
 
+.itemsFavorite {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
 .title {
   font-size: 2rem;
 }
 
 .buttonsContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   background-color: #e7dfdf;
   padding: 0.5rem;
@@ -37,5 +45,9 @@
   .itemsContainer {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .itemsFavorite {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

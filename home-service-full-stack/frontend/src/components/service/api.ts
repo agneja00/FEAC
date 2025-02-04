@@ -19,7 +19,6 @@ export const sendServiceEmail = async (formData: NewService): Promise<void> => {
   try {
     await axiosInstance.post("/services", formData);
   } catch (error) {
-    console.error("Error sending email:", error);
     throw error;
   }
 };
@@ -31,14 +30,23 @@ export const fetchFavoriteServices = async (
   return response.data;
 };
 
-export const toggleFavorite = async (email: string, serviceId: string) => {
+export const toggleFavorite = async (
+  email: string,
+  serviceId: string,
+): Promise<Service> => {
   try {
     const response = await axiosInstance.post(
       `/services/user/${email}/favorites`,
-      { email, serviceId },
+      {
+        email,
+        serviceId,
+      },
     );
     return response.data;
   } catch (error) {
-    throw new Error("Failed to toggle favorite");
+    throw new Error(
+      "Failed to toggle favorite: " +
+        (error instanceof Error ? error.message : "Unknown error"),
+    );
   }
 };

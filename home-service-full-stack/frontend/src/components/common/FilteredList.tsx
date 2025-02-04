@@ -9,6 +9,7 @@ interface FilteredListProps<T> {
   activeFilter: string;
   onFilterChange: (filter: string) => void;
   renderItem: (item: T) => React.ReactNode;
+  favorite?: boolean;
 }
 
 const FilteredList = <T,>({
@@ -18,6 +19,7 @@ const FilteredList = <T,>({
   activeFilter,
   onFilterChange,
   renderItem,
+  favorite,
 }: FilteredListProps<T>) => {
   return (
     <div className={styles.container}>
@@ -35,7 +37,12 @@ const FilteredList = <T,>({
           </Button>
         ))}
       </div>
-      <div className={styles.itemsContainer}>
+      <div
+        className={classNames(
+          styles.itemsContainer,
+          favorite && styles.itemsFavorite,
+        )}
+      >
         {items.length > 0 ? (
           items.map((item) => renderItem(item))
         ) : (
