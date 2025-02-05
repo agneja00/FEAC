@@ -3,16 +3,16 @@ import styles from "./ServicesContent.module.scss";
 import ServiceList from "@/components/service/ServiceList";
 import VerticalCategoryList from "@/components/category/VerticalCategoryList";
 import { useState, useEffect } from "react";
-import { useServices } from "@/components/service/hooks";
 import { Service } from "../service/types";
 import Input from "../common/Input";
+import { useServiceData } from "../service/hooks";
 
 type Params = {
   category?: string;
 };
 
 const ServicesContent: React.FC = () => {
-  const { data: allServices } = useServices();
+  const { allServices, favoriteServices } = useServiceData();
   const [filteredServices, setFilteredServices] = useState<Service[]>([]);
   const [searchValue, setSearchValue] = useState("");
 
@@ -49,9 +49,9 @@ const ServicesContent: React.FC = () => {
         </div>
         <div className={styles.categoryContainer}>
           <ServiceList
-            categoryName={category}
             className={styles.serviceList}
             services={filteredServices}
+            favoriteServices={favoriteServices}
           />
         </div>
       </div>

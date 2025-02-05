@@ -66,10 +66,21 @@ export const useToggleFavorite = () => {
 };
 
 export const useFavoriteServices = (email: string) => {
-  const { user } = useContext(UserContext);
   return useQuery<Service[]>({
     queryKey: [SERVICE_KEY, email, FAVORITE_KEY],
-    queryFn: () => fetchFavoriteServices(user!.email),
-    enabled: !!user?.email,
+    queryFn: () => fetchFavoriteServices(email),
+    enabled: !!email,
   });
+};
+
+export const useServiceData = () => {
+  const { data: allServices } = useServices();
+  const { user } = useContext(UserContext);
+  const { data: favoriteServices } = useFavoriteServices(user?.email || "");
+
+  return {
+    allServices,
+    user,
+    favoriteServices,
+  };
 };

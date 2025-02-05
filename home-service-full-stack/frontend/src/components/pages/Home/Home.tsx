@@ -1,8 +1,11 @@
 import styles from "./Home.module.scss";
 import CategoryList from "@/components/category/CategoryList";
 import ServiceList from "@/components/service/ServiceList";
+import { useServiceData } from "@/components/service/hooks";
 
 const Home = () => {
+  const { allServices, favoriteServices } = useServiceData();
+
   return (
     <>
       <section className={styles.hero}>
@@ -17,7 +20,7 @@ const Home = () => {
       </section>
       <CategoryList />
       <h2 className={styles.businessTitle}>Popular businesses</h2>
-      <ServiceList />
+      <ServiceList services={allServices} favoriteServices={favoriteServices} />
     </>
   );
 };
