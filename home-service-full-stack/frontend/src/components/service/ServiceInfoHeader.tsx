@@ -1,14 +1,32 @@
 import styles from "./ServiceInfoHeader.module.scss";
 import Button from "../common/Button";
-import { CiLocationOn } from "react-icons/ci";
-import { CiMail } from "react-icons/ci";
+import { CiLocationOn, CiMail } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock } from "react-icons/hi";
 import { useCurrentService } from "./hooks";
+import { useSnackbar } from "notistack";
 
 const ServiceInfoHeader: React.FC = () => {
   const { currentService } = useCurrentService();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleShare = async () => {
+    if (!currentService) return;
+
+    const serviceUrl = `${window.location.origin}/service/${currentService._id}`;
+
+    try {
+      await navigator.clipboard.writeText(serviceUrl);
+      enqueueSnackbar("Service link copied to clipboard!", {
+        variant: "success",
+      });
+    } catch (error) {
+      enqueueSnackbar("Failed to copy link. Please try again.", {
+        variant: "error",
+      });
+    }
+  };
 
   return (
     <div className={styles.infoServiceContainer}>
@@ -35,7 +53,7 @@ const ServiceInfoHeader: React.FC = () => {
       </div>
       <div className={styles.infoServiceContainerSecond}>
         <div className={styles.detailsContainerSecond}>
-          <Button small>
+          <Button small onClick={handleShare}>
             <IoShareOutline fontSize={20} />
           </Button>
           <div className={styles.infoContainer}>
