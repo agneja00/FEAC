@@ -1,73 +1,86 @@
 import { render, screen } from "@testing-library/react";
 import ServiceList from "./ServiceList";
+import ServiceCard from "./ServiceCard";
 import { Service } from "./types";
-import { useServices } from "./hooks";
-import { MemoryRouter } from "react-router-dom";
 
-jest.mock("./hooks");
+jest.mock("./ServiceCard", () => ({
+  __esModule: true,
+  default: jest.fn(() => (
+    <div data-testid="mocked-service-card">Mocked ServiceCard</div>
+  )),
+}));
 
 const mockServices: Service[] = [
   {
     _id: "1",
-    imageUrls: ["https://example.com/image1.jpg"],
     name: "Service 1",
-    category: "Restaurant",
-    contactPerson: "John Doe",
-    address: "123 Street A",
-    email: "business@gmail.com",
-    about: "good restaurant",
-    favoritedBy: ["ajfofj@mail.ru"],
+    about: "About Service 1",
+    address: "Address 1",
+    category: "Category 1",
+    contactPerson: "Contact Person 1",
+    email: "email1@example.com",
+    imageUrls: ["image1.jpg"],
+    favoritedBy: ["user1"],
   },
   {
     _id: "2",
-    imageUrls: ["https://example.com/image2.jpg"],
     name: "Service 2",
-    category: "Retail",
-    contactPerson: "Jane Smith",
-    address: "456 Street B",
-    email: "business1@gmail.com",
-    about: "good retail business",
-    favoritedBy: [""],
+    about: "About Service 2",
+    address: "Address 2",
+    category: "Category 2",
+    contactPerson: "Contact Person 2",
+    email: "email2@example.com",
+    imageUrls: ["image2.jpg"],
+    favoritedBy: [],
   },
 ];
 
-describe("ServiceList Component", () => {
-  beforeEach(() => {
-    (useServices as jest.Mock).mockReturnValue({ data: mockServices });
-  });
+const mockFavoriteServices: Service[] = [
+  {
+    _id: "1",
+    name: "Service 1",
+    about: "About Service 1",
+    address: "Address 1",
+    category: "Category 1",
+    contactPerson: "Contact Person 1",
+    email: "email1@example.com",
+    imageUrls: ["image1.jpg"],
+    favoritedBy: ["user1"],
+  },
+];
 
-  test("renders a list of services", () => {
-    render(
-      <MemoryRouter>
-        <ServiceList />
-      </MemoryRouter>,
-    );
+it("renders the correct number of ServiceCard components", () => {
+  render(<ServiceList services={mockServices} />);
+  const serviceCards = screen.getAllByTestId("mocked-service-card");
+  expect(serviceCards).toHaveLength(mockServices.length);
+});
 
-    expect(screen.getByText("Service 1")).toBeInTheDocument();
-    expect(screen.getByText("Service 2")).toBeInTheDocument();
-  });
+it("passes the correct props to ServiceCard", () => {
+  render(
+    <ServiceList
+      services={mockServices}
+      favoriteServices={mockFavoriteServices}
+    />
+  );
 
-  test("filters services by category", () => {
-    render(
-      <MemoryRouter>
-        <ServiceList categoryName="Restaurant" />
-      </MemoryRouter>,
-    );
+  expect(ServiceCard).toHaveBeenCalledWith(
+    expect.objectContaining({
+      service: mockServices[0],
+      isFavorite: true,
+    }),
+    expect.anything()
+  );
 
-    expect(screen.getByText("Service 1")).toBeInTheDocument();
-    expect(screen.queryByText("Service 2")).not.toBeInTheDocument();
-  });
+  expect(ServiceCard).toHaveBeenCalledWith(
+    expect.objectContaining({
+      service: mockServices[1],
+      isFavorite: false,
+    }),
+    expect.anything()
+  );
+});
 
-  test("renders an empty list if no services are available", () => {
-    (useServices as jest.Mock).mockReturnValue({ data: [] });
-
-    render(
-      <MemoryRouter>
-        <ServiceList />
-      </MemoryRouter>,
-    );
-
-    expect(screen.queryByText("Service 1")).not.toBeInTheDocument();
-    expect(screen.queryByText("Service 2")).not.toBeInTheDocument();
-  });
+it("renders an empty container when services are not provided", () => {
+  const { container } = render(<ServiceList />);
+  expect(container.firstChild).toBeEmptyDOMElement();
 });
