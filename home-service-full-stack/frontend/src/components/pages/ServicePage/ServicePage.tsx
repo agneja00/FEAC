@@ -62,7 +62,7 @@ const ServicePage = () => {
         time: timeSlot,
         userEmail: user.email,
         userName: user.name,
-        status: "confirmed",
+        status: "Confirmed",
       };
       await postBooking(booking);
       enqueueSnackbar("Successfully booked!", { variant: "success" });

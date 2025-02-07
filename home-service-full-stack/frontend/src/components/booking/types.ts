@@ -1,6 +1,6 @@
 import { Service } from "../service/types";
 
-export type BookingStatus = "confirmed" | "pending" | "completed";
+export type BookingStatus = "Confirmed" | "Completed";
 
 export interface Booking {
   _id: string;

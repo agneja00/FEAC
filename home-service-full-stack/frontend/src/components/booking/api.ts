@@ -4,13 +4,10 @@ import { fetchServiceById } from "../service/api";
 
 export const fetchUserBookings = async (
   userEmail: string,
-  status: BookingStatus,
+  status: string,
 ): Promise<Booking[]> => {
   const response = await axiosInstance.get<Booking[]>(
     `/bookings/user/${userEmail}`,
-    {
-      params: { status },
-    },
   );
   const bookings = response.data;
 

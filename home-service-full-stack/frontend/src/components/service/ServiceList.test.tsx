@@ -60,7 +60,7 @@ it("passes the correct props to ServiceCard", () => {
     <ServiceList
       services={mockServices}
       favoriteServices={mockFavoriteServices}
-    />
+    />,
   );
 
   expect(ServiceCard).toHaveBeenCalledWith(
@@ -68,7 +68,7 @@ it("passes the correct props to ServiceCard", () => {
       service: mockServices[0],
       isFavorite: true,
     }),
-    expect.anything()
+    expect.anything(),
   );
 
   expect(ServiceCard).toHaveBeenCalledWith(
@@ -76,7 +76,7 @@ it("passes the correct props to ServiceCard", () => {
       service: mockServices[1],
       isFavorite: false,
     }),
-    expect.anything()
+    expect.anything(),
   );
 });
 

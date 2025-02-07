@@ -105,10 +105,10 @@ router.put("/:id", authMiddleware, async (req: Request, res: Response) => {
   }
 });
 
-router.get("/category/:category", authMiddleware, async (req: Request, res: Response) => {
+router.get("/categories/:category", async (req: Request, res: Response) => {
   try {
     const filteredServices = await Service.find({
-      category: req.params.category.toLowerCase(),
+      category: req.params.category,
     });
 
     res.status(200).json(filteredServices);
