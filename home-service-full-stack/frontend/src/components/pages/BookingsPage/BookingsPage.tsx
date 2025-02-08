@@ -7,17 +7,13 @@ import { BookingStatus, Booking } from "@/components/booking/types";
 const BookingsPage = () => {
   const [status, setStatus] = useState<BookingStatus>("Confirmed");
 
-  const { data: bookings } = useUserBookings("Confirmed");
-  const filteredBookings = bookings
-    ? bookings.filter((booking) => booking.status === status)
-    : [];
-
+  const { data: bookings } = useUserBookings(status);
   const statuses: BookingStatus[] = ["Confirmed", "Completed"];
 
   return (
     <FilteredList
       title="My Bookings"
-      items={filteredBookings}
+      items={bookings || []}
       filters={statuses}
       activeFilter={status}
       onFilterChange={(filter: string) => setStatus(filter as BookingStatus)}
@@ -27,5 +23,4 @@ const BookingsPage = () => {
     />
   );
 };
-
 export default BookingsPage;
