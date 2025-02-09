@@ -3,18 +3,39 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock, HiOutlineLocationMarker } from "react-icons/hi";
 import { FaRegCalendar } from "react-icons/fa";
 import { Booking } from "./types.ts";
+import { useServicePath } from "../service/hooks";
+import Button from "../common/Button.tsx";
+import { useDeleteBooking } from "./hooks.ts";
+import { useSnackbar } from "notistack";
 
 interface BookingCardProps {
   booking: Booking;
 }
 
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
-  const { serviceId, date, time } = booking;
+  const { _id, serviceId, date, time, status } = booking;
+  const { mutate: deleteBooking } = useDeleteBooking();
+  const navigateToService = useServicePath();
+  const { enqueueSnackbar } = useSnackbar();
 
   const service = typeof serviceId === "string" ? null : serviceId;
+  const resolvedServiceId =
+    typeof serviceId === "string" ? serviceId : serviceId?._id;
+
+  const handleCancelBooking = () => {
+    deleteBooking(_id);
+    enqueueSnackbar("Booking successfully canceled!", { variant: "success" });
+  };
 
   return (
-    <div className={styles.cardContainer}>
+    <div
+      className={styles.cardContainer}
+      onClick={() => {
+        if (resolvedServiceId) {
+          navigateToService(resolvedServiceId);
+        }
+      }}
+    >
       {service && (
         <>
           <img
@@ -52,6 +73,18 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                 <span className={styles.dateAndTime}>{time}</span>
               </p>
             </div>
+            {status !== "Completed" && (
+              <Button
+                small
+                cancel
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCancelBooking();
+                }}
+              >
+                Cancel
+              </Button>
+            )}
           </section>
         </>
       )}

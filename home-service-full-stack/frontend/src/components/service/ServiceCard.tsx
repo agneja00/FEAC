@@ -1,12 +1,11 @@
-import { useNavigate, generatePath } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { Service } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Button from "../common/Button";
 import styles from "./ServiceCard.module.scss";
-import { ROUTES } from "@/constants/routes";
 import { useToggleFavorite } from "./hooks";
 import { UserContext } from "../context/UserContext";
+import { useServicePath } from "./hooks";
 
 interface ServiceCardProps {
   service: Service;
@@ -19,10 +18,9 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
   const { _id, name, category, contactPerson, address, imageUrls } = service;
   const { user } = useContext(UserContext);
   const email = user?.email;
-  const navigate = useNavigate();
   const { mutate, isPending } = useToggleFavorite();
-  const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
+  const navigateToService = useServicePath();
 
   useEffect(() => {
     setLocalIsFavorite(isFavorite);
@@ -57,7 +55,7 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
         <p className={styles.contactPerson}>{contactPerson}</p>
         <p className={styles.address}>{address}</p>
         <div className={styles.buttonContainer}>
-          <Button small onClick={() => navigate(servicePath)}>
+          <Button small onClick={() => navigateToService(_id)}>
             Book now
           </Button>
           <Button

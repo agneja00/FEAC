@@ -17,7 +17,8 @@
 }
 
 .small {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
+  max-width: 6rem;
 }
 
 .favorite {
@@ -29,9 +30,20 @@
   }
 }
 
+.cancel {
+  background-color: #ff0000;
+  &:hover {
+    background-color: #d00d0d;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .button {
     font-size: 0.9rem;
     padding: 0.75rem 1.25rem;
+  }
+
+  .small {
+    padding: 0.5rem 1rem;
   }
 }

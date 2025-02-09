@@ -1,9 +1,9 @@
 .cardContainer {
+  @include card-style;
   display: flex;
   align-items: center;
   gap: 1rem;
   border: 1px solid #e7dfdf;
-  border-radius: 1rem;
   padding: 0.8rem;
   width: 100%;
 }

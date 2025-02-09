@@ -5,10 +5,11 @@ import {
   toggleFavorite,
   fetchFavoriteServices,
 } from "./api";
-import { useParams } from "react-router-dom";
+import { generatePath, useNavigate, useParams } from "react-router-dom";
 import { Service } from "./types";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { ROUTES } from "@/constants/routes";
 
 export const SERVICE_KEY = "SERVICES";
 export const FAVORITE_KEY = "FAVORITES";
@@ -25,6 +26,17 @@ export const useServiceById = (serviceId: string) => {
     queryKey: [SERVICE_KEY, serviceId],
     queryFn: () => fetchServiceById(serviceId),
   });
+};
+
+export const useServicePath = () => {
+  const navigate = useNavigate();
+
+  const navigateToService = (id: string) => {
+    const servicePath = generatePath(ROUTES.SERVICE_ID, { id });
+    navigate(servicePath);
+  };
+
+  return navigateToService;
 };
 
 export const useCurrentService = () => {

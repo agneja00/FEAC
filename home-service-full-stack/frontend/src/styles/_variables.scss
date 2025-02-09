@@ -2,6 +2,21 @@ $primary-color: #8056eb;
 $secondary-color: #000000;
 $tertiary-color: #ffffff;
 
+@mixin card-style {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 1rem;
+  display: flex;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-10px);
+    box-shadow: rgba(86, 20, 208, 0.25) 5px 5px 15px;
+  }
+}
+
 @mixin modal-container {
   position: fixed;
   left: 0;
