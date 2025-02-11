@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useParams, useNavigate, generatePath } from "react-router-dom";
 import FilteredList from "@/components/common/FilteredList";
 import BookingCard from "@/components/booking/BookingCard";

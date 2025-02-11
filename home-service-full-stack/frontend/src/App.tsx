@@ -55,6 +55,10 @@ const router = createBrowserRouter([
         path: ROUTES.FAVORITES,
         element: <FavoritesPage />,
       },
+      {
+        path: ROUTES.FAVORITES_CATEGORY,
+        element: <FavoritesPage />,
+      },
     ],
   },
   {

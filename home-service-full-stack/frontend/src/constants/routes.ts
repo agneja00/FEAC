@@ -10,4 +10,5 @@ export const ROUTES = {
   BOOKINGS: "/bookings/user/:email",
   BOOKINGS_FILTER: "/bookings/user/:email/:status",
   FAVORITES: "/services/user/:email/favorites",
+  FAVORITES_CATEGORY: "/services/user/:email/favorites/:category",
 };
