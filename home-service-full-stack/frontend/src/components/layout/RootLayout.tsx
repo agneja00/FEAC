@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import Topbar from "./Topbar";
+import Footer from "../common/Footer";
 
 const RootLayout = () => {
   return (
@@ -9,6 +10,7 @@ const RootLayout = () => {
       <div className={styles.rootContainer}>
         <Outlet />
       </div>
+      <Footer />
     </>
   );
 };
