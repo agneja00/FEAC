@@ -8,22 +8,35 @@ import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
+import { BookingStatus } from "../booking/types";
+
+const NAVIGATION_LINKS = [
+  { href: ROUTES.SERVICES, label: "Services" },
+  { href: ROUTES.ABOUT_US, label: "About Us" },
+  { href: ROUTES.FOR_BUSINESS_PARTNERS, label: "For Business Partners" },
+];
+
+const USER_MENU_ITEMS = [
+  { href: ROUTES.BOOKINGS_FILTER, label: "My Bookings" },
+  { href: ROUTES.FAVORITES, label: "My Favorites" },
+  { href: ROUTES.HOME, label: "Logout", action: "logout" },
+];
 
 const Topbar = () => {
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeStatus, setActiveStatus] = useState<BookingStatus>("Confirmed");
 
   const generateUserPath = (route: string) =>
-    user?.email ? generatePath(route, { email: user.email }) : null;
-
-  const bookingPath = generateUserPath(ROUTES.BOOKINGS);
-  const favoritePath = generateUserPath(ROUTES.FAVORITES);
+    user?.email
+      ? generatePath(route, { email: user.email, status: activeStatus })
+      : null;
 
   const handleModalClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-
     if (modalOpen && !target.closest(`.${styles.accountModalContent}`)) {
       setModalOpen(false);
     } else if (
@@ -40,11 +53,17 @@ const Topbar = () => {
     setModalOpen(!modalOpen);
   };
 
-  const links = [
-    { href: ROUTES.SERVICES, label: "Services" },
-    { href: ROUTES.ABOUT_US, label: "About Us" },
-    { href: ROUTES.FOR_BUSINESS_PARTNERS, label: "For Business Partners" },
-  ];
+  const handleMenuItemClick = (item: (typeof USER_MENU_ITEMS)[number]) => {
+    setMenuOpen(false);
+    setModalOpen(false);
+
+    if (item.action === "logout") {
+      logout();
+      return;
+    }
+
+    navigate(item.href);
+  };
 
   return (
     <header className={styles.topbar}>
@@ -67,7 +86,7 @@ const Topbar = () => {
               : styles.navigationLargeContent
           }
         >
-          {links.map(({ href, label }) => (
+          {NAVIGATION_LINKS.map(({ href, label }) => (
             <Link
               key={label}
               to={href}
@@ -91,41 +110,22 @@ const Topbar = () => {
               >
                 <ul className={styles.accountModalContent}>
                   <li className={styles.account}>My Account</li>
-                  {bookingPath && (
-                    <Link
-                      className={styles.accountLink}
-                      to={bookingPath}
-                      onClick={() => {
-                        setMenuOpen(false);
-                        setModalOpen(false);
-                      }}
-                    >
-                      My Bookings
-                    </Link>
-                  )}
-                  {favoritePath && (
-                    <Link
-                      className={styles.accountLink}
-                      to={favoritePath}
-                      onClick={() => {
-                        setMenuOpen(false);
-                        setModalOpen(false);
-                      }}
-                    >
-                      My Favorites
-                    </Link>
-                  )}
-                  <Link
-                    className={styles.accountLink}
-                    to={ROUTES.HOME}
-                    onClick={() => {
-                      logout();
-                      setMenuOpen(false);
-                      setModalOpen(false);
-                    }}
-                  >
-                    Logout
-                  </Link>
+                  {USER_MENU_ITEMS.map((item) => {
+                    const path = generateUserPath(item.href);
+                    if (!path) return null;
+
+                    return (
+                      <li key={item.label}>
+                        <Link
+                          className={styles.accountLink}
+                          to={path}
+                          onClick={() => handleMenuItemClick(item)}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </Modal>
             )}

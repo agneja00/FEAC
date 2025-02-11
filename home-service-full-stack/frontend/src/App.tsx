@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <ServicePage />,
       },
       {
-        path: ROUTES.BOOKINGS,
+        path: ROUTES.BOOKINGS_FILTER,
         element: <BookingsPage />,
       },
       {

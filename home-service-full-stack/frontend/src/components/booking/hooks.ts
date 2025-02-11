@@ -14,7 +14,10 @@ export const useUserBookings = (status: BookingStatus) => {
     queryKey: [BOOKING_KEY, userEmail, status],
     queryFn: async () => {
       const bookings = await fetchUserBookings(userEmail, status);
-      return bookings.filter((booking) => booking.userEmail === userEmail);
+      return bookings.filter(
+        (booking) =>
+          booking.userEmail === userEmail && booking.status === status,
+      );
     },
   });
 };
