@@ -4,8 +4,6 @@ import { MemoryRouter, useNavigate } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 import { Service } from "./types";
 import { UserContext } from "../context/UserContext";
-import { ROUTES } from "@/constants/routes";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
