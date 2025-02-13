@@ -74,10 +74,23 @@
   color: #333;
 }
 
+@media only screen and (min-width: 390px) {
+  .accountModalContainer {
+    top: -12%;
+    left: 2%;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .accountModalContainer {
+    top: 2%;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .accountModalContainer {
-    top: -45%;
-    left: 46.5%;
+    top: -47%;
+    left: 35.5%;
   }
 
   .modalContent {
@@ -98,5 +111,39 @@
     top: 0.3rem;
     right: 0.3rem;
     font-size: 1.8rem;
+  }
+}
+
+@media only screen and (min-width: 820px) {
+  .accountModalContainer {
+    top: -48%;
+    left: 37%;
+  }
+}
+
+@media only screen and (min-width: 910px) {
+  .accountModalContainer {
+    top: -49%;
+    left: 39%;
+  }
+}
+
+@media only screen and (min-width: 1050px) {
+  .accountModalContainer {
+    top: -45%;
+    left: 42%;
+  }
+}
+
+@media only screen and (min-width: 1250px) {
+  .accountModalContainer {
+    left: 44%;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .accountModalContainer {
+    top: -45%;
+    left: 46%;
   }
 }

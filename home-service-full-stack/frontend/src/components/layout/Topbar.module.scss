@@ -84,13 +84,25 @@
   border-bottom: 0.125rem solid #f1f1f1;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 390px) {
+  .avatarMobile,
   .buttonMobile {
-    left: 46%;
+    top: 38%;
+  }
+
+  .buttonMobile {
+    left: 44.5%;
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 500px) {
+  .avatarMobile,
+  .buttonMobile {
+    top: 50%;
+  }
+}
+
+@media only screen and (min-width: 667px) {
   .topbar {
     padding: 1.5rem 3.7rem;
   }
