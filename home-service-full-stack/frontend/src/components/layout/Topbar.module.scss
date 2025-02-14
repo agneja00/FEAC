@@ -102,7 +102,7 @@
   }
 }
 
-@media only screen and (min-width: 667px) {
+@media only screen and (min-width: 668px) {
   .topbar {
     padding: 1.5rem 3.7rem;
   }
@@ -110,6 +110,7 @@
   .navLink {
     margin-right: 1.5rem;
     padding-bottom: 2.1rem;
+    font-size: 1rem;
 
     &:focus {
       color: $primary-color;
@@ -129,5 +130,11 @@
   .navigationLargeContainer {
     @include flex-style;
     width: 100%;
+  }
+}
+
+@media only screen and (min-width: 820px) {
+  .navLink {
+    font-size: 1.2rem;
   }
 }

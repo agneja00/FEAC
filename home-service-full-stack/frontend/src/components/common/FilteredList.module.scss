@@ -41,12 +41,18 @@
   background-color: $tertiary-color;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 820px) {
   .itemsContainer {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
+  .itemsFavorite {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1250px) {
   .itemsFavorite {
     grid-template-columns: repeat(4, 1fr);
   }

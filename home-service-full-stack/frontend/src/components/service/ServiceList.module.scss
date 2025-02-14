@@ -5,13 +5,13 @@
   width: 100%;
 }
 
-@media only screen and (min-width: 1020px) {
+@media only screen and (min-width: 920px) {
   .container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media only screen and (min-width: 1250px) {
+@media only screen and (min-width: 1140px) {
   .container {
     grid-template-columns: repeat(4, 1fr);
   }
