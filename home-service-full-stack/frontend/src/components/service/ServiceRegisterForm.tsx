@@ -9,6 +9,7 @@ import {
 import Button from "../common/Button";
 import { NewService } from "./types";
 import { sendServiceEmail } from "./api";
+import { useTranslation } from "react-i18next";
 
 interface ServiceRegisterFormProps {
   onSubmitSuccess?: () => void;
@@ -18,6 +19,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   onSubmitSuccess,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   const handleSubmit = async (
     formValues: NewService,
@@ -25,7 +27,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   ) => {
     try {
       await sendServiceEmail(formValues);
-      enqueueSnackbar("Email sent successfully!", { variant: "success" });
+      enqueueSnackbar(t("messages.emailSendSuccess"), { variant: "success" });
       resetForm();
 
       if (onSubmitSuccess) {
@@ -33,7 +35,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
       }
     } catch (error) {
       enqueueSnackbar(
-        error instanceof Error ? error.message : "An error occurred.",
+        error instanceof Error ? error.message : t("messages.emailSendError"),
         { variant: "error" },
       );
     }
@@ -46,35 +48,39 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
       onSubmit={handleSubmit}
     >
       <Form className={styles.form}>
-        <h2 className={styles.subtitle}>
-          Let’s Work Together to Serve More Homes!
-        </h2>
-        <FormikField label="Service name:" name="name" />
+        <h2 className={styles.subtitle}>{t("forms.registerService.title")}</h2>
+        <FormikField
+          label={t("forms.registerService.serviceName")}
+          name="name"
+        />
         <div className={styles.aboutContainer}>
           <label className={styles.label} htmlFor="about">
-            Description of your service:
+            {t("forms.registerService.description")}
           </label>
           <Field as="textarea" name="about" className={styles.textarea} />
           <ErrorMessage name="about" component="div" className={styles.error} />
         </div>
-        <FormikField label="Company address:" name="address" />
+        <FormikField
+          label={t("forms.registerService.companyAddress")}
+          name="address"
+        />
         <div className={styles.selectContainer}>
           <label className={styles.label} htmlFor="category">
-            Category:
+            {t("forms.registerService.category")}
           </label>
           <Field as="select" name="category" className={styles.select}>
-            <option value="">Select a category:</option>
+            <option value="">{t("forms.registerService.select")}</option>
             {[
-              "shifting",
-              "repair",
-              "plumbing",
-              "cleaning",
-              "painting",
-              "electric",
-              "decoration",
+              t("categories.shifting"),
+              t("categories.repair"),
+              t("categories.plumbing"),
+              t("categories.cleaning"),
+              t("categories.painting"),
+              t("categories.electric"),
+              t("categories.decoration"),
             ].map((category) => (
               <option key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {category.charAt(0) + category.slice(1)}
               </option>
             ))}
           </Field>
@@ -84,9 +90,12 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
             className={styles.error}
           />
         </div>
-        <FormikField label="Contact person:" name="contactPerson" />
-        <FormikField type="email" label="Email:" name="email" />
-        <Button type="submit">Complete the Form</Button>
+        <FormikField
+          label={t("forms.registerService.contact")}
+          name="contactPerson"
+        />
+        <FormikField type="email" label={t("common.email")} name="email" />
+        <Button type="submit">{t("buttons.completeTheForm")}</Button>
       </Form>
     </Formik>
   );

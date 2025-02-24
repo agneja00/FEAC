@@ -9,6 +9,11 @@
   z-index: 1;
 }
 
+.headerLeftSide {
+  @include flex-style;
+  flex-direction: column;
+}
+
 .navigationMobileContainer {
   @include modal-container;
   top: 5.8rem;

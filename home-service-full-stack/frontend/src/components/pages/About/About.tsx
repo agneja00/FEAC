@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
 import Button from "@/components/common/Button";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
+  const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleReadMore = () => {
@@ -13,98 +15,65 @@ const About = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>About Us</h1>
+      <h1 className={styles.title}>{t("common.aboutUs")}</h1>
       <section className={styles.section}>
-        <p className={styles.paragraph}>
-          Welcome to Home Services! We are your trusted partner in finding
-          reliable and skilled professionals for all your household needs.
-          Whether you’re looking for help with cleaning, repairs, renovations,
-          or any other home-related service, our website is designed to make the
-          process seamless and stress-free.
-        </p>
-        <p className={styles.paragraph}>
-          Our platform connects homeowners with experienced service providers
-          who are dedicated to delivering top-notch results. From quick fixes to
-          major projects, we ensure that you can easily find the right
-          professional for any job with just a few clicks.
-        </p>
-        <p className={styles.paragraph}>
-          At Home Services, we aim to simplify your life by providing a one-stop
-          solution for all your home maintenance and improvement needs. Our
-          intuitive website lets you explore services, compare options, and book
-          appointments effortlessly.
-        </p>
-        <p className={styles.paragraph}>
-          Whether it’s a last-minute repair or a long-planned upgrade, we are
-          here to support you at every step. Trust Home Services to provide
-          reliable and professional solutions, making your home the perfect
-          place to live and thrive.
-        </p>
+        <p className={styles.paragraph}>{t("aboutUs.paragraphFirst")}</p>
+        <p className={styles.paragraph}>{t("aboutUs.paragraphSecond")}</p>
+        <p className={styles.paragraph}>{t("aboutUs.paragraphThird")}</p>
+        <p className={styles.paragraph}>{t("aboutUs.paragraphFourth")}</p>
       </section>
 
       <section
         className={`${styles.section} ${isExpanded ? styles.expanded : ""}`}
       >
-        {!isExpanded && <h2 className={styles.subtitle}>Our Mission...</h2>}
+        {!isExpanded && (
+          <h2 className={styles.subtitle}>{t("aboutUs.missionTitle")}...</h2>
+        )}
         {isExpanded && (
           <>
-            <h2 className={styles.subtitle}>Our Mission</h2>
+            <h2 className={styles.subtitle}>{t("aboutUs.missionTitle")}</h2>
             <div className={styles.mission}>
               <div className={styles.missionForUsers}>
-                <h3 className={styles.subheading}>For Users:</h3>
+                <h3 className={styles.subheading}>{t("aboutUs.forUsers")}</h3>
                 <p className={styles.paragraph}>
-                  Empowering You to Simplify Your Home Life. Our mission is to
-                  make home maintenance and improvement effortless for you. We
-                  aim to connect you with trusted professionals who deliver
-                  exceptional quality and reliability. Whether you need urgent
-                  repairs or are planning a renovation, our platform is built to
-                  save your time, reduce stress, and ensure your peace of mind.
-                  We strive to be your go-to solution for creating a better home
-                  environment.
+                  {t("aboutUs.forUsersParagraph")}
                 </p>
               </div>
               <div className={styles.missionForPartners}>
-                <h3 className={styles.subheading}>For Business Partners:</h3>
+                <h3 className={styles.subheading}>
+                  {t("aboutUs.forPartners")}
+                </h3>
                 <p className={styles.paragraph}>
-                  Helping You Grow Your Business. We are committed to empowering
-                  our business partners by providing a platform to showcase
-                  their skills and connect with a broader audience. Our mission
-                  is to help service providers build their reputation, gain more
-                  clients, and streamline their operations through our
-                  user-friendly tools. By working with us, you’ll benefit from
-                  increased visibility, customer trust, and a dedicated support
-                  system designed to help your business thrive in a competitive
-                  market.
+                  {t("aboutUs.forPartnersParagraph")}
                 </p>
                 <p className={styles.paragraph}>
-                  Interested in partnering with us? Fill out the{" "}
+                  {t("aboutUs.linkFormParagraphFirstPart")}{" "}
                   <Link
                     to={`${ROUTES.FOR_BUSINESS_PARTNERS}?openModal=true`}
                     className={styles.formLink}
                   >
-                    form
+                    {t("aboutUs.linkForm")}
                   </Link>{" "}
-                  to join our network of trusted professionals and bring your
-                  services to a wider audience. Let’s grow together!
+                  {t("aboutUs.linkFormParagraphSecondPart")}
                 </p>
               </div>
             </div>
-            <h2 className={styles.subtitle}>Our Requisites:</h2>
+            <h2 className={styles.subtitle}>{t("aboutUs.requisites")}</h2>
             <ul>
               <li className={styles.requisite}>
-                Phone:{" "}
+                {t("aboutUs.phone")}{" "}
                 <a href="tel:+37062917326" className={styles.link}>
                   +37062917326
                 </a>
               </li>
               <li className={styles.requisite}>
-                Email:{" "}
+                {t("common.email")}{" "}
                 <a href="mailto:homeservices@gmail.com" className={styles.link}>
                   homeservices@gmail.com
                 </a>
               </li>
               <li className={styles.requisite}>
-                Address:
+                {t("aboutUs.address")}
                 <span className={styles.address}>
                   {" "}
                   Kareivių g. 6, Vilnius, Lithuania.
@@ -124,7 +93,7 @@ const About = () => {
 
       <div className={styles.buttonContainer}>
         <Button onClick={toggleReadMore}>
-          {isExpanded ? "Show Less" : "Read More"}
+          {isExpanded ? t("buttons.showLess") : t("buttons.readMore")}
         </Button>
       </div>
     </div>

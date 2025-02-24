@@ -10,8 +10,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { useLoginUser } from "./hooks";
 import { ErrorResponse } from "../types/error";
+import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const { login } = useContext(UserContext);
   const [error, setError] = useState("");
   const { mutateAsync: loginUser } = useLoginUser();
@@ -36,22 +38,28 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
       >
         <Form className={styles.form}>
-          <h1 className={styles.title}>Login</h1>
+          <h1 className={styles.title}>
+            {t("forms.loginAndRegister.loginTitle")}
+          </h1>
           <div className={styles.field}>
-            <FormikField name="email" type="email" placeholder="Email" />
+            <FormikField
+              name="email"
+              type="email"
+              placeholder={t("common.email")}
+            />
           </div>
           <div className={styles.field}>
             <FormikField
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder={t("common.password")}
             />
           </div>
           {error && <p className={styles.error}>{error}</p>}
-          <Button type="submit">Log in</Button>
+          <Button type="submit">{t("buttons.login")}</Button>
           <div className={styles.link}>
             <Link to={ROUTES.REGISTER} className={styles.signUp}>
-              Don't have an account? Sign up
+              {t("forms.loginAndRegister.sign")}
             </Link>
           </div>
         </Form>

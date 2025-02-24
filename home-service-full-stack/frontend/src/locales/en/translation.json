@@ -1,0 +1,156 @@
+{
+  "common": {
+    "email": "Email",
+    "aboutUs": "About Us",
+    "forBusinessPartners": "For Business Partners",
+    "register": "Register",
+    "password": "Password"
+  },
+  "topbar": {
+    "services": "Services"
+  },
+  "accountModal": {
+    "myAccount": "My Account",
+    "myBookings": "My Bookings",
+    "myFavorites": "My Favorites",
+    "logOut": "Logout"
+  },
+  "homePage": {
+    "findHome": "Find Home",
+    "serviceRepair": "Service/Repair",
+    "nearYou": "Near You",
+    "explore": "Explore Best Home Service & Repair near you",
+    "popularBusinesses": "Popular businesses"
+  },
+  "categories": {
+    "categories": "Categories",
+    "category": "Category",
+    "all": "All",
+    "shifting": "Shifting",
+    "repair": "Repair",
+    "plumbing": "Plumbing",
+    "cleaning": "Cleaning",
+    "painting": "Painting",
+    "electric": "Electric",
+    "decoration": "Decoration"
+  },
+  "buttons": {
+    "bookNow": "Book Now",
+    "bookAppointment": "Book Appointment",
+    "reserveTime": "Reserve Time",
+    "completeTheForm": "Complete the Form",
+    "readMore": "Read More",
+    "showLess": "Show Less",
+    "registerNow": "Register Now",
+    "loginOrSign": "Login / Sign Up",
+    "login": "Log in",
+    "cancel": "Cancel"
+  },
+  "messages": {
+    "emailSendSuccess": "Email sent successfully!",
+    "emailSendError": "An error occurred.",
+    "copyLinkSuccess": "Service link copied to clipboard!",
+    "copyLinkError": "Failed to copy link. Please try again.",
+    "noImages": "No images available",
+    "bookSuccess": "Successfully booked!",
+    "bookError": "An error occurred.",
+    "bookCancel": "Booking successfully canceled!",
+    "favoritesLoading": "Loading favorites...",
+    "favoritesError": "Error loading favorites.",
+    "favoritesLogin": "Please log in to view your favorites.",
+    "required": "Field is required",
+    "validEmail": "Email should be valid",
+    "requiredCategory": "Category is required",
+    "registrationSuccess": "Registration successful!"
+  },
+  "inputPlaceholder": {
+    "search": "Start typing the name of the service you’re looking for...",
+    "name": "Name"
+  },
+  "forms": {
+    "book": {
+      "title": "Book a Service",
+      "action": "Select Date and Time slot to book a service",
+      "select": "Select Date"
+    },
+    "registerService": {
+      "title": "Let’s Work Together to Serve More Homes!",
+      "serviceName": "Service name:",
+      "description": "Description of your service:",
+      "companyAddress": "Company address:",
+      "category": "Category:",
+      "select": "Select a category",
+      "contact": "Contact person:"
+    },
+    "loginAndRegister": {
+      "loginTitle": "Login",
+      "sign": "Don't have an account? Sign up",
+      "login": "Already have an account? Log in"
+    }
+  },
+  "aboutUs": {
+    "paragraphFirst": "Welcome to Home Services! We are your trusted partner in finding reliable and skilled professionals for all your household needs. Whether you’re looking for help with cleaning, repairs, renovations, or any other home-related service, our website is designed to make the process seamless and stress-free.",
+    "paragraphSecond": " Our platform connects homeowners with experienced service providers who are dedicated to delivering top-notch results. From quick fixes to major projects, we ensure that you can easily find the right professional for any job with just a few clicks.",
+    "paragraphThird": "At Home Services, we aim to simplify your life by providing a one-stop solution for all your home maintenance and improvement needs. Our intuitive website lets you explore services, compare options, and book appointments effortlessly.",
+    "paragraphFourth": "Whether it’s a last-minute repair or a long-planned upgrade, we are here to support you at every step. Trust Home Services to provide reliable and professional solutions, making your home the perfect place to live and thrive.",
+    "missionTitle": "Our Mission",
+    "forUsers": "For Users:",
+    "forUsersParagraph": "Empowering You to Simplify Your Home Life. Our mission is to make home maintenance and improvement effortless for you. We aim to connect you with trusted professionals who deliver exceptional quality and reliability. Whether you need urgent repairs or are planning a renovation, our platform is built to save your time, reduce stress, and ensure your peace of mind. We strive to be your go-to solution for creating a better home environment.",
+    "forPartners": "For Business Partners:",
+    "forPartnersParagraph": "Helping You Grow Your Business. We are committed to empowering our business partners by providing a platform to showcase their skills and connect with a broader audience. Our mission is to help service providers build their reputation, gain more clients, and streamline their operations through our user-friendly tools. By working with us, you’ll benefit from increased visibility, customer trust, and a dedicated support system designed to help your business thrive in a competitive market.",
+    "linkFormParagraphFirstPart": "Interested in partnering with us? Fill out the",
+    "linkForm": "form",
+    "linkFormParagraphSecondPart": "to join our network of trusted professionals and bring your services to a wider audience. Let’s grow together!",
+    "requisites": "Our Requisites:",
+    "phone": "Phone:",
+    "address": "Address:"
+  },
+  "forBusinessPartners": {
+    "join": "Join Our Network of Home Service Professionals!",
+    "paragraph": "Welcome to our exclusive network of home service professionals! As a trusted provider of quality home maintenance and improvement solutions, we invite you to become part of our growing ecosystem of skilled tradespeople and service providers.",
+    "partner": "Why Partner with Us?",
+    "expandBold": "Expand Your Reach:",
+    "expand": "Gain access to a large customer base actively seeking home services.",
+    "revenueBold": "Increase Your Revenue:",
+    "revenue": "Receive bookings directly through our platform and grow your business effortlessly.",
+    "flexibleBold": "Flexible Opportunities:",
+    "flexible": "Choose the services you want to offer, set your availability, and manage your bookings seamlessly.",
+    "toolsBold": "Support and Tools:",
+    "tools": "Benefit from marketing, scheduling tools, and customer support to help you succeed.",
+    "howItWorks": "How It Works",
+    "signBold": "Sign Up: ",
+    "sign": "Register your business by filling out the form below.",
+    "verifiedBold": "Get Verified:",
+    "verified": "Our team will review your application and verify your credentials.",
+    "startBold": "Start Receiving Bookings:",
+    "start": "Once approved, your business will appear in our directory, and customers can book your services."
+  },
+  "servicePage": {
+    "available": "Available 8:00 AM to 10:00 PM",
+    "description": "Description",
+    "gallery": "Gallery",
+    "similarServices": "Similar Services"
+  },
+  "time": {
+    "8AM": "8:00 AM",
+    "10AM": "10:00 AM",
+    "11AM": "11:00 AM",
+    "1130AM": "11:30 AM",
+    "12PM": "12:00 PM",
+    "1230PM": "12:30 PM",
+    "2PM": "2:00 PM",
+    "6PM": "6:00 PM",
+    "7PM": "7:00 PM"
+  },
+  "status": {
+    "confirmed": "Confirmed",
+    "completed": "Completed"
+  },
+  "bookingCard": {
+    "date": "Date:",
+    "time": "Time:"
+  },
+  "footer": {
+    "copyright": "Copyright © 2025 Agnieska Jackevic. All Rights Reserved."
+  }
+}

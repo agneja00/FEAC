@@ -6,12 +6,14 @@ import { useState, useEffect } from "react";
 import { Service } from "../service/types";
 import Input from "../common/Input";
 import { useServiceData } from "../service/hooks";
+import { useTranslation } from "react-i18next";
 
 type Params = {
   category?: string;
 };
 
 const ServicesContent: React.FC = () => {
+  const { t } = useTranslation();
   const { allServices, favoriteServices } = useServiceData();
   const [filteredServices, setFilteredServices] = useState<Service[]>([]);
   const [searchValue, setSearchValue] = useState("");
@@ -39,7 +41,7 @@ const ServicesContent: React.FC = () => {
         <Input
           value={searchValue}
           onChange={handleChangeValue}
-          placeholder="Start typing the name of the service you’re looking for..."
+          placeholder={t("inputPlaceholder.search")}
           search
         />
       </div>

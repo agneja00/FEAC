@@ -1,0 +1,156 @@
+{
+  "common": {
+    "email": "El. paštas",
+    "aboutUs": "Apie mus",
+    "forBusinessPartners": "Verslo partneriams",
+    "register": "Registruotis",
+    "password": "Slaptažodis"
+  },
+  "topbar": {
+    "services": "Paslaugos"
+  },
+  "accountModal": {
+    "myAccount": "Mano paskyra",
+    "myBookings": "Mano rezervacijos",
+    "myFavorites": "Mėgstamiausi",
+    "logOut": "Atsijungti"
+  },
+  "homePage": {
+    "findHome": "Rasti namų",
+    "serviceRepair": "Paslaugą/Remontą",
+    "nearYou": "Netoli jūsų",
+    "explore": "Atraskite geriausias namų paslaugas ir remontą netoli jūsų",
+    "popularBusinesses": "Populiariausios paslaugos"
+  },
+  "categories": {
+    "categories": "Kategorijos",
+    "category": "Kategorija",
+    "all": "Visos",
+    "shifting": "Perkėlimas",
+    "repair": "Remontas",
+    "plumbing": "Vandentiekis",
+    "cleaning": "Valymas",
+    "painting": "Dažyba",
+    "electric": "Elektra",
+    "decoration": "Dekoravimas"
+  },
+  "buttons": {
+    "bookNow": "Užsakyti dabar",
+    "bookAppointment": "Užsakyti paslaugą",
+    "reserveTime": "Rezervuoti laiką",
+    "completeTheForm": "Užpildykite formą",
+    "readMore": "Skaityti daugiau",
+    "showLess": "Rodyti mažiau",
+    "registerNow": "Registruokites dabar",
+    "loginOrSign": "Prisijungti / Registruotis",
+    "login": "Prisijungti",
+    "cancel": "Atšaukti"
+  },
+  "messages": {
+    "emailSendSuccess": "El. laiškas buvo išsiųstas sėkmingai!",
+    "emailSendError": "Įvyko klaida, siunčiant el. laišką.",
+    "copyLinkSuccess": "Paslaugos nuoroda nukopijuota į iškarpinę!",
+    "copyLinkError": "Nepavyko nukopijuoti nuorodos. Bandykite dar kartą.",
+    "noImages": "Paveikslėlių nėra.",
+    "bookSuccess": "Paslauga rezervuota sėkmingai!",
+    "bookError": "Įvyko klaida, bandant rezervuoti paslaugą.",
+    "bookCancel": "Rezervacija sėkmingai atšaukta!",
+    "favoritesLoading": "Įkeliami mėgstamiausi...",
+    "favoritesError": "Klaida įkeliant mėgstamiausius.",
+    "favoritesLogin": "Prisijunkite, kad galėtumėte peržiūrėti savo mėgstamiausius.",
+    "required": "Laukas būtinas",
+    "validEmail": "El. paštas turi būti teisingo formato",
+    "requiredCategory": "Kategorija yra būtina",
+    "registrationSuccess": "Registracija sėkmingai atlikta!"
+  },
+  "inputPlaceholder": {
+    "search": "Pradėkite rašyti ieškomos paslaugos pavadinimą...",
+    "name": "Vardas"
+  },
+  "forms": {
+    "book": {
+      "title": "Užsakyti paslaugą",
+      "action": "Pasirinkite datą ir laiką, kad užsakytumėte paslaugą",
+      "select": "Pasirinkite datą"
+    },
+    "registerService": {
+      "title": "Dirbkime kartu, kad aptarnautume daugiau namų!",
+      "serviceName": "Paslaugos pavadinimas:",
+      "description": "Jūsų paslaugos aprašymas:",
+      "companyAddress": "Įmonės adresas:",
+      "category": "Kategorija:",
+      "select": "Pasirinkite kategoriją",
+      "contact": "Kontaktinis asmuo:"
+    },
+    "loginAndRegister": {
+      "loginTitle": "Prisijungti",
+      "sign": "Neturite paskyros? Užsiregistruokite",
+      "login": "Jau turite paskyrą? Prisijunkite"
+    }
+  },
+  "aboutUs": {
+    "paragraphFirst": "Sveiki atvykę į „Home Services“! Esame jūsų patikimas partneris, padedantis rasti patikimus ir kvalifikuotus specialistus visiems jūsų namų poreikiams. Nesvarbu, ar jums reikia pagalbos valymo, remonto, renovacijų ar bet kokių kitų namų susijusių paslaugų, mūsų svetainė sukurta, kad šis procesas būtų paprastas ir be streso.",
+    "paragraphSecond": "Mūsų platforma sujungia namų savininkus su patyrusiais paslaugų teikėjais, kurie yra pasišventę teikti aukščiausios kokybės rezultatus. Nuo greitų taisymų iki didelių projektų mes užtikriname, kad galėtumėte lengvai rasti tinkamą specialistą bet kokiam darbui vos keliais paspaudimais.",
+    "paragraphThird": "„Home Services“ siekiame supaprastinti jūsų gyvenimą, suteikdami visų jūsų namų priežiūros ir tobulinimo poreikių vienos vietos sprendimą. Mūsų intuityvi svetainė leidžia jums naršyti paslaugas, lyginti pasirinkimus ir lengvai užsisakyti laiką.",
+    "paragraphFourth": "Nesvarbu, ar tai paskutinės minutės remontas, ar ilgai planuotas tobulinimas, mes esame čia, kad jums padėtume kiekviename žingsnyje. Pasitikėkite „Home Services“, kad gautumėte patikimus ir profesionalius sprendimus, kurie padarys jūsų namus tobula vieta gyventi ir klestėti.",
+    "missionTitle": "Mūsų misija",
+    "forUsers": "Vartotojams:",
+    "forUsersParagraph": "Suteikiame jums galimybę supaprastinti savo namų gyvenimą. Mūsų misija yra padaryti namų priežiūrą ir tobulinimą paprastą jums. Siekiame sujungti jus su patikimais specialistais, kurie teikia išskirtinę kokybę ir patikimumą. Nesvarbu, ar jums reikia skubaus remonto, ar planuojate renovaciją, mūsų platforma sukurta taupyti jūsų laiką, sumažinti stresą ir užtikrinti ramybę. Mes siekiame būti jūsų pagrindiniu sprendimu, kuriant geresnę namų aplinką.",
+    "forPartners": "Verslo partneriams:",
+    "forPartnersParagraph": "Padėti jums augti savo verslą. Mes esame pasišventę įgalinti savo verslo partnerius, suteikdami platformą jų įgūdžiams parodyti ir susisiekti su platesne auditorija. Mūsų misija yra padėti paslaugų teikėjams kurti savo reputaciją, įgyti daugiau klientų ir supaprastinti savo veiklą naudojant mūsų patogias priemones. Bendradarbiaudami su mumis jūs gausite didesnį matomumą, klientų pasitikėjimą ir specialią paramos sistemą, skirtą padėti jūsų verslui klestėti konkurencingoje rinkoje.",
+    "linkFormParagraphFirstPart": "Domina bendradarbiavimas su mumis? Užpildykite",
+    "linkForm": "formą",
+    "linkFormParagraphSecondPart": ", kad prisijungtumėte prie mūsų patikimų specialistų tinklo ir pasiūlytumėte savo paslaugas platesnei auditorijai. Augkime kartu!",
+    "requisites": "Mūsų rekvizitai:",
+    "phone": "Telefonas:",
+    "address": "Adresas:"
+  },
+  "forBusinessPartners": {
+    "join": "Prisijunkite prie mūsų namų paslaugų specialistų tinklo!",
+    "paragraph": "Sveiki atvykę į mūsų išskirtinį namų paslaugų specialistų tinklą! Kaip patikimas kokybiškų namų priežiūros ir tobulinimo sprendimų teikėjas, kviečiame jus tapti mūsų augančios kvalifikuotų amatininkų ir paslaugų teikėjų ekosistemos dalimi.",
+    "partner": "Kodėl bendradarbiauti su mumis?",
+    "expandBold": "Išplėskite savo veiklą:",
+    "expand": "Gaukite prieigą prie didelės klientų bazės, aktyviai ieškančios namų paslaugų.",
+    "revenueBold": "Padidinkite savo pajamas:",
+    "revenue": "Gaukite užsakymus tiesiogiai per mūsų platformą ir auginkite savo verslą be pastangų.",
+    "flexibleBold": "Lankstūs galimybės:",
+    "flexible": "Pasirinkite paslaugas, kurias norite teikti, nustatykite savo prieinamumą ir valdykite savo užsakymus be problemų.",
+    "toolsBold": "Pagalba ir priemonės:",
+    "tools": "Naudokitės rinkodaros, planavimo priemonėmis ir klientų pagalba, kad pasiektumėte sėkmės.",
+    "howItWorks": "Kaip tai veikia",
+    "signBold": "Užsiregistruokite:",
+    "sign": "Užpildykite toliau pateiktą formą, kad užsiregistruotumėte savo verslą.",
+    "verifiedBold": "Gaukite patvirtinimą:",
+    "verified": "Mūsų komanda peržiūrės jūsų paraišką ir patvirtins jūsų duomenis.",
+    "startBold": "Pradėkite gauti užsakymus:",
+    "start": "Patvirtinus, jūsų verslas bus rodomas mūsų kataloge, o klientai galės užsisakyti jūsų paslaugas."
+  },
+  "servicePage": {
+    "available": "Galimas nuo 8:00 iki 22:00",
+    "description": "Aprašymas",
+    "gallery": "Galerija",
+    "similarServices": "Panašios paslaugos"
+  },
+  "time": {
+    "8AM": "8:00",
+    "10AM": "10:00",
+    "11AM": "11:00",
+    "1130AM": "11:30",
+    "12PM": "12:00",
+    "1230PM": "12:30",
+    "2PM": "14:00",
+    "6PM": "18:00",
+    "7PM": "19:00"
+  },
+  "status": {
+    "confirmed": "Patvirtinti",
+    "completed": "Užbaigti"
+  },
+  "bookingCard": {
+    "date": "Data:",
+    "time": "Laikas:"
+  },
+  "footer": {
+    "copyright": "Autorių teisės © 2025 Agnieška Jackevič. Visos teisės saugomos."
+  }
+}

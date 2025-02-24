@@ -9,8 +9,10 @@ import { registerInitialValus, reigsterValidationSchema } from "../user/consts";
 import { useRegisterUser } from "./hooks";
 import { RegisterRequest } from "../user/types";
 import { ErrorResponse } from "../types/error";
+import { useTranslation } from "react-i18next";
 
 const RegisterForm = () => {
+  const { t } = useTranslation();
   const { mutateAsync: registerUser } = useRegisterUser();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const RegisterForm = () => {
     try {
       await registerUser(formValues);
       navigate(ROUTES.LOGIN);
-      enqueueSnackbar("Registration successful", {
+      enqueueSnackbar(t("messages.registrationSuccess"), {
         variant: "success",
       });
     } catch (error) {
@@ -39,26 +41,33 @@ const RegisterForm = () => {
       >
         {({ isSubmitting }) => (
           <Form className={styles.form}>
-            <h1 className={styles.title}>Register</h1>
+            <h1 className={styles.title}>{t("common.register")}</h1>
             <div className={styles.field}>
-              <FormikField name="name" placeholder="Name" />
+              <FormikField
+                name="name"
+                placeholder={t("inputPlaceholder.name")}
+              />
             </div>
             <div className={styles.field}>
-              <FormikField name="email" type="email" placeholder="Email" />
+              <FormikField
+                name="email"
+                type="email"
+                placeholder={t("common.email")}
+              />
             </div>
             <div className={styles.field}>
               <FormikField
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t("common.password")}
               />
             </div>
             <Button type="submit" disabled={isSubmitting}>
-              Register
+              {t("common.register")}
             </Button>
             <div className={styles.link}>
               <Link to={ROUTES.LOGIN} className={styles.signUp}>
-                Already have an account? Log in
+                {t("forms.loginAndRegister.login")}
               </Link>
             </div>
           </Form>

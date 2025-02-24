@@ -6,6 +6,7 @@ import styles from "./ServiceCard.module.scss";
 import { useToggleFavorite } from "./hooks";
 import { UserContext } from "../context/UserContext";
 import { useServicePath } from "./hooks";
+import { useTranslation } from "react-i18next";
 
 interface ServiceCardProps {
   service: Service;
@@ -13,6 +14,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
+  const { t } = useTranslation();
   if (!service || !service._id) return null;
 
   const { _id, name, category, contactPerson, address, imageUrls } = service;
@@ -56,7 +58,7 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
         <p className={styles.address}>{address}</p>
         <div className={styles.buttonContainer}>
           <Button small onClick={() => navigateToService(_id)}>
-            Book now
+            {t("buttons.bookNow")}
           </Button>
           <Button
             favorite

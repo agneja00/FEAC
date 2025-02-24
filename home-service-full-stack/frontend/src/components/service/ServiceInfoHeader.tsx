@@ -6,8 +6,10 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock } from "react-icons/hi";
 import { useCurrentService } from "./hooks";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 const ServiceInfoHeader: React.FC = () => {
+  const { t } = useTranslation();
   const { currentService } = useCurrentService();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -18,11 +20,11 @@ const ServiceInfoHeader: React.FC = () => {
 
     try {
       await navigator.clipboard.writeText(serviceUrl);
-      enqueueSnackbar("Service link copied to clipboard!", {
+      enqueueSnackbar(t("messages.copyLinkSuccess"), {
         variant: "success",
       });
     } catch (error) {
-      enqueueSnackbar("Failed to copy link. Please try again.", {
+      enqueueSnackbar(t("messages.copyLinkError"), {
         variant: "error",
       });
     }
@@ -64,7 +66,7 @@ const ServiceInfoHeader: React.FC = () => {
           </div>
           <div className={styles.infoContainer}>
             <HiOutlineClock fontSize={20} />
-            <p>Available 8:00 AM to 10:00 PM</p>
+            <p>{t("servicePage.available")}</p>
           </div>
         </div>
       </div>

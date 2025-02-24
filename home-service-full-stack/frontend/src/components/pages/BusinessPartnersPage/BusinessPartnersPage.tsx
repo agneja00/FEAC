@@ -4,8 +4,10 @@ import ServiceRegisterForm from "@/components/service/ServiceRegisterForm";
 import Button from "@/components/common/Button";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Modal from "@/components/common/Modal";
+import { useTranslation } from "react-i18next";
 
 const BusinessPartnersPage = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [formOpen, setFormOpen] = useState(false);
@@ -25,55 +27,63 @@ const BusinessPartnersPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>For Business Partners</h1>
-      <h2 className={styles.subtitle}>
-        Join Our Network of Home Service Professionals!
-      </h2>
-      <p className={styles.paragraph}>
-        Welcome to our exclusive network of home service professionals! As a
-        trusted provider of quality home maintenance and improvement solutions,
-        we invite you to become part of our growing ecosystem of skilled
-        tradespeople and service providers.
-      </p>
+      <h1 className={styles.title}>{t("common.forBusinessPartners")}</h1>
+      <h2 className={styles.subtitle}>{t("forBusinessPartners.join")}</h2>
+      <p className={styles.paragraph}>{t("forBusinessPartners.paragraph")}</p>
       <section className={styles.section}>
-        <h3 className={styles.subheading}>Why Partner with Us?</h3>
+        <h3 className={styles.subheading}>
+          {t("forBusinessPartners.partner")}
+        </h3>
         <ul className={styles.list}>
           <li>
-            <span className={styles.boldText}>Expand Your Reach:</span> Gain
-            access to a large customer base actively seeking home services.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.expandBold")}
+            </span>{" "}
+            Gain
+            {t("forBusinessPartners.expand")}
           </li>
           <li>
-            <span className={styles.boldText}>Increase Your Revenue:</span>{" "}
-            Receive bookings directly through our platform and grow your
-            business effortlessly.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.revenueBold")}
+            </span>{" "}
+            {t("forBusinessPartners.revenue")}
           </li>
           <li>
-            <span className={styles.boldText}>Flexible Opportunities:</span>{" "}
-            Choose the services you want to offer, set your availability, and
-            manage your bookings seamlessly.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.flexibleBold")}
+            </span>{" "}
+            {t("forBusinessPartners.flexible")}
           </li>
           <li>
-            <span className={styles.boldText}>Support and Tools:</span> Benefit
-            from marketing, scheduling tools, and customer support to help you
-            succeed.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.toolsBold")}
+            </span>{" "}
+            {t("forBusinessPartners.tools")}
           </li>
         </ul>
       </section>
       <section className={styles.section}>
-        <h3 className={styles.subheading}>How It Works</h3>
+        <h3 className={styles.subheading}>
+          {t("forBusinessPartners.howItWorks")}
+        </h3>
         <ul className={styles.list}>
           <li>
-            <span className={styles.boldText}>Sign Up:</span> Register your
-            business by filling out the form below.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.signBold")}
+            </span>{" "}
+            {t("forBusinessPartners.sign")}
           </li>
           <li>
-            <span className={styles.boldText}>Get Verified:</span> Our team will
-            review your application and verify your credentials.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.verifiedBold")}
+            </span>{" "}
+            {t("forBusinessPartners.verified")}
           </li>
           <li>
-            <span className={styles.boldText}>Start Receiving Bookings:</span>{" "}
-            Once approved, your business will appear in our directory, and
-            customers can book your services.
+            <span className={styles.boldText}>
+              {t("forBusinessPartners.startBold")}
+            </span>{" "}
+            {t("forBusinessPartners.start")}
           </li>
         </ul>
       </section>
@@ -83,7 +93,7 @@ const BusinessPartnersPage = () => {
         </Modal>
       ) : (
         <div className={styles.registerBusinessContainer}>
-          <Button onClick={handleOpenModal}>Register Now</Button>
+          <Button onClick={handleOpenModal}>{t("buttons.registerNow")}</Button>
         </div>
       )}
     </div>

@@ -2,8 +2,10 @@ import styles from "./SimilarService.module.scss";
 import { generatePath, Link } from "react-router-dom";
 import { useServices, useCurrentService } from "./hooks";
 import { ROUTES } from "@/constants/routes";
+import { useTranslation } from "react-i18next";
 
 const SimilarService: React.FC = () => {
+  const { t } = useTranslation();
   const { data: services } = useServices();
   const { currentService } = useCurrentService();
 
@@ -19,7 +21,7 @@ const SimilarService: React.FC = () => {
 
   return (
     <>
-      <h3 className={styles.title}>Similar Service</h3>
+      <h3 className={styles.title}>{t("servicePage.similarServices")}</h3>
       <div className={styles.similarContainer}>
         {similarService?.map((simService) => (
           <div className={styles.similarBusiness} key={simService._id}>

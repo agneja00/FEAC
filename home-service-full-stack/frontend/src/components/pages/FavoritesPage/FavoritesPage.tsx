@@ -5,19 +5,33 @@ import FilteredList from "@/components/common/FilteredList";
 import ServiceCard from "@/components/service/ServiceCard";
 import { UserContext } from "@/components/context/UserContext";
 import { ROUTES } from "@/constants/routes";
-
-const FAVORITE_FILTERS = [
-  "All",
-  "Shifting",
-  "Repair",
-  "Plumbing",
-  "Cleaning",
-  "Painting",
-  "Electric",
-  "Decoration",
-];
+import { useTranslation } from "react-i18next";
 
 const FavoritesPage = () => {
+  const { t } = useTranslation();
+
+  const FAVORITE_FILTERS = [
+    "All",
+    "Shifting",
+    "Repair",
+    "Plumbing",
+    "Cleaning",
+    "Painting",
+    "Electric",
+    "Decoration",
+  ];
+
+  const filterLabels = {
+    All: t("categories.all"),
+    Shifting: t("categories.shifting"),
+    Repair: t("categories.repair"),
+    Plumbing: t("categories.plumbing"),
+    Cleaning: t("categories.cleaning"),
+    Painting: t("categories.painting"),
+    Electric: t("categories.electric"),
+    Decoration: t("categories.decoration"),
+  };
+
   const { user } = useContext(UserContext);
   const { email, category } = useParams<{
     email?: string;
@@ -26,7 +40,7 @@ const FavoritesPage = () => {
   const navigate = useNavigate();
 
   if (!user?.email) {
-    return <p>Please log in to view your favorites.</p>;
+    return <p>{t("messages.favoritesLogin")}</p>;
   }
 
   const userEmail = email ?? user.email;
@@ -45,8 +59,8 @@ const FavoritesPage = () => {
     error,
   } = useFavoriteServices(userEmail);
 
-  if (isLoading) return <p>Loading favorites...</p>;
-  if (error) return <p>Error loading favorites</p>;
+  if (isLoading) return <p>{t("messages.favoritesLoading")}</p>;
+  if (error) return <p>{t("messages.favoritesError")}</p>;
 
   const filteredServices =
     !category || category === "All"
@@ -69,7 +83,7 @@ const FavoritesPage = () => {
 
   return (
     <FilteredList
-      title="My Favorite Services"
+      title={t("accountModal.myFavorites")}
       items={filteredServices}
       filters={FAVORITE_FILTERS}
       activeFilter={category || "All"}
@@ -77,6 +91,7 @@ const FavoritesPage = () => {
       renderItem={(service) => (
         <ServiceCard key={service._id} service={service} isFavorite={true} />
       )}
+      filterLabels={filterLabels}
       favorite
     />
   );

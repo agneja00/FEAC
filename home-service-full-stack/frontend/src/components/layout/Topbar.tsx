@@ -9,22 +9,28 @@ import { UserContext } from "../context/UserContext";
 import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
 import { BookingStatus } from "../booking/types";
-
-const NAVIGATION_LINKS = [
-  { href: ROUTES.SERVICES, label: "Services" },
-  { href: ROUTES.ABOUT_US, label: "About Us" },
-  { href: ROUTES.FOR_BUSINESS_PARTNERS, label: "For Business Partners" },
-];
-
-const USER_MENU_ITEMS = [
-  { href: ROUTES.BOOKINGS_FILTER, label: "My Bookings" },
-  { href: ROUTES.FAVORITES, label: "My Favorites" },
-  { href: ROUTES.HOME, label: "Logout", action: "logout" },
-];
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../common/LanguageSwither";
 
 const Topbar = () => {
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const NAVIGATION_LINKS = [
+    { href: ROUTES.SERVICES, label: t("topbar.services") },
+    { href: ROUTES.ABOUT_US, label: t("common.aboutUs") },
+    {
+      href: ROUTES.FOR_BUSINESS_PARTNERS,
+      label: t("common.forBusinessPartners"),
+    },
+  ];
+
+  const USER_MENU_ITEMS = [
+    { href: ROUTES.BOOKINGS_FILTER, label: t("accountModal.myBookings") },
+    { href: ROUTES.FAVORITES, label: t("accountModal.myFavorites") },
+    { href: ROUTES.HOME, label: t("accountModal.logOut"), action: "logout" },
+  ];
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -70,7 +76,7 @@ const Topbar = () => {
       <Link to={ROUTES.HOME} className={styles.logo} onClick={handleModalClose}>
         <img src={Logo} alt="logo" />
       </Link>
-
+      <LanguageSwitcher />
       <div
         className={
           menuOpen
@@ -98,7 +104,6 @@ const Topbar = () => {
           ))}
           <hr className={styles.navLine} />
         </nav>
-
         {user ? (
           <>
             {modalOpen && (
@@ -109,7 +114,9 @@ const Topbar = () => {
                 accountModal
               >
                 <ul className={styles.accountModalContent}>
-                  <li className={styles.account}>My Account</li>
+                  <li className={styles.account}>
+                    {t("accountModal.myAccount")}
+                  </li>
                   {USER_MENU_ITEMS.map((item) => {
                     const path = generateUserPath(item.href);
                     if (!path) return null;
@@ -142,7 +149,7 @@ const Topbar = () => {
             onClick={() => navigate(ROUTES.LOGIN)}
             large
           >
-            Login / Sign Up
+            {t("buttons.loginOrSign")}
           </Button>
         )}
       </div>

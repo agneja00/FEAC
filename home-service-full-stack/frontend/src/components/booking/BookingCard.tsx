@@ -7,12 +7,14 @@ import { useServicePath } from "../service/hooks";
 import Button from "../common/Button.tsx";
 import { useDeleteBooking } from "./hooks.ts";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 interface BookingCardProps {
   booking: Booking;
 }
 
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
+  const { t } = useTranslation();
   const { _id, serviceId, date, time, status } = booking;
   const { mutate: deleteBooking } = useDeleteBooking();
   const navigateToService = useServicePath();
@@ -24,7 +26,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
 
   const handleCancelBooking = () => {
     deleteBooking(_id);
-    enqueueSnackbar("Booking successfully canceled!", { variant: "success" });
+    enqueueSnackbar(t("messages.bookCancel"), { variant: "success" });
   };
 
   return (
@@ -60,7 +62,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
             <div className={styles.info}>
               <FaRegCalendar className={styles.icon} fontSize={22} />
               <p className={styles.service}>
-                Service on:
+                {t("bookingCard.date")}
                 <span className={styles.dateAndTime}>
                   {date ? new Date(date).toLocaleDateString() : "N/A"}
                 </span>
@@ -69,7 +71,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
             <div className={styles.info}>
               <HiOutlineClock className={styles.icon} fontSize={24} />
               <p className={styles.service}>
-                Service at:
+                {t("bookingCard.time")}
                 <span className={styles.dateAndTime}>{time}</span>
               </p>
             </div>
@@ -82,7 +84,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                   handleCancelBooking();
                 }}
               >
-                Cancel
+                {t("buttons.cancel")}
               </Button>
             )}
           </section>

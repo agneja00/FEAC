@@ -1,11 +1,10 @@
 import styles from "./Footer.module.scss";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
-  return (
-    <p className={styles.footer}>
-      Copyright &#169; 2025 Agnieska Jackevic. All Rights Reserved.
-    </p>
-  );
+  const { t } = useTranslation();
+
+  return <p className={styles.footer}>{t("footer.copyright")}</p>;
 };
 
 export default Footer;

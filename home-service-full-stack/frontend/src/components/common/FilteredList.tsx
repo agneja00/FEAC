@@ -1,6 +1,7 @@
 import styles from "./FilteredList.module.scss";
 import Button from "@/components/common/Button";
 import classNames from "classnames";
+import { ReactNode } from "react";
 
 interface FilteredListProps<T> {
   title: string;
@@ -8,8 +9,9 @@ interface FilteredListProps<T> {
   filters: string[];
   activeFilter: string;
   onFilterChange: (filter: string) => void;
-  renderItem: (item: T) => React.ReactNode;
+  renderItem: (item: T) => ReactNode;
   favorite?: boolean;
+  filterLabels?: Record<string, string>;
 }
 
 const FilteredList = <T,>({
@@ -20,6 +22,7 @@ const FilteredList = <T,>({
   onFilterChange,
   renderItem,
   favorite,
+  filterLabels,
 }: FilteredListProps<T>) => {
   return (
     <div className={styles.container}>
@@ -33,7 +36,7 @@ const FilteredList = <T,>({
             })}
             onClick={() => onFilterChange(filter)}
           >
-            {filter}
+            {filterLabels ? filterLabels[filter] : filter}
           </Button>
         ))}
       </div>

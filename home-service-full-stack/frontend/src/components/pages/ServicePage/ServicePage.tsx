@@ -16,8 +16,10 @@ import { Dayjs } from "dayjs";
 import { LocalizationProvider, DateCalendar } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 const ServicePage = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const [bookOpen, setBookOpen] = useState(false);
   const { user } = useContext(UserContext);
@@ -30,15 +32,15 @@ const ServicePage = () => {
   const [timeSlot, setTimeSlot] = useState("");
 
   const timeSlots = [
-    "8:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "11:30 AM",
-    "12:00 AM",
-    "12:30 AM",
-    "14:00 AM",
-    "6:00 PM",
-    "7:00 PM",
+    t("time.8AM"),
+    t("time.10AM"),
+    t("time.11AM"),
+    t("time.1130AM"),
+    t("time.12PM"),
+    t("time.1230PM"),
+    t("time.2PM"),
+    t("time.6PM"),
+    t("time.7PM"),
   ];
 
   const handleDateChange = (newValue: Dayjs | null) => {
@@ -65,11 +67,11 @@ const ServicePage = () => {
         status: "Confirmed",
       };
       await postBooking(booking);
-      enqueueSnackbar("Successfully booked!", { variant: "success" });
+      enqueueSnackbar(t("messages.bookSuccess"), { variant: "success" });
       handleCloseModal();
     } catch (error) {
       enqueueSnackbar(
-        error instanceof Error ? error.message : "An error occurred.",
+        error instanceof Error ? error.message : t("messages.bookSuccess"),
         { variant: "error" },
       );
     }
@@ -81,9 +83,9 @@ const ServicePage = () => {
     <>
       {bookOpen && (
         <Modal onClose={handleCloseModal} isOpen={true}>
-          <h3 className={styles.title}>Book a Service</h3>
-          <p>Select Date and Time slot to book a service</p>
-          <h4 className={styles.subtitle}>Select Date</h4>
+          <h3 className={styles.title}>{t("forms.book.title")}</h3>
+          <p>{t("forms.book.action")}</p>
+          <h4 className={styles.subtitle}>{t("forms.book.select")}</h4>
           <div className={styles.calendar}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar value={dateValue} onChange={handleDateChange} />
@@ -100,7 +102,7 @@ const ServicePage = () => {
               </button>
             ))}
           </div>
-          <Button onClick={handleSubmit}>Reserve Time</Button>
+          <Button onClick={handleSubmit}>{t("buttons.reserveTime")}</Button>
         </Modal>
       )}
       <ServicesAndBookingsLayout>
@@ -118,12 +120,12 @@ const ServicePage = () => {
                   onClick={handleOpenModal}
                 >
                   <GiNotebook fontSize={20} />
-                  <span>Book Appointment</span>
+                  <span>{t("buttons.bookAppointment")}</span>
                 </Button>
               ) : (
                 <Button className={styles.button} onClick={handleOpenModal}>
                   <GiNotebook fontSize={20} />
-                  <span>Book Appointment</span>
+                  <span>{t("buttons.bookAppointment")}</span>
                 </Button>
               )}
             </div>
