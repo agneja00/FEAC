@@ -16,8 +16,10 @@ interface ServiceCardProps {
 const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
   const { t, i18n } = useTranslation();
   if (!service || !service._id) return null;
-
-  const { _id, name, category, contactPerson, address, imageUrls } = service;
+  const { _id, contactPerson, address, imageUrls } = service;
+  const name = service.translations?.name?.[i18n.language] || service.name;
+  const category =
+    service.translations?.category?.[i18n.language] || service.category;
   const { user } = useContext(UserContext);
   const email = user?.email;
   const { mutate, isPending } = useToggleFavorite();

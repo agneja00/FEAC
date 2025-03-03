@@ -6,7 +6,7 @@ import {
   fetchFavoriteServices,
 } from "./api";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
-import { ServiceWithFavorite } from "./types";
+import { Service, ServiceWithFavorite } from "./types";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { ROUTES } from "@/constants/routes";
@@ -21,10 +21,11 @@ export const useServices = (lang: string) => {
   });
 };
 
-export const useServiceById = (serviceId: string, lang: string) => {
+export const useServiceById = (serviceId: string, lang: string = "en") => {
   return useQuery<ServiceWithFavorite>({
     queryKey: [SERVICE_KEY, serviceId, lang],
     queryFn: () => fetchServiceById(lang, serviceId),
+    enabled: !!serviceId,
   });
 };
 
@@ -33,6 +34,7 @@ export const useServicePath = () => {
   const { lang } = useParams<{ lang: string }>();
 
   const navigateToService = (id: string) => {
+    if (!lang) return;
     const servicePath = generatePath(ROUTES.SERVICE_ID, { lang, id });
     navigate(servicePath);
   };
@@ -42,7 +44,9 @@ export const useServicePath = () => {
 
 export const useCurrentService = () => {
   const { id, lang } = useParams<{ id: string; lang: string }>();
-  const { data } = useServiceById(id!, lang || "en");
+  if (!id) return { currentService: undefined };
+
+  const { data } = useServiceById(id, lang || "en");
   return { currentService: data };
 };
 
@@ -60,9 +64,15 @@ export const useToggleFavorite = () => {
     }) => toggleFavorite(lang, email, serviceId),
     onMutate: async ({ serviceId }) => {
       await queryClient.cancelQueries({ queryKey: [SERVICE_KEY] });
+      await queryClient.cancelQueries({ queryKey: [FAVORITE_KEY] });
+
       const previousServices = queryClient.getQueryData<ServiceWithFavorite[]>([
         SERVICE_KEY,
       ]);
+      const previousFavorites = queryClient.getQueryData<ServiceWithFavorite[]>(
+        [FAVORITE_KEY],
+      );
+
       if (previousServices) {
         queryClient.setQueryData(
           [SERVICE_KEY],
@@ -73,11 +83,22 @@ export const useToggleFavorite = () => {
           ),
         );
       }
-      return { previousServices };
+
+      if (previousFavorites) {
+        queryClient.setQueryData(
+          [FAVORITE_KEY],
+          previousFavorites.filter((service) => service._id !== serviceId),
+        );
+      }
+
+      return { previousServices, previousFavorites };
     },
     onError: (_err, _newService, context) => {
       if (context?.previousServices) {
         queryClient.setQueryData([SERVICE_KEY], context.previousServices);
+      }
+      if (context?.previousFavorites) {
+        queryClient.setQueryData([FAVORITE_KEY], context.previousFavorites);
       }
     },
     onSuccess: (_, variables) => {
@@ -90,34 +111,39 @@ export const useToggleFavorite = () => {
 };
 
 export const useFavoriteServices = (email: string) => {
-  const { lang = "en" } = useParams<{ lang: string }>();
+  const { lang } = useParams<{ lang: string }>();
+
   return useQuery<ServiceWithFavorite[]>({
     queryKey: [FAVORITE_KEY, email, lang],
-    queryFn: () => fetchFavoriteServices(lang, email),
+    queryFn: () => fetchFavoriteServices(lang || "en", email),
     enabled: !!email,
   });
 };
 
 export const useServiceData = () => {
-  const { lang } = useParams<{ lang: string }>();
-  const { data: allServices = [] } = useServices(lang || "en");
+  const { lang } = useParams<{ lang?: string }>();
+  const selectedLang = lang || "en";
+
+  const { data: allServices = [] } = useServices(selectedLang);
   const { user } = useContext(UserContext);
   const { data: favoriteServices = [] } = useFavoriteServices(
     user?.email || "",
   );
 
-  const favoriteServiceIds = new Set(
-    favoriteServices.map((service) => service._id),
-  );
-
-  const updatedServices = allServices.map((service) => ({
+  const translateService = (service: Service) => ({
     ...service,
-    isFavorite: favoriteServiceIds.has(service._id),
-  }));
+    isFavorite: favoriteServices.some((fav) => fav._id === service._id),
+    name: service?.translations?.name?.[selectedLang] || service.name,
+    category:
+      service?.translations?.category?.[selectedLang] || service.category,
+  });
+
+  const updatedServices = allServices.map(translateService);
+  const updatedFavorites = favoriteServices.map(translateService);
 
   return {
     allServices: updatedServices,
     user,
-    favoriteServices,
+    favoriteServices: updatedFavorites,
   };
 };

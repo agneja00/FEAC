@@ -15,7 +15,7 @@ export const fetchServiceById = async (
   lang: string,
   serviceId: string,
 ): Promise<ServiceWithFavorite> => {
-  const response = await axiosInstance.get(`/${lang}/services/${serviceId}`);
+  const response = await axiosInstance.get(`/${lang}/service/${serviceId}`);
   return { ...response.data, isFavorite: false };
 };
 
@@ -33,9 +33,12 @@ export const fetchFavoriteServices = async (
   const response = await axiosInstance.get(
     `/${lang}/services/user/${email}/favorites`,
   );
+
   return response.data.map((service: Service) => ({
     ...service,
     isFavorite: true,
+    name: service.translations?.name?.[lang] || service.name,
+    category: service.translations?.category?.[lang] || service.category,
   }));
 };
 

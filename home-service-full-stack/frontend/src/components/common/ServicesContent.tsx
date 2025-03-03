@@ -19,17 +19,23 @@ const ServicesContent: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const { category } = useParams<Params>();
+  const { lang = "en" } = useParams<{ lang?: string }>();
 
   useEffect(() => {
     if (allServices) {
-      const filtered = allServices.filter(
-        (ser) =>
-          (!category || ser.category === category) &&
-          ser.name.toLowerCase().includes(searchValue.toLowerCase()),
-      );
+      const filtered = allServices.filter((ser) => {
+        const translatedCategory =
+          ser.translations?.category?.[lang] || ser.category;
+
+        return (
+          (!category || translatedCategory === category) &&
+          ser.name.toLowerCase().includes(searchValue.toLowerCase())
+        );
+      });
+
       setFilteredServices(filtered);
     }
-  }, [allServices, category, searchValue]);
+  }, [allServices, category, searchValue, lang]);
 
   const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);

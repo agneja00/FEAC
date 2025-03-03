@@ -66,16 +66,22 @@ const FavoritesPage = () => {
   const filteredServices =
     !category || category === "All"
       ? favoriteServices || []
-      : (favoriteServices || []).filter(
-          (service) => service.category === category,
-        );
+      : (favoriteServices || []).filter((service) => {
+          const translatedCategory =
+            service.translations?.category?.[lang] ?? service.category;
+          const filterCategory = t(`categories.${category}`);
+
+          return (
+            translatedCategory?.toLowerCase() === filterCategory?.toLowerCase()
+          );
+        });
 
   const handleFilterChange = (newCategory: string) => {
     const newPath =
       newCategory === "All"
         ? generatePath(ROUTES.FAVORITES, { lang, email: userEmail })
         : generatePath(ROUTES.FAVORITES_CATEGORY, {
-            lang, // Include lang
+            lang,
             email: userEmail,
             category: newCategory,
           });
