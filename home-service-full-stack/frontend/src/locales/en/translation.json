@@ -58,6 +58,7 @@
     "favoritesLoading": "Loading favorites...",
     "favoritesError": "Error loading favorites.",
     "favoritesLogin": "Please log in to view your favorites.",
+    "favoriteToggleError": "Failed to toggle favorite.",
     "required": "Field is required",
     "validEmail": "Email should be valid",
     "requiredCategory": "Category is required",

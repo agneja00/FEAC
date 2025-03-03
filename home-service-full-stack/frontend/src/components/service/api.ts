@@ -1,52 +1,52 @@
 import axiosInstance from "@/config/axios";
-import { Service, NewService } from "./types";
+import { Service, NewService, ServiceWithFavorite } from "./types";
 
-export const fetchServices = async (): Promise<Service[]> => {
-  const response = await axiosInstance.get("/services");
-  return await response.data;
+export const fetchServices = async (
+  lang: string,
+): Promise<ServiceWithFavorite[]> => {
+  const response = await axiosInstance.get(`/${lang}/services`);
+  return response.data.map((service: Service) => ({
+    ...service,
+    isFavorite: false,
+  }));
 };
 
-export const fetchServiceById = async (serviceId: string): Promise<Service> => {
-  try {
-    const response = await axiosInstance.get(`/services/${serviceId}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const fetchServiceById = async (
+  lang: string,
+  serviceId: string,
+): Promise<ServiceWithFavorite> => {
+  const response = await axiosInstance.get(`/${lang}/services/${serviceId}`);
+  return { ...response.data, isFavorite: false };
 };
 
-export const sendServiceEmail = async (formData: NewService): Promise<void> => {
-  try {
-    await axiosInstance.post("/services", formData);
-  } catch (error) {
-    throw error;
-  }
+export const sendServiceEmail = async (
+  lang: string,
+  formData: NewService,
+): Promise<void> => {
+  await axiosInstance.post(`/${lang}/services`, formData);
 };
 
 export const fetchFavoriteServices = async (
+  lang: string,
   email: string,
-): Promise<Service[]> => {
-  const response = await axiosInstance.get(`/services/user/${email}/favorites`);
-  return response.data;
+): Promise<ServiceWithFavorite[]> => {
+  const response = await axiosInstance.get(
+    `/${lang}/services/user/${email}/favorites`,
+  );
+  return response.data.map((service: Service) => ({
+    ...service,
+    isFavorite: true,
+  }));
 };
 
 export const toggleFavorite = async (
+  lang: string,
   email: string,
   serviceId: string,
-): Promise<Service> => {
-  try {
-    const response = await axiosInstance.post(
-      `/services/user/${email}/favorites`,
-      {
-        email,
-        serviceId,
-      },
-    );
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      "Failed to toggle favorite: " +
-        (error instanceof Error ? error.message : "Unknown error"),
-    );
-  }
+): Promise<ServiceWithFavorite> => {
+  const response = await axiosInstance.post(
+    `/${lang}/services/user/${email}/favorites`,
+    { email, serviceId },
+  );
+  return response.data;
 };

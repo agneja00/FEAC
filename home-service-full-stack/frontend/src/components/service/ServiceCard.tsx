@@ -14,7 +14,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   if (!service || !service._id) return null;
 
   const { _id, name, category, contactPerson, address, imageUrls } = service;
@@ -34,7 +34,11 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
     setLocalIsFavorite(!previousIsFavorite);
 
     mutate(
-      { email: user.email, serviceId: _id },
+      {
+        email: user.email,
+        serviceId: _id,
+        lang: i18n.language,
+      },
       {
         onError: (error) => {
           setLocalIsFavorite(previousIsFavorite);

@@ -1,26 +1,22 @@
 import styles from "./ServiceList.module.scss";
-import classNames from "classnames";
+import { ServiceWithFavorite } from "./types";
 import ServiceCard from "./ServiceCard";
-import { Service } from "./types";
+import classNames from "classnames";
 
 interface ServiceListProps {
+  services: ServiceWithFavorite[];
+  favoriteServices?: ServiceWithFavorite[];
   className?: string;
-  services?: Service[];
-  favoriteServices?: Service[];
 }
 
-const ServiceList: React.FC<ServiceListProps> = ({
-  className,
-  services,
-  favoriteServices,
-}) => {
+const ServiceList: React.FC<ServiceListProps> = ({ services, className }) => {
   return (
     <div className={classNames(styles.container, className)}>
-      {services?.map((service) => (
+      {services.map((service) => (
         <ServiceCard
           key={service._id}
           service={service}
-          isFavorite={favoriteServices?.some((fav) => fav._id === service._id)}
+          isFavorite={service.isFavorite}
         />
       ))}
     </div>

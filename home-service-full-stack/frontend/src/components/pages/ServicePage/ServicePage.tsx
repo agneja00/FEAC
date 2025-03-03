@@ -65,6 +65,12 @@ const ServicePage = () => {
         userEmail: user.email,
         userName: user.name,
         status: "Confirmed",
+        translations: {
+          status: {
+            en: "Confirmed",
+            lt: "Patvirtinti",
+          },
+        },
       };
       await postBooking(booking);
       enqueueSnackbar(t("messages.bookSuccess"), { variant: "success" });

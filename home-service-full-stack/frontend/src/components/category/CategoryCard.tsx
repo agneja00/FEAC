@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./CategoryCard.module.scss";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import classNames from "classnames";
@@ -11,29 +12,39 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
-  const params = useParams<{ category?: string }>();
-  const { name } = category;
+  const params = useParams<{ lang?: string; category?: string }>();
   const navigate = useNavigate();
+  const lang = params.lang || "en";
+
+  const categoryName = category.name;
 
   const categoryPath =
-    category.name === "All"
-      ? generatePath(ROUTES.SERVICES)
+    categoryName === "All" || categoryName === "Visos"
+      ? generatePath(ROUTES.SERVICES, { lang })
       : generatePath(ROUTES.SERVICES_CATEGORY, {
-          category: name,
+          lang,
+          category: categoryName,
         });
-  const activeCategory = params.category;
+
+  const isActive = params.category === categoryName;
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      navigate(categoryPath);
+    }
+  };
 
   return (
     <div
-      className={classNames(
-        styles.card,
-        activeCategory === name && styles.active,
-        className,
-      )}
+      className={classNames(styles.card, isActive && styles.active, className)}
       onClick={() => navigate(categoryPath)}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${categoryName} services`}
+      onKeyDown={handleKeyDown}
     >
-      <UrlIcon src={category.url} alt={`icon ${category.name}`} />
-      <p className={styles.name}>{name}</p>
+      <UrlIcon src={category.url} alt={`${categoryName} icon`} />
+      <p className={styles.name}>{categoryName}</p>
     </div>
   );
 };

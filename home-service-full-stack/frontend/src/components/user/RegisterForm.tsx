@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import { useSnackbar } from "notistack";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
-import { Link, useNavigate } from "react-router-dom";
+import { generatePath, Link, useNavigate, useParams } from "react-router-dom";
 import FormikField from "../common/FormikInput";
 import { registerInitialValus, reigsterValidationSchema } from "../user/consts";
 import { useRegisterUser } from "./hooks";
@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 
 const RegisterForm = () => {
   const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { mutateAsync: registerUser } = useRegisterUser();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const RegisterForm = () => {
   const handleSubmit = async (formValues: RegisterRequest) => {
     try {
       await registerUser(formValues);
-      navigate(ROUTES.LOGIN);
+      navigate(generatePath(ROUTES.LOGIN, { lang }));
       enqueueSnackbar(t("messages.registrationSuccess"), {
         variant: "success",
       });
@@ -66,7 +67,10 @@ const RegisterForm = () => {
               {t("common.register")}
             </Button>
             <div className={styles.link}>
-              <Link to={ROUTES.LOGIN} className={styles.signUp}>
+              <Link
+                to={generatePath(ROUTES.LOGIN, { lang })}
+                className={styles.signUp}
+              >
                 {t("forms.loginAndRegister.login")}
               </Link>
             </div>

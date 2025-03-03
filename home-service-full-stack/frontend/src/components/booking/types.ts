@@ -10,6 +10,13 @@ export interface Booking {
   userEmail: string;
   userName: string;
   status: BookingStatus;
+  translations: {
+    status: {
+      en: string;
+      lt: string;
+      [key: string]: string;
+    };
+  };
 }
 
 export type NewBooking = Omit<Booking, "_id">;

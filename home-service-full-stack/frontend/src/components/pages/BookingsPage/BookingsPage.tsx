@@ -6,50 +6,59 @@ import { BookingStatus } from "@/components/booking/types";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
 
-const statuses: BookingStatus[] = ["Confirmed", "Completed"];
+const statusTranslations: Record<string, Record<string, string>> = {
+  en: { Confirmed: "Confirmed", Completed: "Completed" },
+  lt: { Confirmed: "Patvirtinti", Completed: "Užbaigti" },
+};
 
 const BookingsPage = () => {
   const { t } = useTranslation();
-  const { email, status } = useParams<{
-    email: string;
-    status: string;
-  }>();
+  const {
+    lang = "en",
+    email,
+    status,
+  } = useParams<{ lang: string; email: string; status: string }>();
   const navigate = useNavigate();
 
-  const validatedStatus: BookingStatus = statuses.includes(
-    status as BookingStatus,
-  )
-    ? (status as BookingStatus)
-    : "Confirmed";
+  const getEnglishStatus = () =>
+    Object.keys(statusTranslations.en).find(
+      (key) => statusTranslations[lang]?.[key] === status,
+    ) || "Confirmed";
 
-  const { data: bookings } = useUserBookings(validatedStatus);
-
-  const statusTranslations: Record<BookingStatus, string> = {
-    Confirmed: t("status.confirmed"),
-    Completed: t("status.completed"),
-  };
+  const validatedStatus = getEnglishStatus() as BookingStatus;
+  const { data: bookings, isLoading, error } = useUserBookings(validatedStatus);
 
   const handleFilterChange = (filter: string) => {
-    if (email) {
-      const newPath = generatePath(ROUTES.BOOKINGS_FILTER, {
+    const translatedStatus =
+      statusTranslations[lang][filter as BookingStatus] || filter;
+    navigate(
+      generatePath(ROUTES.BOOKINGS_FILTER, {
+        lang,
         email,
-        status: filter,
-      });
-      navigate(newPath);
-    }
+        status: translatedStatus,
+      }),
+    );
   };
+
+  if (isLoading) return <div>{t("common.loading")}</div>;
+  if (error)
+    return (
+      <div>
+        {t("common.error")}: {error.message}
+      </div>
+    );
 
   return (
     <FilteredList
       title={t("accountModal.myBookings")}
       items={bookings || []}
-      filters={statuses}
+      filters={Object.keys(statusTranslations[lang]) as BookingStatus[]}
       activeFilter={validatedStatus}
       onFilterChange={handleFilterChange}
+      filterLabels={statusTranslations[lang]}
       renderItem={(booking) => (
         <BookingCard key={booking._id} booking={booking} />
       )}
-      filterLabels={statusTranslations}
     />
   );
 };

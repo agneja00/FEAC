@@ -1,12 +1,13 @@
 import styles from "./SimilarService.module.scss";
-import { generatePath, Link } from "react-router-dom";
+import { generatePath, Link, useParams } from "react-router-dom";
 import { useServices, useCurrentService } from "./hooks";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
 
 const SimilarService: React.FC = () => {
   const { t } = useTranslation();
-  const { data: services } = useServices();
+  const { lang } = useParams<{ lang: string }>();
+  const { data: services } = useServices(lang || "en");
   const { currentService } = useCurrentService();
 
   const similarService = services?.filter(
@@ -14,10 +15,6 @@ const SimilarService: React.FC = () => {
       service.category === currentService?.category &&
       service._id !== currentService._id,
   );
-  const servicePath =
-    similarService && similarService.length > 0
-      ? generatePath(ROUTES.SERVICE_ID, { id: similarService[0]._id })
-      : "#";
 
   return (
     <>
@@ -29,9 +26,15 @@ const SimilarService: React.FC = () => {
               className={styles.businessImg}
               src={simService.imageUrls[0]}
               alt={simService.name}
-            ></img>
+            />
             <div className={styles.detailsContainer}>
-              <Link className={styles.similarName} to={servicePath}>
+              <Link
+                className={styles.similarName}
+                to={generatePath(ROUTES.SERVICE_ID, {
+                  lang,
+                  id: simService._id,
+                })}
+              >
                 {simService.name}
               </Link>
               <p className={styles.contactPerson}>{simService.contactPerson}</p>

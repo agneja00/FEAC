@@ -8,15 +8,15 @@ import bookingRoutes from "./routes/bookingRoutes";
 import path from "path";
 
 const app = express();
-app.use(express.json());
+
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.use("/auth", authRoutes);
-app.use("/categories", categoryRoutes);
-app.use("/services", serviceRoutes);
-app.use("/bookings", bookingRoutes);
+app.use("/", authRoutes);
+app.use("/", categoryRoutes);
+app.use("/", serviceRoutes);
+app.use("/", bookingRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist", "index.html"));

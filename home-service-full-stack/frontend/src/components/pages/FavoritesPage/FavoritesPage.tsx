@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const FavoritesPage = () => {
   const { t } = useTranslation();
+  const { lang = "en" } = useParams<{ lang: string }>();
 
   const FAVORITE_FILTERS = [
     "All",
@@ -72,8 +73,9 @@ const FavoritesPage = () => {
   const handleFilterChange = (newCategory: string) => {
     const newPath =
       newCategory === "All"
-        ? generatePath(ROUTES.FAVORITES, { email: userEmail })
+        ? generatePath(ROUTES.FAVORITES, { lang, email: userEmail })
         : generatePath(ROUTES.FAVORITES_CATEGORY, {
+            lang, // Include lang
             email: userEmail,
             category: newCategory,
           });

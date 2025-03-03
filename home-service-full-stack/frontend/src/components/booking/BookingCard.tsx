@@ -14,15 +14,18 @@ interface BookingCardProps {
 }
 
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
-  const { t } = useTranslation();
-  const { _id, serviceId, date, time, status } = booking;
+  const { t, i18n } = useTranslation();
+  const { _id, serviceId, date, time, status, translations } = booking;
   const { mutate: deleteBooking } = useDeleteBooking();
   const navigateToService = useServicePath();
   const { enqueueSnackbar } = useSnackbar();
 
-  const service = typeof serviceId === "string" ? null : serviceId;
+  const service =
+    typeof serviceId === "object" && serviceId !== null ? serviceId : null;
   const resolvedServiceId =
     typeof serviceId === "string" ? serviceId : serviceId?._id;
+
+  const translatedStatus = translations?.status?.[i18n.language] || status;
 
   const handleCancelBooking = () => {
     deleteBooking(_id);
@@ -64,7 +67,9 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
               <p className={styles.service}>
                 {t("bookingCard.date")}
                 <span className={styles.dateAndTime}>
-                  {date ? new Date(date).toLocaleDateString() : "N/A"}
+                  {date
+                    ? new Date(date).toLocaleDateString(i18n.language)
+                    : t("common.na")}
                 </span>
               </p>
             </div>
@@ -75,7 +80,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                 <span className={styles.dateAndTime}>{time}</span>
               </p>
             </div>
-            {status !== "Completed" && (
+            {!["Completed", "Užbaigti"].includes(translatedStatus) && (
               <Button
                 small
                 cancel

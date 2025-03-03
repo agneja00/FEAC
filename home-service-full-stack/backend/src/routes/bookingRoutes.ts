@@ -4,21 +4,58 @@ import { IService } from "../models/Service";
 import authMiddleware from "../middlewares/authMiddleware";
 import sendEmail from "../utils/sendEmail";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const router = express.Router();
 
-router.get("/user/:email/:status", authMiddleware, async (req, res) => {
+const errorMessages: { [key: string]: { fetchError: string; createError: string; deleteError: string } } = {
+  en: {
+    fetchError: "Error fetching bookings for the user",
+    createError: "Error creating booking",
+    deleteError: "Error deleting booking",
+  },
+  lt: {
+    fetchError: "Klaida gaunant vartotojo rezervacijas",
+    createError: "Klaida kuriant rezervaciją",
+    deleteError: "Klaida šalinant rezervaciją",
+  },
+};
+
+const statusTranslations: { [key: string]: { [key: string]: string } } = {
+  en: {
+    Completed: "Completed",
+    Confirmed: "Confirmed",
+  },
+  lt: {
+    Completed: "Užbaigti",
+    Confirmed: "Patvirtinti",
+  },
+};
+
+router.get("/:lang/bookings/user/:email/:status", async (req, res) => {
+  const { lang, email, status } = req.params;
+
+  const dbStatus =
+    Object.keys(statusTranslations[lang] || {}).find((key) => statusTranslations[lang][key] === status) || status;
+
   try {
-    const { email, status } = req.params;
-    const bookings = await Booking.find({ userEmail: email, status }).populate("serviceId").exec();
-    res.json(bookings);
+    const bookings = await Booking.find({ userEmail: email, status: dbStatus }).populate("serviceId").exec();
+
+    const translatedBookings = bookings.map((booking) => ({
+      ...booking.toObject(),
+      translatedStatus: booking.translations?.status?.[lang] || booking.status,
+    }));
+
+    res.json(translatedBookings);
   } catch (err) {
-    res.status(500).json({ message: "Error fetching bookings for the user", error: err });
+    res.status(500).json({ message: errorMessages[lang]?.fetchError || errorMessages.en.fetchError, error: err });
   }
 });
 
-router.post("/", authMiddleware, async (req, res) => {
+router.post("/:lang/bookings", authMiddleware, async (req, res) => {
+  const lang = req.params.lang === "lt" ? "lt" : "en";
+
   try {
     const newBooking = new Booking(req.body);
     await newBooking.save();
@@ -32,28 +69,33 @@ router.post("/", authMiddleware, async (req, res) => {
     const date = bookingWithService?.date.toISOString().split("T")[0];
     const time = bookingWithService?.time;
 
+    const emailMessages = {
+      en: {
+        subject: "Booking Confirmation",
+        text: `Dear ${userName}, your booking with ${serviceName} on ${date} at ${time} has been confirmed.`,
+        html: `<p>Dear ${userName}, your booking with <strong>${serviceName}</strong> on <strong>${date}</strong> at <strong>${time}</strong> has been <i>confirmed</i>.</p>`,
+      },
+      lt: {
+        subject: "Rezervacijos patvirtinimas",
+        text: `Gerb. ${userName}, jūsų rezervacija su ${serviceName} ${date} ${time} buvo patvirtinta.`,
+        html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${serviceName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
+      },
+    };
+
     sendEmail({
       to: userEmail!,
       from: process.env.EMAIL!,
-      subject: "Rezervacijos patvirtinimas",
-      text: `Gerb. ${userName}, jūsų rezervacija su ${serviceName} ${date} ${time} buvo patvirtinta.`,
-      html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${serviceName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
+      subject: emailMessages[lang].subject,
+      text: emailMessages[lang].text,
+      html: emailMessages[lang].html,
     });
+
     res.status(201).json(bookingWithService);
   } catch (err) {
     res.status(400).json({
-      message: "Error creating booking",
+      message: errorMessages[lang].createError,
       error: (err as Error)?.message ?? err,
     });
-  }
-});
-
-router.delete("/:id", authMiddleware, async (req, res) => {
-  try {
-    const deletedBooking = await Booking.findByIdAndDelete(req.params.id);
-    res.json(deletedBooking);
-  } catch (err) {
-    res.status(404).json(err);
   }
 });
 

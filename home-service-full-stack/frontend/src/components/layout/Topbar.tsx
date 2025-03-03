@@ -1,6 +1,6 @@
 import styles from "./Topbar.module.scss";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { Link, useNavigate, generatePath } from "react-router-dom";
+import { Link, useNavigate, generatePath, useParams } from "react-router-dom";
 import Logo from "@/assets/logo.svg";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
@@ -16,30 +16,42 @@ const Topbar = () => {
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { lang = "en" } = useParams<{ lang?: string }>();
 
   const NAVIGATION_LINKS = [
-    { href: ROUTES.SERVICES, label: t("topbar.services") },
-    { href: ROUTES.ABOUT_US, label: t("common.aboutUs") },
     {
-      href: ROUTES.FOR_BUSINESS_PARTNERS,
+      href: generatePath(ROUTES.SERVICES, { lang }),
+      label: t("topbar.services"),
+    },
+    {
+      href: generatePath(ROUTES.ABOUT_US, { lang }),
+      label: t("common.aboutUs"),
+    },
+    {
+      href: generatePath(ROUTES.FOR_BUSINESS_PARTNERS, { lang }),
       label: t("common.forBusinessPartners"),
     },
   ];
 
   const USER_MENU_ITEMS = [
-    { href: ROUTES.BOOKINGS_FILTER, label: t("accountModal.myBookings") },
-    { href: ROUTES.FAVORITES, label: t("accountModal.myFavorites") },
+    {
+      href: generatePath(ROUTES.BOOKINGS_FILTER, {
+        lang,
+        email: user?.email || "",
+        status: "Confirmed",
+      }),
+      label: t("accountModal.myBookings"),
+    },
+    {
+      href: generatePath(ROUTES.FAVORITES, { lang, email: user?.email || "" }),
+      label: t("accountModal.myFavorites"),
+    },
     { href: ROUTES.HOME, label: t("accountModal.logOut"), action: "logout" },
   ];
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeStatus, setActiveStatus] = useState<BookingStatus>("Confirmed");
-
-  const generateUserPath = (route: string) =>
-    user?.email
-      ? generatePath(route, { email: user.email, status: activeStatus })
-      : null;
 
   const handleModalClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -73,9 +85,15 @@ const Topbar = () => {
 
   return (
     <header className={styles.topbar}>
-      <Link to={ROUTES.HOME} className={styles.logo} onClick={handleModalClose}>
-        <img src={Logo} alt="logo" />
-      </Link>
+      <div className={styles.headerLeftSide}>
+        <Link
+          to={generatePath(ROUTES.HOME, { lang })}
+          className={styles.logo}
+          onClick={handleModalClose}
+        >
+          <img src={Logo} alt="logo" />
+        </Link>
+      </div>
       <LanguageSwitcher />
       <div
         className={
@@ -118,7 +136,11 @@ const Topbar = () => {
                     {t("accountModal.myAccount")}
                   </li>
                   {USER_MENU_ITEMS.map((item) => {
-                    const path = generateUserPath(item.href);
+                    const path = generatePath(item.href, {
+                      lang,
+                      email: user.email,
+                      status: activeStatus,
+                    });
                     if (!path) return null;
 
                     return (
@@ -146,7 +168,7 @@ const Topbar = () => {
         ) : (
           <Button
             className={menuOpen ? styles.buttonMobile : styles.buttonLarge}
-            onClick={() => navigate(ROUTES.LOGIN)}
+            onClick={() => navigate(generatePath(ROUTES.LOGIN, { lang }))}
             large
           >
             {t("buttons.loginOrSign")}

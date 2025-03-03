@@ -58,6 +58,7 @@
     "favoritesLoading": "Įkeliami mėgstamiausi...",
     "favoritesError": "Klaida įkeliant mėgstamiausius.",
     "favoritesLogin": "Prisijunkite, kad galėtumėte peržiūrėti savo mėgstamiausius.",
+    "favoriteToggleError": "Nepavyko pakeisti mėgstamiausio.",
     "required": "Laukas būtinas",
     "validEmail": "El. paštas turi būti teisingo formato",
     "requiredCategory": "Kategorija yra būtina",

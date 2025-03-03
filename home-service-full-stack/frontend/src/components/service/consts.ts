@@ -25,6 +25,20 @@ export const ServiceRegisterValidationSchema: Yup.Schema<NewService> =
     email: Yup.string()
       .email(errorMessage.email)
       .required(errorMessage.required),
+    translations: Yup.object().shape({
+      name: Yup.object().shape({
+        en: Yup.string().required(errorMessage.required),
+        lt: Yup.string().required(errorMessage.required),
+      }),
+      about: Yup.object().shape({
+        en: Yup.string().required(errorMessage.required),
+        lt: Yup.string().required(errorMessage.required),
+      }),
+      category: Yup.object().shape({
+        en: Yup.string().required(errorMessage.required),
+        lt: Yup.string().required(errorMessage.required),
+      }),
+    }),
   });
 
 export const serviceRegisterInitialValues: NewService = {
@@ -34,4 +48,18 @@ export const serviceRegisterInitialValues: NewService = {
   category: "",
   contactPerson: "",
   email: "",
+  translations: {
+    name: {
+      en: "",
+      lt: "",
+    },
+    about: {
+      en: "",
+      lt: "",
+    },
+    category: {
+      en: "",
+      lt: "",
+    },
+  },
 };

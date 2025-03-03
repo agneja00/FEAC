@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import Service from "../models/Service";
+import Category from "../models/Category";
 import Booking from "../models/Booking";
 import authMiddleware from "../middlewares/authMiddleware";
 import sendEmail from "../utils/sendEmail";
@@ -10,10 +11,51 @@ dotenv.config();
 
 const router = express.Router();
 
-router.get("/", async (req: Request, res: Response) => {
+const errorMessages: {
+  [key: string]: {
+    fetchError: string;
+    createError: string;
+    fetchByIdError: string;
+    editError: string;
+    fetchByCategoryError: string;
+    fetchBookingsError: string;
+    fetchFavoritesError: string;
+    toggleFavoriteError: string;
+  };
+} = {
+  en: {
+    fetchError: "Error fetching services",
+    createError: "Error creating service",
+    fetchByIdError: "Error fetching service",
+    editError: "Error editing service",
+    fetchByCategoryError: "Error fetching services by category",
+    fetchBookingsError: "Error fetching bookings",
+    fetchFavoritesError: "Error fetching favorites",
+    toggleFavoriteError: "Error toggling favorite",
+  },
+  lt: {
+    fetchError: "Klaida gaunant paslaugas",
+    createError: "Klaida kuriant paslaugą",
+    fetchByIdError: "Klaida gaunant paslaugą",
+    editError: "Klaida redaguojant paslaugą",
+    fetchByCategoryError: "Klaida gaunant paslaugas pagal kategoriją",
+    fetchBookingsError: "Klaida gaunant rezervacijas",
+    fetchFavoritesError: "Klaida gaunant mėgstamas paslaugas",
+    toggleFavoriteError: "Klaida keičiant mėgstamą paslaugą",
+  },
+};
+
+router.get("/:lang/services", async (req: Request, res: Response) => {
+  const lang = req.params.lang || "en";
   try {
     const services = await Service.find();
-    res.json(services);
+    const translatedServices = services.map((service) => ({
+      ...service.toObject(),
+      name: service.translations.name[lang] || service.translations.name.en,
+      about: service.translations.about[lang] || service.translations.about.en,
+      category: service.translations.category[lang] || service.translations.category.en,
+    }));
+    res.json(translatedServices);
   } catch (err) {
     res.status(500).json({
       message: "Error fetching services",
@@ -22,8 +64,12 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/", authMiddleware, async (req: Request, res: Response) => {
-  const { name, about, address, category, contactPerson, email } = req.body;
+router.post("/:lang/services", authMiddleware, async (req: Request, res: Response) => {
+  const validLanguages = ["en", "lt"];
+  const defaultLanguage = "en";
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+
+  const { name, about, address, category, contactPerson, email, translations } = req.body;
 
   try {
     const newService = new Service({
@@ -35,6 +81,7 @@ router.post("/", authMiddleware, async (req: Request, res: Response) => {
       email,
       imageUrls: req.body.imageUrls || [],
       favoritedBy: [],
+      translations,
     });
 
     await newService.save();
@@ -66,29 +113,47 @@ router.post("/", authMiddleware, async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Error creating service:", err);
     res.status(500).json({
-      message: "Server error while creating service",
+      message: errorMessages[lang].createError,
       error: err instanceof Error ? err.message : err,
     });
   }
 });
 
-router.get("/:id", async (req: Request, res: Response) => {
+router.get("/:lang/service/:id", async (req: Request, res: Response) => {
+  const validLanguages = ["en", "lt"];
+  const defaultLanguage = "en";
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: "Invalid ID format" });
   }
 
   try {
     const service = await Service.findById(req.params.id);
-    service ? res.json(service) : res.status(404).json({ message: "Service not found" });
+    if (service) {
+      const translatedService = {
+        ...service.toObject(),
+        name: service.translations.name[lang] || service.translations.name.en,
+        about: service.translations.about[lang] || service.translations.about.en,
+        category: service.translations.category[lang] || service.translations.category.en,
+      };
+      res.json(translatedService);
+    } else {
+      res.status(404).json({ message: "Service not found" });
+    }
   } catch (err) {
     res.status(500).json({
-      message: "Error fetching service",
+      message: errorMessages[lang].fetchByIdError,
       error: err instanceof Error ? err.message : err,
     });
   }
 });
 
-router.put("/:id", authMiddleware, async (req: Request, res: Response) => {
+router.put("/:lang/service/:id", authMiddleware, async (req: Request, res: Response) => {
+  const validLanguages = ["en", "lt"];
+  const defaultLanguage = "en";
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+
   try {
     const updatedService = await Service.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
 
@@ -99,28 +164,49 @@ router.put("/:id", authMiddleware, async (req: Request, res: Response) => {
     res.json(updatedService);
   } catch (err) {
     res.status(400).json({
-      message: "Error editing service",
+      message: errorMessages[lang].editError,
       error: err instanceof Error ? err.message : err,
     });
   }
 });
 
-router.get("/categories/:category", async (req: Request, res: Response) => {
+router.get("/:lang/services/categories/:category", async (req: Request, res: Response) => {
+  const validLanguages = ["en", "lt"];
+  const defaultLanguage = "en";
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+
   try {
     const filteredServices = await Service.find({
       category: req.params.category,
     });
+    const categories = await Category.find();
 
-    res.status(200).json(filteredServices);
+    const translatedServices = filteredServices.map((service) => ({
+      ...service.toObject(),
+      name: service.translations?.name?.[lang] || service.translations?.name?.en || service.name,
+      about: service.translations?.about?.[lang] || service.translations?.about?.en || service.about,
+      category: service.translations?.category?.[lang] || service.translations?.category?.en || service.category,
+    }));
+
+    const translatedCategories = categories.map((category) => ({
+      ...category.toObject(),
+      name: category.name?.[lang] || category.name.en || category.name,
+    }));
+
+    res.status(200).json({ services: translatedServices, categories: translatedCategories });
   } catch (err) {
     res.status(500).json({
-      message: "Error fetching services by category",
+      message: errorMessages[lang].fetchByCategoryError,
       error: err instanceof Error ? err.message : err,
     });
   }
 });
 
-router.get("/:id/bookings/date/:date", authMiddleware, async (req: Request, res: Response) => {
+router.get("/:lang/services/:id/bookings/date/:date", authMiddleware, async (req: Request, res: Response) => {
+  const validLanguages = ["en", "lt"];
+  const defaultLanguage = "en";
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+
   try {
     const slots = await Booking.find({
       serviceId: req.params.id,
@@ -130,22 +216,31 @@ router.get("/:id/bookings/date/:date", authMiddleware, async (req: Request, res:
     res.json(slots);
   } catch (err) {
     res.status(500).json({
-      message: "Error fetching bookings",
+      message: errorMessages[lang].fetchBookingsError,
       error: err instanceof Error ? err.message : err,
     });
   }
 });
 
-router.get("/user/:email/favorites", authMiddleware, async (req: Request, res: Response) => {
+router.get("/:lang/services/user/:email/favorites", authMiddleware, async (req, res) => {
   try {
-    const services = await Service.find({ favoritedBy: req.params.email });
-    res.json(services);
+    const { email } = req.params;
+
+    if (!email) {
+      return res.status(400).json({ message: "User email is required" });
+    }
+    const favoriteServices = await Service.find({ favoritedBy: email });
+    res.json(favoriteServices);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching favorites" });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
-router.post("/user/:email/favorites", authMiddleware, async (req, res) => {
+router.post("/:lang/services/user/:email/favorites", authMiddleware, async (req, res) => {
+  const validLanguages = ["en", "lt"];
+  const defaultLanguage = "en";
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+
   const { email, serviceId } = req.body;
   try {
     if (!email || !serviceId) {
@@ -166,7 +261,8 @@ router.post("/user/:email/favorites", authMiddleware, async (req, res) => {
     await service.save();
     res.json(service);
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error });
+    res.status(500).json({ message: errorMessages[lang].toggleFavoriteError, error });
   }
 });
+
 export default router;

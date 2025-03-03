@@ -7,6 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   large?: boolean;
   cancel?: boolean;
   language?: boolean;
+  active?: boolean;
 }
 
 const Button = ({
@@ -16,6 +17,7 @@ const Button = ({
   large,
   cancel,
   language,
+  active,
   ...props
 }: ButtonProps) => {
   return (
@@ -27,6 +29,7 @@ const Button = ({
         large && styles.large,
         cancel && styles.cancel,
         language && styles.language,
+        active && styles.active,
         className,
       )}
       {...props}
@@ -35,4 +38,5 @@ const Button = ({
     </button>
   );
 };
+
 export default Button;

@@ -1,5 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  Navigate,
+} from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { ROUTES } from "./constants/routes";
 import RootLayout from "./components/layout/RootLayout";
@@ -24,44 +28,54 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: ROUTES.HOME,
-        element: <Home />,
+        index: true,
+        element: <Navigate to="/en" replace />,
       },
       {
-        path: ROUTES.SERVICES,
-        element: <Services />,
-      },
-      {
-        path: ROUTES.ABOUT_US,
-        element: <About />,
-      },
-      {
-        path: ROUTES.SERVICES_CATEGORY,
-        element: <ServicesCategory />,
-      },
-      {
-        path: ROUTES.FOR_BUSINESS_PARTNERS,
-        element: <BusinessPartnersPage />,
-      },
-      {
-        path: ROUTES.SERVICE_ID,
-        element: <ServicePage />,
-      },
-      {
-        path: ROUTES.BOOKINGS_FILTER,
-        element: <BookingsPage />,
-      },
-      {
-        path: ROUTES.FAVORITES,
-        element: <FavoritesPage />,
-      },
-      {
-        path: ROUTES.FAVORITES_CATEGORY,
-        element: <FavoritesPage />,
+        path: ":lang",
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: ROUTES.SERVICES,
+            element: <Services />,
+          },
+          {
+            path: ROUTES.SERVICES_CATEGORY,
+            element: <ServicesCategory />,
+          },
+          {
+            path: ROUTES.SERVICE_ID,
+            element: <ServicePage />,
+          },
+          {
+            path: ROUTES.ABOUT_US,
+            element: <About />,
+          },
+          {
+            path: ROUTES.FOR_BUSINESS_PARTNERS,
+            element: <BusinessPartnersPage />,
+          },
+          {
+            path: ROUTES.BOOKINGS_FILTER,
+            element: <BookingsPage />,
+          },
+          {
+            path: ROUTES.FAVORITES,
+            element: <FavoritesPage />,
+          },
+          {
+            path: ROUTES.FAVORITES_CATEGORY,
+            element: <FavoritesPage />,
+          },
+        ],
       },
     ],
   },
   {
+    path: "/:lang",
     element: <AuthLayout />,
     errorElement: <ErrorPage />,
     children: [

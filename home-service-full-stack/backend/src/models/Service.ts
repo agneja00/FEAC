@@ -9,6 +9,23 @@ export interface IService {
   email: string;
   imageUrls: string[];
   favoritedBy: string[];
+  translations: {
+    name: {
+      en: string;
+      lt: string;
+      [key: string]: string;
+    };
+    about: {
+      en: string;
+      lt: string;
+      [key: string]: string;
+    };
+    category: {
+      en: string;
+      lt: string;
+      [key: string]: string;
+    };
+  };
 }
 
 const serviceSchema = new mongoose.Schema<IService>({
@@ -55,6 +72,20 @@ const serviceSchema = new mongoose.Schema<IService>({
       default: [],
     },
   ],
+  translations: {
+    name: {
+      en: { type: String, required: true },
+      lt: { type: String, required: true },
+    },
+    about: {
+      en: { type: String, default: "" },
+      lt: { type: String, default: "" },
+    },
+    category: {
+      en: { type: String, required: true },
+      lt: { type: String, required: true },
+    },
+  },
 });
 
 serviceSchema.index({ category: 1 });

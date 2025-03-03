@@ -8,6 +8,15 @@ export interface Service {
   email: string;
   imageUrls: string[];
   favoritedBy: string[];
+  translations: {
+    name: { [key: string]: string };
+    about: { [key: string]: string };
+    category: { [key: string]: string };
+  };
+}
+
+export interface ServiceWithFavorite extends Service {
+  isFavorite?: boolean;
 }
 
 export type NewService = Omit<Service, "_id" | "imageUrls" | "favoritedBy">;

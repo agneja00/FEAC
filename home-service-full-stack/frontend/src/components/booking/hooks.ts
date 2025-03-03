@@ -1,42 +1,54 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createBooking, deleteBooking, fetchUserBookings } from "./api.ts";
-import { UserContext } from "../context/UserContext.tsx";
+import { createBooking, deleteBooking, fetchUserBookings } from "./api";
+import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
-import { BookingStatus } from "./types.ts";
+import { BookingStatus, NewBooking } from "./types";
+import { useParams } from "react-router-dom";
 
 export const BOOKING_KEY = "BOOKING";
 
 export const useUserBookings = (status: BookingStatus) => {
+  const { lang } = useParams<{ lang: string }>();
   const { user } = useContext(UserContext);
   const userEmail = user!.email;
 
   return useQuery({
-    queryKey: [BOOKING_KEY, userEmail, status],
+    queryKey: [BOOKING_KEY, userEmail, status, lang],
     queryFn: async () => {
-      const bookings = await fetchUserBookings(userEmail, status);
-      return bookings.filter(
-        (booking) =>
-          booking.userEmail === userEmail && booking.status === status,
-      );
+      const bookings = await fetchUserBookings(lang || "en", userEmail, status);
+
+      return bookings.map((booking) => ({
+        ...booking,
+        translatedStatus:
+          booking.translations?.status?.[lang || "en"] || booking.status,
+      }));
     },
   });
 };
 
 export const useAddBooking = () => {
   const queryClient = useQueryClient();
+  const { lang } = useParams<{ lang: string }>();
 
   return useMutation({
-    mutationFn: createBooking,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: [BOOKING_KEY] }),
+    mutationFn: (booking: NewBooking) => {
+      return createBooking(lang || "en", booking);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: [BOOKING_KEY] });
+    },
   });
 };
 
 export const useDeleteBooking = () => {
   const queryClient = useQueryClient();
+  const { lang } = useParams<{ lang: string }>();
 
   return useMutation({
-    mutationFn: deleteBooking,
-    onSuccess: () => {
+    mutationFn: (id: string) => {
+      return deleteBooking(lang || "en", id);
+    },
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [BOOKING_KEY] });
     },
   });

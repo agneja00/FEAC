@@ -1,16 +1,19 @@
 import mongoose from "mongoose";
 
 interface ICategory {
-  name: string;
+  name: {
+    en: string;
+    lt: string;
+    [key: string]: string;
+  };
   url: string;
 }
 
 const categorySchema = new mongoose.Schema<ICategory>({
   name: {
-    type: String,
-    required: true,
+    en: { type: String, required: true },
+    lt: { type: String, required: true },
   },
-
   url: {
     type: String,
     default: "https://img.icons8.com/?size=100&id=6644&format=png&color=000000",
