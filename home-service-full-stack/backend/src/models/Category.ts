@@ -4,6 +4,7 @@ interface ICategory {
   name: {
     en: string;
     lt: string;
+    ru: string;
     [key: string]: string;
   };
   url: string;
@@ -13,6 +14,7 @@ const categorySchema = new mongoose.Schema<ICategory>({
   name: {
     en: { type: String, required: true },
     lt: { type: String, required: true },
+    ru: { type: String, required: true },
   },
   url: {
     type: String,

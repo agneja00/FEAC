@@ -11,7 +11,10 @@ const FavoritesPage = () => {
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: "en" | "lt" }>();
 
-  const CATEGORY_TRANSLATIONS: Record<"en" | "lt", Record<string, string>> = {
+  const CATEGORY_TRANSLATIONS: Record<
+    "en" | "lt" | "ru",
+    Record<string, string>
+  > = {
     en: {
       All: "All",
       Shifting: "Shifting",
@@ -31,6 +34,16 @@ const FavoritesPage = () => {
       Painting: "Dažymas",
       Electric: "Elektra",
       Decoration: "Dekoravimas",
+    },
+    ru: {
+      All: "Все",
+      Shifting: "Переезд",
+      Repair: "Ремонт",
+      Plumbing: "Сантехника",
+      Cleaning: "Уборка",
+      Painting: "Покраска",
+      Electric: "Электрика",
+      Decoration: "Декорирование",
     },
   };
 

@@ -20,6 +20,11 @@ const errorMessages: { [key: string]: { fetchError: string; createError: string;
     createError: "Klaida kuriant rezervaciją",
     deleteError: "Klaida šalinant rezervaciją",
   },
+  ru: {
+    fetchError: "Ошибка при получении бронирований пользователя",
+    createError: "Ошибка при создании бронирования",
+    deleteError: "Ошибка при удалении бронирования",
+  },
 };
 
 const statusTranslations: { [key: string]: { [key: string]: string } } = {
@@ -30,6 +35,10 @@ const statusTranslations: { [key: string]: { [key: string]: string } } = {
   lt: {
     Completed: "Užbaigti",
     Confirmed: "Patvirtinti",
+  },
+  ru: {
+    Completed: "Завершено",
+    Confirmed: "Подтверждено",
   },
 };
 
@@ -54,7 +63,7 @@ router.get("/:lang/bookings/user/:email/:status", async (req, res) => {
 });
 
 router.post("/:lang/bookings", authMiddleware, async (req, res) => {
-  const lang = req.params.lang === "lt" ? "lt" : "en";
+  const lang = req.params.lang === "lt" ? "lt" : req.params.lang === "ru" ? "ru" : "en";
 
   try {
     const newBooking = new Booking(req.body);
@@ -79,6 +88,11 @@ router.post("/:lang/bookings", authMiddleware, async (req, res) => {
         subject: "Rezervacijos patvirtinimas",
         text: `Gerb. ${userName}, jūsų rezervacija su ${serviceName} ${date} ${time} buvo patvirtinta.`,
         html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${serviceName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>patvirtinta</i>.</p>`,
+      },
+      ru: {
+        subject: "Подтверждение бронирования",
+        text: `Уважаемый(ая) ${userName}, ваше бронирование услуги ${serviceName} на ${date} в ${time} подтверждено.`,
+        html: `<p>Уважаемый(ая) ${userName}, ваше бронирование услуги <strong>${serviceName}</strong> на <strong>${date}</strong> в <strong>${time}</strong> подтверждено.</p>`,
       },
     };
 

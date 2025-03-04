@@ -69,6 +69,7 @@ const ServicePage = () => {
           status: {
             en: "Confirmed",
             lt: "Patvirtinti",
+            ru: "Подтверждено",
           },
         },
       };

@@ -34,6 +34,13 @@ const LanguageSwitcher: React.FC = () => {
       >
         LT
       </Button>
+      <Button
+        language
+        onClick={() => changeLanguage("ru")}
+        active={currentLanguage === "ru"}
+      >
+        RU
+      </Button>
     </div>
   );
 };

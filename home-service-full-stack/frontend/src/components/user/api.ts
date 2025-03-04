@@ -5,7 +5,7 @@ export const loginUser = async (
   formValues: LoginRequest,
   lang: string,
 ): Promise<LoginResponse> => {
-  const response = await axiosInstance.post(`/${lang}/auth/login`, formValues); // Include lang in the URL
+  const response = await axiosInstance.post(`/${lang}/auth/login`, formValues);
   return response.data;
 };
 

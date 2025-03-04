@@ -43,6 +43,16 @@ const errorMessages: {
     fetchFavoritesError: "Klaida gaunant mėgstamas paslaugas",
     toggleFavoriteError: "Klaida keičiant mėgstamą paslaugą",
   },
+  ru: {
+    fetchError: "Ошибка при получении услуг",
+    createError: "Ошибка при создании услуги",
+    fetchByIdError: "Ошибка при получении услуги",
+    editError: "Ошибка при редактировании услуги",
+    fetchByCategoryError: "Ошибка при получении услуг по категории",
+    fetchBookingsError: "Ошибка при получении бронирований",
+    fetchFavoritesError: "Ошибка при получении избранных",
+    toggleFavoriteError: "Ошибка при изменении избранного",
+  },
 };
 
 const categoryTranslations: Record<string, Record<string, string>> = {
@@ -63,6 +73,15 @@ const categoryTranslations: Record<string, Record<string, string>> = {
     painting: "Painting",
     electric: "Electric",
     decoration: "Decoration",
+  },
+  ru: {
+    shifting: "Переезд",
+    repair: "Ремонт",
+    plumbing: "Сантехника",
+    cleaning: "Уборка",
+    painting: "Покраска",
+    electric: "Электрика",
+    decoration: "Декорирование",
   },
 };
 
@@ -86,7 +105,7 @@ router.get("/:lang/services", async (req: Request, res: Response) => {
 });
 
 router.post("/:lang/services", authMiddleware, async (req: Request, res: Response) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -143,7 +162,7 @@ router.post("/:lang/services", authMiddleware, async (req: Request, res: Respons
 });
 
 router.get("/:lang/service/:id", async (req: Request, res: Response) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -173,7 +192,7 @@ router.get("/:lang/service/:id", async (req: Request, res: Response) => {
 });
 
 router.put("/:lang/service/:id", authMiddleware, async (req: Request, res: Response) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -194,7 +213,7 @@ router.put("/:lang/service/:id", authMiddleware, async (req: Request, res: Respo
 });
 
 router.get("/:lang/services/categories/:category", async (req: Request, res: Response) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -226,7 +245,7 @@ router.get("/:lang/services/categories/:category", async (req: Request, res: Res
 });
 
 router.get("/:lang/services/:id/bookings/date/:date", authMiddleware, async (req: Request, res: Response) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -260,7 +279,7 @@ router.get("/:lang/services/user/:email/favorites", authMiddleware, async (req, 
 });
 
 router.post("/:lang/services/user/:email/favorites", authMiddleware, async (req, res) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 

@@ -19,7 +19,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
   const categoryName = category.name;
 
   const categoryPath =
-    categoryName === "All" || categoryName === "Visos"
+    categoryName === "All" || categoryName === "Visos" || categoryName === "Все"
       ? generatePath(ROUTES.SERVICES, { lang })
       : generatePath(ROUTES.SERVICES_CATEGORY, {
           lang,

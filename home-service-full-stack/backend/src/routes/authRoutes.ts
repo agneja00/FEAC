@@ -5,7 +5,7 @@ import { generateToken } from "../utils/password";
 const router = express.Router();
 
 router.post("/:lang/auth/register", async (req, res) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -22,6 +22,10 @@ router.post("/:lang/auth/register", async (req, res) => {
     lt: {
       userExists: "Vartotojas jau egzistuoja",
       serverError: "Klaida registruojant naują vartotoją.",
+    },
+    ru: {
+      userExists: "Пользователь уже существует",
+      serverError: "Ошибка при регистрации нового пользователя.",
     },
   };
 
@@ -46,7 +50,7 @@ router.post("/:lang/auth/register", async (req, res) => {
 });
 
 router.post("/:lang/auth/login", async (req, res) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -66,6 +70,11 @@ router.post("/:lang/auth/login", async (req, res) => {
       missingFields: "Prašome pateikti el. paštą ir slaptažodį",
       incorrectCredentials: "Neteisingas el. paštas arba slaptažodis",
       serverError: "Prisijungimo klaida.",
+    },
+    ru: {
+      missingFields: "Пожалуйста, введите email и пароль",
+      incorrectCredentials: "Неверный email или пароль",
+      serverError: "Ошибка при входе в систему.",
     },
   };
 

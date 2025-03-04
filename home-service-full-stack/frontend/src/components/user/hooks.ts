@@ -1,6 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { loginUser, registerUser } from "./api";
-import { useTranslation } from "react-i18next";
 import { LoginRequest, RegisterRequest } from "./types";
 import axiosInstance from "@/config/axios";
 import { useParams } from "react-router-dom";

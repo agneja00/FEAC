@@ -2,7 +2,10 @@ import * as Yup from "yup";
 import { NewService } from "./types";
 import { errorMessage } from "@/constants/errorMessage";
 
-const categoryTranslations: Record<"en" | "lt", Record<string, string>> = {
+const categoryTranslations: Record<
+  "en" | "lt" | "ru",
+  Record<string, string>
+> = {
   en: {
     Shifting: "Shifting",
     Repair: "Repair",
@@ -20,6 +23,16 @@ const categoryTranslations: Record<"en" | "lt", Record<string, string>> = {
     Painting: "Dažymas",
     Electric: "Elektra",
     Decoration: "Dekoravimas",
+  },
+  ru: {
+    All: "Все",
+    Shifting: "Переезд",
+    Repair: "Ремонт",
+    Plumbing: "Сантехника",
+    Cleaning: "Уборка",
+    Painting: "Покраска",
+    Electric: "Электрика",
+    Decoration: "Декорирование",
   },
 };
 
@@ -44,14 +57,17 @@ export const ServiceRegisterValidationSchema: Yup.Schema<NewService> =
       name: Yup.object().shape({
         en: Yup.string().required(errorMessage.required),
         lt: Yup.string().required(errorMessage.required),
+        ru: Yup.string().required(errorMessage.required),
       }),
       about: Yup.object().shape({
         en: Yup.string().required(errorMessage.required),
         lt: Yup.string().required(errorMessage.required),
+        ru: Yup.string().required(errorMessage.required),
       }),
       category: Yup.object().shape({
         en: Yup.string().required(errorMessage.required),
         lt: Yup.string().required(errorMessage.required),
+        ru: Yup.string().required(errorMessage.required),
       }),
     }),
   });
@@ -67,14 +83,17 @@ export const serviceRegisterInitialValues: NewService = {
     name: {
       en: "",
       lt: "",
+      ru: "",
     },
     about: {
       en: "",
       lt: "",
+      ru: "",
     },
     category: {
       en: "",
       lt: "",
+      ru: "",
     },
   },
 };

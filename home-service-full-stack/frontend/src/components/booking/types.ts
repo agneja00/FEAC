@@ -14,6 +14,7 @@ export interface Booking {
     status: {
       en: string;
       lt: string;
+      ru: string;
       [key: string]: string;
     };
   };

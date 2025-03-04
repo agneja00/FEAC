@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 const statusTranslations: Record<string, Record<string, string>> = {
   en: { Confirmed: "Confirmed", Completed: "Completed" },
   lt: { Confirmed: "Patvirtinti", Completed: "Užbaigti" },
+  ru: { Confirmed: "Подтверждено", Completed: "Завершено" },
 };
 
 const BookingsPage = () => {

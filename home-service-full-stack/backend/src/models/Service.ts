@@ -13,16 +13,19 @@ export interface IService {
     name: {
       en: string;
       lt: string;
+      ru: string;
       [key: string]: string;
     };
     about: {
       en: string;
       lt: string;
+      ru: string;
       [key: string]: string;
     };
     category: {
       en: string;
       lt: string;
+      ru: string;
       [key: string]: string;
     };
   };
@@ -76,14 +79,17 @@ const serviceSchema = new mongoose.Schema<IService>({
     name: {
       en: { type: String, required: true },
       lt: { type: String, required: true },
+      ru: { type: String, required: true },
     },
     about: {
       en: { type: String, default: "" },
       lt: { type: String, default: "" },
+      ru: { type: String, required: true },
     },
     category: {
       en: { type: String, required: true },
       lt: { type: String, required: true },
+      ru: { type: String, required: true },
     },
   },
 });

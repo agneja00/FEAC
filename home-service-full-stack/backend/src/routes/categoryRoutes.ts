@@ -18,10 +18,14 @@ const errorMessages: {
     fetchError: "Klaida gaunant kategorijas",
     createError: "Klaida kuriant kategoriją",
   },
+  ru: {
+    fetchError: "Ошибка при получении категорий",
+    createError: "Ошибка при создании категории",
+  },
 };
 
 router.get("/:lang/categories", async (req, res) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
@@ -40,7 +44,7 @@ router.get("/:lang/categories", async (req, res) => {
 });
 
 router.post("/:lang/categories", authMiddleware, async (req, res) => {
-  const validLanguages = ["en", "lt"];
+  const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 

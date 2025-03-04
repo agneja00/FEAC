@@ -11,6 +11,7 @@ export interface IBooking extends Document {
     status: {
       en: string;
       lt: string;
+      ru: string;
       [key: string]: string;
     };
   };
@@ -47,6 +48,7 @@ const bookingSchema = new mongoose.Schema({
     status: {
       en: { type: String, required: true },
       lt: { type: String, required: true },
+      ru: { type: String, required: true },
     },
   },
 });
@@ -59,12 +61,14 @@ bookingSchema.pre<IBooking>("save", function (next) {
     this.translations.status = {
       en: "Completed",
       lt: "Užbaigta",
+      ru: "Завершено",
     };
   } else {
     this.status = "Confirmed";
     this.translations.status = {
       en: "Confirmed",
       lt: "Patvirtinta",
+      ru: "Подтверждено",
     };
   }
 

@@ -5,6 +5,7 @@ import { fetchServiceById } from "../service/api";
 const statusTranslations: Record<string, Record<BookingStatus, string>> = {
   en: { Confirmed: "Confirmed", Completed: "Completed" },
   lt: { Confirmed: "Patvirtinti", Completed: "Užbaigti" },
+  ru: { Confirmed: "Подтверждено", Completed: "Завершено" },
 };
 
 export const fetchUserBookings = async (
