@@ -10,6 +10,7 @@ import Button from "../common/Button";
 import { NewService } from "./types";
 import { sendServiceEmail } from "./api";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 interface ServiceRegisterFormProps {
   onSubmitSuccess?: () => void;
@@ -20,13 +21,24 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
+  const { lang = "en" } = useParams<{ lang: string }>();
+
+  const CATEGORY_OPTIONS = [
+    { key: "Shifting", label: t("categories.shifting") },
+    { key: "Repair", label: t("categories.repair") },
+    { key: "Plumbing", label: t("categories.plumbing") },
+    { key: "Cleaning", label: t("categories.cleaning") },
+    { key: "Painting", label: t("categories.painting") },
+    { key: "Electric", label: t("categories.electric") },
+    { key: "Decoration", label: t("categories.decoration") },
+  ];
 
   const handleSubmit = async (
     formValues: NewService,
     { resetForm }: { resetForm: () => void },
   ) => {
     try {
-      await sendServiceEmail(formValues);
+      await sendServiceEmail(lang, formValues);
       enqueueSnackbar(t("messages.emailSendSuccess"), { variant: "success" });
       resetForm();
 
@@ -70,17 +82,9 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
           </label>
           <Field as="select" name="category" className={styles.select}>
             <option value="">{t("forms.registerService.select")}</option>
-            {[
-              t("categories.shifting"),
-              t("categories.repair"),
-              t("categories.plumbing"),
-              t("categories.cleaning"),
-              t("categories.painting"),
-              t("categories.electric"),
-              t("categories.decoration"),
-            ].map((category) => (
-              <option key={category} value={category}>
-                {category.charAt(0) + category.slice(1)}
+            {CATEGORY_OPTIONS.map(({ key, label }) => (
+              <option key={key} value={key}>
+                {label}
               </option>
             ))}
           </Field>

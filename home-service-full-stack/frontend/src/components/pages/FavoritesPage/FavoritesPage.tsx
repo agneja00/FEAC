@@ -9,29 +9,33 @@ import { useTranslation } from "react-i18next";
 
 const FavoritesPage = () => {
   const { t } = useTranslation();
-  const { lang = "en" } = useParams<{ lang: string }>();
+  const { lang = "en" } = useParams<{ lang: "en" | "lt" }>();
 
-  const FAVORITE_FILTERS = [
-    "All",
-    "Shifting",
-    "Repair",
-    "Plumbing",
-    "Cleaning",
-    "Painting",
-    "Electric",
-    "Decoration",
-  ];
-
-  const filterLabels = {
-    All: t("categories.all"),
-    Shifting: t("categories.shifting"),
-    Repair: t("categories.repair"),
-    Plumbing: t("categories.plumbing"),
-    Cleaning: t("categories.cleaning"),
-    Painting: t("categories.painting"),
-    Electric: t("categories.electric"),
-    Decoration: t("categories.decoration"),
+  const CATEGORY_TRANSLATIONS: Record<"en" | "lt", Record<string, string>> = {
+    en: {
+      All: "All",
+      Shifting: "Shifting",
+      Repair: "Repair",
+      Plumbing: "Plumbing",
+      Cleaning: "Cleaning",
+      Painting: "Painting",
+      Electric: "Electric",
+      Decoration: "Decoration",
+    },
+    lt: {
+      All: "Visos",
+      Shifting: "Perkraustymas",
+      Repair: "Remontas",
+      Plumbing: "Santechnika",
+      Cleaning: "Valymas",
+      Painting: "Dažymas",
+      Electric: "Elektra",
+      Decoration: "Dekoravimas",
+    },
   };
+
+  const FAVORITE_FILTERS = Object.keys(CATEGORY_TRANSLATIONS.en);
+  const filterLabels = CATEGORY_TRANSLATIONS[lang];
 
   const { user } = useContext(UserContext);
   const { email, category } = useParams<{
@@ -47,8 +51,11 @@ const FavoritesPage = () => {
   const userEmail = email ?? user.email;
 
   useEffect(() => {
-    if (category && !FAVORITE_FILTERS.includes(category)) {
-      navigate(generatePath(ROUTES.FAVORITES, { email: userEmail }), {
+    if (
+      category &&
+      !Object.values(CATEGORY_TRANSLATIONS[lang]).includes(category)
+    ) {
+      navigate(generatePath(ROUTES.FAVORITES, { lang, email: userEmail }), {
         replace: true,
       });
     }
@@ -63,27 +70,30 @@ const FavoritesPage = () => {
   if (isLoading) return <p>{t("messages.favoritesLoading")}</p>;
   if (error) return <p>{t("messages.favoritesError")}</p>;
 
+  const categoryInEnglish =
+    Object.entries(CATEGORY_TRANSLATIONS[lang]).find(
+      ([, value]) => value === category,
+    )?.[0] || category;
+
   const filteredServices =
-    !category || category === "All"
+    !categoryInEnglish || categoryInEnglish === "All"
       ? favoriteServices || []
       : (favoriteServices || []).filter((service) => {
-          const translatedCategory =
-            service.translations?.category?.[lang] ?? service.category;
-          const filterCategory = t(`categories.${category}`);
-
-          return (
-            translatedCategory?.toLowerCase() === filterCategory?.toLowerCase()
-          );
+          const serviceCategoryEn =
+            service.translations?.category?.["en"] || service.category;
+          return serviceCategoryEn === categoryInEnglish;
         });
 
   const handleFilterChange = (newCategory: string) => {
+    const translatedCategory = CATEGORY_TRANSLATIONS[lang][newCategory];
+
     const newPath =
       newCategory === "All"
         ? generatePath(ROUTES.FAVORITES, { lang, email: userEmail })
         : generatePath(ROUTES.FAVORITES_CATEGORY, {
             lang,
             email: userEmail,
-            category: newCategory,
+            category: translatedCategory,
           });
 
     navigate(newPath);
@@ -94,7 +104,7 @@ const FavoritesPage = () => {
       title={t("accountModal.myFavorites")}
       items={filteredServices}
       filters={FAVORITE_FILTERS}
-      activeFilter={category || "All"}
+      activeFilter={categoryInEnglish || "All"}
       onFilterChange={handleFilterChange}
       renderItem={(service) => (
         <ServiceCard key={service._id} service={service} isFavorite={true} />

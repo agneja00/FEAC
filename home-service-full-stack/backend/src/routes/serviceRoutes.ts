@@ -45,6 +45,27 @@ const errorMessages: {
   },
 };
 
+const categoryTranslations: Record<string, Record<string, string>> = {
+  lt: {
+    Perkraustymas: "Shifting",
+    Remontas: "Repair",
+    Santechnika: "Plumbing",
+    Valymas: "Cleaning",
+    Dažymas: "Painting",
+    Elektra: "Electric",
+    Dekoravimas: "Decoration",
+  },
+  en: {
+    shifting: "Shifting",
+    repair: "Repair",
+    plumbing: "Plumbing",
+    cleaning: "Cleaning",
+    painting: "Painting",
+    electric: "Electric",
+    decoration: "Decoration",
+  },
+};
+
 router.get("/:lang/services", async (req: Request, res: Response) => {
   const lang = req.params.lang || "en";
   try {
@@ -71,12 +92,14 @@ router.post("/:lang/services", authMiddleware, async (req: Request, res: Respons
 
   const { name, about, address, category, contactPerson, email, translations } = req.body;
 
+  const categoryKey = categoryTranslations[lang][category] || category;
+
   try {
     const newService = new Service({
       name,
       about,
       address,
-      category,
+      category: categoryKey,
       contactPerson,
       email,
       imageUrls: req.body.imageUrls || [],
@@ -93,14 +116,14 @@ router.post("/:lang/services", authMiddleware, async (req: Request, res: Respons
       text: `Service name: ${name},
       About: ${about},
       Address: ${address},
-      Category: ${category},
+      Category: ${categoryKey},
       Contact Person: ${contactPerson},
       Email: ${email}.`,
       html: `<ul>
         <li><strong>Service name:</strong> ${name}</li>
         <li><strong>About:</strong> ${about}</li>
         <li><strong>Address:</strong> ${address}</li>
-        <li><strong>Category:</strong> ${category}</li>
+        <li><strong>Category:</strong> ${categoryKey}</li>
         <li><strong>Contact Person:</strong> ${contactPerson}</li>
         <li><strong>Email:</strong> ${email}</li>
       </ul>`,
@@ -113,7 +136,7 @@ router.post("/:lang/services", authMiddleware, async (req: Request, res: Respons
   } catch (err) {
     console.error("Error creating service:", err);
     res.status(500).json({
-      message: errorMessages[lang].createError,
+      message: "Failed to create service.",
       error: err instanceof Error ? err.message : err,
     });
   }

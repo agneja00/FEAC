@@ -1,11 +1,12 @@
 import styles from "./About.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
 import Button from "@/components/common/Button";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
+  const { lang = "en" } = useParams<{ lang: string }>();
   const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -49,7 +50,7 @@ const About = () => {
                 <p className={styles.paragraph}>
                   {t("aboutUs.linkFormParagraphFirstPart")}{" "}
                   <Link
-                    to={`${ROUTES.FOR_BUSINESS_PARTNERS}?openModal=true`}
+                    to={`${ROUTES.FOR_BUSINESS_PARTNERS.replace(":lang", lang)}?openModal=true`}
                     className={styles.formLink}
                   >
                     {t("aboutUs.linkForm")}
