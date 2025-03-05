@@ -22,6 +22,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: string }>();
+  const validatedLang = (lang === "en" || lang === "lt" || lang === "ru") ? lang : "en";
 
   const CATEGORY_OPTIONS = [
     { key: "Shifting", label: t("categories.shifting") },
@@ -56,7 +57,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   return (
     <Formik
       initialValues={serviceRegisterInitialValues}
-      validationSchema={ServiceRegisterValidationSchema}
+      validationSchema={ServiceRegisterValidationSchema(validatedLang)}
       onSubmit={handleSubmit}
     >
       <Form className={styles.form}>
@@ -88,11 +89,9 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
               </option>
             ))}
           </Field>
-          <ErrorMessage
-            name="category"
-            component="div"
-            className={styles.error}
-          />
+          <ErrorMessage name="category">
+            {(msg) => <div className={styles.error}>{t(msg)}</div>}
+          </ErrorMessage>
         </div>
         <FormikField
           label={t("forms.registerService.contact")}

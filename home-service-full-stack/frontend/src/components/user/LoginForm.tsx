@@ -14,7 +14,8 @@ import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
   const { t } = useTranslation();
-  const { lang } = useParams<{ lang: string }>();
+  const { lang = "en" } = useParams<{ lang: string }>();
+  const validatedLang = (lang === "en" || lang === "lt" || lang === "ru") ? lang : "en";
   const { login } = useContext(UserContext);
   const [error, setError] = useState("");
   const { mutateAsync: loginUser } = useLoginUser();
@@ -35,7 +36,7 @@ const LoginForm = () => {
     <div className={styles.container}>
       <Formik
         initialValues={loginInitialValues}
-        validationSchema={loginValidationSchema}
+        validationSchema={loginValidationSchema(validatedLang)}
         onSubmit={handleSubmit}
       >
         <Form className={styles.form}>

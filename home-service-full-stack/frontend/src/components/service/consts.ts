@@ -39,38 +39,40 @@ const categoryTranslations: Record<
 const allValidCategories = [
   ...Object.values(categoryTranslations.en),
   ...Object.values(categoryTranslations.lt),
+  ...Object.values(categoryTranslations.ru),
 ];
 
-export const ServiceRegisterValidationSchema: Yup.Schema<NewService> =
+export const ServiceRegisterValidationSchema = (lang: "en" | "lt" | "ru") =>
   Yup.object().shape({
-    name: Yup.string().required(errorMessage.required),
-    about: Yup.string().required(errorMessage.required),
-    address: Yup.string().required(errorMessage.required),
+    name: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
+    about: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
+    address: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
     category: Yup.string()
-      .required(errorMessage.select)
+      .required(errorMessage[lang]?.errorMessage?.select)
       .oneOf(allValidCategories, "Invalid category"),
-    contactPerson: Yup.string().required(errorMessage.required),
+    contactPerson: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
     email: Yup.string()
-      .email(errorMessage.email)
-      .required(errorMessage.required),
+      .email(errorMessage[lang]?.errorMessage?.email)
+      .required(errorMessage[lang]?.errorMessage?.required),
     translations: Yup.object().shape({
       name: Yup.object().shape({
-        en: Yup.string().required(errorMessage.required),
-        lt: Yup.string().required(errorMessage.required),
-        ru: Yup.string().required(errorMessage.required),
+        en: Yup.string().required(errorMessage.en?.errorMessage?.required),
+        lt: Yup.string().required(errorMessage.lt?.errorMessage?.required),
+        ru: Yup.string().required(errorMessage.ru?.errorMessage?.required),
       }),
       about: Yup.object().shape({
-        en: Yup.string().required(errorMessage.required),
-        lt: Yup.string().required(errorMessage.required),
-        ru: Yup.string().required(errorMessage.required),
+        en: Yup.string().required(errorMessage.en?.errorMessage?.required),
+        lt: Yup.string().required(errorMessage.lt?.errorMessage?.required),
+        ru: Yup.string().required(errorMessage.ru?.errorMessage?.required),
       }),
       category: Yup.object().shape({
-        en: Yup.string().required(errorMessage.required),
-        lt: Yup.string().required(errorMessage.required),
-        ru: Yup.string().required(errorMessage.required),
+        en: Yup.string().required(errorMessage.en?.errorMessage?.required),
+        lt: Yup.string().required(errorMessage.lt?.errorMessage?.required),
+        ru: Yup.string().required(errorMessage.ru?.errorMessage?.required),
       }),
     }),
   });
+
 
 export const serviceRegisterInitialValues: NewService = {
   name: "",

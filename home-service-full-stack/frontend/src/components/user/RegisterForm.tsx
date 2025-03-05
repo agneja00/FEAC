@@ -5,7 +5,7 @@ import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
 import { generatePath, Link, useNavigate, useParams } from "react-router-dom";
 import FormikField from "../common/FormikInput";
-import { registerInitialValus, reigsterValidationSchema } from "../user/consts";
+import { registerInitialValues, registerValidationSchema } from "../user/consts";
 import { useRegisterUser } from "./hooks";
 import { RegisterRequest } from "../user/types";
 import { ErrorResponse } from "../types/error";
@@ -13,7 +13,8 @@ import { useTranslation } from "react-i18next";
 
 const RegisterForm = () => {
   const { t } = useTranslation();
-  const { lang } = useParams<{ lang: string }>();
+  const { lang = "en" } = useParams<{ lang: string }>();
+  const validatedLang = (lang === "en" || lang === "lt" || lang === "ru") ? lang : "en";
   const { mutateAsync: registerUser } = useRegisterUser();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -36,8 +37,8 @@ const RegisterForm = () => {
   return (
     <div className={styles.container}>
       <Formik
-        initialValues={registerInitialValus}
-        validationSchema={reigsterValidationSchema}
+        initialValues={registerInitialValues}
+        validationSchema={registerValidationSchema(validatedLang)}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
