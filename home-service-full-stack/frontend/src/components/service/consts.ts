@@ -50,7 +50,9 @@ export const ServiceRegisterValidationSchema = (lang: "en" | "lt" | "ru") =>
     category: Yup.string()
       .required(errorMessage[lang]?.errorMessage?.select)
       .oneOf(allValidCategories, "Invalid category"),
-    contactPerson: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
+    contactPerson: Yup.string().required(
+      errorMessage[lang]?.errorMessage?.required,
+    ),
     email: Yup.string()
       .email(errorMessage[lang]?.errorMessage?.email)
       .required(errorMessage[lang]?.errorMessage?.required),
@@ -72,7 +74,6 @@ export const ServiceRegisterValidationSchema = (lang: "en" | "lt" | "ru") =>
       }),
     }),
   });
-
 
 export const serviceRegisterInitialValues: NewService = {
   name: "",

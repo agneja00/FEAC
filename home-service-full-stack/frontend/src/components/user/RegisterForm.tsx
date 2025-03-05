@@ -5,7 +5,10 @@ import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
 import { generatePath, Link, useNavigate, useParams } from "react-router-dom";
 import FormikField from "../common/FormikInput";
-import { registerInitialValues, registerValidationSchema } from "../user/consts";
+import {
+  registerInitialValues,
+  registerValidationSchema,
+} from "../user/consts";
 import { useRegisterUser } from "./hooks";
 import { RegisterRequest } from "../user/types";
 import { ErrorResponse } from "../types/error";
@@ -14,7 +17,8 @@ import { useTranslation } from "react-i18next";
 const RegisterForm = () => {
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: string }>();
-  const validatedLang = (lang === "en" || lang === "lt" || lang === "ru") ? lang : "en";
+  const validatedLang =
+    lang === "en" || lang === "lt" || lang === "ru" ? lang : "en";
   const { mutateAsync: registerUser } = useRegisterUser();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();

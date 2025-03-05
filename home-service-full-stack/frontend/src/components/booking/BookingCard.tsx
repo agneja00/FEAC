@@ -49,7 +49,9 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
             alt="logo"
           />
           <section className={styles.details}>
-            <h2 className={styles.serviceName}>{service.category}</h2>
+            <h2 className={styles.serviceName}>
+              {service.translations.name[i18n.language]}
+            </h2>{" "}
             <div className={styles.info}>
               <MdOutlinePersonOutline className={styles.icon} fontSize={24} />
               <p className={styles.infoDetails}>
@@ -80,7 +82,9 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                 <span className={styles.dateAndTime}>{time}</span>
               </p>
             </div>
-            {!["Completed", "Užbaigti"].includes(translatedStatus) && (
+            {!["Completed", "Užbaigti", "Завершено"].includes(
+              translatedStatus,
+            ) && (
               <Button
                 small
                 cancel

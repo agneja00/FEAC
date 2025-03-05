@@ -22,7 +22,8 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: string }>();
-  const validatedLang = (lang === "en" || lang === "lt" || lang === "ru") ? lang : "en";
+  const validatedLang =
+    lang === "en" || lang === "lt" || lang === "ru" ? lang : "en";
 
   const CATEGORY_OPTIONS = [
     { key: "Shifting", label: t("categories.shifting") },
