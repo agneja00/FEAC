@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738806705603" clover="3.2.0">
-  <project timestamp="1738806705603" name="All files">
-    <metrics statements="100" coveredstatements="88" conditionals="27" coveredconditionals="21" methods="19" coveredmethods="12" elements="146" coveredelements="121" complexity="0" loc="100" ncloc="100" packages="5" files="10" classes="10"/>
+<coverage generated="1741406550262" clover="3.2.0">
+  <project timestamp="1741406550263" name="All files">
+    <metrics statements="107" coveredstatements="94" conditionals="43" coveredconditionals="29" methods="20" coveredmethods="12" elements="170" coveredelements="135" complexity="0" loc="107" ncloc="107" packages="5" files="10" classes="10"/>
     <package name="components.common">
-      <metrics statements="16" coveredstatements="16" conditionals="10" coveredconditionals="7" methods="3" coveredmethods="3"/>
+      <metrics statements="16" coveredstatements="16" conditionals="16" coveredconditionals="10" methods="3" coveredmethods="3"/>
       <file name="Button.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\Button.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="5" conditionals="12" coveredconditionals="8" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="17" count="31" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="23" count="31" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
       </file>
       <file name="FormikInput.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\FormikInput.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -52,11 +52,11 @@
       </file>
     </package>
     <package name="components.service">
-      <metrics statements="37" coveredstatements="35" conditionals="13" coveredconditionals="11" methods="9" coveredmethods="7"/>
+      <metrics statements="38" coveredstatements="36" conditionals="17" coveredconditionals="13" methods="8" coveredmethods="6"/>
       <file name="ServiceCard.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\ServiceCard.tsx">
-        <metrics statements="29" coveredstatements="27" conditionals="13" coveredconditionals="11" methods="6" coveredmethods="4"/>
+        <metrics statements="31" coveredstatements="29" conditionals="17" coveredconditionals="13" methods="6" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -64,43 +64,44 @@
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="16" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="17" count="15" type="cond" truecount="3" falsecount="0"/>
+        <line num="17" count="15" type="stmt"/>
+        <line num="18" count="15" type="cond" truecount="3" falsecount="0"/>
         <line num="19" count="14" type="stmt"/>
-        <line num="20" count="14" type="stmt"/>
-        <line num="21" count="14" type="stmt"/>
-        <line num="22" count="14" type="stmt"/>
+        <line num="20" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="14" type="cond" truecount="1" falsecount="1"/>
         <line num="23" count="14" type="stmt"/>
         <line num="24" count="14" type="stmt"/>
         <line num="25" count="14" type="stmt"/>
+        <line num="26" count="14" type="stmt"/>
         <line num="27" count="14" type="stmt"/>
-        <line num="28" count="12" type="stmt"/>
-        <line num="31" count="14" type="stmt"/>
-        <line num="32" count="1" type="cond" truecount="2" falsecount="1"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="29" count="14" type="stmt"/>
+        <line num="30" count="12" type="stmt"/>
+        <line num="33" count="14" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="2" falsecount="1"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="49" count="14" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="55" count="14" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
       </file>
       <file name="ServiceList.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\ServiceList.tsx">
-        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
       </file>
     </package>
     <package name="components.user">
-      <metrics statements="30" coveredstatements="30" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <metrics statements="36" coveredstatements="35" conditionals="10" coveredconditionals="6" methods="4" coveredmethods="3"/>
       <file name="LoginForm.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\user\LoginForm.tsx">
-        <metrics statements="24" coveredstatements="24" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -111,29 +112,35 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="16" count="5" type="stmt"/>
-        <line num="17" count="5" type="stmt"/>
-        <line num="18" count="5" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="5" type="cond" truecount="2" falsecount="3"/>
         <line num="20" count="5" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="31" count="5" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
       </file>
       <file name="consts.ts" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\user\consts.ts">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
     </package>
     <package name="constants">
@@ -144,7 +151,7 @@
       </file>
       <file name="routes.ts" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\constants\routes.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
     </package>
   </project>

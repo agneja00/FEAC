@@ -23,15 +23,15 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">90.32% </span>
+            <span class="strong">90.9% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">28/31</span>
+            <span class="fraction">30/33</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">84.61% </span>
+            <span class="strong">76.47% </span>
             <span class="quiet">Branches</span>
-            <span class="fraction">11/13</span>
+            <span class="fraction">13/17</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -41,9 +41,9 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">93.1% </span>
+            <span class="strong">93.54% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">27/29</span>
+            <span class="fraction">29/31</span>
           </div>
         </div>
         <p class="quiet">
@@ -142,9 +142,15 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -159,8 +165,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
@@ -181,6 +189,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,15 +237,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useNavigate, generatePath } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useEffect, useContext } from "react";
 import { Service } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Button from "../common/Button";
 import styles from "./ServiceCard.module.scss";
-import { ROUTES } from "@/constants/routes";
 import { useToggleFavorite } from "./hooks";
 import { UserContext } from "../context/UserContext";
+import { useServicePath } from "./hooks";
+import { useTranslation } from "react-i18next";
 &nbsp;
 interface ServiceCardProps {
   service: Service;
@@ -241,15 +253,17 @@ interface ServiceCardProps {
 }
 &nbsp;
 const ServiceCard = ({ service, isFavorite = <span class="branch-0 cbranch-no" title="branch not covered" >false </span>}: ServiceCardProps) =&gt; {
+  const { t, i18n } = useTranslation();
   if (!service || !service._id) return null;
-&nbsp;
-  const { _id, name, category, contactPerson, address, imageUrls } = service;
+  const { _id, contactPerson, address, imageUrls } = service;
+  const name = service.translations?.name?.[i18n.language] || <span class="branch-1 cbranch-no" title="branch not covered" >service.name;</span>
+  const category =
+    service.translations?.category?.[i18n.language] || <span class="branch-1 cbranch-no" title="branch not covered" >service.category;</span>
   const { user } = useContext(UserContext);
   const email = user?.email;
-  const navigate = useNavigate();
   const { mutate, isPending } = useToggleFavorite();
-  const servicePath = generatePath(ROUTES.SERVICE_ID, { id: _id });
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
+  const navigateToService = useServicePath();
 &nbsp;
   useEffect(() =&gt; {
     setLocalIsFavorite(isFavorite);
@@ -261,7 +275,11 @@ const ServiceCard = ({ service, isFavorite = <span class="branch-0 cbranch-no" t
     setLocalIsFavorite(!previousIsFavorite);
 &nbsp;
     mutate(
-      { email: user.email, serviceId: _id },
+      {
+        email: user.email,
+        serviceId: _id,
+        lang: i18n.language,
+      },
       {
         onError: <span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >          setLocalIsFavorite(previousIsFavorite);</span>
@@ -284,8 +302,8 @@ const ServiceCard = ({ service, isFavorite = <span class="branch-0 cbranch-no" t
         &lt;p className={styles.contactPerson}&gt;{contactPerson}&lt;/p&gt;
         &lt;p className={styles.address}&gt;{address}&lt;/p&gt;
         &lt;div className={styles.buttonContainer}&gt;
-          &lt;Button small onClick={() =&gt; navigate(servicePath)}&gt;
-            Book now
+          &lt;Button small onClick={() =&gt; navigateToService(_id)}&gt;
+            {t("buttons.bookNow")}
           &lt;/Button&gt;
           &lt;Button
             favorite
@@ -322,7 +340,7 @@ export default ServiceCard;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-02-06T01:51:45.091Z
+      at 2025-03-08T04:02:29.862Z
     </div>
     <script src="../../prettify.js"></script>
     <script>

@@ -71,7 +71,11 @@
 <a name='L10'></a><a href='#L10'>10</a>
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
-<a name='L13'></a><a href='#L13'>13</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -84,16 +88,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const ROUTES = {
-  HOME: "/",
-  SERVICES: "/services",
-  SERVICES_CATEGORY: "/services/:category",
-  SERVICE_ID: "/service/:id",
-  ABOUT_US: "/about-us",
-  FOR_BUSINESS_PARTNERS: "/for-business-partners",
-  LOGIN: "/auth/login",
-  REGISTER: "/auth/register",
-  BOOKINGS: "/bookings/user/:email",
-  FAVORITES: "/services/user/:email/favorites",
+  HOME: "/:lang",
+  SERVICES: "/:lang/services",
+  SERVICES_CATEGORY: "/:lang/services/categories/:category",
+  SERVICE_ID: "/:lang/service/:id",
+  ABOUT_US: "/:lang/about-us",
+  FOR_BUSINESS_PARTNERS: "/:lang/for-business-partners",
+  LOGIN: "/:lang/auth/login",
+  REGISTER: "/:lang/auth/register",
+  BOOKINGS: "/:lang/bookings/user/:email",
+  BOOKINGS_FILTER: "/:lang/bookings/user/:email/:status",
+  FAVORITES: "/:lang/services/user/:email/favorites",
+  FAVORITES_CATEGORY: "/:lang/services/user/:email/favorites/:category",
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -109,7 +115,7 @@
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-02-06T01:51:45.091Z
+      at 2025-03-08T04:02:29.862Z
     </div>
     <script src="../prettify.js"></script>
     <script>

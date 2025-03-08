@@ -5,9 +5,11 @@ import ServiceCard from "./ServiceCard";
 import { Service } from "./types";
 import { UserContext } from "../context/UserContext";
 
+const mockNavigate = jest.fn();
+
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
+  useNavigate: () => mockNavigate,
   generatePath: jest.fn((_path, params) => `/services/${params.id}`),
 }));
 
@@ -16,6 +18,12 @@ jest.mock("./hooks", () => ({
     mutate: jest.fn(),
     isPending: false,
   }),
+  useServicePath: () => (serviceId: string) =>
+    mockNavigate(`/services/${serviceId}`),
+}));
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key: string) => key, i18n: { language: "en" } }),
 }));
 
 const mockUser = {
@@ -41,9 +49,26 @@ const mockService: Service = {
   email: "test@example.com",
   imageUrls: ["image1.jpg"],
   favoritedBy: ["test@example.com"],
+  translations: {
+    name: { en: "Test Service", lt: "Test Paslauga", ru: "Тест Услуга" },
+    about: {
+      en: "About Test Service",
+      lt: "Apie test paslaugą",
+      ru: "О тестовой услуге",
+    },
+    category: {
+      en: "Test Category",
+      lt: "Test Kategorija",
+      ru: "Тест Категория",
+    },
+  },
 };
 
 describe("ServiceCard", () => {
+  beforeEach(() => {
+    mockNavigate.mockClear();
+  });
+
   const renderServiceCard = (
     props: Partial<React.ComponentProps<typeof ServiceCard>> = {},
   ) => {
@@ -100,15 +125,12 @@ describe("ServiceCard", () => {
 
   it('renders the "Book now" button', () => {
     renderServiceCard();
-    expect(screen.getByText("Book now")).toBeInTheDocument();
+    expect(screen.getByText("buttons.bookNow")).toBeInTheDocument();
   });
 
   it('navigates to the service details page when "Book now" is clicked', () => {
-    const mockNavigate = jest.fn();
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-
     renderServiceCard();
-    fireEvent.click(screen.getByText("Book now"));
+    fireEvent.click(screen.getByText("buttons.bookNow"));
 
     expect(mockNavigate).toHaveBeenCalledWith(`/services/${mockService._id}`);
   });
@@ -132,7 +154,7 @@ describe("ServiceCard", () => {
     fireEvent.click(screen.getByRole("button", { name: /Add to favorites/i }));
 
     expect(mutate).toHaveBeenCalledWith(
-      { email: mockUser.email, serviceId: mockService._id },
+      { email: mockUser.email, serviceId: mockService._id, lang: "en" },
       expect.anything(),
     );
   });

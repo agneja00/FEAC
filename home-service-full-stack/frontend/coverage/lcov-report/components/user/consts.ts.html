@@ -23,9 +23,9 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">90% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">6/6</span>
+            <span class="fraction">9/10</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -35,15 +35,15 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">50% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">0/0</span>
+            <span class="fraction">1/2</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">87.5% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">6/6</span>
+            <span class="fraction">7/8</span>
           </div>
         </div>
         <p class="quiet">
@@ -90,13 +90,19 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -104,6 +110,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,21 +133,25 @@
 import { LoginRequest, RegisterRequest } from "./types";
 import { errorMessage } from "@/constants/errorMessage";
 &nbsp;
-export const loginValidationSchema: Yup.Schema&lt;LoginRequest&gt; =
+export const loginValidationSchema = (
+  lang: "en" | "lt" | "ru",
+): Yup.Schema&lt;LoginRequest&gt; =&gt;
   Yup.object().shape({
     email: Yup.string()
-      .email(errorMessage.email)
-      .required(errorMessage.required),
-    password: Yup.string().required(errorMessage.required),
+      .email(errorMessage[lang]?.errorMessage?.email)
+      .required(errorMessage[lang]?.errorMessage?.required),
+    password: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
   });
 &nbsp;
-export const reigsterValidationSchema: Yup.Schema&lt;RegisterRequest&gt; =
-  Yup.object().shape({
-    name: Yup.string().required(errorMessage.required),
+export const registerValidationSchema = <span class="fstat-no" title="function not covered" >(</span>
+  lang: "en" | "lt" | "ru",
+): Yup.Schema&lt;RegisterRequest&gt; =&gt;
+<span class="cstat-no" title="statement not covered" >  Yup.object().shape({</span>
+    name: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
     email: Yup.string()
-      .email(errorMessage.email)
-      .required(errorMessage.required),
-    password: Yup.string().required(errorMessage.required),
+      .email(errorMessage[lang]?.errorMessage?.email)
+      .required(errorMessage[lang]?.errorMessage?.required),
+    password: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
   });
 &nbsp;
 export const loginInitialValues: LoginRequest = {
@@ -147,7 +159,7 @@ export const loginInitialValues: LoginRequest = {
   password: "",
 };
 &nbsp;
-export const registerInitialValus: RegisterRequest = {
+export const registerInitialValues: RegisterRequest = {
   name: "",
   email: "",
   password: "",
@@ -166,7 +178,7 @@ export const registerInitialValus: RegisterRequest = {
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-02-06T01:51:45.091Z
+      at 2025-03-08T04:02:29.862Z
     </div>
     <script src="../../prettify.js"></script>
     <script>

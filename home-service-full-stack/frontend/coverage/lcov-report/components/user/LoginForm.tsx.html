@@ -25,13 +25,13 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">24/24</span>
+            <span class="fraction">28/28</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">75% </span>
+            <span class="strong">60% </span>
             <span class="quiet">Branches</span>
-            <span class="fraction">3/4</span>
+            <span class="fraction">6/10</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">24/24</span>
+            <span class="fraction">28/28</span>
           </div>
         </div>
         <p class="quiet">
@@ -122,7 +122,21 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -134,9 +148,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -153,6 +172,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,12 +221,17 @@ import { LoginRequest } from "../user/types";
 import FormikField from "../common/FormikInput";
 import Button from "../common/Button";
 import { ROUTES } from "../../constants/routes";
-import { Link, useNavigate } from "react-router-dom";
+import { generatePath, Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { useLoginUser } from "./hooks";
 import { ErrorResponse } from "../types/error";
+import { useTranslation } from "react-i18next";
 &nbsp;
 const LoginForm = () =&gt; {
+  const { t } = useTranslation();
+  const { lang = "en" } = useParams&lt;{ lang: string }&gt;();
+  const validatedLang =
+    lang === "en" || <span class="branch-1 cbranch-no" title="branch not covered" >lang === "lt" </span>|| <span class="branch-2 cbranch-no" title="branch not covered" >lang === "ru" </span>? lang : <span class="branch-1 cbranch-no" title="branch not covered" >"en";</span>
   const { login } = useContext(UserContext);
   const [error, setError] = useState("");
   const { mutateAsync: loginUser } = useLoginUser();
@@ -207,8 +240,8 @@ const LoginForm = () =&gt; {
   const handleSubmit = async (formValues: LoginRequest) =&gt; {
     try {
       const response = await loginUser(formValues);
-      login(response);
-      navigate(ROUTES.HOME);
+      login(response.data);
+      navigate(generatePath(ROUTES.HOME, { lang }));
     } catch (error) {
       const errorMessage = error as ErrorResponse;
       setError(errorMessage.response?.data.message ?? <span class="branch-1 cbranch-no" title="branch not covered" >"")</span>;
@@ -219,26 +252,35 @@ const LoginForm = () =&gt; {
     &lt;div className={styles.container}&gt;
       &lt;Formik
         initialValues={loginInitialValues}
-        validationSchema={loginValidationSchema}
+        validationSchema={loginValidationSchema(validatedLang)}
         onSubmit={handleSubmit}
       &gt;
         &lt;Form className={styles.form}&gt;
-          &lt;h1 className={styles.title}&gt;Login&lt;/h1&gt;
+          &lt;h1 className={styles.title}&gt;
+            {t("forms.loginAndRegister.loginTitle")}
+          &lt;/h1&gt;
           &lt;div className={styles.field}&gt;
-            &lt;FormikField name="email" type="email" placeholder="Email" /&gt;
+            &lt;FormikField
+              name="email"
+              type="email"
+              placeholder={t("common.email")}
+            /&gt;
           &lt;/div&gt;
           &lt;div className={styles.field}&gt;
             &lt;FormikField
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder={t("common.password")}
             /&gt;
           &lt;/div&gt;
           {error &amp;&amp; &lt;p className={styles.error}&gt;{error}&lt;/p&gt;}
-          &lt;Button type="submit"&gt;Log in&lt;/Button&gt;
+          &lt;Button type="submit"&gt;{t("buttons.login")}&lt;/Button&gt;
           &lt;div className={styles.link}&gt;
-            &lt;Link to={ROUTES.REGISTER} className={styles.signUp}&gt;
-              Don't have an account? Sign up
+            &lt;Link
+              to={generatePath(ROUTES.REGISTER, { lang })}
+              className={styles.signUp}
+            &gt;
+              {t("forms.loginAndRegister.sign")}
             &lt;/Link&gt;
           &lt;/div&gt;
         &lt;/Form&gt;
@@ -262,7 +304,7 @@ export default LoginForm;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-02-06T01:51:45.091Z
+      at 2025-03-08T04:02:29.862Z
     </div>
     <script src="../../prettify.js"></script>
     <script>
