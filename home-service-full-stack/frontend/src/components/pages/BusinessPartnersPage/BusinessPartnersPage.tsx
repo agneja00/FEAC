@@ -39,7 +39,6 @@ const BusinessPartnersPage = () => {
             <span className={styles.boldText}>
               {t("forBusinessPartners.expandBold")}
             </span>{" "}
-            Gain
             {t("forBusinessPartners.expand")}
           </li>
           <li>
