@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Code coverage report for constants/errorMessage.ts</title>
+    <title>Code coverage report for config/axios.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,31 +19,31 @@
       <div class="pad1">
         <h1>
           <a href="../index.html">All files</a> /
-          <a href="index.html">constants</a> errorMessage.ts
+          <a href="index.html">config</a> axios.ts
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">76.92% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">1/1</span>
+            <span class="fraction">10/13</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">33.33% </span>
             <span class="quiet">Branches</span>
-            <span class="fraction">0/0</span>
+            <span class="fraction">1/3</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">50% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">0/0</span>
+            <span class="fraction">1/2</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
+            <span class="strong">76.92% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">1/1</span>
+            <span class="fraction">10/13</span>
           </div>
         </div>
         <p class="quiet">
@@ -57,7 +57,7 @@
           </div>
         </template>
       </div>
-      <div class="status-line high"></div>
+      <div class="status-line medium"></div>
       <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,52 +82,70 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const errorMessage = {
-  en: {
-    errorMessage: {
-      required: "Field is required",
-      email: "Email should be valid",
-      select: "Category is required",
-    },
-  },
-  lt: {
-    errorMessage: {
-      required: "Laukas yra privalomas",
-      email: "El. paštas turi būti teisingas",
-      select: "Kategorija yra privaloma",
-    },
-  },
-  ru: {
-    errorMessage: {
-      required: "Поле обязательно для заполнения",
-      email: "Электронная почта должна быть действительной",
-      select: "Категория обязательна",
-    },
-  },
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { PROD } from "../constants/environment";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+&nbsp;
+const baseURL = PROD
+  ? "https://home-services-f898b008a33e.herokuapp.com/"
+  : <span class="branch-1 cbranch-no" title="branch not covered" >"http://localhost:3000/";</span>
+&nbsp;
+const config: AxiosRequestConfig = {
+  baseURL,
 };
+&nbsp;
+export const axiosInstance = axios.create(config);
+&nbsp;
+axiosInstance.interceptors.request.use(
+  async (config) =&gt; {
+    const token = localStorage.getItem("token");
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (token) {
+      const parsedToken = <span class="cstat-no" title="statement not covered" >JSON.parse(token);</span>
+<span class="cstat-no" title="statement not covered" >      config.headers.Authorization = `Bearer ${parsedToken}`;</span>
+    }
+    return config;
+  },
+<span class="fstat-no" title="function not covered" >  (e</span>rror: AxiosError) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return Promise.reject(error);</span>
+  },
+);
+&nbsp;
+export default axiosInstance;
 &nbsp;</pre></td></tr></table></pre>
 
       <div class="push"></div>

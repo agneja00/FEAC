@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Code coverage report for constants/errorMessage.ts</title>
+    <title>Code coverage report for components/common/UrlIcon.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type="text/css">
       .coverage-summary .sorter {
-        background-image: url(../sort-arrow-sprite.png);
+        background-image: url(../../sort-arrow-sprite.png);
       }
     </style>
   </head>
@@ -18,14 +18,14 @@
     <div class="wrapper">
       <div class="pad1">
         <h1>
-          <a href="../index.html">All files</a> /
-          <a href="index.html">constants</a> errorMessage.ts
+          <a href="../../index.html">All files</a> /
+          <a href="index.html">components/common</a> UrlIcon.tsx
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">1/1</span>
+            <span class="fraction">5/5</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -37,13 +37,13 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">0/0</span>
+            <span class="fraction">1/1</span>
           </div>
 
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">1/1</span>
+            <span class="fraction">5/5</span>
           </div>
         </div>
         <p class="quiet">
@@ -75,14 +75,8 @@
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L17'></a><a href='#L17'>17</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -90,44 +84,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const errorMessage = {
-  en: {
-    errorMessage: {
-      required: "Field is required",
-      email: "Email should be valid",
-      select: "Category is required",
-    },
-  },
-  lt: {
-    errorMessage: {
-      required: "Laukas yra privalomas",
-      email: "El. paštas turi būti teisingas",
-      select: "Kategorija yra privaloma",
-    },
-  },
-  ru: {
-    errorMessage: {
-      required: "Поле обязательно для заполнения",
-      email: "Электронная почта должна быть действительной",
-      select: "Категория обязательна",
-    },
-  },
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import styles from "./UrlIcon.module.scss";
+import classNames from "classnames";
+&nbsp;
+interface UrlIconProps {
+  className?: string;
+  src: string;
+  alt: string;
+}
+&nbsp;
+const UrlIcon: React.FC&lt;UrlIconProps&gt; = ({ className, src, alt }) =&gt; {
+  return (
+    &lt;img className={classNames(styles.icon, className)} src={src} alt={alt} /&gt;
+  );
 };
+&nbsp;
+export default UrlIcon;
 &nbsp;</pre></td></tr></table></pre>
 
       <div class="push"></div>
@@ -144,13 +123,13 @@
       >
       at 2025-03-12T21:52:57.793Z
     </div>
-    <script src="../prettify.js"></script>
+    <script src="../../prettify.js"></script>
     <script>
       window.onload = function () {
         prettyPrint();
       };
     </script>
-    <script src="../sorter.js"></script>
-    <script src="../block-navigation.js"></script>
+    <script src="../../sorter.js"></script>
+    <script src="../../block-navigation.js"></script>
   </body>
 </html>

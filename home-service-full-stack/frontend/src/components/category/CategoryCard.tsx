@@ -26,7 +26,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
           category: categoryName,
         });
 
-  const isActive = params.category === categoryName;
+  const isActive =
+    category.name.toLowerCase() === (params.category || "").toLowerCase();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {

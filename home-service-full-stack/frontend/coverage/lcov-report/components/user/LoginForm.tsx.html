@@ -133,10 +133,7 @@
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -172,9 +169,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,7 +236,7 @@ const LoginForm = () =&gt; {
       const response = await loginUser(formValues);
       login(response.data);
       navigate(generatePath(ROUTES.HOME, { lang }));
-    } catch (error) {
+        } catch (error) {
       const errorMessage = error as ErrorResponse;
       setError(errorMessage.response?.data.message ?? <span class="branch-1 cbranch-no" title="branch not covered" >"")</span>;
     }
@@ -276,10 +270,7 @@ const LoginForm = () =&gt; {
           {error &amp;&amp; &lt;p className={styles.error}&gt;{error}&lt;/p&gt;}
           &lt;Button type="submit"&gt;{t("buttons.login")}&lt;/Button&gt;
           &lt;div className={styles.link}&gt;
-            &lt;Link
-              to={generatePath(ROUTES.REGISTER, { lang })}
-              className={styles.signUp}
-            &gt;
+          &lt;Link to={generatePath(ROUTES.REGISTER, { lang })} className={styles.signUp}&gt;
               {t("forms.loginAndRegister.sign")}
             &lt;/Link&gt;
           &lt;/div&gt;
@@ -304,7 +295,7 @@ export default LoginForm;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-03-09T10:34:50.736Z
+      at 2025-03-12T21:52:57.793Z
     </div>
     <script src="../../prettify.js"></script>
     <script>
