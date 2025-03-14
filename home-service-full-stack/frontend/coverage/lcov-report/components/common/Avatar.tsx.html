@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Code coverage report for components/common/FormikInput.tsx</title>
+    <title>Code coverage report for components/common/Avatar.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,19 +19,19 @@
       <div class="pad1">
         <h1>
           <a href="../../index.html">All files</a> /
-          <a href="index.html">components/common</a> FormikInput.tsx
+          <a href="index.html">components/common</a> Avatar.tsx
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">6/6</span>
+            <span class="fraction">4/4</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">50% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Branches</span>
-            <span class="fraction">1/2</span>
+            <span class="fraction">2/2</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">6/6</span>
+            <span class="fraction">4/4</span>
           </div>
         </div>
         <p class="quiet">
@@ -79,13 +79,8 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -93,10 +88,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,30 +99,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import styles from "./Input.module.scss";
-import { Field, ErrorMessage } from "formik";
-import Input from "./Input";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import styles from "./Avatar.module.scss";
 &nbsp;
-interface FormikFieldProps extends React.InputHTMLAttributes&lt;HTMLInputElement&gt; {
-  name: string;
-  label?: string;
+interface AvatarProps {
+  children: React.ReactNode;
+  onClick?: (e: React.MouseEvent&lt;HTMLDivElement&gt;) =&gt; void;
+  className?: string;
 }
 &nbsp;
-const FormikField = ({ name, label, ...props }: FormikFieldProps) =&gt; {
+const Avatar: React.FC&lt;AvatarProps&gt; = ({ children, onClick, className }) =&gt; {
   return (
-    &lt;div className={styles.formField}&gt;
-      {label &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;label className={styles.label} htmlFor={name}&gt;</span>
-          {label}
-        &lt;/label&gt;
-      )}
-      &lt;Field name={name} as={Input} id={name} {...props} /&gt;
-      &lt;ErrorMessage name={name} component="div" className={styles.error} /&gt;
+    &lt;div
+      className={`${styles.avatar} ${className || ""}`.trim()}
+      onClick={onClick}
+    &gt;
+      {children}
     &lt;/div&gt;
   );
 };
 &nbsp;
-export default FormikField;
+export default Avatar;
 &nbsp;</pre></td></tr></table></pre>
 
       <div class="push"></div>

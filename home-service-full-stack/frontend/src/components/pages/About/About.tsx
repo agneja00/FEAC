@@ -51,7 +51,7 @@ const About = () => {
                   {t("aboutUs.linkFormParagraphFirstPart")}{" "}
                   <Link
                     to={`${ROUTES.FOR_BUSINESS_PARTNERS.replace(":lang", lang)}?openModal=true`}
-                    className={styles.formLink}
+                    className={styles.formLink || ""}
                   >
                     {t("aboutUs.linkForm")}
                   </Link>{" "}
@@ -85,6 +85,7 @@ const About = () => {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className={styles.map}
+                  data-testid="map-iframe"
                 ></iframe>
               </li>
             </ul>

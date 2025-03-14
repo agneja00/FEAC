@@ -15,7 +15,7 @@ const FormikField = ({ name, label, ...props }: FormikFieldProps) => {
           {label}
         </label>
       )}
-      <Field name={name} as={Input} {...props} />
+      <Field name={name} as={Input} id={name} {...props} />
       <ErrorMessage name={name} component="div" className={styles.error} />
     </div>
   );

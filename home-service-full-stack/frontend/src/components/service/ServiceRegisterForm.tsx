@@ -71,7 +71,12 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
           <label className={styles.label} htmlFor="about">
             {t("forms.registerService.description")}
           </label>
-          <Field as="textarea" name="about" className={styles.textarea} />
+          <Field
+            as="textarea"
+            name="about"
+            id="about"
+            className={styles.textarea}
+          />
           <ErrorMessage name="about" component="div" className={styles.error} />
         </div>
         <FormikField
@@ -82,7 +87,12 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
           <label className={styles.label} htmlFor="category">
             {t("forms.registerService.category")}
           </label>
-          <Field as="select" name="category" className={styles.select}>
+          <Field
+            as="select"
+            name="category"
+            id="category"
+            className={styles.select}
+          >
             <option value="">{t("forms.registerService.select")}</option>
             {CATEGORY_OPTIONS.map(({ key, label }) => (
               <option key={key} value={key}>
