@@ -132,6 +132,10 @@
     "gallery": "Galerija",
     "similarServices": "Panašios paslaugos"
   },
+  "errorPage": {
+    "errorMessage": "Oi! Puslapis, kurio ieškote, neegzistuoja.",
+    "backHome": "Grįžti į pradžią"
+  },
   "time": {
     "8AM": "8:00",
     "10AM": "10:00",

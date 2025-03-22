@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.content {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.title {
+  font-size: 6rem;
+  color: #ff6b6b;
+}
+
+.message {
+  font-size: 1.5rem;
+  margin: 1.25rem 0;
+  color: #333;
+}

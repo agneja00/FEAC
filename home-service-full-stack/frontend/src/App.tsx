@@ -89,6 +89,14 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/:lang/*",
+    element: <ErrorPage />,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/en" replace />,
+  },
 ]);
 
 const queryClient = new QueryClient();

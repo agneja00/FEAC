@@ -132,6 +132,10 @@
     "gallery": "Gallery",
     "similarServices": "Similar Services"
   },
+  "errorPage": {
+    "errorMessage": "Oops! The page you're looking for doesn't exist.",
+    "backHome": "Go back Home"
+  },
   "time": {
     "8AM": "8:00 AM",
     "10AM": "10:00 AM",
