@@ -19,4 +19,7 @@ export interface ServiceWithFavorite extends Service {
   isFavorite?: boolean;
 }
 
-export type NewService = Omit<Service, "_id" | "imageUrls" | "favoritedBy">;
+export type NewService = Omit<
+  Service,
+  "_id" | "imageUrls" | "favoritedBy" | "translations"
+>;

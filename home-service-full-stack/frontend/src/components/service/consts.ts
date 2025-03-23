@@ -25,7 +25,6 @@ const categoryTranslations: Record<
     Decoration: "Dekoravimas",
   },
   ru: {
-    All: "Все",
     Shifting: "Переезд",
     Repair: "Ремонт",
     Plumbing: "Сантехника",
@@ -56,23 +55,6 @@ export const ServiceRegisterValidationSchema = (lang: "en" | "lt" | "ru") =>
     email: Yup.string()
       .email(errorMessage[lang]?.errorMessage?.email)
       .required(errorMessage[lang]?.errorMessage?.required),
-    translations: Yup.object().shape({
-      name: Yup.object().shape({
-        en: Yup.string().required(errorMessage.en?.errorMessage?.required),
-        lt: Yup.string().required(errorMessage.lt?.errorMessage?.required),
-        ru: Yup.string().required(errorMessage.ru?.errorMessage?.required),
-      }),
-      about: Yup.object().shape({
-        en: Yup.string().required(errorMessage.en?.errorMessage?.required),
-        lt: Yup.string().required(errorMessage.lt?.errorMessage?.required),
-        ru: Yup.string().required(errorMessage.ru?.errorMessage?.required),
-      }),
-      category: Yup.object().shape({
-        en: Yup.string().required(errorMessage.en?.errorMessage?.required),
-        lt: Yup.string().required(errorMessage.lt?.errorMessage?.required),
-        ru: Yup.string().required(errorMessage.ru?.errorMessage?.required),
-      }),
-    }),
   });
 
 export const serviceRegisterInitialValues: NewService = {
@@ -82,21 +64,4 @@ export const serviceRegisterInitialValues: NewService = {
   category: "",
   contactPerson: "",
   email: "",
-  translations: {
-    name: {
-      en: "",
-      lt: "",
-      ru: "",
-    },
-    about: {
-      en: "",
-      lt: "",
-      ru: "",
-    },
-    category: {
-      en: "",
-      lt: "",
-      ru: "",
-    },
-  },
 };

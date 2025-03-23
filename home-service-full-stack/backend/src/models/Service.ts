@@ -77,19 +77,19 @@ const serviceSchema = new mongoose.Schema<IService>({
   ],
   translations: {
     name: {
-      en: { type: String, required: true },
-      lt: { type: String, required: true },
-      ru: { type: String, required: true },
+      en: { type: String, default: "" },
+      lt: { type: String, default: "" },
+      ru: { type: String, default: "" },
     },
     about: {
       en: { type: String, default: "" },
       lt: { type: String, default: "" },
-      ru: { type: String, required: true },
+      ru: { type: String, default: "" },
     },
     category: {
-      en: { type: String, required: true },
-      lt: { type: String, required: true },
-      ru: { type: String, required: true },
+      en: { type: String, default: "" },
+      lt: { type: String, default: "" },
+      ru: { type: String, default: "" },
     },
   },
 });

@@ -109,25 +109,11 @@ router.post("/:lang/services", authMiddleware, async (req: Request, res: Respons
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
-  const { name, about, address, category, contactPerson, email, translations } = req.body;
+  const { name, about, address, category, contactPerson, email } = req.body;
 
   const categoryKey = categoryTranslations[lang][category] || category;
 
   try {
-    const newService = new Service({
-      name,
-      about,
-      address,
-      category: categoryKey,
-      contactPerson,
-      email,
-      imageUrls: req.body.imageUrls || [],
-      favoritedBy: [],
-      translations,
-    });
-
-    await newService.save();
-
     await sendEmail({
       to: process.env.EMAIL!,
       from: process.env.EMAIL!,
@@ -150,7 +136,6 @@ router.post("/:lang/services", authMiddleware, async (req: Request, res: Respons
 
     res.status(201).json({
       message: "Service created and email sent successfully!",
-      service: newService,
     });
   } catch (err) {
     console.error("Error creating service:", err);

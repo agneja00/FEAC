@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "../user/Form.module.scss";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useSnackbar } from "notistack";
@@ -40,7 +41,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
     { resetForm }: { resetForm: () => void },
   ) => {
     try {
-      await sendServiceEmail(lang, formValues);
+      await sendServiceEmail(validatedLang, formValues);
       enqueueSnackbar(t("messages.emailSendSuccess"), { variant: "success" });
       resetForm();
 
@@ -61,56 +62,68 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
       validationSchema={ServiceRegisterValidationSchema(validatedLang)}
       onSubmit={handleSubmit}
     >
-      <Form className={styles.form}>
-        <h2 className={styles.subtitle}>{t("forms.registerService.title")}</h2>
-        <FormikField
-          label={t("forms.registerService.serviceName")}
-          name="name"
-        />
-        <div className={styles.aboutContainer}>
-          <label className={styles.label} htmlFor="about">
-            {t("forms.registerService.description")}
-          </label>
-          <Field
-            as="textarea"
-            name="about"
-            id="about"
-            className={styles.textarea}
+      {({ isSubmitting }) => (
+        <Form className={styles.form}>
+          <h2 className={styles.subtitle}>
+            {t("forms.registerService.title")}
+          </h2>
+          <FormikField
+            label={t("forms.registerService.serviceName")}
+            name="name"
           />
-          <ErrorMessage name="about" component="div" className={styles.error} />
-        </div>
-        <FormikField
-          label={t("forms.registerService.companyAddress")}
-          name="address"
-        />
-        <div className={styles.selectContainer}>
-          <label className={styles.label} htmlFor="category">
-            {t("forms.registerService.category")}
-          </label>
-          <Field
-            as="select"
-            name="category"
-            id="category"
-            className={styles.select}
-          >
-            <option value="">{t("forms.registerService.select")}</option>
-            {CATEGORY_OPTIONS.map(({ key, label }) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </Field>
-          <ErrorMessage name="category">
-            {(msg) => <div className={styles.error}>{t(msg)}</div>}
-          </ErrorMessage>
-        </div>
-        <FormikField
-          label={t("forms.registerService.contact")}
-          name="contactPerson"
-        />
-        <FormikField type="email" label={t("common.email")} name="email" />
-        <Button type="submit">{t("buttons.completeTheForm")}</Button>
-      </Form>
+          <div className={styles.aboutContainer}>
+            <label className={styles.label} htmlFor="about">
+              {t("forms.registerService.description")}
+            </label>
+            <Field
+              as="textarea"
+              name="about"
+              id="about"
+              className={styles.textarea}
+            />
+            <ErrorMessage
+              name="about"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+          <FormikField
+            label={t("forms.registerService.companyAddress")}
+            name="address"
+          />
+          <div className={styles.selectContainer}>
+            <label className={styles.label} htmlFor="category">
+              {t("forms.registerService.category")}
+            </label>
+            <Field
+              as="select"
+              name="category"
+              id="category"
+              className={styles.select}
+            >
+              <option value="">{t("forms.registerService.select")}</option>
+              {CATEGORY_OPTIONS.map(({ key, label }) => (
+                <option key={key} value={key}>
+                  {label}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage name="category">
+              {(msg) => <div className={styles.error}>{t(msg)}</div>}
+            </ErrorMessage>
+          </div>
+          <FormikField
+            label={t("forms.registerService.contact")}
+            name="contactPerson"
+          />
+          <FormikField type="email" label={t("common.email")} name="email" />
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting
+              ? t("buttons.submitting")
+              : t("buttons.completeTheForm")}
+          </Button>
+        </Form>
+      )}
     </Formik>
   );
 };
