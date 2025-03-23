@@ -7,11 +7,15 @@ import { ROUTES } from "@/constants/routes";
 const supportedLanguages = ["en", "lt", "ru"];
 
 const ErrorPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { lang } = useParams<{ lang?: string }>();
   const navigate = useNavigate();
 
   const selectedLang = supportedLanguages.includes(lang || "") ? lang : "en";
+
+  if (selectedLang && selectedLang !== i18n.language) {
+    i18n.changeLanguage(selectedLang);
+  }
 
   return (
     <div className={styles.container}>

@@ -20,6 +20,7 @@ import Register from "./components/pages/Register/Register";
 import { UserProvider } from "./components/context/UserContext";
 import Services from "./components/pages/Services/Services";
 import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
+import LanguageValidator from "./components/common/LanguageValidator";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: ":lang",
+        element: <LanguageValidator />,
         children: [
           {
             index: true,
@@ -95,7 +97,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Navigate to="/en" replace />,
+    element: <ErrorPage />,
   },
 ]);
 
