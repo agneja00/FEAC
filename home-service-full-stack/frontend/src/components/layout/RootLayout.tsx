@@ -11,7 +11,8 @@ const RootLayout = () => {
   const pathSegments = location.pathname.split("/");
   const lang = pathSegments[1];
 
-  const isInvalidLanguage = !supportedLanguages.includes(lang);
+  const isInvalidLanguage = lang && !supportedLanguages.includes(lang);
+
   const isInvalidRoute = isInvalidLanguage || location.pathname.endsWith("/*");
 
   return (
