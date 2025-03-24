@@ -124,11 +124,17 @@ export const useServiceData = () => {
   const { lang } = useParams<{ lang?: string }>();
   const selectedLang = lang || "en";
 
-  const { data: allServices = [] } = useServices(selectedLang);
+  const {
+    data: allServices = [],
+    isLoading: isServicesLoading,
+    error: servicesError,
+  } = useServices(selectedLang);
   const { user } = useContext(UserContext);
-  const { data: favoriteServices = [] } = useFavoriteServices(
-    user?.email || "",
-  );
+  const {
+    data: favoriteServices = [],
+    isLoading: isFavoritesLoading,
+    error: favoritesError,
+  } = useFavoriteServices(user?.email || "");
 
   const translateService = (service: Service) => ({
     ...service,
@@ -140,10 +146,14 @@ export const useServiceData = () => {
 
   const updatedServices = allServices.map(translateService);
   const updatedFavorites = favoriteServices.map(translateService);
+  const isLoading = isServicesLoading || isFavoritesLoading;
+  const error = servicesError || favoritesError;
 
   return {
     allServices: updatedServices,
     user,
     favoriteServices: updatedFavorites,
+    isLoading,
+    error,
   };
 };

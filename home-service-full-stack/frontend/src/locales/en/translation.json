@@ -4,7 +4,9 @@
     "aboutUs": "About Us",
     "forBusinessPartners": "For Business Partners",
     "register": "Register",
-    "password": "Password"
+    "password": "Password",
+    "loading": "Loading, please wait...",
+    "error": "Something went wrong. Please try again."
   },
   "topbar": {
     "services": "Services"

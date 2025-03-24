@@ -4,7 +4,9 @@
     "aboutUs": "Apie mus",
     "forBusinessPartners": "Verslo partneriams",
     "register": "Registruotis",
-    "password": "Slaptažodis"
+    "password": "Slaptažodis",
+    "loading": "Kraunama, prašome palaukti...",
+    "error": "Kažkas nutiko. Prašome bandyti dar kartą."
   },
   "topbar": {
     "services": "Paslaugos"

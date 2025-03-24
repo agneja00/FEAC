@@ -5,8 +5,17 @@ import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
-  const { allServices } = useServiceData();
+  const { allServices, isLoading, error } = useServiceData();
   const { t } = useTranslation();
+
+  if (isLoading) return <div>{t("common.loading")}</div>;
+
+  if (error)
+    return (
+      <div>
+        {t("common.error")}: {error.message}
+      </div>
+    );
 
   return (
     <>

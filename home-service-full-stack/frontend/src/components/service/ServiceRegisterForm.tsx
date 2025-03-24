@@ -38,7 +38,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
 
   const handleSubmit = async (
     formValues: NewService,
-    { resetForm }: { resetForm: () => void }
+    { resetForm }: { resetForm: () => void },
   ) => {
     try {
       await sendServiceEmail(validatedLang, formValues);
@@ -51,7 +51,7 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
     } catch (error) {
       enqueueSnackbar(
         error instanceof Error ? error.message : t("messages.emailSendError"),
-        { variant: "error" }
+        { variant: "error" },
       );
     }
   };
