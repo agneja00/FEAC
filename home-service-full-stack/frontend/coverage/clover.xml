@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1742343530697" clover="3.2.0">
-  <project timestamp="1742343530697" name="All files">
-    <metrics statements="595" coveredstatements="488" conditionals="237" coveredconditionals="148" methods="126" coveredmethods="75" elements="958" coveredelements="711" complexity="0" loc="595" ncloc="595" packages="13" files="35" classes="35"/>
+<coverage generated="1742923300534" clover="3.2.0">
+  <project timestamp="1742923300535" name="All files">
+    <metrics statements="632" coveredstatements="521" conditionals="250" coveredconditionals="153" methods="132" coveredmethods="80" elements="1014" coveredelements="754" complexity="0" loc="632" ncloc="632" packages="13" files="37" classes="37"/>
     <package name="components.booking">
       <metrics statements="27" coveredstatements="27" conditionals="15" coveredconditionals="12" methods="4" coveredmethods="4"/>
       <file name="BookingCard.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\booking\BookingCard.tsx">
@@ -107,7 +107,7 @@
       </file>
     </package>
     <package name="components.common">
-      <metrics statements="86" coveredstatements="84" conditionals="55" coveredconditionals="44" methods="20" coveredmethods="18"/>
+      <metrics statements="86" coveredstatements="84" conditionals="55" coveredconditionals="45" methods="20" coveredmethods="18"/>
       <file name="Avatar.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\Avatar.tsx">
         <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -117,11 +117,11 @@
       </file>
       <file name="Button.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\Button.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="12" coveredconditionals="12" methods="1" coveredmethods="1"/>
-        <line num="1" count="8" type="stmt"/>
-        <line num="2" count="8" type="stmt"/>
-        <line num="13" count="8" type="stmt"/>
-        <line num="23" count="115" type="stmt"/>
-        <line num="42" count="8" type="stmt"/>
+        <line num="1" count="9" type="stmt"/>
+        <line num="2" count="9" type="stmt"/>
+        <line num="13" count="9" type="stmt"/>
+        <line num="23" count="417" type="stmt"/>
+        <line num="42" count="9" type="stmt"/>
       </file>
       <file name="FilteredList.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\FilteredList.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
@@ -136,21 +136,21 @@
         <line num="59" count="1" type="stmt"/>
       </file>
       <file name="FormikInput.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\FormikInput.tsx">
-        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="58" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="1266" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
       </file>
       <file name="Input.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\Input.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="96" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="1304" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
       </file>
       <file name="LanguageSwither.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\common\LanguageSwither.tsx">
         <metrics statements="19" coveredstatements="18" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="4"/>
@@ -424,7 +424,7 @@
       </file>
     </package>
     <package name="components.service">
-      <metrics statements="174" coveredstatements="113" conditionals="55" coveredconditionals="22" methods="44" coveredmethods="15"/>
+      <metrics statements="211" coveredstatements="146" conditionals="68" coveredconditionals="26" methods="50" coveredmethods="20"/>
       <file name="ServiceCard.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\ServiceCard.tsx">
         <metrics statements="32" coveredstatements="30" conditionals="19" coveredconditionals="15" methods="6" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
@@ -518,6 +518,37 @@
         <line num="16" count="27" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
       </file>
+      <file name="ServiceRegisterForm.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\ServiceRegisterForm.tsx">
+        <metrics statements="28" coveredstatements="26" conditionals="9" coveredconditionals="4" methods="5" coveredmethods="4"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="2" type="cond" truecount="2" falsecount="3"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="48" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="66" count="302" type="stmt"/>
+        <line num="106" count="2114" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+      </file>
       <file name="SimilarService.tsx" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\SimilarService.tsx">
         <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
@@ -554,8 +585,18 @@
         <line num="50" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
       </file>
+      <file name="consts.ts" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\consts.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+      </file>
       <file name="hooks.ts" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\components\service\hooks.ts">
-        <metrics statements="63" coveredstatements="15" conditionals="23" coveredconditionals="0" methods="19" coveredmethods="0"/>
+        <metrics statements="65" coveredstatements="15" conditionals="27" coveredconditionals="0" methods="19" coveredmethods="0"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
         <line num="8" count="4" type="stmt"/>
@@ -611,14 +652,16 @@
         <line num="123" count="4" type="stmt"/>
         <line num="124" count="0" type="stmt"/>
         <line num="125" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="127" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="129" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="133" count="0" type="stmt"/>
-        <line num="135" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="137" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="139" count="0" type="stmt"/>
         <line num="141" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
-        <line num="144" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="149" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="150" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="152" count="0" type="stmt"/>
       </file>
     </package>
     <package name="components.user">
@@ -734,7 +777,7 @@
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="errorMessage.ts" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\constants\errorMessage.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
       </file>
       <file name="routes.ts" path="C:\Users\Administrator123\FEAC\home-service-full-stack\frontend\src\constants\routes.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
