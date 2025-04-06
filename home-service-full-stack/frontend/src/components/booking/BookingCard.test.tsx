@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import BookingCard from "./BookingCard";
-import { Booking } from "./types";
+import { IBooking } from "./types";
 import { useDeleteBooking } from "./hooks";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
@@ -27,7 +27,7 @@ describe("BookingCard", () => {
   const enqueueSnackbarMock = jest.fn();
   const navigateToServiceMock = jest.fn();
 
-  const booking: Booking = {
+  const booking: IBooking = {
     _id: "1",
     serviceId: {
       _id: "service1",
@@ -127,7 +127,7 @@ describe("BookingCard", () => {
   });
 
   it("does not render the cancel button for completed bookings", () => {
-    const completedBooking: Booking = {
+    const completedBooking: IBooking = {
       ...booking,
       status: "Completed",
       translations: {
@@ -145,7 +145,7 @@ describe("BookingCard", () => {
   });
 
   it("renders 'N/A' when date is missing", () => {
-    const bookingWithoutDate: Booking = {
+    const bookingWithoutDate: IBooking = {
       ...booking,
       date: null,
     };

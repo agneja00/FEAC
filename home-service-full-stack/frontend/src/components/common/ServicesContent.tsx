@@ -3,22 +3,22 @@ import styles from "./ServicesContent.module.scss";
 import ServiceList from "@/components/service/ServiceList";
 import VerticalCategoryList from "@/components/category/VerticalCategoryList";
 import { useState, useEffect } from "react";
-import { Service } from "../service/types";
+import { IService } from "../service/types";
 import Input from "../common/Input";
 import { useServiceData } from "../service/hooks";
 import { useTranslation } from "react-i18next";
 
-type Params = {
+type TParams = {
   category?: string;
 };
 
 const ServicesContent: React.FC = () => {
   const { t } = useTranslation();
   const { allServices, favoriteServices } = useServiceData();
-  const [filteredServices, setFilteredServices] = useState<Service[]>([]);
+  const [filteredServices, setFilteredServices] = useState<IService[]>([]);
   const [searchValue, setSearchValue] = useState("");
 
-  const { category } = useParams<Params>();
+  const { category } = useParams<TParams>();
   const { lang = "en" } = useParams<{ lang?: string }>();
 
   useEffect(() => {

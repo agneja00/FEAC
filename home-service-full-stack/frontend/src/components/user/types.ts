@@ -1,20 +1,20 @@
-export interface User {
+export interface IUser {
   _id: string;
   name: string;
   email: string;
 }
 
-export interface LoginRequest {
+export interface ILoginRequest {
   email: string;
   password: string;
 }
 
-export interface LoginResponse {
+export interface ILoginResponse {
   status: string;
   token: string;
-  user: User;
+  user: IUser;
 }
 
-export interface RegisterRequest extends LoginRequest {
+export interface IRegisterRequest extends ILoginRequest {
   name: string;
 }

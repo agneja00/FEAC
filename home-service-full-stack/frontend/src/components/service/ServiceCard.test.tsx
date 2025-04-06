@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter, useNavigate } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
-import { Service } from "./types";
+import { IService } from "./types";
 import { UserContext } from "../context/UserContext";
 
 const mockNavigate = jest.fn();
@@ -39,7 +39,7 @@ const mockUserContextValue = {
   logout: jest.fn(),
 };
 
-const mockService: Service = {
+const mockService: IService = {
   _id: "1",
   name: "Test Service",
   about: "About Test Service",

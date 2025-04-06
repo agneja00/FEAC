@@ -2,7 +2,7 @@ import { useParams, useNavigate, generatePath } from "react-router-dom";
 import FilteredList from "@/components/common/FilteredList";
 import BookingCard from "@/components/booking/BookingCard";
 import { useUserBookings } from "@/components/booking/hooks";
-import { BookingStatus } from "@/components/booking/types";
+import { TBookingStatus } from "@/components/booking/types";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
 
@@ -26,12 +26,12 @@ const BookingsPage = () => {
       (key) => statusTranslations[lang]?.[key] === status,
     ) || "Confirmed";
 
-  const validatedStatus = getEnglishStatus() as BookingStatus;
+  const validatedStatus = getEnglishStatus() as TBookingStatus;
   const { data: bookings, isLoading, error } = useUserBookings(validatedStatus);
 
   const handleFilterChange = (filter: string) => {
     const translatedStatus =
-      statusTranslations[lang][filter as BookingStatus] || filter;
+      statusTranslations[lang][filter as TBookingStatus] || filter;
     navigate(
       generatePath(ROUTES.BOOKINGS_FILTER, {
         lang,
@@ -53,7 +53,7 @@ const BookingsPage = () => {
     <FilteredList
       title={t("accountModal.myBookings")}
       items={bookings || []}
-      filters={Object.keys(statusTranslations[lang]) as BookingStatus[]}
+      filters={Object.keys(statusTranslations[lang]) as TBookingStatus[]}
       activeFilter={validatedStatus}
       onFilterChange={handleFilterChange}
       filterLabels={statusTranslations[lang]}

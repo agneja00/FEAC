@@ -3,11 +3,11 @@ import styles from "./CategoryCard.module.scss";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import classNames from "classnames";
 import { ROUTES } from "@/constants/routes";
-import { Category } from "./types";
+import { ICategory } from "./types";
 import UrlIcon from "../common/UrlIcon";
 
 interface CategoryCardProps {
-  category: Category;
+  category: ICategory;
   className?: string;
 }
 

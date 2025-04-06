@@ -2,12 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createBooking, deleteBooking, fetchUserBookings } from "./api";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
-import { BookingStatus, NewBooking } from "./types";
+import { TBookingStatus, NewBooking } from "./types";
 import { useParams } from "react-router-dom";
 
 export const BOOKING_KEY = "BOOKING";
 
-export const useUserBookings = (status: BookingStatus) => {
+export const useUserBookings = (status: TBookingStatus) => {
   const { lang } = useParams<{ lang: string }>();
   const { user } = useContext(UserContext);
   const userEmail = user!.email;

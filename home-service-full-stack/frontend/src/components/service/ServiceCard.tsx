@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Service } from "@/components/service/types";
+import { IService } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Button from "../common/Button";
 import styles from "./ServiceCard.module.scss";
@@ -9,7 +9,7 @@ import { useServicePath } from "./hooks";
 import { useTranslation } from "react-i18next";
 
 interface ServiceCardProps {
-  service: Service;
+  service: IService;
   isFavorite?: boolean;
 }
 

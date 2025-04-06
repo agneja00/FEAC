@@ -10,7 +10,7 @@ import {
   registerValidationSchema,
 } from "../user/consts";
 import { useRegisterUser } from "./hooks";
-import { RegisterRequest } from "../user/types";
+import { IRegisterRequest } from "../user/types";
 import { ErrorResponse } from "../types/error";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +23,7 @@ const RegisterForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const handleSubmit = async (formValues: RegisterRequest) => {
+  const handleSubmit = async (formValues: IRegisterRequest) => {
     try {
       await registerUser(formValues);
       navigate(generatePath(ROUTES.LOGIN, { lang }));

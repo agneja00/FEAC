@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useParams } from "react-router-dom";
 import CategoryCard from "../category/CategoryCard";
-import { Category } from "../category/types";
+import { ICategory } from "../category/types";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -9,13 +9,13 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("CategoryCard Component", () => {
-  const mockCategory: Category = {
+  const mockCategory: ICategory = {
     name: "Cleaning",
     url: "/icons/cleaning.png",
     _id: "1",
   };
 
-  const renderComponent = (category: Category, categoryParam?: string) => {
+  const renderComponent = (category: ICategory, categoryParam?: string) => {
     return render(
       <MemoryRouter
         initialEntries={[`/en/services/categories/${categoryParam || ""}`]}

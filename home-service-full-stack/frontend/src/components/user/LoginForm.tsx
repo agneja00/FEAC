@@ -2,7 +2,7 @@ import styles from "./Form.module.scss";
 import { useContext, useState } from "react";
 import { Form, Formik } from "formik";
 import { loginInitialValues, loginValidationSchema } from "../user/consts";
-import { LoginRequest } from "../user/types";
+import { ILoginRequest } from "../user/types";
 import FormikField from "../common/FormikInput";
 import Button from "../common/Button";
 import { ROUTES } from "../../constants/routes";
@@ -22,7 +22,7 @@ const LoginForm = () => {
   const { mutateAsync: loginUser } = useLoginUser();
   const navigate = useNavigate();
 
-  const handleSubmit = async (formValues: LoginRequest) => {
+  const handleSubmit = async (formValues: ILoginRequest) => {
     try {
       const response = await loginUser(formValues);
       login(response.data);

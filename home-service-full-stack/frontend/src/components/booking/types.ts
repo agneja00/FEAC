@@ -1,15 +1,15 @@
-import { Service } from "../service/types";
+import { IService } from "../service/types";
 
-export type BookingStatus = "Confirmed" | "Completed";
+export type TBookingStatus = "Confirmed" | "Completed";
 
-export interface Booking {
+export interface IBooking {
   _id: string;
-  serviceId: string | Service;
+  serviceId: string | IService;
   date: Date | null;
   time: string;
   userEmail: string;
   userName: string;
-  status: BookingStatus;
+  status: TBookingStatus;
   translations: {
     status: {
       en: string;
@@ -20,4 +20,4 @@ export interface Booking {
   };
 }
 
-export type NewBooking = Omit<Booking, "_id">;
+export type NewBooking = Omit<IBooking, "_id">;

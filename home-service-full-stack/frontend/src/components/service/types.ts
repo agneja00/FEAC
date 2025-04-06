@@ -1,4 +1,4 @@
-export interface Service {
+export interface IService {
   _id: string;
   name: string;
   about: string;
@@ -15,11 +15,11 @@ export interface Service {
   };
 }
 
-export interface ServiceWithFavorite extends Service {
+export interface ServiceWithFavorite extends IService {
   isFavorite?: boolean;
 }
 
 export type NewService = Omit<
-  Service,
+  IService,
   "_id" | "imageUrls" | "favoritedBy" | "translations"
 >;

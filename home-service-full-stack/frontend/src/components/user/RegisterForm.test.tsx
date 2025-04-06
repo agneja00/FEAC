@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter, useNavigate, useParams } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 import { useRegisterUser } from "./hooks";
-import { RegisterRequest } from "../user/types";
+import { IRegisterRequest } from "../user/types";
 import { ErrorResponse } from "../types/error";
 import { AxiosError } from "axios";
 import { useSnackbar } from "notistack";
@@ -87,7 +87,7 @@ describe("RegisterForm", () => {
   });
 
   it("submits the form successfully", async () => {
-    const formValues: RegisterRequest = {
+    const formValues: IRegisterRequest = {
       name: "John Doe",
       email: "john.doe@example.com",
       password: "password123",
@@ -126,7 +126,7 @@ describe("RegisterForm", () => {
   });
 
   it("handles form submission error", async () => {
-    const formValues: RegisterRequest = {
+    const formValues: IRegisterRequest = {
       name: "John Doe",
       email: "john.doe@example.com",
       password: "password123",

@@ -1,7 +1,7 @@
 import axiosInstance from "@/config/axios";
-import { Category } from "./types";
+import { ICategory } from "./types";
 
-export const fetchCategories = async (lang: string): Promise<Category[]> => {
+export const fetchCategories = async (lang: string): Promise<ICategory[]> => {
   try {
     const response = await axiosInstance.get(`/${lang}/categories`);
     return response.data;
@@ -12,8 +12,8 @@ export const fetchCategories = async (lang: string): Promise<Category[]> => {
 
 export const createCategory = async (
   lang: string,
-  categoryData: Omit<Category, "_id">,
-): Promise<Category> => {
+  categoryData: Omit<ICategory, "_id">,
+): Promise<ICategory> => {
   const response = await axiosInstance.post(
     `/${lang}/categories`,
     categoryData,

@@ -8,7 +8,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
-import { BookingStatus } from "../booking/types";
+import { TBookingStatus } from "../booking/types";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../common/LanguageSwither";
 
@@ -51,7 +51,7 @@ const Topbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeStatus, setActiveStatus] = useState<BookingStatus>("Confirmed");
+  const [activeStatus, setActiveStatus] = useState<TBookingStatus>("Confirmed");
 
   const handleModalClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;

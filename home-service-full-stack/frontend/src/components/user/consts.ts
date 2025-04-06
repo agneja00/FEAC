@@ -1,10 +1,10 @@
 import * as Yup from "yup";
-import { LoginRequest, RegisterRequest } from "./types";
+import { ILoginRequest, IRegisterRequest } from "./types";
 import { errorMessage } from "@/constants/errorMessage";
 
 export const loginValidationSchema = (
   lang: "en" | "lt" | "ru",
-): Yup.Schema<LoginRequest> =>
+): Yup.Schema<ILoginRequest> =>
   Yup.object().shape({
     email: Yup.string()
       .email(errorMessage[lang]?.errorMessage?.email)
@@ -14,7 +14,7 @@ export const loginValidationSchema = (
 
 export const registerValidationSchema = (
   lang: "en" | "lt" | "ru",
-): Yup.Schema<RegisterRequest> =>
+): Yup.Schema<IRegisterRequest> =>
   Yup.object().shape({
     name: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
     email: Yup.string()
@@ -23,12 +23,12 @@ export const registerValidationSchema = (
     password: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
   });
 
-export const loginInitialValues: LoginRequest = {
+export const loginInitialValues: ILoginRequest = {
   email: "",
   password: "",
 };
 
-export const registerInitialValues: RegisterRequest = {
+export const registerInitialValues: IRegisterRequest = {
   name: "",
   email: "",
   password: "",

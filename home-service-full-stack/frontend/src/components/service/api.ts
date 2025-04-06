@@ -1,11 +1,11 @@
 import axiosInstance from "@/config/axios";
-import { Service, NewService, ServiceWithFavorite } from "./types";
+import { IService, NewService, ServiceWithFavorite } from "./types";
 
 export const fetchServices = async (
   lang: string,
 ): Promise<ServiceWithFavorite[]> => {
   const response = await axiosInstance.get(`/${lang}/services`);
-  return response.data.map((service: Service) => ({
+  return response.data.map((service: IService) => ({
     ...service,
     isFavorite: false,
   }));
@@ -34,7 +34,7 @@ export const fetchFavoriteServices = async (
     `/${lang}/services/user/${email}/favorites`,
   );
 
-  return response.data.map((service: Service) => ({
+  return response.data.map((service: IService) => ({
     ...service,
     isFavorite: true,
     name: service.translations?.name?.[lang] || service.name,

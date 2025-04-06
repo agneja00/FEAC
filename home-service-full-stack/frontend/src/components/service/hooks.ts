@@ -6,7 +6,7 @@ import {
   fetchFavoriteServices,
 } from "./api";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
-import { Service, ServiceWithFavorite } from "./types";
+import { IService, ServiceWithFavorite } from "./types";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { ROUTES } from "@/constants/routes";
@@ -136,7 +136,7 @@ export const useServiceData = () => {
     error: favoritesError,
   } = useFavoriteServices(user?.email || "");
 
-  const translateService = (service: Service) => ({
+  const translateService = (service: IService) => ({
     ...service,
     isFavorite: favoriteServices.some((fav) => fav._id === service._id),
     name: service?.translations?.name?.[selectedLang] || service.name,

@@ -2,7 +2,7 @@ import styles from "./BookingCard.module.scss";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { HiOutlineClock, HiOutlineLocationMarker } from "react-icons/hi";
 import { FaRegCalendar } from "react-icons/fa";
-import { Booking } from "./types.ts";
+import { IBooking } from "./types.ts";
 import { useServicePath } from "../service/hooks";
 import Button from "../common/Button.tsx";
 import { useDeleteBooking } from "./hooks.ts";
@@ -10,7 +10,7 @@ import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 
 interface BookingCardProps {
-  booking: Booking;
+  booking: IBooking;
 }
 
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
