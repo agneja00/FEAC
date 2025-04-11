@@ -5,8 +5,8 @@
   border: 1px solid var(--button-border);
   padding: 0.8rem;
   width: 100%;
-  @include card-style;
   transition: border-color 0.3s ease;
+  @include card-style;
 
   &:hover {
     border-color: var(--primary-color);
