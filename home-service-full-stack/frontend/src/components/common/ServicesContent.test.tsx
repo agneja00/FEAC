@@ -10,9 +10,9 @@ import {
 } from "../service/hooks";
 import { generatePath, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Service, ServiceWithFavorite } from "../service/types";
+import { IService, ServiceWithFavorite } from "../service/types";
 import { UserContext } from "../context/UserContext";
-import { User } from "../user/types";
+import { IUser } from "../user/types";
 import { ROUTES } from "@/constants/routes";
 
 jest.mock("../service/hooks", () => ({
@@ -36,7 +36,7 @@ jest.mock("react-i18next", () => ({
   })),
 }));
 
-const services: Service[] = [
+const services: IService[] = [
   {
     _id: "1",
     name: "Service 1",
@@ -91,7 +91,7 @@ const favoriteServices: ServiceWithFavorite[] = [
   },
 ];
 
-const mockUser: User = {
+const mockUser: IUser = {
   _id: "123",
   name: "Test User",
   email: "user@example.com",

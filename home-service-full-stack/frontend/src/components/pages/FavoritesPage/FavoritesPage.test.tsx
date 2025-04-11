@@ -4,7 +4,7 @@ import { UserContext } from "@/components/context/UserContext";
 import FavoritesPage from "./FavoritesPage";
 import { useFavoriteServices } from "@/components/service/hooks";
 import { ServiceWithFavorite } from "@/components/service/types";
-import { User } from "@/components/user/types";
+import { IUser } from "@/components/user/types";
 import { ROUTES } from "@/constants/routes";
 
 jest.mock("@/components/service/hooks", () => ({
@@ -32,7 +32,7 @@ jest.mock("@/components/service/ServiceCard", () => ({
   default: jest.fn(({ service }) => <div>{service.name}</div>),
 }));
 
-const mockUser: User = {
+const mockUser: IUser = {
   _id: "12345",
   name: "Test User",
   email: "test@example.com",
@@ -96,7 +96,7 @@ describe("FavoritesPage", () => {
     jest.clearAllMocks();
   });
 
-  const renderComponent = (route: string, user: User | null = mockUser) => {
+  const renderComponent = (route: string, user: IUser | null = mockUser) => {
     return render(
       <UserContext.Provider
         value={{

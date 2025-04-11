@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CategoryList from "../category/CategoryList";
 import { useCategories } from "./hooks";
 import { MemoryRouter } from "react-router-dom";

@@ -1,7 +1,7 @@
 import { render, act } from "@testing-library/react";
 import { UserProvider, UserContext } from "@/components/context/UserContext";
 import { useLocalStorage } from "usehooks-ts";
-import { LoginResponse, User } from "@/components/user/types";
+import { ILoginResponse, IUser } from "@/components/user/types";
 
 jest.mock("usehooks-ts", () => ({
   useLocalStorage: jest.fn(),
@@ -10,10 +10,10 @@ jest.mock("usehooks-ts", () => ({
 const mockUseLocalStorage = useLocalStorage as jest.Mock;
 
 describe("UserContext", () => {
-  let userState: User | null = null;
+  let userState: IUser | null = null;
   let tokenState: string | null = null;
 
-  const setUserMock = jest.fn((newUser: User | null) => {
+  const setUserMock = jest.fn((newUser: IUser | null) => {
     userState = newUser;
   });
   const setTokenMock = jest.fn((newToken: string | null) => {
@@ -60,7 +60,7 @@ describe("UserContext", () => {
   });
 
   it("updates user and token on login", () => {
-    const loginResponse: LoginResponse = {
+    const loginResponse: ILoginResponse = {
       status: "success",
       token: "test-token",
       user: { _id: "123", name: "Test User", email: "test@example.com" },
@@ -102,7 +102,7 @@ describe("UserContext", () => {
   });
 
   it("clears user and token on logout", () => {
-    const loginResponse: LoginResponse = {
+    const loginResponse: ILoginResponse = {
       status: "success",
       token: "test-token",
       user: { _id: "123", name: "Test User", email: "test@example.com" },
