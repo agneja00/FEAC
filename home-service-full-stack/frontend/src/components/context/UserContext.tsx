@@ -1,11 +1,11 @@
 import { PropsWithChildren, createContext } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { LoginResponse, User } from "../user/types";
+import { ILoginResponse, IUser } from "../user/types";
 
 const UserContext = createContext<{
-  user: User | null;
+  user: IUser | null;
   isLoggedIn: boolean;
-  login: (user: LoginResponse) => void;
+  login: (user: ILoginResponse) => void;
   logout: () => void;
 }>({
   user: null,
@@ -15,12 +15,12 @@ const UserContext = createContext<{
 });
 
 const UserProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useLocalStorage<User | null>("user", null);
+  const [user, setUser] = useLocalStorage<IUser | null>("user", null);
   const [, setToken] = useLocalStorage<string | null>("token", null);
 
   const isLoggedIn = !!user;
 
-  const login = (loginResponse: LoginResponse) => {
+  const login = (loginResponse: ILoginResponse) => {
     setUser(loginResponse.user);
     setToken(loginResponse.token);
   };
