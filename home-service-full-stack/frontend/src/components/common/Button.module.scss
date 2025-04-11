@@ -1,65 +1,67 @@
 .button {
-  padding: 0.8rem;
-  background-color: $primary-color;
-  color: $tertiary-color;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
+  @include button-style;
 
-  &:hover {
-    background-color: #5b24e7;
+  &.large {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  &.small {
+    padding: 0.5rem;
+    max-width: 7rem;
+  }
+
+  &.favorite {
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--button-border);
+
+    &:hover {
+      background-color: var(--favorite-hover);
+      color: var(--tertiary-color);
+    }
+  }
+
+  &.cancel {
+    background-color: var(--error-color);
+
+    &:hover {
+      background-color: var(--error-hover);
+    }
+  }
+
+  &.language {
+    font-weight: 700;
+    color: var(--secondary-color);
+    background-color: var(--tertiary-color);
+    padding: 0.25rem;
+    border: none;
+    border-bottom: 1px solid transparent;
+
+    &:focus {
+      color: var(--language-focus-and-hover);
+      border-bottom-color: var(--language-focus-and-hover);
+    }
+
+    &:hover {
+      color: var(--language-focus-and-hover);
+      background-color: var(--tertiary-color);
+    }
   }
 }
 
-.large {
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-}
-
-.small {
-  padding: 0.5rem;
-  max-width: 7rem;
-}
-
-.favorite {
-  background-color: $tertiary-color;
-  color: $secondary-color;
-
-  &:hover {
-    background-color: #e7245f;
-  }
-}
-
-.cancel {
-  background-color: #ff0000;
-  &:hover {
-    background-color: #d00d0d;
-  }
-}
-
-.language {
-  font-weight: 700;
-  color: $secondary-color;
-  background-color: $tertiary-color;
-  padding: 0.25rem;
-  &:focus {
-    color: #e7245f;
-    border-bottom: 1px solid #e7245f;
-  }
-  &:hover {
-    color: #e7245f;
-    background-color: $tertiary-color;
-  }
-}
-
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 410px) {
   .button {
     font-size: 0.9rem;
     padding: 0.75rem 1.25rem;
-  }
 
-  .small {
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
+    &.small {
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+    }
+
+    &.language {
+      padding: 0.5rem;
+    }
   }
 }

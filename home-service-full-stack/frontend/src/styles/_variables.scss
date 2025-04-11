@@ -1,19 +1,62 @@
-$primary-color: #8056eb;
-$secondary-color: #000000;
-$tertiary-color: #ffffff;
+:root {
+  --primary-color: #8056eb;
+  --primary-color-hover: #6a4bc7;
+  --secondary-color: #000000;
+  --tertiary-color: #ffffff;
+  --category-card-color: #f2eefd;
+  --text-color: #333333;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --shadow-hover: rgba(86, 20, 208, 0.25);
+  --input-border: #67abc2;
+  --error-color: #ff0000;
+  --error-hover: #d00d0d;
+  --button-border: #e0e0e0;
+  --favorite-hover: #e7245f;
+  --language-focus-and-hover: #e7245f;
+}
+
+[data-theme="dark"] {
+  --primary-color: #9a7aed;
+  --primary-color-hover: #8056eb;
+  --secondary-color: #ffffff;
+  --tertiary-color: #121212;
+  --category-card-color: #2a233a;
+  --text-color: #f5f5f5;
+  --card-bg: #1e1e1e;
+  --input-bg: #2d2d2d;
+  --modal-overlay: rgba(0, 0, 0, 0.85);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(134, 86, 235, 0.4);
+  --input-border: #5d8b9c;
+  --error-hover: #b30000;
+  --button-border: #333333;
+  --favorite-hover: #c61e4d;
+  --language-focus-and-hover: #ff3366;
+}
+
+body {
+  background-color: var(--tertiary-color);
+  color: var(--text-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
 
 @mixin card-style {
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: var(--shadow-color) 1.95px 1.95px 2.6px;
   border-radius: 1rem;
   display: flex;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    cursor: pointer;
     transform: translateY(-10px);
-    box-shadow: rgba(86, 20, 208, 0.25) 5px 5px 15px;
+    box-shadow: var(--shadow-hover) 5px 5px 15px;
+    cursor: pointer;
   }
 }
 
@@ -22,7 +65,7 @@ $tertiary-color: #ffffff;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--modal-overlay);
   z-index: 1000;
   animation: open-modal 0.3s forwards ease-out;
 }
@@ -30,11 +73,10 @@ $tertiary-color: #ffffff;
 @keyframes open-modal {
   0% {
     transform: translate(100%);
-    background-color: #00000017;
+    opacity: 0.1;
   }
-
   100% {
-    background-color: #000000c3;
+    opacity: 1;
   }
 }
 
@@ -45,7 +87,7 @@ $tertiary-color: #ffffff;
 }
 
 @mixin label-style {
-  color: #333;
+  color: var(--text-color);
   font-weight: 600;
 }
 
@@ -56,21 +98,38 @@ $tertiary-color: #ffffff;
 }
 
 @mixin input-style {
-  color: $secondary-color;
+  color: var(--text-color);
+  background-color: var(--input-bg);
   font-size: 1rem;
   margin-top: 0.5rem;
   padding: 0.625rem 1rem;
-  border: 0.125rem solid #67abc2;
+  border: 0.125rem solid var(--input-border);
   border-radius: 0.375rem;
+  transition: all 0.3s ease;
+
   &:focus {
     outline: none;
-    border-color: #9147ff;
+    border-color: var(--primary-color);
   }
 }
 
 @mixin error-message {
-  color: #ff0000;
+  color: var(--error-color);
   font-size: 0.8rem;
   font-weight: 600;
   margin-top: 0.8rem;
+}
+
+@mixin button-style {
+  padding: 0.8rem;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--primary-color-hover);
+  }
 }

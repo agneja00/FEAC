@@ -23,26 +23,34 @@
   display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: 1.875rem;
-  background-color: #e5ddfb;
-  color: $primary-color;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
   font-weight: 500;
   font-size: 0.9rem;
   width: 7rem;
   text-align: center;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .name {
   margin-top: 0.5rem;
+  color: var(--text-color);
 }
 
 .contactPerson {
   margin-top: 1rem;
-  color: $primary-color;
+  color: var(--primary-color);
 }
 
 .address {
   margin: 1rem 0;
-  color: #a8a8a8;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 .buttonContainer {

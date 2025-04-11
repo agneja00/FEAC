@@ -1,6 +1,6 @@
 .container {
   line-height: 1.6;
-  padding: 0 1rem 0 1rem;
+  padding: 0 1rem;
 }
 
 .title {
@@ -19,14 +19,14 @@
 }
 
 .paragraph {
-  color: #414141;
+  color: var(--text-color);
   font-size: 1rem;
   text-align: justify;
   margin-bottom: 1rem;
 }
 
 .subheading {
-  color: $primary-color;
+  color: var(--primary-color);
   margin: 0.5rem 0;
   font-size: 1.1rem;
 }
@@ -52,7 +52,7 @@
 }
 
 .formLink {
-  color: $primary-color;
+  color: var(--primary-color);
   font-style: italic;
   font-weight: 600;
 }

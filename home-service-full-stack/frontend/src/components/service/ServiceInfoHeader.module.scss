@@ -16,7 +16,8 @@
   height: 6rem;
   border-radius: 50%;
   object-fit: cover;
-  align-self: center;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 2px 6px var(--shadow-hover);
 }
 
 .detailsContainerFirst,
@@ -26,24 +27,32 @@
   gap: 0.9rem;
   font-size: 85%;
   font-weight: 500;
-  color: #7c7878;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 .chip {
   padding: 0.5rem;
   width: 50%;
   border-radius: 1.875rem;
-  background-color: #e5ddfb;
-  color: $primary-color;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
   font-weight: 500;
   text-transform: capitalize;
   text-align: center;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
 }
 
 .name {
   font-size: 1.2rem;
   font-weight: 800;
-  color: $secondary-color;
+  color: var(--secondary-color);
 }
 
 .infoContainer {
@@ -53,7 +62,7 @@
 }
 
 .contactPerson {
-  color: $primary-color;
+  color: var(--primary-color);
 }
 
 @media only screen and (min-width: 820px) {
@@ -76,6 +85,7 @@
   .avatar {
     width: 10rem;
     height: 10rem;
+    border-width: 4px;
   }
 
   .detailsContainerFirst,

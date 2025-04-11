@@ -21,6 +21,7 @@ import { UserProvider } from "./components/context/UserContext";
 import Services from "./components/pages/Services/Services";
 import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
 import LanguageValidator from "./components/common/LanguageValidator";
+import { ThemeProvider } from "./components/context/ThemeContext";
 
 const router = createBrowserRouter([
   {
@@ -106,11 +107,13 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <SnackbarProvider>
-          <RouterProvider router={router} />
-        </SnackbarProvider>
-      </UserProvider>
+      <ThemeProvider>
+        <UserProvider>
+          <SnackbarProvider>
+            <RouterProvider router={router} />
+          </SnackbarProvider>
+        </UserProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

@@ -3,9 +3,9 @@
   @include flex-style;
   gap: 2rem;
   padding: 1.5rem;
-  border-bottom: 0.125rem solid #f1f1f1;
+  border-bottom: 0.125rem solid var(--button-border);
   width: 100%;
-  background-color: $tertiary-color;
+  background-color: var(--tertiary-color);
   z-index: 1;
 }
 
@@ -31,7 +31,7 @@
   height: 100%;
   padding: 4rem 2rem;
   transform: translateX(0);
-  background-color: $tertiary-color;
+  background-color: var(--tertiary-color);
 }
 
 .navigationLargeContainer {
@@ -40,12 +40,12 @@
 
 .navLink,
 .accountLink {
-  color: #323232;
+  color: var(--text-color);
   font-size: 1.2rem;
   font-weight: 500;
 
   &:hover {
-    color: $primary-color;
+    color: var(--primary-color);
     text-decoration: none;
   }
 }
@@ -78,15 +78,15 @@
   padding: 1.2rem;
   border-radius: 0.5rem;
   list-style: none;
-  box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2px 2px;
-  background-color: hsl(36deg, 100%, 99%);
+  box-shadow: var(--shadow-color) 2px 2px 2px 2px;
+  background-color: var(--card-bg);
 }
 
 .account {
   font-size: 1.25rem;
   font-weight: 600;
   padding: 0.7rem 0;
-  border-bottom: 0.125rem solid #f1f1f1;
+  border-bottom: 0.125rem solid var(--button-border);
 }
 
 @media only screen and (min-width: 390px) {
@@ -107,7 +107,7 @@
   }
 }
 
-@media only screen and (min-width: 668px) {
+@media only screen and (min-width: 920px) {
   .topbar {
     padding: 1.5rem 6.5rem;
   }
@@ -115,11 +115,11 @@
   .navLink {
     margin-right: 1.5rem;
     padding-bottom: 2.1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
 
     &:focus {
-      color: $primary-color;
-      border-bottom: 3px solid $primary-color;
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
     }
   }
 
@@ -135,11 +135,5 @@
   .navigationLargeContainer {
     @include flex-style;
     width: 100%;
-  }
-}
-
-@media only screen and (min-width: 820px) {
-  .navLink {
-    font-size: 1.2rem;
   }
 }

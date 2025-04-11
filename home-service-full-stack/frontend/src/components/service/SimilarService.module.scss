@@ -1,5 +1,6 @@
 .title {
   margin-top: 1.5rem;
+  color: var(--text-color);
 }
 
 .similarContainer {
@@ -13,12 +14,22 @@
   gap: 1rem;
   font-size: 0.5rem;
   padding: 1rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+  }
 }
 
 .businessImg {
   width: 10rem;
+  height: 6rem;
   border-radius: 10%;
-  object-fit: contain;
+  object-fit: cover;
+  border: 1px solid var(--button-border);
 }
 
 .detailsContainer {
@@ -26,22 +37,24 @@
   flex-direction: column;
   gap: 0.9rem;
   font-size: 0.85rem;
-  color: #7c7878;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 .similarName {
   font-size: 1.2rem;
   font-weight: 600;
-  color: $secondary-color;
+  color: var(--secondary-color);
 }
 
 .contactPerson {
-  color: $primary-color;
+  color: var(--primary-color);
 }
 
 @media only screen and (min-width: 768px) {
   .title {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
 
   .detailsContainer {

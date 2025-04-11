@@ -4,8 +4,8 @@
   justify-content: center;
   width: 45%;
   gap: 0.5rem;
-  background-color: #f2eefd;
-  border: 0.125rem solid #e6e6e6;
+  background-color: var(--category-card-color);
+  border: 0.125rem solid var(--button-border);
   border-radius: 1rem;
   padding: 1rem 3rem;
   cursor: pointer;
@@ -14,14 +14,15 @@
     font-size: 0.8rem;
     text-transform: capitalize;
     font-weight: 500;
+    color: var(--text-color);
   }
 
   &:hover,
   &.active {
-    border-color: #beaaf5;
+    border-color: var(--primary-color-hover);
 
     .name {
-      color: $primary-color;
+      color: var(--primary-color);
     }
   }
 }
