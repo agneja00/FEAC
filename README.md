@@ -10,6 +10,7 @@ A modern platform for booking home services (cleaning, repairs, painting, etc.) 
 - Favorites: Save preferred services for quick access.
 - Multi-Language: Switch between languages (English, Lithuanian and Russian).
 - Service Providers: Register and list your own services.
+- Dark Mode Toggle: Switch between light and dark themes.
 
 ### Links
 
