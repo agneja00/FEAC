@@ -35,3 +35,6 @@ A modern platform for booking home services (cleaning, repairs, painting, etc.) 
 
 - Website - [Agnieska Jackevic] (https://web-portfolio-agneja00.vercel.app/)
 - Linkedin - [Agnieska Jackevic] (https://www.linkedin.com/in/agnieska-jackevic-948830222/)
+
+![Screenshot](./home-service-full-stack/frontend/src/assets/desktop_light.png)
+![Screenshot](./home-service-full-stack/frontend/src/assets/mobile_dark.png)
