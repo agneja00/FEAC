@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": "20.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "test": "jest",
     "ts-coverage": "typescript-coverage-report",
