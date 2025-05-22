@@ -11,12 +11,9 @@ const statusTranslations: Record<string, Record<TBookingStatus, string>> = {
 export const fetchUserBookings = async (
   lang: string,
   userEmail: string,
-  status: TBookingStatus,
 ): Promise<IBooking[]> => {
-  const translatedStatus = statusTranslations[lang]?.[status] || status;
-
   const response = await axiosInstance.get<IBooking[]>(
-    `/${lang}/bookings/user/${userEmail}/${translatedStatus}`,
+    `/${lang}/bookings/user/${userEmail}`,
   );
 
   const bookings = response.data;

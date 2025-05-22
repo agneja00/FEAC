@@ -55,22 +55,28 @@ const bookingSchema = new mongoose.Schema({
 
 bookingSchema.pre<IBooking>("save", function (next) {
   const now = new Date();
+const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+const bookingDateUTC = new Date(Date.UTC(
+  this.date.getUTCFullYear(),
+  this.date.getUTCMonth(),
+  this.date.getUTCDate()
+));
 
-  if (this.date < now) {
-    this.status = "Completed";
-    this.translations.status = {
-      en: "Completed",
-      lt: "Užbaigta",
-      ru: "Завершено",
-    };
-  } else {
-    this.status = "Confirmed";
-    this.translations.status = {
-      en: "Confirmed",
-      lt: "Patvirtinta",
-      ru: "Подтверждено",
-    };
-  }
+if (bookingDateUTC < todayUTC) {
+  this.status = "Completed";
+  this.translations.status = {
+    en: "Completed",
+    lt: "Užbaigta",
+    ru: "Завершено",
+  };
+} else {
+  this.status = "Confirmed";
+  this.translations.status = {
+    en: "Confirmed",
+    lt: "Patvirtinta",
+    ru: "Подтверждено",
+  };
+}
 
   next();
 });

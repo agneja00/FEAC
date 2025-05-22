@@ -27,40 +27,56 @@ const errorMessages: { [key: string]: { fetchError: string; createError: string;
   },
 };
 
-const statusTranslations: { [key: string]: { [key: string]: string } } = {
-  en: {
-    Completed: "Completed",
-    Confirmed: "Confirmed",
-  },
-  lt: {
-    Completed: "Užbaigti",
-    Confirmed: "Patvirtinti",
-  },
-  ru: {
-    Completed: "Завершено",
-    Confirmed: "Подтверждено",
-  },
-};
-
-router.get("/:lang/bookings/user/:email/:status", async (req, res) => {
-  const { lang, email, status } = req.params;
-
-  const dbStatus =
-    Object.keys(statusTranslations[lang] || {}).find((key) => statusTranslations[lang][key] === status) || status;
+router.get("/:lang/bookings/user/:email", authMiddleware, async (req, res) => {
+  const { lang, email } = req.params;
 
   try {
-    const bookings = await Booking.find({ userEmail: email, status: dbStatus }).populate("serviceId").exec();
+    const bookings = await Booking.find({ userEmail: email }).populate("serviceId").exec();
 
-    const translatedBookings = bookings.map((booking) => ({
-      ...booking.toObject(),
-      translatedStatus: booking.translations?.status?.[lang] || booking.status,
-    }));
+    const todayUTC = new Date(Date.UTC(
+      new Date().getUTCFullYear(),
+      new Date().getUTCMonth(),
+      new Date().getUTCDate()
+    ));
 
-    res.json(translatedBookings);
+    const updatedBookings = await Promise.all(
+      bookings.map(async (booking) => {
+        const bookingDateUTC = new Date(Date.UTC(
+          booking.date.getUTCFullYear(),
+          booking.date.getUTCMonth(),
+          booking.date.getUTCDate()
+        ));
+
+        const isCompleted = bookingDateUTC < todayUTC;
+
+        const correctStatus = isCompleted ? "Completed" : "Confirmed";
+
+        if (booking.status !== correctStatus) {
+          booking.status = correctStatus;
+          booking.translations.status = {
+            en: isCompleted ? "Completed" : "Confirmed",
+            lt: isCompleted ? "Užbaigta" : "Patvirtinta",
+            ru: isCompleted ? "Завершено" : "Подтверждено",
+          };
+          await booking.save();
+        }
+
+        return {
+          ...booking.toObject(),
+          translatedStatus: booking.translations.status[lang] || booking.status,
+        };
+      })
+    );
+
+    res.json(updatedBookings);
   } catch (err) {
-    res.status(500).json({ message: errorMessages[lang]?.fetchError || errorMessages.en.fetchError, error: err });
+    res.status(500).json({
+      message: errorMessages[lang]?.fetchError || errorMessages.en.fetchError,
+      error: err,
+    });
   }
 });
+
 
 router.post("/:lang/bookings", authMiddleware, async (req, res) => {
   const lang = req.params.lang === "lt" ? "lt" : req.params.lang === "ru" ? "ru" : "en";

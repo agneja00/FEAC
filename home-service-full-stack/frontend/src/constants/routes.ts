@@ -8,7 +8,7 @@ export const ROUTES = {
   LOGIN: "/:lang/auth/login",
   REGISTER: "/:lang/auth/register",
   BOOKINGS: "/:lang/bookings/user/:email",
-  BOOKINGS_FILTER: "/:lang/bookings/user/:email/:status",
+  BOOKINGS_FILTER: "/:lang/bookings/user/:email/",
   FAVORITES: "/:lang/services/user/:email/favorites",
   FAVORITES_CATEGORY: "/:lang/services/user/:email/favorites/:category",
 };

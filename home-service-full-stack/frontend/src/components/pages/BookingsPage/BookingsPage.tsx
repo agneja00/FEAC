@@ -6,32 +6,42 @@ import { TBookingStatus } from "@/components/booking/types";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
 
-const statusTranslations: Record<string, Record<string, string>> = {
+const statusTranslations: Record<string, Record<TBookingStatus, string>> = {
   en: { Confirmed: "Confirmed", Completed: "Completed" },
-  lt: { Confirmed: "Patvirtinti", Completed: "Užbaigti" },
+  lt: { Confirmed: "Patvirtinta", Completed: "Užbaigta" },
   ru: { Confirmed: "Подтверждено", Completed: "Завершено" },
 };
 
 const BookingsPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const {
     lang = "en",
     email,
-    status,
-  } = useParams<{ lang: string; email: string; status: string }>();
-  const navigate = useNavigate();
+    status: statusFromUrl,
+  } = useParams<{
+    lang: string;
+    email: string;
+    status: string;
+  }>();
 
-  const getEnglishStatus = () =>
-    Object.keys(statusTranslations.en).find(
-      (key) => statusTranslations[lang]?.[key] === status,
-    ) || "Confirmed";
+  const getEnglishStatus = (): TBookingStatus => {
+    const langTranslations =
+      statusTranslations[lang] || statusTranslations["en"];
+    const match = Object.entries(langTranslations).find(
+      ([_, translated]) => translated === statusFromUrl,
+    );
+    return (match?.[0] as TBookingStatus) || "Confirmed";
+  };
 
-  const validatedStatus = getEnglishStatus() as TBookingStatus;
-  const { data: bookings, isLoading, error } = useUserBookings(validatedStatus);
+  const validatedStatus = getEnglishStatus();
+
+  const { data: bookings, isLoading, error } = useUserBookings();
 
   const handleFilterChange = (filter: string) => {
     const translatedStatus =
-      statusTranslations[lang][filter as TBookingStatus] || filter;
+      statusTranslations[lang]?.[filter as TBookingStatus] || filter;
     navigate(
       generatePath(ROUTES.BOOKINGS_FILTER, {
         lang,
@@ -49,10 +59,14 @@ const BookingsPage = () => {
       </div>
     );
 
+  const filteredBookings = (bookings || []).filter(
+    (b) => b.status === validatedStatus,
+  );
+
   return (
     <FilteredList
       title={t("accountModal.myBookings")}
-      items={bookings || []}
+      items={filteredBookings}
       filters={Object.keys(statusTranslations[lang]) as TBookingStatus[]}
       activeFilter={validatedStatus}
       onFilterChange={handleFilterChange}
