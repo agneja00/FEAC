@@ -33,19 +33,13 @@ router.get("/:lang/bookings/user/:email", authMiddleware, async (req, res) => {
   try {
     const bookings = await Booking.find({ userEmail: email }).populate("serviceId").exec();
 
-    const todayUTC = new Date(Date.UTC(
-      new Date().getUTCFullYear(),
-      new Date().getUTCMonth(),
-      new Date().getUTCDate()
-    ));
+    const todayUTC = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate()));
 
     const updatedBookings = await Promise.all(
       bookings.map(async (booking) => {
-        const bookingDateUTC = new Date(Date.UTC(
-          booking.date.getUTCFullYear(),
-          booking.date.getUTCMonth(),
-          booking.date.getUTCDate()
-        ));
+        const bookingDateUTC = new Date(
+          Date.UTC(booking.date.getUTCFullYear(), booking.date.getUTCMonth(), booking.date.getUTCDate()),
+        );
 
         const isCompleted = bookingDateUTC < todayUTC;
 
@@ -61,11 +55,14 @@ router.get("/:lang/bookings/user/:email", authMiddleware, async (req, res) => {
           await booking.save();
         }
 
+        const obj = booking.toObject();
+
         return {
-          ...booking.toObject(),
-          translatedStatus: booking.translations.status[lang] || booking.status,
+          ...obj,
+          status: booking.status,
+          translatedStatus: booking.translations?.status?.[lang] || booking.status,
         };
-      })
+      }),
     );
 
     res.json(updatedBookings);
@@ -76,7 +73,6 @@ router.get("/:lang/bookings/user/:email", authMiddleware, async (req, res) => {
     });
   }
 });
-
 
 router.post("/:lang/bookings", authMiddleware, async (req, res) => {
   const lang = req.params.lang === "lt" ? "lt" : req.params.lang === "ru" ? "ru" : "en";
