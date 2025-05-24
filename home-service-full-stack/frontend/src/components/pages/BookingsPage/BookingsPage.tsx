@@ -15,22 +15,20 @@ const statusTranslations: Record<string, Record<TBookingStatus, string>> = {
 const BookingsPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const {
-    lang = "en",
-    email,
-    status: statusFromUrl,
-  } = useParams<{
-    lang: string;
-    email: string;
-    status: string;
+  const params = useParams<{
+    lang?: string;
+    email?: string;
+    status?: string;
   }>();
 
+  const lang = params.lang ?? "en";
+  const email = params.email ?? "";
+  const statusFromUrl = params.status ?? statusTranslations[lang].Confirmed;
+
   const getEnglishStatus = (): TBookingStatus => {
-    const langTranslations =
-      statusTranslations[lang] || statusTranslations["en"];
-    const match = Object.entries(langTranslations).find(
-      ([_, translated]) => translated === statusFromUrl,
+    const langMap = statusTranslations[lang] || statusTranslations["en"];
+    const match = Object.entries(langMap).find(
+      ([, val]) => val === statusFromUrl,
     );
     return (match?.[0] as TBookingStatus) || "Confirmed";
   };
@@ -40,13 +38,14 @@ const BookingsPage = () => {
   const { data: bookings, isLoading, error } = useUserBookings();
 
   const handleFilterChange = (filter: string) => {
-    const translatedStatus =
+    const translated =
       statusTranslations[lang]?.[filter as TBookingStatus] || filter;
+
     navigate(
       generatePath(ROUTES.BOOKINGS_FILTER, {
         lang,
         email,
-        status: translatedStatus,
+        status: translated,
       }),
     );
   };
