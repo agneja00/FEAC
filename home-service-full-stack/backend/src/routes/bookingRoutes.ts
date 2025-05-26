@@ -7,9 +7,33 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+function evaluateBookingStatus(date: Date): {
+  status: "Confirmed" | "Completed";
+  translations: {
+    en: string;
+    lt: string;
+    ru: string;
+  };
+} {
+  const now = new Date();
+  const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const bookingDateUTC = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+
+  const isCompleted = bookingDateUTC < todayUTC;
+
+  return {
+    status: isCompleted ? "Completed" : "Confirmed",
+    translations: {
+      en: isCompleted ? "Completed" : "Confirmed",
+      lt: isCompleted ? "Užbaigta" : "Patvirtinta",
+      ru: isCompleted ? "Завершено" : "Подтверждено",
+    },
+  };
+}
+
 const router = express.Router();
 
-const errorMessages: { [key: string]: { fetchError: string; createError: string; deleteError: string } } = {
+const errorMessages: Record<string, { fetchError: string; createError: string; deleteError: string }> = {
   en: {
     fetchError: "Error fetching bookings for the user",
     createError: "Error creating booking",
@@ -27,45 +51,39 @@ const errorMessages: { [key: string]: { fetchError: string; createError: string;
   },
 };
 
-router.get("/:lang/bookings/user/:email", authMiddleware, async (req, res) => {
-  const { lang, email } = req.params;
+router.get("/:lang/bookings/user/:email/:status", authMiddleware, async (req, res) => {
+  const { lang, email, status } = req.params;
 
   try {
-    const bookings = await Booking.find({ userEmail: email }).populate("serviceId").exec();
+    const allowedStatuses = ["Confirmed", "Completed"];
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({ message: "Invalid status filter." });
+    }
 
-    const todayUTC = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate()));
+    const rawBookings = await Booking.find({ userEmail: email }).populate("serviceId");
 
     const updatedBookings = await Promise.all(
-      bookings.map(async (booking) => {
-        const bookingDateUTC = new Date(
-          Date.UTC(booking.date.getUTCFullYear(), booking.date.getUTCMonth(), booking.date.getUTCDate()),
-        );
+      rawBookings.map(async (booking) => {
+        const { status: newStatus, translations } = evaluateBookingStatus(booking.date);
 
-        const isCompleted = bookingDateUTC < todayUTC;
-
-        const correctStatus = isCompleted ? "Completed" : "Confirmed";
-
-        if (booking.status !== correctStatus) {
-          booking.status = correctStatus;
-          booking.translations.status = {
-            en: isCompleted ? "Completed" : "Confirmed",
-            lt: isCompleted ? "Užbaigta" : "Patvirtinta",
-            ru: isCompleted ? "Завершено" : "Подтверждено",
-          };
+        if (booking.status !== newStatus) {
+          booking.status = newStatus;
+          booking.translations.status = translations;
           await booking.save();
         }
 
         const obj = booking.toObject();
-
         return {
           ...obj,
           status: booking.status,
-          translatedStatus: booking.translations?.status?.[lang] || booking.status,
+          translatedStatus: booking.translations.status[lang] || booking.status,
         };
       }),
     );
 
-    res.json(updatedBookings);
+    const filteredBookings = updatedBookings.filter((b) => b.status === status);
+
+    res.json(filteredBookings);
   } catch (err) {
     res.status(500).json({
       message: errorMessages[lang]?.fetchError || errorMessages.en.fetchError,
@@ -108,7 +126,7 @@ router.post("/:lang/bookings", authMiddleware, async (req, res) => {
       },
     };
 
-    sendEmail({
+    await sendEmail({
       to: userEmail!,
       from: process.env.EMAIL!,
       subject: emailMessages[lang].subject,

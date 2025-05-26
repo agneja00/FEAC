@@ -15,6 +15,7 @@ const statusTranslations: Record<string, Record<TBookingStatus, string>> = {
 const BookingsPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const params = useParams<{
     lang?: string;
     email?: string;
@@ -58,9 +59,7 @@ const BookingsPage = () => {
       </div>
     );
 
-  const filteredBookings = (bookings || []).filter(
-    (b) => b.status === validatedStatus,
-  );
+  const filteredBookings = bookings || [];
 
   return (
     <FilteredList
