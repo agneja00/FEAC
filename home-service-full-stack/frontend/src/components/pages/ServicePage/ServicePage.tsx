@@ -32,15 +32,15 @@ const ServicePage = () => {
   const [timeSlot, setTimeSlot] = useState("");
 
   const timeSlots = [
-    t("time.8AM"),
-    t("time.10AM"),
-    t("time.11AM"),
-    t("time.1130AM"),
-    t("time.12PM"),
-    t("time.1230PM"),
-    t("time.2PM"),
-    t("time.6PM"),
-    t("time.7PM"),
+    { value: "08:00", label: t("time.8AM") },
+    { value: "10:00", label: t("time.10AM") },
+    { value: "11:00", label: t("time.11AM") },
+    { value: "11:30", label: t("time.1130AM") },
+    { value: "12:00", label: t("time.12PM") },
+    { value: "12:30", label: t("time.1230PM") },
+    { value: "14:00", label: t("time.2PM") },
+    { value: "18:00", label: t("time.6PM") },
+    { value: "19:00", label: t("time.7PM") },
   ];
 
   const handleDateChange = (newValue: Dayjs | null) => {
@@ -99,13 +99,13 @@ const ServicePage = () => {
             </LocalizationProvider>
           </div>
           <div className={styles.timeContainer}>
-            {timeSlots.map((time) => (
+            {timeSlots.map(({ value, label }) => (
               <button
-                key={time}
+                key={value}
                 className={styles.time}
-                onClick={() => handleTimeChange(time)}
+                onClick={() => handleTimeChange(value)}
               >
-                {time}
+                {label}
               </button>
             ))}
           </div>
