@@ -1,19 +1,14 @@
 import axiosInstance from "@/config/axios";
-import { IBooking, TBookingStatus, NewBooking } from "./types";
+import { IBooking, NewBooking } from "./types";
 import { fetchServiceById } from "../service/api";
-
-const statusTranslations: Record<string, Record<TBookingStatus, string>> = {
-  en: { Confirmed: "Confirmed", Completed: "Completed" },
-  lt: { Confirmed: "Patvirtinti", Completed: "Užbaigti" },
-  ru: { Confirmed: "Подтверждено", Completed: "Завершено" },
-};
 
 export const fetchUserBookings = async (
   lang: string,
   userEmail: string,
+  status: string,
 ): Promise<IBooking[]> => {
   const response = await axiosInstance.get<IBooking[]>(
-    `/${lang}/bookings/user/${userEmail}`,
+    `/${lang}/bookings/user/${userEmail}/${status}`,
   );
 
   const bookings = response.data;

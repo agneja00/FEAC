@@ -65,7 +65,7 @@ describe("BookingCard", () => {
     translations: {
       status: {
         en: "Confirmed",
-        lt: "Patvirtinti",
+        lt: "Patvirtinta",
         ru: "Подтверждено",
       },
     },

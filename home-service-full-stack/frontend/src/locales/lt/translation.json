@@ -150,8 +150,8 @@
     "7PM": "19:00"
   },
   "status": {
-    "confirmed": "Patvirtinti",
-    "completed": "Užbaigti"
+    "confirmed": "Patvirtinta",
+    "completed": "Užbaigta"
   },
   "bookingCard": {
     "date": "Data:",

@@ -143,4 +143,18 @@ router.post("/:lang/bookings", authMiddleware, async (req, res) => {
   }
 });
 
+router.delete("/:lang/bookings/:id", authMiddleware, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Booking.findByIdAndDelete(id);
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).json({
+      message: "Error deleting booking",
+      error: err,
+    });
+  }
+});
+
 export default router;
