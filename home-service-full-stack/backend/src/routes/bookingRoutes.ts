@@ -33,7 +33,9 @@ function evaluateBookingStatus(date: Date): {
 
 const router = express.Router();
 
-const errorMessages: Record<string, { fetchError: string; createError: string; deleteError: string }> = {
+type LangCode = "en" | "lt" | "ru";
+
+const errorMessages: Record<LangCode, { fetchError: string; createError: string; deleteError: string }> = {
   en: {
     fetchError: "Error fetching bookings for the user",
     createError: "Error creating booking",
@@ -52,7 +54,8 @@ const errorMessages: Record<string, { fetchError: string; createError: string; d
 };
 
 router.get("/:lang/bookings/user/:email/:status", authMiddleware, async (req, res) => {
-  const { lang, email, status } = req.params;
+  const { lang: langParam, email, status } = req.params;
+  const lang = (["en", "lt", "ru"].includes(langParam) ? langParam : "en") as LangCode;
 
   try {
     const allowedStatuses = ["Confirmed", "Completed"];
@@ -144,15 +147,58 @@ router.post("/:lang/bookings", authMiddleware, async (req, res) => {
 });
 
 router.delete("/:lang/bookings/:id", authMiddleware, async (req, res) => {
-  const { id } = req.params;
+  const { id, lang: langParam } = req.params;
+
+  const lang = (["en", "lt", "ru"].includes(langParam) ? langParam : "en") as LangCode;
 
   try {
+    const booking = await Booking.findById(id).populate("serviceId");
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found." });
+    }
+
+    const service = booking.serviceId as unknown as IService;
+
+    const userEmail = booking.userEmail;
+    const userName = booking.userName;
+    const serviceName = service?.name || "Service";
+    const date = booking.date.toISOString().split("T")[0];
+    const time = booking.time;
+
+    const emailMessages: Record<LangCode, { subject: string; text: string; html: string }> = {
+      en: {
+        subject: "Booking Cancelled",
+        text: `Dear ${userName}, your booking with ${serviceName} on ${date} at ${time} has been cancelled.`,
+        html: `<p>Dear ${userName}, your booking with <strong>${serviceName}</strong> on <strong>${date}</strong> at <strong>${time}</strong> has been <i>cancelled</i>.</p>`,
+      },
+      lt: {
+        subject: "Rezervacija atšaukta",
+        text: `Gerb. ${userName}, jūsų rezervacija su ${serviceName} ${date} ${time} buvo atšaukta.`,
+        html: `<p>Gerb. ${userName}, jūsų rezervacija su <strong>${serviceName}</strong> <strong>${date}</strong> <strong>${time}</strong> buvo <i>atšaukta</i>.</p>`,
+      },
+      ru: {
+        subject: "Бронирование отменено",
+        text: `Уважаемый(ая) ${userName}, ваше бронирование услуги ${serviceName} на ${date} в ${time} было отменено.`,
+        html: `<p>Уважаемый(ая) ${userName}, ваше бронирование услуги <strong>${serviceName}</strong> на <strong>${date}</strong> в <strong>${time}</strong> было <i>отменено</i>.</p>`,
+      },
+    };
+
+    await sendEmail({
+      to: userEmail,
+      from: process.env.EMAIL!,
+      subject: emailMessages[lang].subject,
+      text: emailMessages[lang].text,
+      html: emailMessages[lang].html,
+    });
+
     await Booking.findByIdAndDelete(id);
-    res.status(204).send();
+
+    return res.status(200).json({ message: "Booking cancelled successfully." });
   } catch (err) {
-    res.status(500).json({
-      message: "Error deleting booking",
-      error: err,
+    return res.status(500).json({
+      message: errorMessages[lang].deleteError,
+      error: (err as Error).message || err,
     });
   }
 });
