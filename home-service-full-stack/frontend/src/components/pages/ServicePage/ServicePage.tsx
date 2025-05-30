@@ -58,9 +58,25 @@ const ServicePage = () => {
     try {
       if (!currentService || !user) return;
 
+      if (!dateValue) {
+        enqueueSnackbar(t("messages.selectBookingDate"), {
+          variant: "warning",
+        });
+        return;
+      }
+
+      const selectedDate = new Date(dateValue.format("YYYY-MM-DD"));
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (selectedDate < today) {
+        enqueueSnackbar(t("messages.pastDateError"), { variant: "error" });
+        return;
+      }
+
       const booking: NewBooking = {
         serviceId: currentService._id,
-        date: dateValue ? new Date(dateValue.format("YYYY-MM-DD")) : null,
+        date: selectedDate,
         time: timeSlot,
         userEmail: user.email,
         userName: user.name,
@@ -73,12 +89,13 @@ const ServicePage = () => {
           },
         },
       };
+
       await postBooking(booking);
       enqueueSnackbar(t("messages.bookSuccess"), { variant: "success" });
       handleCloseModal();
     } catch (error) {
       enqueueSnackbar(
-        error instanceof Error ? error.message : t("messages.bookSuccess"),
+        error instanceof Error ? error.message : t("messages.bookError"),
         { variant: "error" },
       );
     }
