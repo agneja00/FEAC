@@ -58,25 +58,32 @@ const ServicePage = () => {
     try {
       if (!currentService || !user) return;
 
-      if (!dateValue) {
+      if (!dateValue || !timeSlot) {
         enqueueSnackbar(t("messages.selectBookingDate"), {
-          variant: "warning",
+          variant: "error",
         });
         return;
       }
 
-      const selectedDate = new Date(dateValue.format("YYYY-MM-DD"));
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+      const [hours, minutes] = timeSlot.split(":").map(Number);
+      const bookingDateTime = new Date(
+        dateValue.year(),
+        dateValue.month(),
+        dateValue.date(),
+        hours,
+        minutes,
+      );
 
-      if (selectedDate < today) {
+      const now = new Date();
+
+      if (bookingDateTime < now) {
         enqueueSnackbar(t("messages.pastDateError"), { variant: "error" });
         return;
       }
 
       const booking: NewBooking = {
         serviceId: currentService._id,
-        date: selectedDate,
+        date: new Date(dateValue.format("YYYY-MM-DD")),
         time: timeSlot,
         userEmail: user.email,
         userName: user.name,
