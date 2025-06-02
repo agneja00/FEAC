@@ -59,6 +59,7 @@
     "bookCancel": "Užsakymas sėkmingai atšauktas!",
     "pastDateError": "Negalite pasirinkti datos iš praeities.",
     "selectBookingDate": "Prašome pasirinkti datą prieš pateikdami.",
+    "selectBookingTime": "Prašome pasirinkti laiką.",
     "favoritesLoading": "Įkeliami mėgstamiausi...",
     "favoritesError": "Klaida įkeliant mėgstamiausius.",
     "favoritesLogin": "Prašome prisijungti, kad peržiūrėtumėte mėgstamiausius.",

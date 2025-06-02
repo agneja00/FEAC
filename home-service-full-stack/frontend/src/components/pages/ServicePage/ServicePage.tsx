@@ -58,9 +58,16 @@ const ServicePage = () => {
     try {
       if (!currentService || !user) return;
 
-      if (!dateValue || !timeSlot) {
+      if (!dateValue) {
         enqueueSnackbar(t("messages.selectBookingDate"), {
-          variant: "error",
+          variant: "warning",
+        });
+        return;
+      }
+
+      if (!timeSlot) {
+        enqueueSnackbar(t("messages.selectBookingTime"), {
+          variant: "warning",
         });
         return;
       }

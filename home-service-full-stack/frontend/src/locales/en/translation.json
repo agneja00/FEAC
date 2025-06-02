@@ -59,6 +59,7 @@
     "bookCancel": "Booking successfully canceled!",
     "pastDateError": "You can't book a date in the past.",
     "selectBookingDate": "Please select a date before submitting.",
+    "selectBookingTime": "Please select a time slot.",
     "favoritesLoading": "Loading favorites...",
     "favoritesError": "Error loading favorites.",
     "favoritesLogin": "Please log in to view your favorites.",

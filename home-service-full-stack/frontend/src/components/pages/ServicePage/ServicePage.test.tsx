@@ -82,7 +82,7 @@ const renderWithProviders = () =>
           </SnackbarProvider>
         </UserContext.Provider>
       </MemoryRouter>
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 
 describe("ServicePage booking date validation", () => {
@@ -95,7 +95,7 @@ describe("ServicePage booking date validation", () => {
     fireEvent.click(reserveBtn);
 
     expect(
-      await screen.findByText("messages.selectBookingDate")
+      await screen.findByText("messages.selectBookingDate"),
     ).toBeInTheDocument();
   });
 
@@ -107,7 +107,7 @@ describe("ServicePage booking date validation", () => {
     const reserveBtn = screen.getByText("buttons.reserveTime");
     fireEvent.click(reserveBtn);
     expect(
-      await screen.findByText("messages.selectBookingDate")
+      await screen.findByText("messages.selectBookingDate"),
     ).toBeInTheDocument();
   });
 });
@@ -126,7 +126,7 @@ describe("ServicePage SimilarService section", () => {
     renderWithProviders();
 
     const similarSection = screen.getByText(
-      "servicePage.similarServices"
+      "servicePage.similarServices",
     ).parentElement;
     expect(similarSection).toBeTruthy();
 
