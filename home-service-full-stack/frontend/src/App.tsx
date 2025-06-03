@@ -93,11 +93,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/:lang/*",
+    path: ROUTES.ERROR_LANG,
     element: <ErrorPage />,
   },
   {
-    path: "*",
+    path: ROUTES.ERROR_GLOBAL,
     element: <ErrorPage />,
   },
 ]);

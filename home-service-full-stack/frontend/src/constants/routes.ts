@@ -11,4 +11,7 @@ export const ROUTES = {
   BOOKINGS_FILTER: "/:lang/bookings/user/:email/:status",
   FAVORITES: "/:lang/services/user/:email/favorites",
   FAVORITES_CATEGORY: "/:lang/services/user/:email/favorites/:category",
+
+  ERROR_LANG: "/:lang/*",
+  ERROR_GLOBAL: "*",
 };
