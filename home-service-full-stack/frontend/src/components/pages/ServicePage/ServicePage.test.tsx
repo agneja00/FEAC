@@ -114,18 +114,20 @@ describe("ServicePage booking date validation", () => {
 
     fireEvent.click(screen.getByText("buttons.bookAppointment"));
 
-    const yesterdayDate = new Date();
-    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-    const yesterday = yesterdayDate.getDate().toString();
+    const prevMonthButton = screen.getByLabelText("Previous month");
+    fireEvent.click(prevMonthButton);
 
     const calendar = screen.getByRole("grid");
-    const pastButton = Array.from(calendar.querySelectorAll("button")).find(
-      (btn) => btn.textContent?.trim() === yesterday,
+    const dateButtons = Array.from(calendar.querySelectorAll("button")).filter(
+      (btn) => !btn.disabled,
     );
 
-    if (!pastButton) throw new Error("No past date button found in calendar");
+    if (dateButtons.length === 0) {
+      throw new Error("No date buttons found in calendar");
+    }
 
-    fireEvent.click(pastButton);
+    fireEvent.click(dateButtons[0]);
+    fireEvent.click(screen.getByText("time.10AM"));
     fireEvent.click(screen.getByText("buttons.reserveTime"));
 
     expect(
@@ -138,13 +140,13 @@ describe("ServicePage booking date validation", () => {
 
     fireEvent.click(screen.getByText("buttons.bookAppointment"));
 
-    const tomorrowDate = new Date();
-    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-    const tomorrow = tomorrowDate.getDate().toString();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowDate = tomorrow.getDate().toString();
 
     const calendar = screen.getByRole("grid");
     const futureBtn = Array.from(calendar.querySelectorAll("button")).find(
-      (btn) => btn.textContent?.trim() === tomorrow,
+      (btn) => btn.textContent?.trim() === tomorrowDate,
     );
 
     if (!futureBtn) throw new Error("No future date button found in calendar");
@@ -162,13 +164,13 @@ describe("ServicePage booking date validation", () => {
 
     fireEvent.click(screen.getByText("buttons.bookAppointment"));
 
-    const tomorrowDate = new Date();
-    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-    const tomorrow = tomorrowDate.getDate().toString();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowDate = tomorrow.getDate().toString();
 
     const calendar = screen.getByRole("grid");
     const futureBtn = Array.from(calendar.querySelectorAll("button")).find(
-      (btn) => btn.textContent?.trim() === tomorrow,
+      (btn) => btn.textContent?.trim() === tomorrowDate,
     );
 
     if (!futureBtn) throw new Error("No future date button found in calendar");
