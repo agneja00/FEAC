@@ -35,6 +35,14 @@ const Topbar = () => {
 
   const USER_MENU_ITEMS = [
     {
+      href: generatePath(ROUTES.ACCOUNT, {
+        lang,
+        email: user?.email,
+      }),
+      label: t("accountModal.myAccount"),
+      highlight: true,
+    },
+    {
       href: generatePath(ROUTES.BOOKINGS_FILTER, {
         lang,
         email: user?.email || "",
@@ -132,9 +140,6 @@ const Topbar = () => {
                 accountModal
               >
                 <ul className={styles.accountModalContent}>
-                  <li className={styles.account}>
-                    {t("accountModal.myAccount")}
-                  </li>
                   {USER_MENU_ITEMS.map((item) => {
                     const path = generatePath(item.href, {
                       lang,
@@ -146,7 +151,7 @@ const Topbar = () => {
                     return (
                       <li key={item.label}>
                         <Link
-                          className={styles.accountLink}
+                          className={`${item.highlight ? styles.myAccountLink : styles.accountLink}`}
                           to={path}
                           onClick={() => handleMenuItemClick(item)}
                         >

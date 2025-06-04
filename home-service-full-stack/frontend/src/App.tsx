@@ -17,6 +17,7 @@ import ServicePage from "./components/pages/ServicePage/ServicePage";
 import BookingsPage from "./components/pages/BookingsPage/BookingsPage";
 import AuthLayout from "./components/layout/AuthLayout";
 import Register from "./components/pages/Register/Register";
+import MyAccount from "./components/pages/MyAccount/MyAccount";
 import { UserProvider } from "./components/context/UserContext";
 import Services from "./components/pages/Services/Services";
 import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
           {
             path: ROUTES.FOR_BUSINESS_PARTNERS,
             element: <BusinessPartnersPage />,
+          },
+          {
+            path: ROUTES.ACCOUNT,
+            element: <MyAccount />,
           },
           {
             path: ROUTES.BOOKINGS_FILTER,

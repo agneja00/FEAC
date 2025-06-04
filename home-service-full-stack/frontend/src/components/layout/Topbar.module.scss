@@ -73,20 +73,26 @@
 .accountModalContent {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   font-size: 0.9rem;
-  padding: 1.2rem;
+  padding: 1.4rem;
   border-radius: 0.5rem;
   list-style: none;
   box-shadow: var(--shadow-color) 2px 2px 2px 2px;
   background-color: var(--card-bg);
 }
 
-.account {
+.myAccountLink {
   font-size: 1.25rem;
   font-weight: 600;
-  padding: 0.7rem 0;
+  color: var(--text-color);
+  padding: 0.35rem 0;
   border-bottom: 0.125rem solid var(--button-border);
+
+  &:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
 }
 
 @media only screen and (min-width: 390px) {
