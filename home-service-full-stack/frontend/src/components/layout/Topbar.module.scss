@@ -44,10 +44,7 @@
   font-size: 1.2rem;
   font-weight: 500;
 
-  &:hover {
-    color: var(--primary-color);
-    text-decoration: none;
-  }
+  @include link-hover;
 }
 
 .menu {
@@ -89,10 +86,7 @@
   padding: 0.35rem 0;
   border-bottom: 0.125rem solid var(--button-border);
 
-  &:hover {
-    color: var(--primary-color);
-    text-decoration: none;
-  }
+  @include link-hover;
 }
 
 @media only screen and (min-width: 390px) {

@@ -133,3 +133,10 @@ body {
     background-color: var(--primary-color-hover);
   }
 }
+
+@mixin link-hover {
+  &:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+}
