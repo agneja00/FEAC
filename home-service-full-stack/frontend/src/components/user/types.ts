@@ -15,6 +15,16 @@ export interface ILoginResponse {
   user: IUser;
 }
 
+export interface IUpdateUserRequest {
+  name: string;
+  surname?: string;
+  age?: number | null;
+  country?: string;
+  city?: string;
+  email: string;
+  password?: string;
+}
+
 export interface IRegisterRequest extends ILoginRequest {
   name: string;
 }

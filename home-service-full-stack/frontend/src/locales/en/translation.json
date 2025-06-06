@@ -46,7 +46,8 @@
     "registerNow": "Register Now",
     "loginOrSign": "Login / Sign Up",
     "login": "Log in",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "update": "Update"
   },
   "messages": {
     "emailSendSuccess": "Email sent successfully!",
@@ -67,7 +68,9 @@
     "required": "Field is required",
     "validEmail": "Email should be valid",
     "requiredCategory": "Category is required",
-    "registrationSuccess": "Registration successful!"
+    "registrationSuccess": "Registration successful!",
+    "updateSuccess": "Your account has been updated successfully!",
+    "updateError": "An error occurred while updating your account. Please try again."
   },
   "inputPlaceholder": {
     "search": "Start typing the name of the service you’re looking for...",
@@ -92,6 +95,12 @@
       "loginTitle": "Login",
       "sign": "Don't have an account? Sign up",
       "login": "Already have an account? Log in"
+    },
+    "updateAccount": {
+      "surname": "Surname",
+      "age": "Age",
+      "country": "Country",
+      "city": "City"
     }
   },
   "aboutUs": {

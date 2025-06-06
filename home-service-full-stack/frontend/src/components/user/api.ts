@@ -1,5 +1,11 @@
-import { ILoginRequest, ILoginResponse, IRegisterRequest } from "./types";
 import axiosInstance from "@/config/axios";
+import {
+  ILoginRequest,
+  ILoginResponse,
+  IRegisterRequest,
+  IUpdateUserRequest,
+  IUser,
+} from "./types";
 
 export const loginUser = async (
   formValues: ILoginRequest,
@@ -14,5 +20,22 @@ export const registerUser = async (
   lang: string,
 ): Promise<void> => {
   const response = await axiosInstance.post(`/${lang}/auth/register`, user);
+  return response.data;
+};
+
+export const getUserByEmail = async (
+  email: string,
+  lang: string,
+): Promise<IUser> => {
+  const response = await axiosInstance.get(`/${lang}/user/${email}`);
+  return response.data;
+};
+
+export const updateUser = async (
+  email: string,
+  lang: string,
+  data: IUpdateUserRequest,
+): Promise<IUser> => {
+  const response = await axiosInstance.put(`/${lang}/user/${email}`, data);
   return response.data;
 };

@@ -46,7 +46,8 @@
     "registerNow": "Registruokites dabar",
     "loginOrSign": "Prisijungti / Registruotis",
     "login": "Prisijungti",
-    "cancel": "Atšaukti"
+    "cancel": "Atšaukti",
+    "update": "Atnaujinti"
   },
   "messages": {
     "emailSendSuccess": "El. laiškas sėkmingai išsiųstas!",
@@ -67,7 +68,9 @@
     "required": "Laukas yra privalomas",
     "validEmail": "El. paštas turi būti teisingas",
     "requiredCategory": "Kategorija yra privaloma",
-    "registrationSuccess": "Registracija sėkminga!"
+    "registrationSuccess": "Registracija sėkminga!",
+    "updateSuccess": "Jūsų paskyra sėkmingai atnaujinta!",
+    "updateError": "Įvyko klaida atnaujinant paskyrą. Bandykite dar kartą."
   },
   "inputPlaceholder": {
     "search": "Pradėkite rašyti ieškomos paslaugos pavadinimą...",
@@ -92,6 +95,12 @@
       "loginTitle": "Prisijungti",
       "sign": "Neturite paskyros? Užsiregistruokite",
       "login": "Jau turite paskyrą? Prisijunkite"
+    },
+    "updateAccount": {
+      "surname": "Pavardė",
+      "age": "Amžius",
+      "country": "Šalis",
+      "city": "Miestas"
     }
   },
   "aboutUs": {

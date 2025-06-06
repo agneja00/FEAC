@@ -4,6 +4,7 @@ export const errorMessage = {
       required: "Field is required",
       email: "Email should be valid",
       select: "Category is required",
+      invalidAge: "Age must be a positive number",
     },
   },
   lt: {
@@ -11,6 +12,7 @@ export const errorMessage = {
       required: "Laukas yra privalomas",
       email: "El. paštas turi būti teisingas",
       select: "Kategorija yra privaloma",
+      invalidAge: "Amžius turi būti teigiamas skaičius",
     },
   },
   ru: {
@@ -18,6 +20,7 @@ export const errorMessage = {
       required: "Поле обязательно для заполнения",
       email: "Электронная почта должна быть действительной",
       select: "Категория обязательна",
+      invalidAge: "Возраст должен быть положительным числом",
     },
   },
 };

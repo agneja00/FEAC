@@ -29,6 +29,11 @@
       background-color: var(--error-hover);
     }
   }
+  &.update {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 
   &.language {
     font-weight: 700;
