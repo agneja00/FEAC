@@ -4,7 +4,7 @@ A modern platform for booking home services (cleaning, repairs, painting, etc.) 
 
 ### Features
 
-- User Accounts: Register, log in and manage your profile.
+- User Accounts: Register, log in and update your profile information.
 - Service Booking: Schedule services with professionals.
 - Email Notifications: Receive booking confirmations and updates.
 - Favorites: Save preferred services for quick access.
