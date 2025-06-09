@@ -1,7 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ILoginRequest, IRegisterRequest, IUpdateUserRequest } from "./types";
 import axiosInstance from "@/config/axios";
 import { useParams } from "react-router-dom";
+import { getUserByEmail } from "./api";
 
 export const USERS_KEY = "USERS";
 
@@ -31,5 +32,13 @@ export const useUpdateUser = (email: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user", email] });
     },
+  });
+};
+
+export const useUser = (email: string, lang = "en") => {
+  return useQuery({
+    queryKey: ["user", email],
+    queryFn: () => getUserByEmail(email, lang),
+    enabled: !!email,
   });
 };

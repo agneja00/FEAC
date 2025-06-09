@@ -1,8 +1,8 @@
 import styles from "./UpdateAccountForm.module.scss";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
-import { useUpdateUser } from "./hooks";
-import { updateUserInitialValues, updateUserValidationSchema } from "./consts";
+import { useUser, useUpdateUser } from "./hooks";
+import { updateUserValidationSchema } from "./consts";
 import { IUpdateUserRequest } from "./types";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
@@ -21,33 +21,42 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: string }>();
+  const validatedLang = ["en", "lt", "ru"].includes(lang) ? lang : "en";
+
+  const { data: userData, isLoading } = useUser(userEmail, validatedLang);
   const { mutateAsync: updateUser } = useUpdateUser(userEmail);
   const { enqueueSnackbar } = useSnackbar();
 
-  const validatedLang =
-    lang === "en" || lang === "lt" || lang === "ru" ? lang : "en";
+  if (isLoading || !userData) return null;
 
-  const handleSubmit = async (formvalues: IUpdateUserRequest) => {
+  const initialValues: IUpdateUserRequest = {
+    name: userData.name || "",
+    surname: userData.surname || "",
+    age: userData.age ?? 0,
+    country: userData.country || "",
+    city: userData.city || "",
+    email: userData.email || "",
+    password: "",
+  };
+
+  const handleSubmit = async (formValues: IUpdateUserRequest) => {
     try {
-      await updateUser(formvalues);
-      enqueueSnackbar(t("messages.updateSuccess"), {
-        variant: "success",
-      });
-      if (onSuccess) onSuccess();
+      await updateUser(formValues);
+      enqueueSnackbar(t("messages.updateSuccess"), { variant: "success" });
+      onSuccess?.();
     } catch (error) {
       const errorMessage = error as ErrorResponse;
       enqueueSnackbar(
         errorMessage?.response?.data?.message ?? t("messages.updateError"),
-        {
-          variant: "error",
-        },
+        { variant: "error" },
       );
     }
   };
 
   return (
     <Formik
-      initialValues={updateUserInitialValues}
+      enableReinitialize
+      initialValues={initialValues}
       validationSchema={updateUserValidationSchema(validatedLang)}
       onSubmit={handleSubmit}
     >
