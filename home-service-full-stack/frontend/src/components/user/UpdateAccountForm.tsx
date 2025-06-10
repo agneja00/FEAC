@@ -21,8 +21,9 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: string }>();
-  const validatedLang = ["en", "lt", "ru"].includes(lang) ? lang : "en";
-
+  const validatedLang = ["en", "lt", "ru"].includes(lang)
+    ? (lang as "en" | "lt" | "ru")
+    : "en";
   const { data: userData, isLoading } = useUser(userEmail, validatedLang);
   const { mutateAsync: updateUser } = useUpdateUser(userEmail);
   const { enqueueSnackbar } = useSnackbar();
@@ -48,7 +49,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
       const errorMessage = error as ErrorResponse;
       enqueueSnackbar(
         errorMessage?.response?.data?.message ?? t("messages.updateError"),
-        { variant: "error" },
+        { variant: "error" }
       );
     }
   };

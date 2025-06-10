@@ -105,4 +105,31 @@ router.post("/:lang/auth/login", async (req, res) => {
   }
 });
 
+router.get("/:lang/user/:email", async (req, res) => {
+  const { email } = req.params;
+  const user = await User.findOne({ email });
+  if (!user) return res.status(404).json({ message: "User not found" });
+  res.json(user);
+});
+
+router.put("/:lang/user/:email", async (req, res) => {
+  const { email } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedUser = await User.findOneAndUpdate({ email }, updateData, {
+      new: true,
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    console.error("Update error:", err);
+    res.status(500).json({ message: "Server error while updating user." });
+  }
+});
+
 export default router;
