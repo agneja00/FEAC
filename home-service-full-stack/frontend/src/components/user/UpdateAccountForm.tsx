@@ -1,8 +1,8 @@
 import styles from "./UpdateAccountForm.module.scss";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
-import { useUser, useUpdateUser } from "./hooks";
-import { updateUserValidationSchema } from "./consts";
+import { useUpdateUser, useUser } from "./hooks";
+import { updateUserValidationSchema, updateUserInitialValues } from "./consts";
 import { IUpdateUserRequest } from "./types";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
@@ -21,9 +21,10 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang: string }>();
-  const validatedLang = ["en", "lt", "ru"].includes(lang)
-    ? (lang as "en" | "lt" | "ru")
-    : "en";
+
+  const validatedLang: "en" | "lt" | "ru" =
+    lang === "en" || lang === "lt" || lang === "ru" ? lang : "en";
+
   const { data: userData, isLoading } = useUser(userEmail, validatedLang);
   const { mutateAsync: updateUser } = useUpdateUser(userEmail);
   const { enqueueSnackbar } = useSnackbar();
