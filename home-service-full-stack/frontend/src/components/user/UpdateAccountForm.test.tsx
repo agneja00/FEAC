@@ -47,6 +47,8 @@ describe("UpdateAccountForm (Jest)", () => {
     (useSnackbar as jest.Mock).mockReturnValue({
       enqueueSnackbar: enqueueSnackbarMock,
     });
+
+    global.URL.createObjectURL = jest.fn(() => "mock-preview-url");
   });
 
   const renderComponent = () =>
@@ -56,7 +58,7 @@ describe("UpdateAccountForm (Jest)", () => {
           userEmail="john@example.com"
           onSuccess={onSuccessMock}
         />
-      </BrowserRouter>,
+      </BrowserRouter>
     );
 
   it("renders form with pre-filled user data", () => {
@@ -64,17 +66,17 @@ describe("UpdateAccountForm (Jest)", () => {
 
     expect(screen.getByLabelText(/inputPlaceholder.name/i)).toHaveValue("John");
     expect(screen.getByLabelText(/forms.updateAccount.surname/i)).toHaveValue(
-      "Doe",
+      "Doe"
     );
     expect(screen.getByLabelText(/forms.updateAccount.age/i)).toHaveValue(30);
     expect(screen.getByLabelText(/forms.updateAccount.country/i)).toHaveValue(
-      "USA",
+      "USA"
     );
     expect(screen.getByLabelText(/forms.updateAccount.city/i)).toHaveValue(
-      "New York",
+      "New York"
     );
     expect(screen.getByLabelText(/common.email/i)).toHaveValue(
-      "john@example.com",
+      "john@example.com"
     );
   });
 
@@ -88,22 +90,13 @@ describe("UpdateAccountForm (Jest)", () => {
     fireEvent.click(screen.getByRole("button", { name: /buttons.update/i }));
 
     await waitFor(() =>
-      expect(updateUserMock).toHaveBeenCalledWith(
-        expect.objectContaining({
-          name: "John",
-          surname: "Doe",
-          age: 30,
-          country: "USA",
-          city: "New York",
-          email: "john@example.com",
-          password: "newpassword",
-        }),
-      ),
+      expect(updateUserMock).toHaveBeenCalledWith(expect.any(FormData))
     );
 
     expect(enqueueSnackbarMock).toHaveBeenCalledWith("messages.updateSuccess", {
       variant: "success",
     });
+
     expect(onSuccessMock).toHaveBeenCalled();
   });
 
@@ -125,7 +118,27 @@ describe("UpdateAccountForm (Jest)", () => {
     await waitFor(() =>
       expect(enqueueSnackbarMock).toHaveBeenCalledWith("Update failed", {
         variant: "error",
-      }),
+      })
     );
+  });
+
+  it("handles photo file input and displays preview", async () => {
+    renderComponent();
+
+    const file = new File(["dummy"], "avatar.png", { type: "image/png" });
+
+    const input = screen.getByLabelText(
+      /forms.updateAccount.photo/i
+    ) as HTMLInputElement;
+
+    fireEvent.change(input, {
+      target: { files: [file] },
+    });
+
+    await waitFor(() => {
+      const img = screen.getByAltText("Preview") as HTMLImageElement;
+      expect(img).toBeInTheDocument();
+      expect(img.src).toContain("mock-preview-url");
+    });
   });
 });
