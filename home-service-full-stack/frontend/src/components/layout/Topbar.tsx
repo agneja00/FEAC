@@ -166,8 +166,9 @@ const Topbar = () => {
             <Avatar
               className={menuOpen ? styles.avatarMobile : styles.avatarLarge}
               onClick={handleAvatarClick}
+              src={user?.photo}
             >
-              {user?.email?.[0]}
+              {!user?.photo && user?.email?.[0]}
             </Avatar>
           </>
         ) : (

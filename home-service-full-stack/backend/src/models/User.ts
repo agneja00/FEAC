@@ -7,6 +7,7 @@ interface IUser extends mongoose.Document {
   age?: number;
   email: string;
   password: string;
+  photo?: string;
   isCorrectPassword: (password: string) => Promise<boolean>;
 }
 
@@ -15,7 +16,8 @@ const userSchema = new mongoose.Schema<IUser>(
     name: { type: String, required: true },
     age: { type: Number },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    photo: { type: String },
   },
   {
     timestamps: true,

@@ -39,3 +39,21 @@ export const updateUser = async (
   const response = await axiosInstance.put(`/${lang}/user/${email}`, data);
   return response.data;
 };
+
+export const uploadAvatar = async (
+  email: string,
+  lang: string,
+  file: File,
+): Promise<IUser> => {
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  const response = await axiosInstance.post(
+    `/${lang}/user/${email}/avatar`,
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    },
+  );
+  return response.data;
+};

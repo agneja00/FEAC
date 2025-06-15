@@ -56,7 +56,7 @@ describe("UpdateAccountForm (Jest)", () => {
           userEmail="john@example.com"
           onSuccess={onSuccessMock}
         />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
   it("renders form with pre-filled user data", () => {
@@ -64,17 +64,17 @@ describe("UpdateAccountForm (Jest)", () => {
 
     expect(screen.getByLabelText(/inputPlaceholder.name/i)).toHaveValue("John");
     expect(screen.getByLabelText(/forms.updateAccount.surname/i)).toHaveValue(
-      "Doe"
+      "Doe",
     );
     expect(screen.getByLabelText(/forms.updateAccount.age/i)).toHaveValue(30);
     expect(screen.getByLabelText(/forms.updateAccount.country/i)).toHaveValue(
-      "USA"
+      "USA",
     );
     expect(screen.getByLabelText(/forms.updateAccount.city/i)).toHaveValue(
-      "New York"
+      "New York",
     );
     expect(screen.getByLabelText(/common.email/i)).toHaveValue(
-      "john@example.com"
+      "john@example.com",
     );
   });
 
@@ -97,8 +97,8 @@ describe("UpdateAccountForm (Jest)", () => {
           city: "New York",
           email: "john@example.com",
           password: "newpassword",
-        })
-      )
+        }),
+      ),
     );
 
     expect(enqueueSnackbarMock).toHaveBeenCalledWith("messages.updateSuccess", {
@@ -125,7 +125,7 @@ describe("UpdateAccountForm (Jest)", () => {
     await waitFor(() =>
       expect(enqueueSnackbarMock).toHaveBeenCalledWith("Update failed", {
         variant: "error",
-      })
+      }),
     );
   });
 });

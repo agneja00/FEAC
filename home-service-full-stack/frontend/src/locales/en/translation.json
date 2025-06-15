@@ -100,7 +100,8 @@
       "surname": "Surname",
       "age": "Age",
       "country": "Country",
-      "city": "City"
+      "city": "City",
+      "photo": "Photo"
     }
   },
   "aboutUs": {

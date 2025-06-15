@@ -14,9 +14,17 @@
   text-align: left;
 }
 
+.fileLabel {
+  margin-right: 0.5rem;
+}
+
 .input {
   width: 100%;
   @include input-style;
+}
+
+.fileInput {
+  margin-top: 0.5rem;
 }
 
 .error {

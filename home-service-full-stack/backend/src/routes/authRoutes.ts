@@ -1,20 +1,33 @@
 import express from "express";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 import User from "../models/User";
 import { generateToken } from "../utils/password";
 
 const router = express.Router();
+
+const uploadDir = path.join(__dirname, "..", "uploads", "avatars");
+fs.mkdirSync(uploadDir, { recursive: true });
+
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (_req, file, cb) => {
+    const uniqueName = `${Date.now()}-${file.originalname}`;
+    cb(null, uniqueName);
+  },
+});
+
+const upload = multer({ storage });
 
 router.post("/:lang/auth/register", async (req, res) => {
   const validLanguages = ["en", "lt", "ru"];
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
-  const errorMessages: {
-    [key: string]: {
-      userExists: string;
-      serverError: string;
-    };
-  } = {
+  const errorMessages: Record<string, { userExists: string; serverError: string }> = {
     en: {
       userExists: "User already exists",
       serverError: "Error registering new user.",
@@ -54,13 +67,7 @@ router.post("/:lang/auth/login", async (req, res) => {
   const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
 
-  const errorMessages: {
-    [key: string]: {
-      missingFields: string;
-      incorrectCredentials: string;
-      serverError: string;
-    };
-  } = {
+  const errorMessages: Record<string, { missingFields: string; incorrectCredentials: string; serverError: string }> = {
     en: {
       missingFields: "Please provide email and password",
       incorrectCredentials: "Incorrect email or password",
@@ -86,28 +93,25 @@ router.post("/:lang/auth/login", async (req, res) => {
     }
 
     const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(401).json({ message: errorMessages[lang].incorrectCredentials });
-    }
-
-    if (!(await user.isCorrectPassword(password))) {
+    if (!user || !(await user.isCorrectPassword(password))) {
       return res.status(401).json({ message: errorMessages[lang].incorrectCredentials });
     }
 
     const token = generateToken(user._id);
-
     const userWithoutPassword = await User.findById(user._id).select("-password");
 
     return res.status(200).json({ status: "success", token, user: userWithoutPassword });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages[lang].serverError, error: (err as Error).message });
+    return res.status(500).json({
+      message: errorMessages[lang].serverError,
+      error: (err as Error).message,
+    });
   }
 });
 
 router.get("/:lang/user/:email", async (req, res) => {
   const { email } = req.params;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("-password");
   if (!user) return res.status(404).json({ message: "User not found" });
   res.json(user);
 });
@@ -119,7 +123,7 @@ router.put("/:lang/user/:email", async (req, res) => {
   try {
     const updatedUser = await User.findOneAndUpdate({ email }, updateData, {
       new: true,
-    });
+    }).select("-password");
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
@@ -129,6 +133,26 @@ router.put("/:lang/user/:email", async (req, res) => {
   } catch (err) {
     console.error("Update error:", err);
     res.status(500).json({ message: "Server error while updating user." });
+  }
+});
+
+router.post("/user/upload-avatar", upload.single("avatar"), async (req, res) => {
+  const email = req.body.email;
+  if (!email || !req.file) {
+    return res.status(400).json({ message: "Email and avatar image are required." });
+  }
+
+  const avatarUrl = `/uploads/avatars/${req.file.filename}`;
+  try {
+    const updatedUser = await User.findOneAndUpdate({ email }, { avatarUrl }, { new: true }).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "Avatar uploaded", avatarUrl, user: updatedUser });
+  } catch (err) {
+    res.status(500).json({ message: "Server error uploading avatar", error: (err as Error).message });
   }
 });
 

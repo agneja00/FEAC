@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ILoginRequest, IRegisterRequest, IUpdateUserRequest } from "./types";
+import { ILoginRequest, IRegisterRequest } from "./types";
 import axiosInstance from "@/config/axios";
 import { useParams } from "react-router-dom";
 import { getUserByEmail } from "./api";
@@ -27,8 +27,12 @@ export const useUpdateUser = (email: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: IUpdateUserRequest) =>
-      axiosInstance.put(`/${lang}/user/${email}`, data).then((res) => res.data),
+    mutationFn: (formData: FormData) =>
+      axiosInstance
+        .put(`/${lang}/user/${email}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => res.data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user", email] });
     },

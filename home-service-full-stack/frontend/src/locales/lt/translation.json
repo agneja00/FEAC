@@ -100,7 +100,8 @@
       "surname": "Pavardė",
       "age": "Amžius",
       "country": "Šalis",
-      "city": "Miestas"
+      "city": "Miestas",
+      "photo": "Nuotrauka"
     }
   },
   "aboutUs": {

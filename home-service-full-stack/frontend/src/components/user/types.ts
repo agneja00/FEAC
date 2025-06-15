@@ -6,6 +6,7 @@ export interface IUser {
   country?: string;
   city?: string;
   email: string;
+  photo?: string;
 }
 
 export interface ILoginRequest {
@@ -26,6 +27,7 @@ export interface IUpdateUserRequest {
   country?: string;
   city?: string;
   email: string;
+  photo?: File | null;
   password?: string;
 }
 
