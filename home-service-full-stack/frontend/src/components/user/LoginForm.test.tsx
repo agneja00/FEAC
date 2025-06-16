@@ -4,7 +4,6 @@ import { UserContext } from "@/components/context/UserContext";
 import LoginForm from "./LoginForm";
 import { useLoginUser } from "./hooks";
 import { ROUTES } from "@/constants/routes";
-import { generatePath } from "react-router-dom";
 
 jest.mock("./hooks", () => ({
   useLoginUser: jest.fn(),
@@ -14,20 +13,37 @@ jest.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key, i18n: { language: "en" } }),
 }));
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockNavigate,
-  generatePath: jest.fn((path, params) => `/${params.lang}`),
-}));
-
 const mockNavigate = jest.fn();
-const loginMock = jest.fn();
+const mockLogin = jest.fn();
+const mockSetUser = jest.fn();
+
+jest.mock("react-router-dom", () => {
+  const actual = jest.requireActual("react-router-dom");
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+    useParams: () => ({ lang: "en" }),
+    generatePath: jest.fn((path, params) => {
+      switch (path) {
+        case ROUTES.HOME:
+          return `/${params.lang}`;
+        case ROUTES.REGISTER:
+          return `/${params.lang}/auth/register`;
+        default:
+          return "/";
+      }
+    }),
+  };
+});
 
 describe("LoginForm Component", () => {
+  const mockMutateAsync = jest.fn();
+
   beforeEach(() => {
     (useLoginUser as jest.Mock).mockReturnValue({
-      mutateAsync: jest.fn(),
+      mutateAsync: mockMutateAsync,
     });
+    jest.clearAllMocks();
   });
 
   const renderComponent = () =>
@@ -35,30 +51,31 @@ describe("LoginForm Component", () => {
       <Router>
         <UserContext.Provider
           value={{
-            login: loginMock,
+            login: mockLogin,
             logout: jest.fn(),
+            setUser: mockSetUser,
             user: null,
             isLoggedIn: false,
           }}
         >
           <LoginForm />
         </UserContext.Provider>
-      </Router>,
+      </Router>
     );
 
-  test("renders login form", () => {
+  test("renders login form fields and button", () => {
     renderComponent();
     expect(screen.getByPlaceholderText("common.email")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("common.password")).toBeInTheDocument();
     expect(screen.getByText("buttons.login")).toBeInTheDocument();
   });
 
-  test("submits form with valid data", async () => {
-    const mockLoginUser = (useLoginUser as jest.Mock).mockReturnValue({
-      mutateAsync: jest
-        .fn()
-        .mockResolvedValue({ data: { token: "mock-token" } }),
-    });
+  test("submits form with valid data and navigates", async () => {
+    const mockUser = { _id: "1", name: "Test User", email: "test@example.com" };
+    const mockToken = "mock-token";
+    const mockResponse = { data: { user: mockUser, token: mockToken } };
+
+    mockMutateAsync.mockResolvedValue(mockResponse);
 
     renderComponent();
 
@@ -68,26 +85,24 @@ describe("LoginForm Component", () => {
     fireEvent.change(screen.getByPlaceholderText("common.password"), {
       target: { value: "password123" },
     });
+
     fireEvent.click(screen.getByText("buttons.login"));
 
     await waitFor(() => {
-      expect(mockLoginUser().mutateAsync).toHaveBeenCalledWith({
+      expect(mockMutateAsync).toHaveBeenCalledWith({
         email: "test@example.com",
         password: "password123",
       });
-      expect(loginMock).toHaveBeenCalledWith({ token: "mock-token" });
-      expect(mockNavigate).toHaveBeenCalledWith(
-        generatePath(ROUTES.HOME, { lang: "en" }),
-      );
+      expect(mockLogin).toHaveBeenCalledWith(mockResponse.data);
+      expect(mockNavigate).toHaveBeenCalledWith("/en");
     });
   });
 
   test("displays error message on failed login", async () => {
     const errorMessage = "Invalid credentials";
-    (useLoginUser as jest.Mock).mockReturnValue({
-      mutateAsync: jest.fn().mockRejectedValue({
-        response: { data: { message: errorMessage } },
-      }),
+
+    mockMutateAsync.mockRejectedValue({
+      response: { data: { message: errorMessage } },
     });
 
     renderComponent();
@@ -96,8 +111,9 @@ describe("LoginForm Component", () => {
       target: { value: "test@example.com" },
     });
     fireEvent.change(screen.getByPlaceholderText("common.password"), {
-      target: { value: "password123" },
+      target: { value: "wrongpass" },
     });
+
     fireEvent.click(screen.getByText("buttons.login"));
 
     await waitFor(() => {
@@ -114,5 +130,15 @@ describe("LoginForm Component", () => {
       const errors = await screen.findAllByText("Field is required");
       expect(errors.length).toBe(2);
     });
+  });
+
+  test("renders sign up link with correct path", () => {
+    renderComponent();
+
+    const signUpLink = screen.getByRole("link", {
+      name: "forms.loginAndRegister.sign",
+    });
+
+    expect(signUpLink).toHaveAttribute("href", "/en/auth/register");
   });
 });
