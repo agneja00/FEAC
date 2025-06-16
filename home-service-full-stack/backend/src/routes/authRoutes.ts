@@ -116,11 +116,28 @@ router.get("/:lang/user/:email", async (req, res) => {
   res.json(user);
 });
 
-router.put("/:lang/user/:email", async (req, res) => {
+router.put("/:lang/user/:email", upload.single("photo"), async (req, res) => {
   const { email } = req.params;
-  const updateData = req.body;
+  const { name, surname, age, country, city, password } = req.body;
 
   try {
+    const updateData: any = {
+      name,
+      surname,
+      age,
+      country,
+      city,
+    };
+
+    if (req.file) {
+      updateData.photo = `/uploads/avatars/${req.file.filename}`;
+    }
+
+    if (password) {
+      const bcrypt = await import("bcryptjs");
+      updateData.password = await bcrypt.hash(password, 10);
+    }
+
     const updatedUser = await User.findOneAndUpdate({ email }, updateData, {
       new: true,
     }).select("-password");

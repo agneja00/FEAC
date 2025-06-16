@@ -4,13 +4,17 @@ import { Link, useNavigate, generatePath, useParams } from "react-router-dom";
 import Logo from "@/assets/logo.svg";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
 import { UserContext } from "../context/UserContext";
 import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
-import { TBookingStatus } from "../booking/types";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../common/LanguageSwither";
+import { PROD } from "@/constants/environment";
+
+const baseURL = PROD
+  ? "https://home-services-f898b008a33e.herokuapp.com"
+  : "http://localhost:5173";
 
 const Topbar = () => {
   const { user, logout } = useContext(UserContext);
@@ -18,48 +22,61 @@ const Topbar = () => {
   const { t } = useTranslation();
   const { lang = "en" } = useParams<{ lang?: string }>();
 
-  const NAVIGATION_LINKS = [
-    {
-      href: generatePath(ROUTES.SERVICES, { lang }),
-      label: t("topbar.services"),
-    },
-    {
-      href: generatePath(ROUTES.ABOUT_US, { lang }),
-      label: t("common.aboutUs"),
-    },
-    {
-      href: generatePath(ROUTES.FOR_BUSINESS_PARTNERS, { lang }),
-      label: t("common.forBusinessPartners"),
-    },
-  ];
+  const NAVIGATION_LINKS = useMemo(
+    () => [
+      {
+        href: generatePath(ROUTES.SERVICES, { lang }),
+        label: t("topbar.services"),
+      },
+      {
+        href: generatePath(ROUTES.ABOUT_US, { lang }),
+        label: t("common.aboutUs"),
+      },
+      {
+        href: generatePath(ROUTES.FOR_BUSINESS_PARTNERS, { lang }),
+        label: t("common.forBusinessPartners"),
+      },
+    ],
+    [lang, t],
+  );
 
-  const USER_MENU_ITEMS = [
-    {
-      href: generatePath(ROUTES.ACCOUNT, {
-        lang,
-        email: user?.email,
-      }),
-      label: t("accountModal.myAccount"),
-      highlight: true,
-    },
-    {
-      href: generatePath(ROUTES.BOOKINGS_FILTER, {
-        lang,
-        email: user?.email || "",
-        status: "Confirmed",
-      }),
-      label: t("accountModal.myBookings"),
-    },
-    {
-      href: generatePath(ROUTES.FAVORITES, { lang, email: user?.email || "" }),
-      label: t("accountModal.myFavorites"),
-    },
-    { href: ROUTES.HOME, label: t("accountModal.logOut"), action: "logout" },
-  ];
+  const USER_MENU_ITEMS = useMemo(() => {
+    if (!user?.email) return [];
+
+    return [
+      {
+        path: generatePath(ROUTES.ACCOUNT, {
+          lang,
+          email: user.email,
+        }),
+        label: t("accountModal.myAccount"),
+        highlight: true,
+      },
+      {
+        path: generatePath(ROUTES.BOOKINGS_FILTER, {
+          lang,
+          email: user.email,
+          status: "Confirmed",
+        }),
+        label: t("accountModal.myBookings"),
+      },
+      {
+        path: generatePath(ROUTES.FAVORITES, {
+          lang,
+          email: user.email,
+        }),
+        label: t("accountModal.myFavorites"),
+      },
+      {
+        path: generatePath(ROUTES.HOME, { lang }),
+        label: t("accountModal.logOut"),
+        action: "logout",
+      },
+    ];
+  }, [user?.email, lang, t]);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeStatus, setActiveStatus] = useState<TBookingStatus>("Confirmed");
 
   const handleModalClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -88,8 +105,12 @@ const Topbar = () => {
       return;
     }
 
-    navigate(item.href);
+    navigate(item.path);
   };
+
+  const avatarUrl = user?.photo
+    ? `${baseURL.replace(/\/$/, "")}/${user.photo.replace(/^\/+/, "")}`
+    : undefined;
 
   return (
     <header className={styles.topbar}>
@@ -132,43 +153,38 @@ const Topbar = () => {
         </nav>
         {user ? (
           <>
-            {modalOpen && (
+            {modalOpen && USER_MENU_ITEMS.length > 0 && (
               <Modal
-                userEmail={user?.email}
+                userEmail={user.email}
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 accountModal
               >
                 <ul className={styles.accountModalContent}>
-                  {USER_MENU_ITEMS.map((item) => {
-                    const path = generatePath(item.href, {
-                      lang,
-                      email: user.email,
-                      status: activeStatus,
-                    });
-                    if (!path) return null;
-
-                    return (
-                      <li key={item.label}>
-                        <Link
-                          className={`${item.highlight ? styles.myAccountLink : styles.accountLink}`}
-                          to={path}
-                          onClick={() => handleMenuItemClick(item)}
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    );
-                  })}
+                  {USER_MENU_ITEMS.map((item) => (
+                    <li key={item.label}>
+                      <Link
+                        className={`${
+                          item.highlight
+                            ? styles.myAccountLink
+                            : styles.accountLink
+                        }`}
+                        to={item.path}
+                        onClick={() => handleMenuItemClick(item)}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </Modal>
             )}
             <Avatar
               className={menuOpen ? styles.avatarMobile : styles.avatarLarge}
               onClick={handleAvatarClick}
-              src={user?.photo}
+              src={avatarUrl}
             >
-              {!user?.photo && user?.email?.[0]}
+              {!avatarUrl && user?.email?.[0]}
             </Avatar>
           </>
         ) : (
