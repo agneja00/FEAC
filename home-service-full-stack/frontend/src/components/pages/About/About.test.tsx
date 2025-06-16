@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";

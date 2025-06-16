@@ -6,7 +6,7 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024;
 const SUPPORTED_FORMATS = ["image/jpeg", "image/png", "image/jpg"];
 
 export const loginValidationSchema = (
-  lang: "en" | "lt" | "ru"
+  lang: "en" | "lt" | "ru",
 ): Yup.Schema<ILoginRequest> =>
   Yup.object().shape({
     email: Yup.string()
@@ -16,7 +16,7 @@ export const loginValidationSchema = (
   });
 
 export const registerValidationSchema = (
-  lang: "en" | "lt" | "ru"
+  lang: "en" | "lt" | "ru",
 ): Yup.Schema<IRegisterRequest> =>
   Yup.object().shape({
     name: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
@@ -27,7 +27,7 @@ export const registerValidationSchema = (
   });
 
 export const updateUserValidationSchema = (
-  lang: "en" | "lt" | "ru"
+  lang: "en" | "lt" | "ru",
 ): Yup.Schema<IUpdateUserRequest> =>
   Yup.object().shape({
     name: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
@@ -47,14 +47,14 @@ export const updateUserValidationSchema = (
         errorMessage[lang]?.errorMessage?.fileTooLarge || "File is too large",
         (value) => {
           return !value || (value && value.size <= MAX_FILE_SIZE);
-        }
+        },
       )
       .test(
         "fileFormat",
         errorMessage[lang]?.errorMessage?.fileType || "Unsupported file format",
         (value) => {
           return !value || (value && SUPPORTED_FORMATS.includes(value.type));
-        }
+        },
       )
       .nullable()
       .optional(),

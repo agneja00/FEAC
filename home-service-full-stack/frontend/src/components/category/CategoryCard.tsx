@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./CategoryCard.module.scss";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import classNames from "classnames";

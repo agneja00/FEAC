@@ -60,7 +60,7 @@ describe("LoginForm Component", () => {
         >
           <LoginForm />
         </UserContext.Provider>
-      </Router>
+      </Router>,
     );
 
   test("renders login form fields and button", () => {

@@ -26,7 +26,7 @@ jest.mock("../common/LanguageSwither", () => ({
 jest.mock("@/components/common/Modal", () => ({
   __esModule: true,
   default: jest.fn(({ isOpen, children }) =>
-    isOpen ? <div>{children}</div> : null
+    isOpen ? <div>{children}</div> : null,
   ),
 }));
 
@@ -95,12 +95,12 @@ describe("Topbar", () => {
   });
 
   const renderWithUserContext = (
-    ctxValue: React.ContextType<typeof UserContext>
+    ctxValue: React.ContextType<typeof UserContext>,
   ) => {
     return render(
       <UserContext.Provider value={ctxValue}>
         <Topbar />
-      </UserContext.Provider>
+      </UserContext.Provider>,
     );
   };
 
