@@ -50,25 +50,25 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(
-      screen.getByRole("heading", { name: "common.register" })
+      screen.getByRole("heading", { name: "common.register" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText("inputPlaceholder.name")
+      screen.getByPlaceholderText("inputPlaceholder.name"),
     ).toBeInTheDocument();
     expect(screen.getByPlaceholderText("common.email")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("common.password")).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat")
+      screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "common.register" })
+      screen.getByRole("button", { name: "common.register" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("forms.loginAndRegister.login")
+      screen.getByText("forms.loginAndRegister.login"),
     ).toBeInTheDocument();
   });
 
@@ -76,7 +76,7 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));
@@ -91,7 +91,7 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     fireEvent.change(screen.getByPlaceholderText("inputPlaceholder.name"), {
@@ -107,7 +107,7 @@ describe("RegisterForm", () => {
       screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
       {
         target: { value: "differentPassword" },
-      }
+      },
     );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));
@@ -129,7 +129,7 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     fireEvent.change(screen.getByPlaceholderText("inputPlaceholder.name"), {
@@ -145,7 +145,7 @@ describe("RegisterForm", () => {
       screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
       {
         target: { value: formValues.password },
-      }
+      },
     );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));
@@ -157,7 +157,7 @@ describe("RegisterForm", () => {
         "messages.registrationSuccess",
         {
           variant: "success",
-        }
+        },
       );
     });
   });
@@ -190,7 +190,7 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     fireEvent.change(screen.getByPlaceholderText("inputPlaceholder.name"), {
@@ -206,7 +206,7 @@ describe("RegisterForm", () => {
       screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
       {
         target: { value: formValues.password },
-      }
+      },
     );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));

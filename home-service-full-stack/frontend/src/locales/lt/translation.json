@@ -95,7 +95,8 @@
       "loginTitle": "Prisijungti",
       "sign": "Neturite paskyros? Užsiregistruokite",
       "login": "Jau turite paskyrą? Prisijunkite",
-      "passwordRepeat": "Pakartokite slaptažodį"
+      "passwordRepeat": "Pakartokite slaptažodį",
+      "passwordNew": "Naujas slaptažodis"
     },
     "updateAccount": {
       "surname": "Pavardė",

@@ -29,6 +29,7 @@ export interface IUpdateUserRequest {
   email: string;
   photo?: File | null;
   password?: string;
+  passwordRepeat?: string;
 }
 
 export interface IRegisterRequest extends ILoginRequest {

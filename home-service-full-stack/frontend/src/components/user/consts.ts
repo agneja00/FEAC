@@ -51,6 +51,17 @@ export const updateUserValidationSchema = (
       .email(errorMessage[lang]?.errorMessage?.email)
       .required(errorMessage[lang]?.errorMessage?.required),
     password: Yup.string().optional(),
+    passwordRepeat: Yup.string().when("password", {
+      is: (val: string) => !!val && val.length > 0,
+      then: (schema) =>
+        schema
+          .required(errorMessage[lang]?.errorMessage?.required)
+          .oneOf(
+            [Yup.ref("password")],
+            errorMessage[lang]?.errorMessage?.passwordMismatch,
+          ),
+      otherwise: (schema) => schema.optional(),
+    }),
     photo: Yup.mixed<File>()
       .test(
         "fileSize",
@@ -86,5 +97,6 @@ export const updateUserInitialValues: IUpdateUserRequest = {
   city: "",
   email: "",
   password: "",
+  passwordRepeat: "",
   photo: null,
 };

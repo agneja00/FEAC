@@ -95,7 +95,8 @@
       "loginTitle": "Вход",
       "sign": "Нет аккаунта? Зарегистрируйтесь",
       "login": "Уже есть аккаунт? Войдите",
-      "passwordRepeat": "Повторите пароль"
+      "passwordRepeat": "Повторите пароль",
+      "passwordNew": "Новый пароль"
     },
     "updateAccount": {
       "surname": "Фамилия",

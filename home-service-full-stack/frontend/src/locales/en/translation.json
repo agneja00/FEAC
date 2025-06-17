@@ -95,7 +95,8 @@
       "loginTitle": "Login",
       "sign": "Don't have an account? Sign up",
       "login": "Already have an account? Log in",
-      "passwordRepeat": "Repeat password"
+      "passwordRepeat": "Repeat password",
+      "passwordNew": "New password"
     },
     "updateAccount": {
       "surname": "Surname",

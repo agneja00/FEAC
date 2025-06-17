@@ -65,28 +65,28 @@ describe("ServiceRegisterForm", () => {
     render(
       <SnackbarProvider>
         <ServiceRegisterForm />
-      </SnackbarProvider>
+      </SnackbarProvider>,
     );
 
     await userEvent.type(
       screen.getByLabelText(/service name:/i),
-      "Test Service"
+      "Test Service",
     );
     await userEvent.type(
       screen.getByLabelText(/description of your service:/i),
-      "Test Description"
+      "Test Description",
     );
     await userEvent.type(
       screen.getByLabelText(/company address:/i),
-      "Test Address"
+      "Test Address",
     );
     await userEvent.selectOptions(
       screen.getByLabelText(/category:/i),
-      "Shifting"
+      "Shifting",
     );
     await userEvent.type(
       screen.getByLabelText(/contact person:/i),
-      "Test Contact"
+      "Test Contact",
     );
     await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
 
@@ -105,28 +105,28 @@ describe("ServiceRegisterForm", () => {
     render(
       <SnackbarProvider>
         <ServiceRegisterForm />
-      </SnackbarProvider>
+      </SnackbarProvider>,
     );
 
     await userEvent.type(
       screen.getByLabelText(/service name:/i),
-      "Test Service"
+      "Test Service",
     );
     await userEvent.type(
       screen.getByLabelText(/description of your service:/i),
-      "Test Description"
+      "Test Description",
     );
     await userEvent.type(
       screen.getByLabelText(/company address:/i),
-      "Test Address"
+      "Test Address",
     );
     await userEvent.selectOptions(
       screen.getByLabelText(/category:/i),
-      "Shifting"
+      "Shifting",
     );
     await userEvent.type(
       screen.getByLabelText(/contact person:/i),
-      "Test Contact"
+      "Test Contact",
     );
     await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
 
