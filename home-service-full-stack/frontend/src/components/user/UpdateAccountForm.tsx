@@ -44,7 +44,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
     email: userData.email,
     password: "",
     passwordRepeat: "",
-    photo: null,
+    photo: undefined,
   };
 
   const handlePhotoChange = (

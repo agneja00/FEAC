@@ -22,7 +22,6 @@ jest.mock("notistack", () => ({
 
 describe("UpdateAccountForm (Jest)", () => {
   const enqueueSnackbarMock = jest.fn();
-  const updateUserMock = jest.fn();
   const onSuccessMock = jest.fn();
 
   beforeEach(() => {
@@ -36,12 +35,9 @@ describe("UpdateAccountForm (Jest)", () => {
         country: "USA",
         city: "New York",
         email: "john@example.com",
+        photo: null,
       },
       isLoading: false,
-    });
-
-    (useUpdateUser as jest.Mock).mockReturnValue({
-      mutateAsync: updateUserMock,
     });
 
     (useSnackbar as jest.Mock).mockReturnValue({
@@ -49,6 +45,7 @@ describe("UpdateAccountForm (Jest)", () => {
     });
 
     global.URL.createObjectURL = jest.fn(() => "mock-preview-url");
+    global.URL.revokeObjectURL = jest.fn();
   });
 
   const renderComponent = () =>
@@ -62,13 +59,17 @@ describe("UpdateAccountForm (Jest)", () => {
     );
 
   it("renders form with pre-filled user data", () => {
+    (useUpdateUser as jest.Mock).mockReturnValue({
+      mutateAsync: jest.fn(),
+    });
+
     renderComponent();
 
     expect(screen.getByLabelText(/inputPlaceholder.name/i)).toHaveValue("John");
     expect(screen.getByLabelText(/forms.updateAccount.surname/i)).toHaveValue(
       "Doe",
     );
-    expect(screen.getByLabelText(/forms.updateAccount.age/i)).toHaveValue(30);
+    expect(screen.getByLabelText(/forms.updateAccount.age/i)).toHaveValue("30");
     expect(screen.getByLabelText(/forms.updateAccount.country/i)).toHaveValue(
       "USA",
     );
@@ -78,14 +79,43 @@ describe("UpdateAccountForm (Jest)", () => {
     expect(screen.getByLabelText(/common.email/i)).toHaveValue(
       "john@example.com",
     );
+
+    expect(
+      screen.getByLabelText(/forms.loginAndRegister.passwordNew/i),
+    ).toHaveValue("");
+    expect(
+      screen.getByLabelText(/forms.loginAndRegister.passwordRepeat/i),
+    ).toHaveValue("");
   });
 
-  it("submits form and calls updateUser", async () => {
+  it("submits form and calls updateUser with new password and passwordRepeat", async () => {
+    const updateUserMock = jest.fn().mockResolvedValue({
+      name: "John",
+      surname: "Doe",
+      age: 30,
+      country: "USA",
+      city: "New York",
+      email: "john@example.com",
+      photo: null,
+    });
+    (useUpdateUser as jest.Mock).mockReturnValue({
+      mutateAsync: updateUserMock,
+    });
+
     renderComponent();
 
-    fireEvent.change(screen.getByLabelText(/common.password/i), {
-      target: { value: "newpassword" },
-    });
+    fireEvent.change(
+      screen.getByLabelText(/forms.loginAndRegister.passwordNew/i),
+      {
+        target: { value: "newpassword" },
+      },
+    );
+    fireEvent.change(
+      screen.getByLabelText(/forms.loginAndRegister.passwordRepeat/i),
+      {
+        target: { value: "newpassword" },
+      },
+    );
 
     fireEvent.click(screen.getByRole("button", { name: /buttons.update/i }));
 
@@ -93,25 +123,42 @@ describe("UpdateAccountForm (Jest)", () => {
       expect(updateUserMock).toHaveBeenCalledWith(expect.any(FormData)),
     );
 
-    expect(enqueueSnackbarMock).toHaveBeenCalledWith("messages.updateSuccess", {
-      variant: "success",
-    });
+    const formDataArg = updateUserMock.mock.calls[0][0];
+    expect(formDataArg.get("password")).toBe("newpassword");
 
-    expect(onSuccessMock).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(enqueueSnackbarMock).toHaveBeenCalledWith(
+        "messages.updateSuccess",
+        {
+          variant: "success",
+        },
+      );
+      expect(onSuccessMock).toHaveBeenCalled();
+    });
   });
 
   it("shows error message on update failure", async () => {
+    const updateUserMock = jest.fn().mockRejectedValue({
+      response: { data: { message: "Update failed" } },
+    });
     (useUpdateUser as jest.Mock).mockReturnValue({
-      mutateAsync: jest.fn().mockRejectedValue({
-        response: { data: { message: "Update failed" } },
-      }),
+      mutateAsync: updateUserMock,
     });
 
     renderComponent();
 
-    fireEvent.change(screen.getByLabelText(/common.password/i), {
-      target: { value: "errorpass" },
-    });
+    fireEvent.change(
+      screen.getByLabelText(/forms.loginAndRegister.passwordNew/i),
+      {
+        target: { value: "errorpass" },
+      },
+    );
+    fireEvent.change(
+      screen.getByLabelText(/forms.loginAndRegister.passwordRepeat/i),
+      {
+        target: { value: "errorpass" },
+      },
+    );
 
     fireEvent.click(screen.getByRole("button", { name: /buttons.update/i }));
 
@@ -123,6 +170,10 @@ describe("UpdateAccountForm (Jest)", () => {
   });
 
   it("handles photo file input and displays preview", async () => {
+    (useUpdateUser as jest.Mock).mockReturnValue({
+      mutateAsync: jest.fn(),
+    });
+
     renderComponent();
 
     const file = new File(["dummy"], "avatar.png", { type: "image/png" });
