@@ -1,10 +1,9 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import ServiceRegisterForm from "./ServiceRegisterForm";
-import { SnackbarProvider } from "notistack";
 import { sendServiceEmail } from "./api";
 import { useSnackbar } from "notistack";
-import { act } from "react-dom/test-utils";
 import userEvent from "@testing-library/user-event";
+import { SnackbarProvider } from "notistack";
 
 jest.mock("./api", () => ({
   sendServiceEmail: jest.fn(),
@@ -46,47 +45,52 @@ jest.mock("react-i18next", () => ({
   }),
 }));
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: () => ({ lang: "en" }),
+}));
+
 describe("ServiceRegisterForm", () => {
+  const enqueueSnackbar = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (useSnackbar as jest.Mock).mockReturnValue({ enqueueSnackbar });
+  });
+
   it("shows an error message when submission fails", async () => {
     const mockError = new Error("Failed to send email.");
     (sendServiceEmail as jest.Mock).mockRejectedValueOnce(mockError);
 
-    const enqueueSnackbar = jest.fn();
-    (useSnackbar as jest.Mock).mockReturnValue({
-      enqueueSnackbar,
-    });
-
     render(
       <SnackbarProvider>
         <ServiceRegisterForm />
-      </SnackbarProvider>,
+      </SnackbarProvider>
     );
 
     await userEvent.type(
       screen.getByLabelText(/service name:/i),
-      "Test Service",
+      "Test Service"
     );
     await userEvent.type(
       screen.getByLabelText(/description of your service:/i),
-      "Test Description",
+      "Test Description"
     );
     await userEvent.type(
       screen.getByLabelText(/company address:/i),
-      "Test Address",
+      "Test Address"
     );
     await userEvent.selectOptions(
       screen.getByLabelText(/category:/i),
-      "Shifting",
+      "Shifting"
     );
     await userEvent.type(
       screen.getByLabelText(/contact person:/i),
-      "Test Contact",
+      "Test Contact"
     );
     await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
 
-    await act(async () => {
-      fireEvent.click(screen.getByText(/complete the form/i));
-    });
+    await userEvent.click(screen.getByText(/complete the form/i));
 
     await waitFor(() => {
       expect(enqueueSnackbar).toHaveBeenCalledWith("Failed to send email.", {
@@ -98,42 +102,35 @@ describe("ServiceRegisterForm", () => {
   it("shows a success message when submission succeeds", async () => {
     (sendServiceEmail as jest.Mock).mockResolvedValueOnce({});
 
-    const enqueueSnackbar = jest.fn();
-    (useSnackbar as jest.Mock).mockReturnValue({
-      enqueueSnackbar,
-    });
-
     render(
       <SnackbarProvider>
         <ServiceRegisterForm />
-      </SnackbarProvider>,
+      </SnackbarProvider>
     );
 
     await userEvent.type(
       screen.getByLabelText(/service name:/i),
-      "Test Service",
+      "Test Service"
     );
     await userEvent.type(
       screen.getByLabelText(/description of your service:/i),
-      "Test Description",
+      "Test Description"
     );
     await userEvent.type(
       screen.getByLabelText(/company address:/i),
-      "Test Address",
+      "Test Address"
     );
     await userEvent.selectOptions(
       screen.getByLabelText(/category:/i),
-      "Shifting",
+      "Shifting"
     );
     await userEvent.type(
       screen.getByLabelText(/contact person:/i),
-      "Test Contact",
+      "Test Contact"
     );
     await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
 
-    await act(async () => {
-      fireEvent.click(screen.getByText(/complete the form/i));
-    });
+    await userEvent.click(screen.getByText(/complete the form/i));
 
     await waitFor(() => {
       expect(enqueueSnackbar).toHaveBeenCalledWith("Email sent successfully!", {
