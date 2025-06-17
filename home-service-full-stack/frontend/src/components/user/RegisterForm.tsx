@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
 import { generatePath, Link, useNavigate, useParams } from "react-router-dom";
-import FormikField from "../common/FormikInput";
+import FormikField from "../common/FormikField";
 import {
   registerInitialValues,
   registerValidationSchema,

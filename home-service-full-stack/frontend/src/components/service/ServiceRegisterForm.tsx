@@ -1,7 +1,7 @@
 import styles from "../user/Form.module.scss";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useSnackbar } from "notistack";
-import FormikField from "../common/FormikInput";
+import FormikField from "../common/FormikField";
 import {
   ServiceRegisterValidationSchema,
   serviceRegisterInitialValues,

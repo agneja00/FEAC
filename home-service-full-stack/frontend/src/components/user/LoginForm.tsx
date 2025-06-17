@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Form, Formik } from "formik";
 import { loginInitialValues, loginValidationSchema } from "../user/consts";
 import { ILoginRequest } from "../user/types";
-import FormikField from "../common/FormikInput";
+import FormikField from "../common/FormikField";
 import Button from "../common/Button";
 import { ROUTES } from "../../constants/routes";
 import { generatePath, Link, useNavigate, useParams } from "react-router-dom";

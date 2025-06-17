@@ -6,7 +6,7 @@ import { updateUserValidationSchema } from "./consts";
 import { IUpdateUserRequest, IUser } from "./types";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
-import FormikField from "../common/FormikInput";
+import FormikField from "../common/FormikField";
 import Button from "../common/Button";
 import { ErrorResponse } from "../types/error";
 import { useState, ChangeEvent, useContext, useEffect } from "react";
