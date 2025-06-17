@@ -104,6 +104,7 @@ describe("FavoritesPage", () => {
           isLoggedIn: !!user,
           login: jest.fn(),
           logout: jest.fn(),
+          setUser: jest.fn(),
         }}
       >
         <MemoryRouter initialEntries={[route]}>
@@ -175,6 +176,7 @@ describe("FavoritesPage", () => {
           isLoggedIn: false,
           login: jest.fn(),
           logout: jest.fn(),
+          setUser: jest.fn(),
         }}
       >
         <MemoryRouter

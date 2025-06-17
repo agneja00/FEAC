@@ -185,7 +185,7 @@ describe("ServicesContent", () => {
     return render(
       <QueryClientProvider client={queryClient}>
         <MockUserContextProvider>{ui}</MockUserContextProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
   };
 
@@ -193,7 +193,7 @@ describe("ServicesContent", () => {
     renderWithProviders(<ServicesContent />);
 
     expect(
-      screen.getByPlaceholderText("inputPlaceholder.search")
+      screen.getByPlaceholderText("inputPlaceholder.search"),
     ).toBeInTheDocument();
   });
 

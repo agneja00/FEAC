@@ -85,6 +85,7 @@ const renderWithProviders = () =>
             isLoggedIn: true,
             login: jest.fn(),
             logout: jest.fn(),
+            setUser: jest.fn(),
           }}
         >
           <SnackbarProvider>
