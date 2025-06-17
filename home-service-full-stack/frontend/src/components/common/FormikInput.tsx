@@ -1,11 +1,12 @@
 import classNames from "classnames";
 import styles from "./Input.module.scss";
-import { Field, ErrorMessage, useField } from "formik";
+import { ErrorMessage, useField } from "formik";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface FormikFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   preview?: string | null;
 }
 
@@ -13,11 +14,11 @@ const FormikField = ({
   name,
   label,
   type,
-  onChange,
   preview,
   ...props
 }: FormikFieldProps) => {
-  const [field] = useField(name);
+  const [field, meta, helpers] = useField(name);
+  const [showPassword, setShowPassword] = useState(false);
 
   if (type === "file") {
     return (
@@ -36,12 +37,18 @@ const FormikField = ({
           type="file"
           accept="image/*"
           className={styles.fileInput}
-          onChange={onChange}
+          onChange={(e) => {
+            if (e.currentTarget.files && e.currentTarget.files[0]) {
+              helpers.setValue(e.currentTarget.files[0]);
+            }
+          }}
         />
         <ErrorMessage name={name} component="div" className={styles.error} />
       </div>
     );
   }
+
+  const isPassword = type === "password";
 
   return (
     <div className={styles.formField}>
@@ -50,14 +57,25 @@ const FormikField = ({
           {label}
         </label>
       )}
-      <Field
-        name={name}
-        as="input"
-        id={name}
-        type={type}
-        className={styles.input}
-        {...props}
-      />
+      <div className={styles.inputWrapper}>
+        <input
+          {...field}
+          id={name}
+          type={isPassword && !showPassword ? "password" : "text"}
+          className={styles.input}
+          {...props}
+        />
+        {isPassword && (
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className={styles.eyeButton}
+            tabIndex={-1}
+          >
+            {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+          </button>
+        )}
+      </div>
       <ErrorMessage name={name} component="div" className={styles.error} />
     </div>
   );

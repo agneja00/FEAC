@@ -1,5 +1,9 @@
 import * as Yup from "yup";
-import { ILoginRequest, IRegisterRequest, IUpdateUserRequest } from "./types";
+import {
+  ILoginRequest,
+  IRegisterFormValues,
+  IUpdateUserRequest,
+} from "./types";
 import { errorMessage } from "@/constants/errorMessage";
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024;
@@ -17,13 +21,19 @@ export const loginValidationSchema = (
 
 export const registerValidationSchema = (
   lang: "en" | "lt" | "ru",
-): Yup.Schema<IRegisterRequest> =>
+): Yup.Schema<IRegisterFormValues> =>
   Yup.object().shape({
     name: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
     email: Yup.string()
       .email(errorMessage[lang]?.errorMessage?.email)
       .required(errorMessage[lang]?.errorMessage?.required),
     password: Yup.string().required(errorMessage[lang]?.errorMessage?.required),
+    passwordRepeat: Yup.string()
+      .oneOf(
+        [Yup.ref("password")],
+        errorMessage[lang]?.errorMessage?.passwordMismatch,
+      )
+      .required(errorMessage[lang]?.errorMessage?.required),
   });
 
 export const updateUserValidationSchema = (
@@ -45,16 +55,12 @@ export const updateUserValidationSchema = (
       .test(
         "fileSize",
         errorMessage[lang]?.errorMessage?.fileTooLarge || "File is too large",
-        (value) => {
-          return !value || (value && value.size <= MAX_FILE_SIZE);
-        },
+        (value) => !value || value.size <= MAX_FILE_SIZE,
       )
       .test(
         "fileFormat",
         errorMessage[lang]?.errorMessage?.fileType || "Unsupported file format",
-        (value) => {
-          return !value || (value && SUPPORTED_FORMATS.includes(value.type));
-        },
+        (value) => !value || SUPPORTED_FORMATS.includes(value.type),
       )
       .nullable()
       .optional(),
@@ -65,10 +71,11 @@ export const loginInitialValues: ILoginRequest = {
   password: "",
 };
 
-export const registerInitialValues: IRegisterRequest = {
+export const registerInitialValues: IRegisterFormValues = {
   name: "",
   email: "",
   password: "",
+  passwordRepeat: "",
 };
 
 export const updateUserInitialValues: IUpdateUserRequest = {

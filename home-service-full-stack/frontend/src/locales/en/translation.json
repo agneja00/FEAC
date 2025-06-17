@@ -94,7 +94,8 @@
     "loginAndRegister": {
       "loginTitle": "Login",
       "sign": "Don't have an account? Sign up",
-      "login": "Already have an account? Log in"
+      "login": "Already have an account? Log in",
+      "passwordRepeat": "Repeat password"
     },
     "updateAccount": {
       "surname": "Surname",

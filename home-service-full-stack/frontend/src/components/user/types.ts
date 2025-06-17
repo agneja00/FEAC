@@ -34,3 +34,7 @@ export interface IUpdateUserRequest {
 export interface IRegisterRequest extends ILoginRequest {
   name: string;
 }
+
+export interface IRegisterFormValues extends IRegisterRequest {
+  passwordRepeat: string;
+}

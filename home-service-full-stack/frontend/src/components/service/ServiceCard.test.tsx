@@ -70,7 +70,7 @@ describe("ServiceCard", () => {
   });
 
   const renderServiceCard = (
-    props: Partial<React.ComponentProps<typeof ServiceCard>> = {}
+    props: Partial<React.ComponentProps<typeof ServiceCard>> = {},
   ) => {
     const defaultProps = {
       service: mockService,
@@ -82,7 +82,7 @@ describe("ServiceCard", () => {
         <UserContext.Provider value={mockUserContextValue}>
           <ServiceCard {...defaultProps} {...props} />
         </UserContext.Provider>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   };
 
@@ -138,7 +138,7 @@ describe("ServiceCard", () => {
   it("renders the favorite button", () => {
     renderServiceCard();
     expect(
-      screen.getByRole("button", { name: /Add to favorites/i })
+      screen.getByRole("button", { name: /Add to favorites/i }),
     ).toBeInTheDocument();
   });
 
@@ -155,7 +155,7 @@ describe("ServiceCard", () => {
 
     expect(mutate).toHaveBeenCalledWith(
       { email: mockUser.email, serviceId: mockService._id, lang: "en" },
-      expect.anything()
+      expect.anything(),
     );
   });
 

@@ -10,7 +10,7 @@ import {
   registerValidationSchema,
 } from "../user/consts";
 import { useRegisterUser } from "./hooks";
-import { IRegisterRequest } from "../user/types";
+import { IRegisterFormValues } from "../user/types";
 import { ErrorResponse } from "../types/error";
 import { useTranslation } from "react-i18next";
 
@@ -23,9 +23,10 @@ const RegisterForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const handleSubmit = async (formValues: IRegisterRequest) => {
+  const handleSubmit = async (formValues: IRegisterFormValues) => {
+    const { passwordRepeat, ...valuesToSubmit } = formValues;
     try {
-      await registerUser(formValues);
+      await registerUser(valuesToSubmit);
       navigate(generatePath(ROUTES.LOGIN, { lang }));
       enqueueSnackbar(t("messages.registrationSuccess"), {
         variant: "success",
@@ -66,6 +67,13 @@ const RegisterForm = () => {
                 name="password"
                 type="password"
                 placeholder={t("common.password")}
+              />
+            </div>
+            <div className={styles.field}>
+              <FormikField
+                name="passwordRepeat"
+                type="password"
+                placeholder={t("forms.loginAndRegister.passwordRepeat")}
               />
             </div>
             <Button type="submit" disabled={isSubmitting}>

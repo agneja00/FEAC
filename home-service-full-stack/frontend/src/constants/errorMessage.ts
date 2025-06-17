@@ -7,6 +7,7 @@ export const errorMessage = {
       invalidAge: "Age must be a positive number",
       fileTooLarge: "File is too large (max 2MB)",
       fileType: "Unsupported file format (only JPEG or PNG)",
+      passwordMismatch: "Passwords do not match",
     },
   },
   lt: {
@@ -17,6 +18,7 @@ export const errorMessage = {
       invalidAge: "Amžius turi būti teigiamas skaičius",
       fileTooLarge: "Failas per didelis (maks. 2MB)",
       fileType: "Nepalaikomas failo formatas (tik JPEG arba PNG)",
+      passwordMismatch: "Slaptažodžiai nesutampa",
     },
   },
   ru: {
@@ -27,6 +29,7 @@ export const errorMessage = {
       invalidAge: "Возраст должен быть положительным числом",
       fileTooLarge: "Файл слишком большой (макс. 2MB)",
       fileType: "Недопустимый формат файла (только JPEG или PNG)",
+      passwordMismatch: "Пароли не совпадают",
     },
   },
 };
