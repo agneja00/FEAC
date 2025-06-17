@@ -17,9 +17,10 @@ jest.mock("./hooks");
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => {
-      if (key === "errorMessage.en.errorMessage.required") {
+      if (key === "errorMessage.en.errorMessage.required")
         return "Field is required";
-      }
+      if (key === "errorMessage.en.errorMessage.passwordMismatch")
+        return "Passwords do not match";
       return key;
     },
   }),
@@ -49,25 +50,25 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(
-      screen.getByRole("heading", { name: "common.register" }),
+      screen.getByRole("heading", { name: "common.register" })
     ).toBeInTheDocument();
-
     expect(
-      screen.getByPlaceholderText("inputPlaceholder.name"),
+      screen.getByPlaceholderText("inputPlaceholder.name")
     ).toBeInTheDocument();
     expect(screen.getByPlaceholderText("common.email")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("common.password")).toBeInTheDocument();
-
     expect(
-      screen.getByRole("button", { name: "common.register" }),
+      screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat")
     ).toBeInTheDocument();
-
     expect(
-      screen.getByText("forms.loginAndRegister.login"),
+      screen.getByRole("button", { name: "common.register" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("forms.loginAndRegister.login")
     ).toBeInTheDocument();
   });
 
@@ -75,14 +76,44 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));
 
     await waitFor(() => {
       const errorMessages = screen.getAllByText("Field is required");
-      expect(errorMessages).toHaveLength(3);
+      expect(errorMessages).toHaveLength(4);
+    });
+  });
+
+  it("shows error if passwords do not match", async () => {
+    render(
+      <MemoryRouter>
+        <RegisterForm />
+      </MemoryRouter>
+    );
+
+    fireEvent.change(screen.getByPlaceholderText("inputPlaceholder.name"), {
+      target: { value: "John Doe" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("common.email"), {
+      target: { value: "john.doe@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("common.password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(
+      screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
+      {
+        target: { value: "differentPassword" },
+      }
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "common.register" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Passwords do not match")).toBeInTheDocument();
     });
   });
 
@@ -98,7 +129,7 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     fireEvent.change(screen.getByPlaceholderText("inputPlaceholder.name"), {
@@ -110,6 +141,12 @@ describe("RegisterForm", () => {
     fireEvent.change(screen.getByPlaceholderText("common.password"), {
       target: { value: formValues.password },
     });
+    fireEvent.change(
+      screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
+      {
+        target: { value: formValues.password },
+      }
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));
 
@@ -120,7 +157,7 @@ describe("RegisterForm", () => {
         "messages.registrationSuccess",
         {
           variant: "success",
-        },
+        }
       );
     });
   });
@@ -153,7 +190,7 @@ describe("RegisterForm", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     fireEvent.change(screen.getByPlaceholderText("inputPlaceholder.name"), {
@@ -165,6 +202,12 @@ describe("RegisterForm", () => {
     fireEvent.change(screen.getByPlaceholderText("common.password"), {
       target: { value: formValues.password },
     });
+    fireEvent.change(
+      screen.getByPlaceholderText("forms.loginAndRegister.passwordRepeat"),
+      {
+        target: { value: formValues.password },
+      }
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "common.register" }));
 
