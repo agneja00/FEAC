@@ -18,8 +18,8 @@ export default defineConfig({
 
   server: {
     proxy: {
-      "/uploads": "http://localhost:3000",
-      "/api": "http://localhost:3000",
+      "/uploads": "http://localhost:5000",
+      "/api": "http://localhost:5000",
     },
   },
 });

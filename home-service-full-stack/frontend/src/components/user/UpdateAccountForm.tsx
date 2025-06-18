@@ -49,7 +49,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 
   const handlePhotoChange = (
     e: ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: any) => void,
+    setFieldValue: (field: string, value: any) => void
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -84,7 +84,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
       });
 
       setPhotoPreview(
-        updatedUser.photo ? `${updatedUser.photo}?t=${Date.now()}` : null,
+        updatedUser.photo ? `${updatedUser.photo}?t=${Date.now()}` : null
       );
 
       onSuccess?.();
@@ -158,7 +158,6 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
               name="passwordRepeat"
               type="password"
               label={`${t("forms.loginAndRegister.passwordRepeat")}:`}
-              required
             />
             <FormikField
               name="photo"

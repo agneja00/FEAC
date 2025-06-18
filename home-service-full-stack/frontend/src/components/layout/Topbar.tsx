@@ -14,7 +14,7 @@ import { PROD } from "@/constants/environment";
 
 const baseURL = PROD
   ? "https://home-services-f898b008a33e.herokuapp.com"
-  : "http://localhost:5173";
+  : "http://localhost:5000";
 
 const Topbar = () => {
   const { user, logout } = useContext(UserContext);
@@ -37,7 +37,7 @@ const Topbar = () => {
         label: t("common.forBusinessPartners"),
       },
     ],
-    [lang, t],
+    [lang, t]
   );
 
   const USER_MENU_ITEMS = useMemo(() => {
