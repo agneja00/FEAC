@@ -84,3 +84,7 @@
 .error {
   @include error-message;
 }
+
+.requiredAsterisk {
+  color: #ff0000;
+}

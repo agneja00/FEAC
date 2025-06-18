@@ -15,6 +15,7 @@ const FormikField = ({
   label,
   type,
   preview,
+  required,
   ...props
 }: FormikFieldProps) => {
   const [field, meta, helpers] = useField(name);
@@ -29,6 +30,7 @@ const FormikField = ({
             className={classNames(styles.label, styles.fileLabel)}
           >
             {label}
+            {required && <span className={styles.requiredAsterisk}> *</span>}
           </label>
         )}
         <input
@@ -55,6 +57,7 @@ const FormikField = ({
       {label && (
         <label className={styles.label} htmlFor={name}>
           {label}
+          {required && <span className={styles.requiredAsterisk}> *</span>}
         </label>
       )}
       <div className={styles.inputWrapper}>
@@ -63,6 +66,7 @@ const FormikField = ({
           id={name}
           type={isPassword && !showPassword ? "password" : "text"}
           className={styles.input}
+          required={required}
           {...props}
         />
         {isPassword && (

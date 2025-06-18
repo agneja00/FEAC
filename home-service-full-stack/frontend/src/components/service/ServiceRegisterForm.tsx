@@ -69,10 +69,12 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
           <FormikField
             label={t("forms.registerService.serviceName")}
             name="name"
+            required
           />
           <div className={styles.aboutContainer}>
             <label className={styles.label} htmlFor="about">
               {t("forms.registerService.description")}
+              <span className={styles.requiredAsterisk}> *</span>
             </label>
             <Field
               as="textarea"
@@ -89,10 +91,12 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
           <FormikField
             label={t("forms.registerService.companyAddress")}
             name="address"
+            required
           />
           <div className={styles.selectContainer}>
             <label className={styles.label} htmlFor="category">
               {t("forms.registerService.category")}
+              <span className={styles.requiredAsterisk}> *</span>
             </label>
             <Field
               as="select"
@@ -114,8 +118,14 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
           <FormikField
             label={t("forms.registerService.contact")}
             name="contactPerson"
+            required
           />
-          <FormikField type="email" label={t("common.email")} name="email" />
+          <FormikField
+            type="email"
+            label={`${t("common.email")}:`}
+            name="email"
+            required
+          />
           <Button type="submit">{t("buttons.completeTheForm")}</Button>
         </Form>
       )}

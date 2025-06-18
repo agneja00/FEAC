@@ -121,7 +121,11 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 
         return (
           <Form className={styles.form}>
-            <FormikField name="name" label={`${t("inputPlaceholder.name")}:`} />
+            <FormikField
+              name="name"
+              label={`${t("inputPlaceholder.name")}:`}
+              required
+            />
             <FormikField
               name="surname"
               label={`${t("forms.updateAccount.surname")}:`}
@@ -143,6 +147,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
               name="email"
               type="email"
               label={`${t("common.email")}:`}
+              required
             />
             <FormikField
               name="password"
@@ -153,6 +158,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
               name="passwordRepeat"
               type="password"
               label={`${t("forms.loginAndRegister.passwordRepeat")}:`}
+              required
             />
             <FormikField
               name="photo"
