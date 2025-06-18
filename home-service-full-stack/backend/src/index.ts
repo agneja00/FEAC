@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://home-services-f898b008a33e.herokuapp.com/en"],
     credentials: true,
   }),
 );
