@@ -3,6 +3,7 @@ import multer from "multer";
 import User from "../models/User";
 import { generateToken } from "../utils/password";
 import cloudinary from "../utils/cloudinary";
+import authMiddleware from "../middlewares/authMiddleware";
 
 const router = express.Router();
 
@@ -80,14 +81,14 @@ router.post("/:lang/auth/login", async (req, res) => {
   }
 });
 
-router.get("/:lang/user/:email", async (req, res) => {
+router.get("/:lang/user/:email", authMiddleware, async (req, res) => {
   const { email } = req.params;
   const user = await User.findOne({ email }).select("-password");
   if (!user) return res.status(404).json({ message: "User not found" });
   res.json(user);
 });
 
-router.put("/:lang/user/:email", upload.single("photo"), async (req, res) => {
+router.put("/:lang/user/:email", upload.single("photo"), authMiddleware, async (req, res) => {
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
   const currentEmail = req.params.email;
   const { name, surname, age, country, city, password, email: newEmail } = req.body;
