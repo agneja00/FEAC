@@ -24,8 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.use("/uploads/avatars", express.static(path.join(__dirname, "uploads", "avatars")));
-
 app.use("/", authRoutes);
 app.use("/", categoryRoutes);
 app.use("/", serviceRoutes);

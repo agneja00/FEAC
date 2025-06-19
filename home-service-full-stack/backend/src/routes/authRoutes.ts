@@ -1,58 +1,51 @@
 import express from "express";
 import multer from "multer";
-import path from "path";
-import fs from "fs";
 import User from "../models/User";
 import { generateToken } from "../utils/password";
+import cloudinary from "../utils/cloudinary";
 
 const router = express.Router();
 
-const uploadDir = path.join(__dirname, "..", "uploads", "avatars");
-fs.mkdirSync(uploadDir, { recursive: true });
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (_req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName);
-  },
-});
-
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+const validLanguages = ["en", "lt", "ru"];
+const defaultLanguage = "en";
+
+const errorMessages: Record<string, any> = {
+  en: {
+    userExists: "User already exists",
+    serverError: "Error registering new user.",
+    missingFields: "Please provide email and password",
+    incorrectCredentials: "Incorrect email or password",
+    updateError: "Server error while updating user.",
+  },
+  lt: {
+    userExists: "Vartotojas jau egzistuoja",
+    serverError: "Klaida registruojant naują vartotoją.",
+    missingFields: "Prašome pateikti el. paštą ir slaptažodį",
+    incorrectCredentials: "Neteisingas el. paštas arba slaptažodis",
+    updateError: "Klaida atnaujinant vartotoją.",
+  },
+  ru: {
+    userExists: "Пользователь уже существует",
+    serverError: "Ошибка при регистрации нового пользователя.",
+    missingFields: "Пожалуйста, введите email и пароль",
+    incorrectCredentials: "Неверный email или пароль",
+    updateError: "Ошибка при обновлении пользователя.",
+  },
+};
+
 router.post("/:lang/auth/register", async (req, res) => {
-  const validLanguages = ["en", "lt", "ru"];
-  const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
-
-  const errorMessages: Record<string, { userExists: string; serverError: string }> = {
-    en: {
-      userExists: "User already exists",
-      serverError: "Error registering new user.",
-    },
-    lt: {
-      userExists: "Vartotojas jau egzistuoja",
-      serverError: "Klaida registruojant naują vartotoją.",
-    },
-    ru: {
-      userExists: "Пользователь уже существует",
-      serverError: "Ошибка при регистрации нового пользователя.",
-    },
-  };
-
   try {
     const user = req.body;
     const existingUser = await User.findOne({ email: user.email });
-
     if (existingUser) {
       return res.status(400).json({ message: errorMessages[lang].userExists });
     }
-
     const newUser = new User(user);
     await newUser.save();
-
     return res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
     return res.status(500).json({
@@ -63,31 +56,9 @@ router.post("/:lang/auth/register", async (req, res) => {
 });
 
 router.post("/:lang/auth/login", async (req, res) => {
-  const validLanguages = ["en", "lt", "ru"];
-  const defaultLanguage = "en";
   const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
-
-  const errorMessages: Record<string, { missingFields: string; incorrectCredentials: string; serverError: string }> = {
-    en: {
-      missingFields: "Please provide email and password",
-      incorrectCredentials: "Incorrect email or password",
-      serverError: "Error logging in.",
-    },
-    lt: {
-      missingFields: "Prašome pateikti el. paštą ir slaptažodį",
-      incorrectCredentials: "Neteisingas el. paštas arba slaptažodis",
-      serverError: "Prisijungimo klaida.",
-    },
-    ru: {
-      missingFields: "Пожалуйста, введите email и пароль",
-      incorrectCredentials: "Неверный email или пароль",
-      serverError: "Ошибка при входе в систему.",
-    },
-  };
-
   try {
     const { email, password } = req.body;
-
     if (!email || !password) {
       return res.status(400).json({ message: errorMessages[lang].missingFields });
     }
@@ -117,8 +88,9 @@ router.get("/:lang/user/:email", async (req, res) => {
 });
 
 router.put("/:lang/user/:email", upload.single("photo"), async (req, res) => {
-  const { email } = req.params;
-  const { name, surname, age, country, city, password } = req.body;
+  const lang = validLanguages.includes(req.params.lang) ? req.params.lang : defaultLanguage;
+  const currentEmail = req.params.email;
+  const { name, surname, age, country, city, password, email: newEmail } = req.body;
 
   try {
     const updateData: any = {
@@ -127,10 +99,29 @@ router.put("/:lang/user/:email", upload.single("photo"), async (req, res) => {
       age,
       country,
       city,
+      email: newEmail || currentEmail,
     };
 
     if (req.file) {
-      updateData.photo = `/uploads/avatars/${req.file.filename}`;
+      const file = req.file;
+
+      const result = await new Promise<any>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "avatars",
+            public_id: `${newEmail || currentEmail}_avatar`,
+            overwrite: true,
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          },
+        );
+
+        stream.end(file.buffer);
+      });
+
+      updateData.photo = result.secure_url;
     }
 
     if (password) {
@@ -138,9 +129,9 @@ router.put("/:lang/user/:email", upload.single("photo"), async (req, res) => {
       updateData.password = await bcrypt.hash(password, 10);
     }
 
-    const updatedUser = await User.findOneAndUpdate({ email }, updateData, {
-      new: true,
-    }).select("-password");
+    const updatedUser = await User.findOneAndUpdate({ email: currentEmail }, updateData, { new: true }).select(
+      "-password",
+    );
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
@@ -149,27 +140,7 @@ router.put("/:lang/user/:email", upload.single("photo"), async (req, res) => {
     res.json(updatedUser);
   } catch (err) {
     console.error("Update error:", err);
-    res.status(500).json({ message: "Server error while updating user." });
-  }
-});
-
-router.post("/user/upload-avatar", upload.single("avatar"), async (req, res) => {
-  const email = req.body.email;
-  if (!email || !req.file) {
-    return res.status(400).json({ message: "Email and avatar image are required." });
-  }
-
-  const avatarUrl = `/uploads/avatars/${req.file.filename}`;
-  try {
-    const updatedUser = await User.findOneAndUpdate({ email }, { avatarUrl }, { new: true }).select("-password");
-
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({ message: "Avatar uploaded", avatarUrl, user: updatedUser });
-  } catch (err) {
-    res.status(500).json({ message: "Server error uploading avatar", error: (err as Error).message });
+    res.status(500).json({ message: errorMessages[lang].updateError });
   }
 });
 

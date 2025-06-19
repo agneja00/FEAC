@@ -37,7 +37,7 @@ const Topbar = () => {
         label: t("common.forBusinessPartners"),
       },
     ],
-    [lang, t]
+    [lang, t],
   );
 
   const USER_MENU_ITEMS = useMemo(() => {
@@ -108,9 +108,7 @@ const Topbar = () => {
     navigate(item.path);
   };
 
-  const avatarUrl = user?.photo
-    ? `${baseURL.replace(/\/$/, "")}/${user.photo.replace(/^\/+/, "")}`
-    : undefined;
+  const avatarUrl = user?.photo?.startsWith("http") ? user.photo : undefined;
 
   return (
     <header className={styles.topbar}>
