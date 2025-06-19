@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import helmet from "helmet";
 import path from "path";
 
 import { connectToDb, PORT } from "./db";
@@ -13,14 +12,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://home-services-f898b008a33e.herokuapp.com"],
+    origin: "http://localhost:5173",
     credentials: true,
   }),
 );
-
-app.use(helmet());
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 

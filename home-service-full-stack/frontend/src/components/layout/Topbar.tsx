@@ -14,7 +14,7 @@ import { PROD } from "@/constants/environment";
 
 const baseURL = PROD
   ? "https://home-services-f898b008a33e.herokuapp.com"
-  : "http://localhost:5000";
+  : "http://localhost:5173";
 
 const Topbar = () => {
   const { user, logout } = useContext(UserContext);
