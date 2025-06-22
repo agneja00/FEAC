@@ -4,13 +4,13 @@ A modern platform for booking home services (cleaning, repairs, painting, etc.) 
 
 ### Features
 
-- User Accounts: Register, log in and update your profile information.
-- Service Booking: Schedule services with professionals.
-- Email Notifications: Receive booking confirmations and updates.
-- Favorites: Save preferred services for quick access.
-- Multi-Language: Switch between languages (English, Lithuanian and Russian).
-- Service Providers: Register and list your own services.
-- Dark Mode Toggle: Switch between light and dark themes.
+- **User Accounts**: Register, log in and update your profile information.
+- **Service Booking**: Schedule services with professionals.
+- **Email Notifications**: Receive booking confirmations and updates.
+- **Favorites**: Save preferred services for quick access.
+- **Multi-Language**: Switch between languages (English, Lithuanian and Russian).
+- **Service Providers**: Register and list your own services.
+- **Dark Mode Toggle**: Switch between light and dark themes.
 
 ### Links
 
