@@ -11,6 +11,7 @@ A modern platform for booking home services (cleaning, repairs, painting, etc.) 
 - **Multi-Language**: Switch between languages (English, Lithuanian and Russian).
 - **Service Providers**: Register and list your own services.
 - **Dark Mode Toggle**: Switch between light and dark themes.
+- **Profile Avatars with Cloudinary**: Upload and manage user avatars via Cloudinary CDN.
 
 ### Links
 
@@ -29,6 +30,7 @@ A modern platform for booking home services (cleaning, repairs, painting, etc.) 
 - React Query
 - MongoDB
 - SendGrid
+- Cloudinary
 - Heroku
 
 ## Author
