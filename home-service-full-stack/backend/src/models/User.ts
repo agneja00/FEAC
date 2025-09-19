@@ -1,7 +1,7 @@
 import mongoose, { Types } from "mongoose";
 import bcrypt from "bcryptjs";
 
-interface IUser extends mongoose.Document {
+export interface IUser extends mongoose.Document {
   _id: Types.ObjectId;
   name: string;
   age?: number;
@@ -19,10 +19,7 @@ const userSchema = new mongoose.Schema<IUser>(
     password: { type: String, required: true },
     photo: { type: String },
   },
-  {
-    timestamps: true,
-    versionKey: false,
-  },
+  { timestamps: true, versionKey: false },
 );
 
 userSchema.pre<IUser>("save", async function (next) {
@@ -37,5 +34,4 @@ userSchema.methods.isCorrectPassword = function (password: string) {
 };
 
 const User = mongoose.model<IUser>("User", userSchema);
-
 export default User;

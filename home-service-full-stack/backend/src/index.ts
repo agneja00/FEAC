@@ -17,6 +17,12 @@ app.use(
   }),
 );
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  next();
+});
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/", authRoutes);

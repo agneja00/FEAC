@@ -8,7 +8,6 @@ export interface IUserPayload {
 }
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       currentUser?: IUserPayload;
@@ -32,6 +31,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     res.status(401).send({ error: "Not authenticated" });
     return;
   }
+
   next();
 };
 
