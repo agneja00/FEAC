@@ -8,8 +8,7 @@
     "deploy": "git push heroku main"
   },
   "engines": {
-    "node": "20.x",
-    "yarn": "1.x"
+    "node": "20.x"
   },
   "keywords": [],
   "author": "",
