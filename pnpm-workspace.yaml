@@ -1,0 +1,3 @@
+packages:
+  - "home-service-full-stack/backend"
+  - "home-service-full-stack/frontend"
