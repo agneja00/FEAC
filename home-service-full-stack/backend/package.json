@@ -4,11 +4,14 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
+    "b": "pnpm --filter home-service-backend",
+    "f": "pnpm --filter home-service-frontend",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "types": "tsc --noEmit --project ./tsconfig.json",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
-    "types": "tsc --noEmit --project ./tsconfig.json"
+    "prettify": "pnpm -r --parallel prettify"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.5",

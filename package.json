@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "b": "pnpm --filter home-service-backend",
+    "f": "pnpm --filter home-service-frontend",
+    "dev": "concurrently \"pnpm --filter home-service-backend dev\" \"pnpm --filter home-service-frontend dev\"",
     "start": "cd home-service-full-stack/backend && pnpm && pnpm build && pnpm start",
+    "types": "concurrently \"pnpm b types\" \"pnpm f types\"",
+    "lint": "concurrently \"pnpm b lint\" \"pnpm f lint\"",
+    "prettify": "pnpm -r --parallel prettify",
     "heroku-postbuild": "cd home-service-full-stack/frontend && pnpm install && pnpm build",
     "deploy": "git push heroku main",
     "prepare": "husky install"
@@ -24,6 +30,7 @@
     "prettier": "^3.6.2"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.2"
   },
