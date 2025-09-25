@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "cd home-service-full-stack/backend && yarn && yarn build && yarn start",
-    "heroku-postbuild": "cd home-service-full-stack/frontend && yarn && yarn build",
+    "start": "cd home-service-full-stack/backend && pnpm && pnpm build && pnpm start",
+    "heroku-postbuild": "cd home-service-full-stack/frontend && pnpm && pnpm build",
     "deploy": "git push heroku main"
   },
   "engines": {
