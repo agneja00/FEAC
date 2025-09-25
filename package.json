@@ -6,10 +6,10 @@
     "start": "cd home-service-full-stack/backend && pnpm && pnpm build && pnpm start",
     "heroku-postbuild": "cd home-service-full-stack/frontend && pnpm && pnpm build",
     "deploy": "git push heroku main",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=20"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +18,19 @@
     "@types/node": "^22.10.7",
     "@typescript-eslint/parser": "^8.21.0",
     "csstype": "^3.1.3",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "prettier": "^3.6.2"
   },
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.2.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,json,md,css,scss,yml,yaml}": [
+      "pnpm exec prettier --write"
+    ],
+    "*.{js,ts,tsx,jsx}": [
+      "pnpm exec eslint --fix"
+    ]
   }
 }
