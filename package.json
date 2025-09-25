@@ -4,13 +4,15 @@
   "description": "",
   "scripts": {
     "start": "cd home-service-full-stack/backend && pnpm && pnpm build && pnpm start",
-    "heroku-postbuild": "cd home-service-full-stack/frontend && pnpm && pnpm build",
+    "heroku-postbuild": "cd home-service-full-stack/frontend && pnpm install && pnpm build",
     "deploy": "git push heroku main",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "engines": {
-    "node": ">=20"
+    "node": "22.19.0",
+    "pnpm": "10.17.1"
   },
+  "packageManager": "pnpm@10.17.1",
   "keywords": [],
   "author": "",
   "license": "ISC",
