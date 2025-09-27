@@ -1,7 +1,13 @@
+import PageTitle from "@/components/common/PageTitle";
 import RegisterForm from "@/components/user/RegisterForm";
 
 const Register = () => {
-  return <RegisterForm />;
+  return (
+    <>
+      <PageTitle title="Register" />
+      <RegisterForm />
+    </>
+  );
 };
 
 export default Register;

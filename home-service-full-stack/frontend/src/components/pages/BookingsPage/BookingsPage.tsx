@@ -5,6 +5,7 @@ import { useUserBookings } from "@/components/booking/hooks";
 import { TBookingStatus } from "@/components/booking/types";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
+import PageTitle from "@/components/common/PageTitle";
 
 const statusTranslations: Record<string, Record<string, string>> = {
   en: { Confirmed: "Confirmed", Completed: "Completed" },
@@ -51,17 +52,20 @@ const BookingsPage = () => {
     );
 
   return (
-    <FilteredList
-      title={t("accountModal.myBookings")}
-      items={bookings || []}
-      filters={Object.keys(statusTranslations[lang]) as TBookingStatus[]}
-      activeFilter={validatedStatus}
-      onFilterChange={handleFilterChange}
-      filterLabels={statusTranslations[lang]}
-      renderItem={(booking) => (
-        <BookingCard key={booking._id} booking={booking} />
-      )}
-    />
+    <>
+      <PageTitle title="My bookings" />
+      <FilteredList
+        title={t("accountModal.myBookings")}
+        items={bookings || []}
+        filters={Object.keys(statusTranslations[lang]) as TBookingStatus[]}
+        activeFilter={validatedStatus}
+        onFilterChange={handleFilterChange}
+        filterLabels={statusTranslations[lang]}
+        renderItem={(booking) => (
+          <BookingCard key={booking._id} booking={booking} />
+        )}
+      />
+    </>
   );
 };
 

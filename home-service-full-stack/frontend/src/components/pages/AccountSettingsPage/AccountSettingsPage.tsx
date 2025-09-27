@@ -1,3 +1,4 @@
+import PageTitle from "@/components/common/PageTitle";
 import { UserContext } from "@/components/context/UserContext";
 import UpdateAccountForm from "@/components/user/UpdateAccountForm";
 import { useContext } from "react";
@@ -9,7 +10,12 @@ const AccountSettingsPage = () => {
     return <div>Loading user data...</div>;
   }
 
-  return <UpdateAccountForm userEmail={user.email} />;
+  return (
+    <>
+      <PageTitle title="My account" />
+      <UpdateAccountForm userEmail={user.email} />
+    </>
+  );
 };
 
 export default AccountSettingsPage;

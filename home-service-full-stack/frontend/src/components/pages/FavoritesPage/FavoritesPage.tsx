@@ -6,6 +6,7 @@ import ServiceCard from "@/components/service/ServiceCard";
 import { UserContext } from "@/components/context/UserContext";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
+import PageTitle from "@/components/common/PageTitle";
 
 const FavoritesPage = () => {
   const { t } = useTranslation();
@@ -63,6 +64,7 @@ const FavoritesPage = () => {
 
   const userEmail = email ?? user.email;
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (
       category &&
@@ -78,6 +80,7 @@ const FavoritesPage = () => {
     data: favoriteServices,
     isLoading,
     error,
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useFavoriteServices(userEmail);
 
   if (isLoading) return <p>{t("messages.favoritesLoading")}</p>;
@@ -113,18 +116,21 @@ const FavoritesPage = () => {
   };
 
   return (
-    <FilteredList
-      title={t("accountModal.myFavorites")}
-      items={filteredServices}
-      filters={FAVORITE_FILTERS}
-      activeFilter={categoryInEnglish || "All"}
-      onFilterChange={handleFilterChange}
-      renderItem={(service) => (
-        <ServiceCard key={service._id} service={service} isFavorite={true} />
-      )}
-      filterLabels={filterLabels}
-      favorite
-    />
+    <>
+      <PageTitle title="My favorites" />
+      <FilteredList
+        title={t("accountModal.myFavorites")}
+        items={filteredServices}
+        filters={FAVORITE_FILTERS}
+        activeFilter={categoryInEnglish || "All"}
+        onFilterChange={handleFilterChange}
+        renderItem={(service) => (
+          <ServiceCard key={service._id} service={service} isFavorite={true} />
+        )}
+        filterLabels={filterLabels}
+        favorite
+      />
+    </>
   );
 };
 

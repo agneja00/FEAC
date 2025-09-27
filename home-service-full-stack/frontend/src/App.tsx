@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { ROUTES } from "./constants/routes";
+import { HelmetProvider } from "react-helmet-async";
 import RootLayout from "./components/layout/RootLayout";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 import Home from "./components/pages/Home/Home";
@@ -111,15 +112,17 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <UserProvider>
-          <SnackbarProvider>
-            <RouterProvider router={router} />
-          </SnackbarProvider>
-        </UserProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <UserProvider>
+            <SnackbarProvider>
+              <RouterProvider router={router} />
+            </SnackbarProvider>
+          </UserProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 

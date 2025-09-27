@@ -17,6 +17,7 @@ import { LocalizationProvider, DateCalendar } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
+import PageTitle from "@/components/common/PageTitle";
 
 const ServicePage = () => {
   const { t } = useTranslation();
@@ -119,6 +120,7 @@ const ServicePage = () => {
 
   return (
     <>
+      <PageTitle title={currentService?.name || "Service"} />
       {bookOpen && (
         <Modal onClose={handleCloseModal} isOpen={true}>
           <h3 className={styles.title}>{t("forms.book.title")}</h3>

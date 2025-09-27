@@ -1,4 +1,5 @@
 import styles from "./Home.module.scss";
+import PageTitle from "@/components/common/PageTitle";
 import CategoryList from "@/components/category/CategoryList";
 import ServiceList from "@/components/service/ServiceList";
 import { useServiceData } from "@/components/service/hooks";
@@ -19,6 +20,7 @@ const Home = () => {
 
   return (
     <>
+      <PageTitle title="Home" />
       <section className={styles.hero}>
         <h1 className={styles.title}>
           {t("homePage.findHome")}{" "}

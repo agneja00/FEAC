@@ -1,7 +1,13 @@
+import PageTitle from "@/components/common/PageTitle";
 import LoginForm from "@/components/user/LoginForm";
 
 const Login = () => {
-  return <LoginForm />;
+  return (
+    <>
+      <PageTitle title="Login" />
+      <LoginForm />
+    </>
+  );
 };
 
 export default Login;
