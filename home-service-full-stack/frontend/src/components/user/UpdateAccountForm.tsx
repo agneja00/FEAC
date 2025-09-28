@@ -1,6 +1,6 @@
 import styles from "./UpdateAccountForm.module.scss";
 import { useParams } from "react-router-dom";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers, useFormikContext } from "formik";
 import { useUpdateUser, useUser } from "./hooks";
 import { updateUserValidationSchema } from "./consts";
 import { IUpdateUserRequest, IUser } from "./types";
@@ -16,6 +16,33 @@ interface UpdateAccountFormProps {
   userEmail: string;
   onSuccess?: () => void;
 }
+
+const PhotoPreviewEffect = ({
+  userPhoto,
+  setPhotoPreview,
+}: {
+  userPhoto?: string | null;
+  setPhotoPreview: (url: string | null) => void;
+}) => {
+  const { values } = useFormikContext<IUpdateUserRequest>();
+
+  useEffect(() => {
+    if (values.photo) {
+      const objectUrl = URL.createObjectURL(values.photo);
+      setPhotoPreview(objectUrl);
+
+      return () => {
+        URL.revokeObjectURL(objectUrl);
+      };
+    } else if (userPhoto) {
+      setPhotoPreview(userPhoto);
+    } else {
+      setPhotoPreview(null);
+    }
+  }, [values.photo, userPhoto, setPhotoPreview]);
+
+  return null;
+};
 
 const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
   userEmail,
@@ -49,15 +76,17 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 
   const handlePhotoChange = (
     e: ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: any) => void,
+    setFieldValue: (field: string, value: unknown) => void,
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     setFieldValue("photo", file);
   };
 
-  const handleSubmit = async (values: IUpdateUserRequest, actions: any) => {
+  const handleSubmit = async (
+    values: IUpdateUserRequest,
+    actions: FormikHelpers<IUpdateUserRequest>,
+  ) => {
     try {
       const formData = new FormData();
       formData.append("name", values.name ?? "");
@@ -103,85 +132,73 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
       validationSchema={updateUserValidationSchema(validatedLang)}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting, setFieldValue, values }) => {
-        useEffect(() => {
-          if (values.photo) {
-            const objectUrl = URL.createObjectURL(values.photo);
-            setPhotoPreview(objectUrl);
+      {({ isSubmitting, setFieldValue }) => (
+        <Form className={styles.form}>
+          <PhotoPreviewEffect
+            userPhoto={userData?.photo}
+            setPhotoPreview={setPhotoPreview}
+          />
 
-            return () => {
-              URL.revokeObjectURL(objectUrl);
-            };
-          } else if (userData?.photo) {
-            setPhotoPreview(userData.photo);
-          } else {
-            setPhotoPreview(null);
-          }
-        }, [values.photo, userData?.photo]);
+          <FormikField
+            name="name"
+            label={`${t("inputPlaceholder.name")}:`}
+            required
+          />
+          <FormikField
+            name="surname"
+            label={`${t("forms.updateAccount.surname")}:`}
+          />
+          <FormikField
+            name="age"
+            type="number"
+            label={`${t("forms.updateAccount.age")}:`}
+          />
+          <FormikField
+            name="country"
+            label={`${t("forms.updateAccount.country")}:`}
+          />
+          <FormikField
+            name="city"
+            label={`${t("forms.updateAccount.city")}:`}
+          />
+          <FormikField
+            name="email"
+            type="email"
+            label={`${t("common.email")}:`}
+            required
+          />
+          <FormikField
+            name="password"
+            type="password"
+            label={`${t("forms.loginAndRegister.passwordNew")}:`}
+          />
+          <FormikField
+            name="passwordRepeat"
+            type="password"
+            label={`${t("forms.loginAndRegister.passwordRepeat")}:`}
+          />
+          <FormikField
+            name="photo"
+            type="file"
+            label={`${t("forms.updateAccount.photo")}:`}
+            onChange={(e) => handlePhotoChange(e, setFieldValue)}
+          />
 
-        return (
-          <Form className={styles.form}>
-            <FormikField
-              name="name"
-              label={`${t("inputPlaceholder.name")}:`}
-              required
-            />
-            <FormikField
-              name="surname"
-              label={`${t("forms.updateAccount.surname")}:`}
-            />
-            <FormikField
-              name="age"
-              type="number"
-              label={`${t("forms.updateAccount.age")}:`}
-            />
-            <FormikField
-              name="country"
-              label={`${t("forms.updateAccount.country")}:`}
-            />
-            <FormikField
-              name="city"
-              label={`${t("forms.updateAccount.city")}:`}
-            />
-            <FormikField
-              name="email"
-              type="email"
-              label={`${t("common.email")}:`}
-              required
-            />
-            <FormikField
-              name="password"
-              type="password"
-              label={`${t("forms.loginAndRegister.passwordNew")}:`}
-            />
-            <FormikField
-              name="passwordRepeat"
-              type="password"
-              label={`${t("forms.loginAndRegister.passwordRepeat")}:`}
-            />
-            <FormikField
-              name="photo"
-              type="file"
-              label={`${t("forms.updateAccount.photo")}:`}
-              onChange={(e) => handlePhotoChange(e, setFieldValue)}
-            />
+          {photoPreview && (
+            <div className={styles.previewWrapper}>
+              <img
+                src={photoPreview}
+                alt="Preview"
+                className={styles.avatarPreview}
+              />
+            </div>
+          )}
 
-            {photoPreview && (
-              <div className={styles.previewWrapper}>
-                <img
-                  src={photoPreview}
-                  alt="Preview"
-                  className={styles.avatarPreview}
-                />
-              </div>
-            )}
-
-            <Button type="submit" update disabled={isSubmitting}>
-              {t("buttons.update")}
-            </Button>
-          </Form>
-        );
-      }}
+          <Button type="submit" update disabled={isSubmitting}>
+            {t("buttons.update")}
+          </Button>
+        </Form>
+      )}
     </Formik>
   );
 };

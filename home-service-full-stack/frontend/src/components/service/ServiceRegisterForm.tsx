@@ -126,7 +126,9 @@ const ServiceRegisterForm: React.FC<ServiceRegisterFormProps> = ({
             name="email"
             required
           />
-          <Button type="submit">{t("buttons.completeTheForm")}</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {t("buttons.completeTheForm")}
+          </Button>
         </Form>
       )}
     </Formik>

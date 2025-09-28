@@ -5,7 +5,7 @@ export const fetchCategories = async (lang: string): Promise<ICategory[]> => {
   try {
     const response = await axiosInstance.get(`/${lang}/categories`);
     return response.data;
-  } catch (error) {
+  } catch {
     throw new Error("Failed to fetch categories");
   }
 };

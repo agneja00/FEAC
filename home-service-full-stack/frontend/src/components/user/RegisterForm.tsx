@@ -24,8 +24,13 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (formValues: IRegisterFormValues) => {
-    const { passwordRepeat, ...valuesToSubmit } = formValues;
     try {
+      const valuesToSubmit = {
+        name: formValues.name,
+        email: formValues.email,
+        password: formValues.password,
+      };
+
       await registerUser(valuesToSubmit);
       navigate(generatePath(ROUTES.LOGIN, { lang }));
       enqueueSnackbar(t("messages.registrationSuccess"), {
@@ -33,9 +38,10 @@ const RegisterForm = () => {
       });
     } catch (error) {
       const errorMessage = error as ErrorResponse;
-      enqueueSnackbar(errorMessage?.response?.data.message ?? "", {
-        variant: "error",
-      });
+      enqueueSnackbar(
+        errorMessage?.response?.data.message ?? t("messages.registrationError"),
+        { variant: "error" },
+      );
     }
   };
 
@@ -46,7 +52,7 @@ const RegisterForm = () => {
         validationSchema={registerValidationSchema(validatedLang)}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {() => (
           <Form className={styles.form}>
             <h1 className={styles.title}>{t("common.register")}</h1>
             <div className={styles.field}>
@@ -76,9 +82,7 @@ const RegisterForm = () => {
                 placeholder={t("forms.loginAndRegister.passwordRepeat")}
               />
             </div>
-            <Button type="submit" disabled={isSubmitting}>
-              {t("common.register")}
-            </Button>
+            <Button type="submit">{t("common.register")}</Button>
             <div className={styles.link}>
               <Link
                 to={generatePath(ROUTES.LOGIN, { lang })}

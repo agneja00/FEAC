@@ -9,28 +9,24 @@ import { useServicePath } from "./hooks";
 import { useTranslation } from "react-i18next";
 
 interface ServiceCardProps {
-  service: IService;
+  service?: IService | null;
   isFavorite?: boolean;
 }
 
 const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
   const { t, i18n } = useTranslation();
-  if (!service || !service._id) return null;
-  const { _id, contactPerson, address, imageUrls } = service;
-  const language = i18n.language || "en";
-
-  const name = service.translations?.name?.[language] || service.name;
-  const category =
-    service.translations?.category?.[language] || service.category;
 
   const { user } = useContext(UserContext);
   const email = user?.email;
   const { mutate, isPending } = useToggleFavorite();
-  const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
   const navigateToService = useServicePath();
 
+  const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
+
   useEffect(() => {
-    setLocalIsFavorite(isFavorite);
+    if (isFavorite !== localIsFavorite) {
+      setLocalIsFavorite(isFavorite);
+    }
   }, [isFavorite]);
 
   const handleToggleFavorite = () => {
@@ -40,24 +36,29 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
 
     mutate(
       {
-        email: user.email,
+        email,
         serviceId: _id,
         lang: language,
       },
       {
-        onError: (error) => {
+        onError: () => {
           setLocalIsFavorite(previousIsFavorite);
-        },
-        onSuccess: (data) => {
-          setLocalIsFavorite(data?.favoritedBy?.includes(email));
         },
       },
     );
   };
 
+  if (!service || !service._id) return null;
+  const { _id, contactPerson, address, imageUrls } = service;
+  const language = i18n.language || "en";
+
+  const name = service.translations?.name?.[language] || service.name;
+  const category =
+    service.translations?.category?.[language] || service.category;
+
   return (
     <div className={styles.card}>
-      {imageUrls?.length > 0 && (
+      {imageUrls?.[0] && (
         <img src={imageUrls[0]} alt={name} className={styles.image} />
       )}
       <div className={styles.infoContainer}>

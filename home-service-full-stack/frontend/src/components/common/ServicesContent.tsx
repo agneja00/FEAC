@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import styles from "./ServicesContent.module.scss";
 import ServiceList from "@/components/service/ServiceList";
 import VerticalCategoryList from "@/components/category/VerticalCategoryList";
-import { useState, useEffect } from "react";
-import { IService } from "../service/types";
+import { useMemo, useState } from "react";
 import Input from "../common/Input";
 import { useServiceData } from "../service/hooks";
 import { useTranslation } from "react-i18next";
@@ -15,26 +14,21 @@ type TParams = {
 const ServicesContent: React.FC = () => {
   const { t } = useTranslation();
   const { allServices, favoriteServices } = useServiceData();
-  const [filteredServices, setFilteredServices] = useState<IService[]>([]);
   const [searchValue, setSearchValue] = useState("");
 
   const { category } = useParams<TParams>();
   const { lang = "en" } = useParams<{ lang?: string }>();
 
-  useEffect(() => {
-    if (allServices) {
-      const filtered = allServices.filter((ser) => {
-        const translatedCategory =
-          ser.translations?.category?.[lang] || ser.category;
-
-        return (
-          (!category || translatedCategory === category) &&
-          ser.name.toLowerCase().includes(searchValue.toLowerCase())
-        );
-      });
-
-      setFilteredServices(filtered);
-    }
+  const filteredServices = useMemo(() => {
+    if (!allServices) return [];
+    return allServices.filter((ser) => {
+      const translatedCategory =
+        ser.translations?.category?.[lang] || ser.category;
+      return (
+        (!category || translatedCategory === category) &&
+        ser.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    });
   }, [allServices, category, searchValue, lang]);
 
   const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {

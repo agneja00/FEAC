@@ -23,7 +23,7 @@ const ServiceInfoHeader: React.FC = () => {
       enqueueSnackbar(t("messages.copyLinkSuccess"), {
         variant: "success",
       });
-    } catch (error) {
+    } catch {
       enqueueSnackbar(t("messages.copyLinkError"), {
         variant: "error",
       });

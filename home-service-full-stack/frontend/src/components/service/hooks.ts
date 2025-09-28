@@ -14,44 +14,39 @@ import { ROUTES } from "@/constants/routes";
 export const SERVICE_KEY = "SERVICES";
 export const FAVORITE_KEY = "FAVORITES";
 
-export const useServices = (lang: string) => {
-  return useQuery<ServiceWithFavorite[]>({
+export const useServices = (lang: string) =>
+  useQuery<ServiceWithFavorite[]>({
     queryKey: [SERVICE_KEY, lang],
     queryFn: () => fetchServices(lang),
   });
-};
 
-export const useServiceById = (serviceId: string, lang: string = "en") => {
-  return useQuery<ServiceWithFavorite>({
+export const useServiceById = (serviceId?: string, lang: string = "en") =>
+  useQuery<ServiceWithFavorite>({
     queryKey: [SERVICE_KEY, serviceId, lang],
-    queryFn: () => fetchServiceById(lang, serviceId),
+    queryFn: () => fetchServiceById(lang, serviceId!),
     enabled: !!serviceId,
   });
-};
 
 export const useServicePath = () => {
   const navigate = useNavigate();
-  const { lang } = useParams<{ lang: string }>();
+  const { lang } = useParams<{ lang?: string }>();
 
-  const navigateToService = (id: string) => {
+  return (id: string) => {
     if (!lang) return;
-    const servicePath = generatePath(ROUTES.SERVICE_ID, { lang, id });
-    navigate(servicePath);
+    navigate(generatePath(ROUTES.SERVICE_ID, { lang, id }));
   };
-
-  return navigateToService;
 };
 
 export const useCurrentService = () => {
-  const { id, lang } = useParams<{ id: string; lang: string }>();
-  if (!id) return { currentService: undefined };
-
+  const { id, lang } = useParams<{ id?: string; lang?: string }>();
   const { data } = useServiceById(id, lang || "en");
+
   return { currentService: data };
 };
 
 export const useToggleFavorite = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: ({
       email,
@@ -110,12 +105,12 @@ export const useToggleFavorite = () => {
   });
 };
 
-export const useFavoriteServices = (email: string) => {
-  const { lang } = useParams<{ lang: string }>();
+export const useFavoriteServices = (email?: string) => {
+  const { lang } = useParams<{ lang?: string }>();
 
   return useQuery<ServiceWithFavorite[]>({
     queryKey: [FAVORITE_KEY, email, lang],
-    queryFn: () => fetchFavoriteServices(lang || "en", email),
+    queryFn: () => fetchFavoriteServices(lang || "en", email!),
     enabled: !!email,
   });
 };
@@ -129,31 +124,28 @@ export const useServiceData = () => {
     isLoading: isServicesLoading,
     error: servicesError,
   } = useServices(selectedLang);
+
   const { user } = useContext(UserContext);
+
   const {
     data: favoriteServices = [],
     isLoading: isFavoritesLoading,
     error: favoritesError,
-  } = useFavoriteServices(user?.email || "");
+  } = useFavoriteServices(user?.email);
 
   const translateService = (service: IService) => ({
     ...service,
     isFavorite: favoriteServices.some((fav) => fav._id === service._id),
-    name: service?.translations?.name?.[selectedLang] || service.name,
+    name: service.translations?.name?.[selectedLang] || service.name,
     category:
-      service?.translations?.category?.[selectedLang] || service.category,
+      service.translations?.category?.[selectedLang] || service.category,
   });
 
-  const updatedServices = allServices.map(translateService);
-  const updatedFavorites = favoriteServices.map(translateService);
-  const isLoading = isServicesLoading || isFavoritesLoading;
-  const error = servicesError || favoritesError;
-
   return {
-    allServices: updatedServices,
+    allServices: allServices.map(translateService),
+    favoriteServices: favoriteServices.map(translateService),
     user,
-    favoriteServices: updatedFavorites,
-    isLoading,
-    error,
+    isLoading: isServicesLoading || isFavoritesLoading,
+    error: servicesError || favoritesError,
   };
 };

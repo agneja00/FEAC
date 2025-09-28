@@ -10,11 +10,6 @@ import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../common/LanguageSwither";
-import { PROD } from "@/constants/environment";
-
-const baseURL = PROD
-  ? "https://home-services-f898b008a33e.herokuapp.com"
-  : "http://localhost:5173";
 
 const Topbar = () => {
   const { user, logout } = useContext(UserContext);

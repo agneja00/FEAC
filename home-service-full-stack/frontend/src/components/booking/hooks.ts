@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createBooking, deleteBooking, fetchUserBookings } from "./api";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
-import { TBookingStatus, NewBooking } from "./types";
+import { TBookingStatus, NewBooking, IBooking } from "./types";
 import { useParams } from "react-router-dom";
 
 export const BOOKING_KEY = "BOOKING";
@@ -31,11 +31,12 @@ export const useAddBooking = () => {
   const { lang } = useParams<{ lang: string }>();
 
   return useMutation({
-    mutationFn: (booking: NewBooking) => {
-      return createBooking(lang || "en", booking);
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [BOOKING_KEY] });
+    mutationFn: (booking: NewBooking) => createBooking(lang || "en", booking),
+    onSuccess: (data: IBooking) => {
+      queryClient.setQueryData<IBooking[]>([BOOKING_KEY], (old = []) => [
+        ...old,
+        data,
+      ]);
     },
   });
 };
@@ -48,7 +49,7 @@ export const useDeleteBooking = () => {
     mutationFn: (id: string) => {
       return deleteBooking(lang || "en", id);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [BOOKING_KEY] });
     },
   });

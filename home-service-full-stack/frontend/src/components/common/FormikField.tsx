@@ -7,18 +7,16 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 interface FormikFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
-  preview?: string | null;
 }
 
 const FormikField = ({
   name,
   label,
   type,
-  preview,
   required,
   ...props
 }: FormikFieldProps) => {
-  const [field, meta, helpers] = useField(name);
+  const [field, , helpers] = useField(name);
   const [showPassword, setShowPassword] = useState(false);
 
   if (type === "file") {
