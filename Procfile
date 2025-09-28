@@ -1,1 +1,1 @@
-web: pnpm start
+web: cd home-service-full-stack/backend && pnpm start
