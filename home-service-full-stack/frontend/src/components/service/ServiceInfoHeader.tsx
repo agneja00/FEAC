@@ -7,6 +7,7 @@ import { HiOutlineClock } from "react-icons/hi";
 import { useCurrentService } from "./hooks";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
+import ResponsiveImage from "../common/ResponsiveImage";
 
 const ServiceInfoHeader: React.FC = () => {
   const { t } = useTranslation();
@@ -33,10 +34,10 @@ const ServiceInfoHeader: React.FC = () => {
   return (
     <div className={styles.infoServiceContainer}>
       <div className={styles.infoServiceContainerFirst}>
-        <img
+        <ResponsiveImage
           className={styles.avatar}
-          alt={currentService?.name}
-          src={currentService?.imageUrls[0]}
+          alt={currentService?.name || "Service image"}
+          src={currentService?.imageUrls[0] || ""}
         />
 
         <section className={styles.detailsContainerFirst}>

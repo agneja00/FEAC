@@ -1,4 +1,5 @@
 import styles from "./Avatar.module.scss";
+import ResponsiveImage from "./ResponsiveImage";
 
 interface AvatarProps {
   children: React.ReactNode;
@@ -19,7 +20,11 @@ const Avatar: React.FC<AvatarProps> = ({
       onClick={onClick}
     >
       {src ? (
-        <img src={src} alt="User avatar" className={styles.avatarImage} />
+        <ResponsiveImage
+          src={src}
+          alt="User avatar"
+          className={styles.avatarImage}
+        />
       ) : (
         children
       )}

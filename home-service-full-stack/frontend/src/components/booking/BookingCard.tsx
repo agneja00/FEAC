@@ -5,6 +5,7 @@ import { FaRegCalendar } from "react-icons/fa";
 import { IBooking } from "./types.ts";
 import { useServicePath } from "../service/hooks";
 import Button from "../common/Button.tsx";
+import ResponsiveImage from "../common/ResponsiveImage";
 import { useDeleteBooking } from "./hooks.ts";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
@@ -43,7 +44,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
     >
       {service && (
         <>
-          <img
+          <ResponsiveImage
             className={styles.image}
             src={service.imageUrls?.[0]}
             alt="logo"

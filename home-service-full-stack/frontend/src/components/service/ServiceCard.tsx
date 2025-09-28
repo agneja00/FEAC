@@ -7,6 +7,7 @@ import { useToggleFavorite } from "./hooks";
 import { UserContext } from "../context/UserContext";
 import { useServicePath } from "./hooks";
 import { useTranslation } from "react-i18next";
+import ResponsiveImage from "../common/ResponsiveImage";
 
 interface ServiceCardProps {
   service?: IService | null;
@@ -59,7 +60,11 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
   return (
     <div className={styles.card}>
       {imageUrls?.[0] && (
-        <img src={imageUrls[0]} alt={name} className={styles.image} />
+        <ResponsiveImage
+          src={imageUrls[0]}
+          alt={name}
+          className={styles.image}
+        />
       )}
       <div className={styles.infoContainer}>
         <span className={styles.chip}>{category}</span>

@@ -3,6 +3,7 @@ import { generatePath, Link, useParams } from "react-router-dom";
 import { useServices, useCurrentService } from "./hooks";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
+import ResponsiveImage from "../common/ResponsiveImage";
 
 const SimilarService: React.FC = () => {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ const SimilarService: React.FC = () => {
       <div className={styles.similarContainer}>
         {similarService?.map((simService) => (
           <div className={styles.similarBusiness} key={simService._id}>
-            <img
+            <ResponsiveImage
               className={styles.businessImg}
               src={simService.imageUrls[0]}
               alt={simService.name}

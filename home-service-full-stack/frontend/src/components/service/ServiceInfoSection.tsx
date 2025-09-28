@@ -3,6 +3,7 @@ import styles from "./ServiceInfoSection.module.scss";
 import { useCurrentService } from "./hooks";
 import Modal from "../common/Modal";
 import { useTranslation } from "react-i18next";
+import ResponsiveImage from "../common/ResponsiveImage";
 
 const ServiceInfoSection: React.FC = () => {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ const ServiceInfoSection: React.FC = () => {
       <div className={styles.gallery}>
         {currentService?.imageUrls?.length ? (
           currentService.imageUrls.map((imageUrl, index) => (
-            <img
+            <ResponsiveImage
               className={styles.serviceImg}
               src={imageUrl}
               alt={`${currentService?.name} photo ${index + 1}`}
@@ -42,7 +43,7 @@ const ServiceInfoSection: React.FC = () => {
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} imageModal>
         {selectedImage && (
-          <img
+          <ResponsiveImage
             className={styles.modalImage}
             src={selectedImage}
             alt="Selected Image"
