@@ -10,7 +10,7 @@
     "types": "concurrently \"pnpm b types\" \"pnpm f types\"",
     "lint": "concurrently \"pnpm b lint\" \"pnpm f lint\"",
     "prettify": "pnpm -r --parallel prettify",
-    "heroku-postbuild": "cd home-service-full-stack/frontend && pnpm install && pnpm build",
+    "heroku-postbuild": "cd home-service-full-stack/backend && pnpm install && pnpm build && cd ../frontend && pnpm install && pnpm build",
     "deploy": "git push heroku main",
     "prepare": "husky install"
   },
