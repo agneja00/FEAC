@@ -129,13 +129,17 @@ router.post("/:lang/bookings", authMiddleware, async (req, res) => {
       },
     };
 
-    await sendEmail({
-      to: userEmail!,
-      from: process.env.EMAIL!,
-      subject: emailMessages[lang].subject,
-      text: emailMessages[lang].text,
-      html: emailMessages[lang].html,
-    });
+    try {
+      await sendEmail({
+        to: userEmail!,
+        from: process.env.EMAIL!,
+        subject: emailMessages[lang].subject,
+        text: emailMessages[lang].text,
+        html: emailMessages[lang].html,
+      });
+    } catch (emailErr) {
+      console.error("⚠️ Failed to send booking confirmation email:", emailErr);
+    }
 
     res.status(201).json(bookingWithService);
   } catch (err) {
@@ -184,16 +188,19 @@ router.delete("/:lang/bookings/:id", authMiddleware, async (req, res) => {
       },
     };
 
-    await sendEmail({
-      to: userEmail,
-      from: process.env.EMAIL!,
-      subject: emailMessages[lang].subject,
-      text: emailMessages[lang].text,
-      html: emailMessages[lang].html,
-    });
+    try {
+      await sendEmail({
+        to: userEmail,
+        from: process.env.EMAIL!,
+        subject: emailMessages[lang].subject,
+        text: emailMessages[lang].text,
+        html: emailMessages[lang].html,
+      });
+    } catch (emailErr) {
+      console.error("Email send failed:", emailErr);
+    }
 
     await Booking.findByIdAndDelete(id);
-
     return res.status(200).json({ message: "Booking cancelled successfully." });
   } catch (err) {
     return res.status(500).json({

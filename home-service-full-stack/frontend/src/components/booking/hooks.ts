@@ -46,11 +46,9 @@ export const useDeleteBooking = () => {
   const { lang } = useParams<{ lang: string }>();
 
   return useMutation({
-    mutationFn: (id: string) => {
-      return deleteBooking(lang || "en", id);
-    },
+    mutationFn: (id: string) => deleteBooking(lang || "en", id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [BOOKING_KEY] });
+      queryClient.invalidateQueries({ queryKey: [BOOKING_KEY], exact: false });
     },
   });
 };
