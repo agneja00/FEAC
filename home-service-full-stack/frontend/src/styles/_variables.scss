@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #7655cc;
-  --primary-color-hover: #533c99;
+  --primary-color: #5c2dc7;
+  --primary-color-hover: #421a99;
   --secondary-color: #000000;
   --tertiary-color: #ffffff;
   --category-card-color: #f2eefd;
@@ -10,17 +10,17 @@
   --modal-overlay: rgba(0, 0, 0, 0.7);
   --shadow-color: rgba(0, 0, 0, 0.15);
   --shadow-hover: rgba(86, 20, 208, 0.25);
-  --input-border: #67abc2;
-  --error-color: #ff0000;
-  --error-hover: #d00d0d;
-  --button-border: #e0e0e0;
+  --input-border: #4a90a0;
+  --error-color: #cc0000;
+  --error-hover: #a00000;
+  --button-border: #cccccc;
   --favorite-hover: #fa2968;
-  --language-focus-and-hover: #e7245f;
+  --language-focus-and-hover: #c91c4e;
 }
 
 [data-theme="dark"] {
-  --primary-color: #9a7aed;
-  --primary-color-hover: #5c419f;
+  --primary-color: #b08fff;
+  --primary-color-hover: #9a7aed;
   --secondary-color: #ffffff;
   --tertiary-color: #121212;
   --category-card-color: #2a233a;
@@ -30,11 +30,17 @@
   --modal-overlay: rgba(0, 0, 0, 0.85);
   --shadow-color: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(134, 86, 235, 0.4);
-  --input-border: #5d8b9c;
-  --error-hover: #b30000;
-  --button-border: #333333;
-  --favorite-hover: #c61e4d;
+  --input-border: #7fb1c4;
+  --error-color: #ff4444;
+  --error-hover: #cc0000;
+  --button-border: #555555;
+  --favorite-hover: #ff4c7a;
   --language-focus-and-hover: #ff3366;
+}
+
+[data-theme="dark"] button,
+[data-theme="dark"] .btn {
+  color: #ffffff;
 }
 
 body {
