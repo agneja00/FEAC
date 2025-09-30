@@ -6,7 +6,7 @@
     "b": "pnpm --filter home-service-backend",
     "f": "pnpm --filter home-service-frontend",
     "dev": "concurrently \"pnpm --filter home-service-backend dev\" \"pnpm --filter home-service-frontend dev\"",
-    "start": "cd home-service-full-stack/backend && pnpm && pnpm build && pnpm start",
+    "start": "cd home-service-full-stack/backend && pnpm install && pnpm build && pnpm start",
     "types": "concurrently \"pnpm b types\" \"pnpm f types\"",
     "lint": "concurrently \"pnpm b lint\" \"pnpm f lint\"",
     "prettify": "pnpm -r --parallel prettify",
