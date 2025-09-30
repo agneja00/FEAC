@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Topbar from "./Topbar";
 import Footer from "../common/Footer";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import { Box, CircularProgress } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useIsFetching } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
@@ -25,39 +25,20 @@ const RootLayout = () => {
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-
     if (isFetching > 0) {
-      timer = setTimeout(() => {
-        setShowLoading(true);
-      }, 300);
+      timer = setTimeout(() => setShowLoading(true), 300);
     } else {
       setShowLoading(false);
     }
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, [isFetching]);
-
-  const loadingBackdropStyle = {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor:
-      theme === "dark" ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)",
-    zIndex: 9999,
-  };
 
   return (
     <div data-theme={theme}>
       {showLoading && (
-        <Box sx={loadingBackdropStyle}>
+        <div className={styles.loadingBackdrop}>
           <CircularProgress size={80} thickness={4} />
-        </Box>
+        </div>
       )}
       {!isInvalidRoute && <Topbar />}
       {isInvalidRoute ? (

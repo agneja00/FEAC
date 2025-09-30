@@ -1,7 +1,8 @@
 import { useTheme } from "../context/ThemeContext";
-import { IconButton, Tooltip } from "@mui/material";
-import { Brightness4, Brightness7 } from "@mui/icons-material";
-
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 const FloatingThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
 
@@ -22,7 +23,7 @@ const FloatingThemeToggle = () => {
           },
         }}
       >
-        {theme === "light" ? <Brightness4 /> : <Brightness7 />}
+        {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
       </IconButton>
     </Tooltip>
   );
