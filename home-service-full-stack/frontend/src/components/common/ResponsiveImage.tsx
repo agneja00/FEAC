@@ -1,4 +1,6 @@
 import React from "react";
+import styles from "./ResponsiveImage.module.scss";
+import classNames from "classnames";
 
 interface ResponsiveImageProps {
   src: string;
@@ -21,8 +23,7 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 
   const srcSet = breakpoints
     .map(
-      (w) =>
-        `${src.replace("/upload/", `/upload/w_${w},q_auto,f_auto/`)} ${w}w`,
+      (w) => `${src.replace("/upload/", `/upload/w_${w},q_auto,f_auto/`)} ${w}w`
     )
     .join(", ");
 
@@ -30,7 +31,7 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 
   return (
     <img
-      className={className}
+      className={classNames(styles.responsiveImage, className)}
       src={fallbackSrc}
       srcSet={srcSet}
       sizes={sizes}
@@ -38,7 +39,8 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       loading="lazy"
       decoding="async"
       onClick={onClick}
-      style={{ objectFit: "cover" }}
+      width={600}
+      height={400}
     />
   );
 };
