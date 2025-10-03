@@ -54,8 +54,11 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
   const language = i18n.language || "en";
 
   const name = service.translations?.name?.[language] || service.name;
+  const rawCategory = service.translations?.category?.[language];
   const category =
-    service.translations?.category?.[language] || service.category;
+    rawCategory && rawCategory.trim() !== ""
+      ? rawCategory
+      : t(`categories.${(service.category || "").toLowerCase()}`);
 
   return (
     <div className={styles.card}>

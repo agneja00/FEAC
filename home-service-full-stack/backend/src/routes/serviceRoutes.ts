@@ -57,13 +57,13 @@ const errorMessages: {
 
 const categoryTranslations: Record<string, Record<string, string>> = {
   lt: {
-    Perkraustymas: "Shifting",
-    Remontas: "Repair",
-    Santechnika: "Plumbing",
-    Valymas: "Cleaning",
-    Dažymas: "Painting",
-    Elektra: "Electric",
-    Dekoravimas: "Decoration",
+    shifting: "Perkraustymas",
+    repair: "Remontas",
+    plumbing: "Santechnika",
+    cleaning: "Valymas",
+    painting: "Dažymas",
+    electric: "Elektra",
+    decoration: "Dekoravimas",
   },
   en: {
     shifting: "Shifting",
@@ -258,7 +258,7 @@ router.get("/:lang/services/user/:email/favorites", authMiddleware, async (req, 
     }
     const favoriteServices = await Service.find({ favoritedBy: email });
     res.json(favoriteServices);
-  } catch (error) {
+  } catch {
     res.status(500).json({ message: "Internal server error" });
   }
 });
