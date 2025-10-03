@@ -76,7 +76,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 
   const handlePhotoChange = (
     e: ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: unknown) => void,
+    setFieldValue: (field: string, value: unknown) => void
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -85,7 +85,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
 
   const handleSubmit = async (
     values: IUpdateUserRequest,
-    actions: FormikHelpers<IUpdateUserRequest>,
+    actions: FormikHelpers<IUpdateUserRequest>
   ) => {
     try {
       const formData = new FormData();
@@ -113,7 +113,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
       });
 
       setPhotoPreview(
-        updatedUser.photo ? `${updatedUser.photo}?t=${Date.now()}` : null,
+        updatedUser.photo ? `${updatedUser.photo}?t=${Date.now()}` : null
       );
 
       onSuccess?.();
@@ -188,7 +188,7 @@ const UpdateAccountForm: React.FC<UpdateAccountFormProps> = ({
             <div className={styles.previewWrapper}>
               <img
                 src={photoPreview}
-                alt="Preview"
+                alt={t("alt.userPhoto")}
                 className={styles.avatarPreview}
               />
             </div>

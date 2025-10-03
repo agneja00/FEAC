@@ -76,6 +76,13 @@
     "search": "Pradėkite rašyti ieškomos paslaugos pavadinimą...",
     "name": "Vardas"
   },
+  "alt": {
+    "serviceImage": "{{serviceName}} paveikslėlis",
+    "userPhoto": "Vartotojo nuotrauka",
+    "categoryImage": "{{categoryName}} kategorija",
+    "logo": "Svetainės logotipas",
+    "default": "Paveikslėlis"
+  },
   "forms": {
     "book": {
       "title": "Užsakyti paslaugą",

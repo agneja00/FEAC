@@ -76,6 +76,13 @@
     "search": "Start typing the name of the service you’re looking for...",
     "name": "Name"
   },
+  "alt": {
+    "serviceImage": "{{serviceName}} image",
+    "userPhoto": "User photo",
+    "categoryImage": "{{categoryName}} category",
+    "logo": "Website logo",
+    "default": "Image"
+  },
   "forms": {
     "book": {
       "title": "Book a Service",

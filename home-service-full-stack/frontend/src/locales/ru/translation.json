@@ -76,6 +76,13 @@
     "search": "Начните вводить название услуги, которую вы ищете...",
     "name": "Имя"
   },
+  "alt": {
+    "serviceImage": "Изображение {{serviceName}}",
+    "userPhoto": "Фото пользователя",
+    "categoryImage": "Категория {{categoryName}}",
+    "logo": "Логотип сайта",
+    "default": "Изображение"
+  },
   "forms": {
     "book": {
       "title": "Забронировать услугу",

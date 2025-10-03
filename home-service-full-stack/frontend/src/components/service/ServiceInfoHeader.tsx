@@ -10,24 +10,26 @@ import { useTranslation } from "react-i18next";
 import ResponsiveImage from "../common/ResponsiveImage";
 
 const ServiceInfoHeader: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { currentService } = useCurrentService();
   const { enqueueSnackbar } = useSnackbar();
 
+  const language = i18n.language || "en";
+
+  const name =
+    currentService?.translations?.name?.[language] || currentService?.name;
+  const category =
+    currentService?.translations?.category?.[language] ||
+    currentService?.category;
+
   const handleShare = async () => {
     if (!currentService) return;
-
     const serviceUrl = `${window.location.origin}/service/${currentService._id}`;
-
     try {
       await navigator.clipboard.writeText(serviceUrl);
-      enqueueSnackbar(t("messages.copyLinkSuccess"), {
-        variant: "success",
-      });
+      enqueueSnackbar(t("messages.copyLinkSuccess"), { variant: "success" });
     } catch {
-      enqueueSnackbar(t("messages.copyLinkError"), {
-        variant: "error",
-      });
+      enqueueSnackbar(t("messages.copyLinkError"), { variant: "error" });
     }
   };
 
@@ -36,13 +38,13 @@ const ServiceInfoHeader: React.FC = () => {
       <div className={styles.infoServiceContainerFirst}>
         <ResponsiveImage
           className={styles.avatar}
-          alt={currentService?.name || "Service image"}
-          src={currentService?.imageUrls[0] || ""}
+          alt={t("alt.serviceImage", { serviceName: name })}
+          src={currentService?.imageUrls?.[0] || ""}
         />
 
         <section className={styles.detailsContainerFirst}>
-          <span className={styles.chip}>{currentService?.category}</span>
-          <h1 className={styles.name}>{currentService?.name}</h1>
+          <span className={styles.chip}>{category}</span>
+          <h1 className={styles.name}>{name}</h1>
 
           <div className={styles.infoContainer}>
             <CiLocationOn />
@@ -56,7 +58,11 @@ const ServiceInfoHeader: React.FC = () => {
       </div>
       <div className={styles.infoServiceContainerSecond}>
         <div className={styles.detailsContainerSecond}>
-          <Button small onClick={handleShare}>
+          <Button
+            small
+            onClick={handleShare}
+            aria-label={t("alt.shareService")}
+          >
             <IoShareOutline fontSize={20} />
           </Button>
           <div className={styles.infoContainer}>

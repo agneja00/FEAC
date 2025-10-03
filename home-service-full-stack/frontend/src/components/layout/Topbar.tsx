@@ -32,7 +32,7 @@ const Topbar = () => {
         label: t("common.forBusinessPartners"),
       },
     ],
-    [lang, t],
+    [lang, t]
   );
 
   const USER_MENU_ITEMS = useMemo(() => {
@@ -113,7 +113,7 @@ const Topbar = () => {
           className={styles.logo}
           onClick={handleModalClose}
         >
-          <img src={Logo} alt="logo" />
+          <img src={Logo} alt={t("alt.logo")} />
         </Link>
       </div>
       <LanguageSwitcher />
@@ -197,7 +197,7 @@ const Topbar = () => {
           onClick={() => setMenuOpen(true)}
           className={styles.menu}
           tabIndex={0}
-          aria-label="Open navigation menu"
+          aria-label={t("alt.openMenu")}
         />
       ) : (
         <IoMdClose
@@ -208,7 +208,7 @@ const Topbar = () => {
           }}
           className={styles.menu}
           tabIndex={0}
-          aria-label="Close navigation menu"
+          aria-label={t("alt.closeMenu")}
         />
       )}
     </header>

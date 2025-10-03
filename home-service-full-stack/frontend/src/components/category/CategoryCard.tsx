@@ -4,6 +4,18 @@ import classNames from "classnames";
 import { ROUTES } from "@/constants/routes";
 import { ICategory } from "./types";
 import UrlIcon from "../common/UrlIcon";
+import { useTranslation } from "react-i18next";
+
+const categoryTranslations: Record<string, Record<string, string>> = {
+  shifting: { lt: "Perkraustymas", ru: "Переезд" },
+  repair: { lt: "Remontas", ru: "Ремонт" },
+  plumbing: { lt: "Santechnika", ru: "Сантехника" },
+  cleaning: { lt: "Valymas", ru: "Уборка" },
+  painting: { lt: "Dažymas", ru: "Покраска" },
+  electric: { lt: "Elektra", ru: "Электрика" },
+  decoration: { lt: "Dekoravimas", ru: "Декорирование" },
+  all: { lt: "Visos", ru: "Все" },
+};
 
 interface CategoryCardProps {
   category: ICategory;
@@ -11,27 +23,29 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
+  const { t, i18n } = useTranslation();
   const params = useParams<{ lang?: string; category?: string }>();
   const navigate = useNavigate();
-  const lang = params.lang || "en";
+  const lang = params.lang || i18n.language || "en";
 
-  const categoryName = category.name;
+  const baseName = category.name.toLowerCase();
+  const translatedName =
+    categoryTranslations[baseName]?.[lang as "lt" | "ru"] || category.name;
 
-  const categoryPath =
-    categoryName === "All" || categoryName === "Visos" || categoryName === "Все"
-      ? generatePath(ROUTES.SERVICES, { lang })
-      : generatePath(ROUTES.SERVICES_CATEGORY, {
-          lang,
-          category: categoryName,
-        });
+  const categoryPath = ["all", "visos", "все"].includes(
+    translatedName.toLowerCase(),
+  )
+    ? generatePath(ROUTES.SERVICES, { lang })
+    : generatePath(ROUTES.SERVICES_CATEGORY, {
+        lang,
+        category: translatedName,
+      });
 
   const isActive =
-    category.name.toLowerCase() === (params.category || "").toLowerCase();
+    translatedName.toLowerCase() === (params.category || "").toLowerCase();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      navigate(categoryPath);
-    }
+    if (e.key === "Enter") navigate(categoryPath);
   };
 
   return (
@@ -40,11 +54,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
       onClick={() => navigate(categoryPath)}
       role="button"
       tabIndex={0}
-      aria-label={`View ${categoryName} services`}
+      aria-label={t("alt.categoryImage", { categoryName: translatedName })}
       onKeyDown={handleKeyDown}
     >
-      <UrlIcon src={category.url} alt={`${categoryName} icon`} />
-      <p className={styles.name}>{categoryName}</p>
+      <UrlIcon
+        src={category.url}
+        alt={t("alt.categoryImage", { categoryName: translatedName })}
+      />
+      <p className={styles.name}>{translatedName}</p>
     </div>
   );
 };

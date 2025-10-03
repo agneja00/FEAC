@@ -47,7 +47,12 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
           <ResponsiveImage
             className={styles.image}
             src={service.imageUrls?.[0]}
-            alt="logo"
+            alt={t("alt.serviceImage", {
+              serviceName:
+                service.translations?.name?.[i18n.language] ||
+                service.name ||
+                "",
+            })}
           />
           <section className={styles.details}>
             <h2 className={styles.serviceName}>
@@ -84,7 +89,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
               </p>
             </div>
             {!["Completed", "Užbaigti", "Завершено"].includes(
-              translatedStatus,
+              translatedStatus
             ) && (
               <Button
                 small

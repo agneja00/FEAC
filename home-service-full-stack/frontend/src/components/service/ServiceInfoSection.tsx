@@ -6,10 +6,14 @@ import { useTranslation } from "react-i18next";
 import ResponsiveImage from "../common/ResponsiveImage";
 
 const ServiceInfoSection: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { currentService } = useCurrentService();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const language = i18n.language || "en";
+  const name =
+    currentService?.translations?.name?.[language] || currentService?.name;
 
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
@@ -25,6 +29,7 @@ const ServiceInfoSection: React.FC = () => {
     <>
       <h2 className={styles.title}>{t("servicePage.description")}</h2>
       <p className={styles.sectionDescription}>{currentService?.about}</p>
+
       <h2 className={styles.title}>{t("servicePage.gallery")}</h2>
       <div className={styles.gallery}>
         {currentService?.imageUrls?.length ? (
@@ -32,7 +37,7 @@ const ServiceInfoSection: React.FC = () => {
             <ResponsiveImage
               className={styles.serviceImg}
               src={imageUrl}
-              alt={`${currentService?.name} photo ${index + 1}`}
+              alt={t("alt.serviceImage", { serviceName: name })}
               key={index}
               onClick={() => handleImageClick(imageUrl)}
             />
@@ -41,12 +46,13 @@ const ServiceInfoSection: React.FC = () => {
           <p className={styles.noImages}>{t("messages.noImages")}</p>
         )}
       </div>
+
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} imageModal>
         {selectedImage && (
           <ResponsiveImage
             className={styles.modalImage}
             src={selectedImage}
-            alt="Selected Image"
+            alt={t("alt.serviceImage", { serviceName: name })}
           />
         )}
       </Modal>

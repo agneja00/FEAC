@@ -16,7 +16,6 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
   const { t, i18n } = useTranslation();
-
   const { user } = useContext(UserContext);
   const email = user?.email;
   const { mutate, isPending } = useToggleFavorite();
@@ -29,6 +28,17 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
       setLocalIsFavorite(isFavorite);
     }
   }, [isFavorite]);
+
+  if (!service || !service._id) return null;
+  const { _id, contactPerson, address, imageUrls } = service;
+  const language = i18n.language || "en";
+
+  const name = service.translations?.name?.[language] || service.name;
+  const rawCategory = service.translations?.category?.[language];
+  const category =
+    rawCategory && rawCategory.trim() !== ""
+      ? rawCategory
+      : t(`categories.${(service.category || "").toLowerCase()}`);
 
   const handleToggleFavorite = () => {
     if (!_id || !email) return;
@@ -45,27 +55,16 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
         onError: () => {
           setLocalIsFavorite(previousIsFavorite);
         },
-      },
+      }
     );
   };
-
-  if (!service || !service._id) return null;
-  const { _id, contactPerson, address, imageUrls } = service;
-  const language = i18n.language || "en";
-
-  const name = service.translations?.name?.[language] || service.name;
-  const rawCategory = service.translations?.category?.[language];
-  const category =
-    rawCategory && rawCategory.trim() !== ""
-      ? rawCategory
-      : t(`categories.${(service.category || "").toLowerCase()}`);
 
   return (
     <div className={styles.card}>
       {imageUrls?.[0] && (
         <ResponsiveImage
           src={imageUrls[0]}
-          alt={name}
+          alt={t("alt.serviceImage", { serviceName: name })}
           className={styles.image}
         />
       )}
@@ -83,7 +82,9 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
             onClick={handleToggleFavorite}
             disabled={isPending}
             aria-label={
-              localIsFavorite ? "Remove from favorites" : "Add to favorites"
+              localIsFavorite
+                ? t("alt.removeFavorite", { serviceName: name })
+                : t("alt.addFavorite", { serviceName: name })
             }
           >
             {localIsFavorite ? (

@@ -1,5 +1,6 @@
 import styles from "./Avatar.module.scss";
 import ResponsiveImage from "./ResponsiveImage";
+import { useTranslation } from "react-i18next";
 
 interface AvatarProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ const Avatar: React.FC<AvatarProps> = ({
   onClick,
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <div
       className={`${styles.avatar} ${className || ""}`.trim()}
@@ -22,7 +24,7 @@ const Avatar: React.FC<AvatarProps> = ({
       {src ? (
         <ResponsiveImage
           src={src}
-          alt="User avatar"
+          alt={t("alt.userPhoto")}
           className={styles.avatarImage}
         />
       ) : (
