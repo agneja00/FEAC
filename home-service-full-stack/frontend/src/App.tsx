@@ -20,10 +20,10 @@ import AuthLayout from "./components/layout/AuthLayout";
 import Register from "./components/pages/Register/Register";
 import AccountSettingsPage from "./components/pages/AccountSettingsPage/AccountSettingsPage";
 import { UserProvider } from "./components/context/UserContext";
+import { ThemeProvider } from "./components/context/ThemeContext";
 import Services from "./components/pages/Services/Services";
 import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
 import LanguageValidator from "./components/common/LanguageValidator";
-import { ThemeProvider } from "./components/context/ThemeContext";
 
 const router = createBrowserRouter([
   {
