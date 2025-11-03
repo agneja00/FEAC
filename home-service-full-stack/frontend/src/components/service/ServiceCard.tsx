@@ -27,7 +27,7 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
     if (isFavorite !== localIsFavorite) {
       setLocalIsFavorite(isFavorite);
     }
-  }, [isFavorite]);
+  }, [isFavorite, localIsFavorite]);
 
   if (!service || !service._id) return null;
   const { _id, contactPerson, address, imageUrls } = service;
@@ -55,7 +55,7 @@ const ServiceCard = ({ service, isFavorite = false }: ServiceCardProps) => {
         onError: () => {
           setLocalIsFavorite(previousIsFavorite);
         },
-      }
+      },
     );
   };
 
