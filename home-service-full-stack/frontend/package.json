@@ -70,7 +70,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-transformer-svg": "^2.0.2",
     "lint-staged": "^16.2.1",
-    "sass": "^1.77.6",
+    "sass": "^1.93.2",
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",

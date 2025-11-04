@@ -252,7 +252,7 @@ importers:
         specifier: ^16.2.1
         version: 16.2.2
       sass:
-        specifier: ^1.77.6
+        specifier: ^1.93.2
         version: 1.93.2
       ts-jest:
         specifier: ^29.3.1
