@@ -1,7 +1,10 @@
 .responsiveImage {
-  width: 100%;
-  height: auto;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   display: block;
+}
+
+.imageNotAvatar {
+  width: 100%;
+  height: auto;
 }

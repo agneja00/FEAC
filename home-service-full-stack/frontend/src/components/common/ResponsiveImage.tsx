@@ -7,6 +7,7 @@ interface ResponsiveImageProps {
   alt: string;
   className?: string;
   sizes?: string;
+  avatar?: boolean;
   onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
 }
 
@@ -17,6 +18,7 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   alt,
   className,
   sizes = "(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 1200px",
+  avatar,
   onClick,
 }) => {
   if (!src) return null;
@@ -31,7 +33,9 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 
   return (
     <img
-      className={classNames(styles.responsiveImage, className)}
+      className={classNames(styles.responsiveImage, className, {
+        [styles.imageNotAvatar]: !avatar,
+      })}
       src={fallbackSrc}
       srcSet={srcSet}
       sizes={sizes}

@@ -26,6 +26,7 @@ const Avatar: React.FC<AvatarProps> = ({
           src={src}
           alt={t("alt.userPhoto")}
           className={styles.avatarImage}
+          avatar
         />
       ) : (
         children
