@@ -44,9 +44,9 @@ const RootLayout = () => {
       {isInvalidRoute ? (
         <ErrorPage />
       ) : (
-        <div className={styles.rootContainer}>
+        <main className={styles.rootContainer}>
           <Outlet />
-        </div>
+        </main>
       )}
       {!isInvalidRoute && <Footer />}
       <FloatingThemeToggle />
