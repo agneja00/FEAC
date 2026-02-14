@@ -122,6 +122,8 @@ body {
 }
 
 @mixin button-style {
+  display: flex;
+  align-items: center;
   padding: 0.8rem;
   background-color: var(--primary-color);
   color: var(--tertiary-color);
