@@ -71,7 +71,7 @@ const About = () => {
                   </a>
                 </li>
                 <li className={styles.requisite}>
-                  {t("common.email")}{" "}
+                  {t("common.email")}:{" "}
                   <a
                     href="mailto:homeservices@gmail.com"
                     className={styles.link}
