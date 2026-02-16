@@ -4,7 +4,7 @@ import { Link, useNavigate, generatePath, useParams } from "react-router-dom";
 import Logo from "@/assets/logo.svg";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
-import { useState, useContext, useMemo } from "react";
+import { useState, useContext, useMemo, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import Avatar from "../common/Avatar";
 import Modal from "../common/Modal";
@@ -32,7 +32,7 @@ const Topbar = () => {
         label: t("common.forBusinessPartners"),
       },
     ],
-    [lang, t]
+    [lang, t],
   );
 
   const USER_MENU_ITEMS = useMemo(() => {
@@ -72,6 +72,21 @@ const Topbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768 && menuOpen) {
+        setMenuOpen(false);
+        setModalOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [menuOpen]);
 
   const handleModalClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
