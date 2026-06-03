@@ -24,6 +24,8 @@ import { ThemeProvider } from "./components/context/ThemeContext";
 import Services from "./components/pages/Services/Services";
 import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
 import LanguageValidator from "./components/common/LanguageValidator";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const router = createBrowserRouter([
   {
@@ -111,6 +113,12 @@ const router = createBrowserRouter([
 const queryClient = new QueryClient();
 
 const App = () => {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
