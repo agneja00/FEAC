@@ -1,7 +1,7 @@
 import styles from "./Topbar.module.scss";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { Link, useNavigate, generatePath, useParams } from "react-router-dom";
-import Logo from "@/assets/logo.svg";
+import Logo from "../common/Logo";
 import Button from "../common/Button";
 import { ROUTES } from "@/constants/routes";
 import { useState, useContext, useMemo, useEffect } from "react";
@@ -128,7 +128,12 @@ const Topbar = () => {
           className={styles.logo}
           onClick={handleModalClose}
         >
-          <img src={Logo} alt={t("alt.logo")} />
+          <Logo
+            width={220}
+            height={54}
+            aria-label={t("alt.logo")}
+            role="img"
+          />{" "}
         </Link>
       </div>
       <LanguageSwitcher />

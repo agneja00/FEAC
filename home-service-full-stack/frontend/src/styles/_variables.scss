@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #5c2dc7;
-  --primary-color-hover: #421a99;
+  --primary-color: #6d28d9;
+  --primary-color-hover: #5b21b6;
   --secondary-color: #000000;
   --tertiary-color: #ffffff;
   --category-card-color: #f2eefd;
@@ -16,11 +16,24 @@
   --button-border: #cccccc;
   --favorite-hover: #fa2968;
   --language-focus-and-hover: #c91c4e;
+
+  --gradient-brand: linear-gradient(
+    135deg,
+    #9333ea 0%,
+    #7c3aed 50%,
+    #5b21b6 100%
+  );
+  --gradient-brand-hover: linear-gradient(
+    135deg,
+    #7c3aed 0%,
+    #6d28d9 50%,
+    #4c1d95 100%
+  );
 }
 
 [data-theme="dark"] {
-  --primary-color: #b08fff;
-  --primary-color-hover: #9a7aed;
+  --primary-color: #a78bfa;
+  --primary-color-hover: #8b5cf6;
   --secondary-color: #ffffff;
   --tertiary-color: #121212;
   --category-card-color: #2a233a;
@@ -36,6 +49,19 @@
   --button-border: #555555;
   --favorite-hover: #ff4c7a;
   --language-focus-and-hover: #ff3366;
+
+  --gradient-brand: linear-gradient(
+    135deg,
+    #9333ea 0%,
+    #7c3aed 50%,
+    #5b21b6 100%
+  );
+  --gradient-brand-hover: linear-gradient(
+    135deg,
+    #7c3aed 0%,
+    #6d28d9 50%,
+    #4c1d95 100%
+  );
 }
 
 body {
@@ -135,6 +161,23 @@ body {
 
   &:hover {
     background-color: var(--primary-color-hover);
+  }
+}
+
+@mixin button-style-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+  background: var(--gradient-brand);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--gradient-brand-hover);
   }
 }
 
