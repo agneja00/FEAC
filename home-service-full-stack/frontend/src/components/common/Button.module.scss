@@ -22,6 +22,21 @@
     }
   }
 
+  &.outline {
+    background-color: var(--tertiary-color);
+    color: var(--text-color);
+    border: 0.0625rem solid var(--button-border);
+
+    &:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+  }
+
+  &.brand {
+    @include button-style-brand;
+  }
+
   &.cancel {
     background-color: var(--error-color);
 
@@ -29,6 +44,7 @@
       background-color: var(--error-hover);
     }
   }
+
   &.update {
     font-size: 1rem;
     text-transform: uppercase;

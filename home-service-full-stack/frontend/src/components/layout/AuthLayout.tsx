@@ -1,6 +1,6 @@
 import styles from "./Layout.module.scss";
 import { Outlet } from "react-router-dom";
-import Topbar from "./Topbar";
+import Topbar from "./Topbar/Topbar";
 
 const AuthLayout = () => {
   return (

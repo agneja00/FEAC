@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
-import LanguageSwitcher from "../common/LanguageSwither";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 jest.mock("react-i18next", () => ({
   useTranslation: jest.fn(),

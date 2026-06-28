@@ -1,0 +1,151 @@
+.wrapper {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.chevron {
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  right: 0;
+  width: 16rem;
+  background-color: var(--card-bg);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow-color) 0 0.75rem 2rem;
+  padding: 1.1rem;
+  z-index: 1000;
+  animation: dropdown-open 0.15s ease-out;
+}
+
+@keyframes dropdown-open {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.profileSection {
+  margin-top: auto;
+
+  padding-top: 2rem;
+}
+
+.profileCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  border-radius: 16px;
+
+  background: var(--tertiary-color);
+
+  border: 1px solid var(--button-border);
+
+  transition: 0.2s ease;
+
+  &:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+  }
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 0.0625rem solid var(--button-border);
+}
+
+.profileText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name {
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  color: var(--text-color);
+  opacity: 0.6;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  list-style: none;
+}
+
+.link,
+.highlightLink {
+  display: block;
+  padding: 0.55rem 0.4rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+
+  &:hover {
+    background-color: var(--category-card-color);
+    color: var(--primary-color);
+  }
+}
+
+.highlightLink {
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: var(--category-card-color);
+}
+
+.logoutButton {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--error-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.7rem 0.4rem 0;
+  margin-top: 0.5rem;
+  border-top: 0.0625rem solid var(--button-border);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--error-hover);
+  }
+}

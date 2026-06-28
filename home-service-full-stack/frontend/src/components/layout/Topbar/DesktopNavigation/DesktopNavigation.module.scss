@@ -1,0 +1,28 @@
+.nav {
+  display: none;
+}
+
+@media only screen and (min-width: 920px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    margin-left: 3rem;
+  }
+
+  .navLink {
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+
+    &:focus {
+      color: var(--primary-color);
+    }
+  }
+}

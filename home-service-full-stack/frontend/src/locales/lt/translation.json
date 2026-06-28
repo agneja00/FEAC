@@ -9,7 +9,10 @@
     "error": "Kažkas nutiko. Prašome bandyti dar kartą."
   },
   "topbar": {
-    "services": "Paslaugos"
+    "home": "Pagrindinis",
+    "services": "Paslaugos",
+    "theme": "Tema",
+    "language": "Kalba"
   },
   "accountModal": {
     "myAccount": "Mano paskyra",
@@ -44,7 +47,7 @@
     "readMore": "Skaityti daugiau",
     "showLess": "Rodyti mažiau",
     "registerNow": "Registruokites dabar",
-    "loginOrSign": "Prisijungti / Registruotis",
+    "signUp": "Registruotis",
     "login": "Prisijungti",
     "cancel": "Atšaukti",
     "update": "Atnaujinti"

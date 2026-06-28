@@ -1,0 +1,225 @@
+import styles from "./MobileMenu.module.scss";
+import { useState, useMemo, useContext } from "react";
+import {
+  NavLink,
+  useNavigate,
+  generatePath,
+  useParams,
+} from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { IoMdMenu, IoMdClose } from "react-icons/io";
+import {
+  IoMoonOutline,
+  IoCalendarOutline,
+  IoHeartOutline,
+  IoHomeOutline,
+  IoInformationCircleOutline,
+} from "react-icons/io5";
+import { MdOutlineHomeRepairService } from "react-icons/md";
+import { HiOutlineBriefcase } from "react-icons/hi2";
+import { GrLanguage } from "react-icons/gr";
+import Button from "../../../common/Button";
+import ThemeToggle from "../../../common/ThemeToggle";
+import LanguageSwitcher from "../../../common/LanguageSwitcher";
+import { ROUTES } from "@/constants/routes";
+import { UserContext } from "../../../context/UserContext";
+import type { IUser } from "../../../user/types";
+import ProfileCard from "../ProfileCard/ProfileCard";
+
+interface MobileMenuProps {
+  user: IUser | null;
+}
+
+const MobileMenu = ({ user }: MobileMenuProps) => {
+  const { logout } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { lang = "en" } = useParams<{ lang?: string }>();
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
+  const HAMBURGER_LINKS = useMemo(
+    () => [
+      {
+        href: generatePath(ROUTES.HOME, {
+          lang,
+        }),
+        label: t("topbar.home"),
+        icon: <IoHomeOutline />,
+      },
+      {
+        href: generatePath(ROUTES.SERVICES, {
+          lang,
+        }),
+        label: t("topbar.services"),
+        icon: <MdOutlineHomeRepairService />,
+      },
+      ...(user?.email
+        ? [
+            {
+              href: generatePath(ROUTES.BOOKINGS_FILTER, {
+                lang,
+                email: user.email,
+                status: "Confirmed",
+              }),
+              label: t("accountModal.myBookings"),
+              icon: <IoCalendarOutline />,
+            },
+
+            {
+              href: generatePath(ROUTES.FAVORITES, {
+                lang,
+                email: user.email,
+              }),
+              label: t("accountModal.myFavorites"),
+              icon: <IoHeartOutline />,
+            },
+          ]
+        : []),
+      {
+        href: generatePath(ROUTES.FOR_BUSINESS_PARTNERS, {
+          lang,
+        }),
+        label: t("common.forBusinessPartners"),
+        icon: <HiOutlineBriefcase />,
+      },
+      {
+        href: generatePath(ROUTES.ABOUT_US, {
+          lang,
+        }),
+        label: t("common.aboutUs"),
+        icon: <IoInformationCircleOutline />,
+      },
+    ],
+
+    [lang, t, user?.email],
+  );
+
+  const handleLogout = () => {
+    close();
+    logout();
+    navigate(
+      generatePath(ROUTES.HOME, {
+        lang,
+      }),
+    );
+  };
+
+  return (
+    <>
+      {!open ? (
+        <IoMdMenu
+          className={styles.trigger}
+          fontSize={32}
+          tabIndex={0}
+          aria-label={t("alt.openMenu")}
+          onClick={() => setOpen(true)}
+        />
+      ) : (
+        <IoMdClose
+          className={styles.trigger}
+          fontSize={32}
+          tabIndex={0}
+          aria-label={t("alt.closeMenu")}
+          onClick={close}
+        />
+      )}
+
+      {open && (
+        <div className={styles.overlay} onClick={close}>
+          <aside className={styles.panel} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.menuSection}>
+              {HAMBURGER_LINKS.map(({ href, label, icon }) => (
+                <NavLink
+                  key={label}
+                  to={href}
+                  onClick={close}
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.menuItem} ${styles.active}`
+                      : styles.menuItem
+                  }
+                >
+                  <span className={styles.icon}>{icon}</span>
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </div>
+
+            <div className={styles.settings}>
+              <div className={styles.settingRow}>
+                <span className={styles.settingLeft}>
+                  <IoMoonOutline />
+                  {t("topbar.theme")}
+                </span>
+                <ThemeToggle />
+              </div>
+
+              <div className={styles.settingRow}>
+                <span className={styles.settingLeft}>
+                  <GrLanguage />
+                  {t("topbar.language")}
+                </span>
+                <LanguageSwitcher />
+              </div>
+            </div>
+
+            {user ? (
+              <div className={styles.profileSection}>
+                <ProfileCard
+                  user={user}
+                  onClick={close}
+                  className={styles.profileCard}
+                />
+
+                <Button
+                  cancel
+                  className={styles.logoutButton}
+                  onClick={handleLogout}
+                >
+                  {t("accountModal.logOut")}
+                </Button>
+              </div>
+            ) : (
+              <div className={styles.authButtons}>
+                <Button
+                  outline
+                  large
+                  onClick={() => {
+                    close();
+
+                    navigate(
+                      generatePath(ROUTES.LOGIN, {
+                        lang,
+                      }),
+                    );
+                  }}
+                >
+                  {t("buttons.login")}
+                </Button>
+
+                <Button
+                  brand
+                  large
+                  onClick={() => {
+                    close();
+
+                    navigate(
+                      generatePath(ROUTES.REGISTER, {
+                        lang,
+                      }),
+                    );
+                  }}
+                >
+                  {t("buttons.signUp")}
+                </Button>
+              </div>
+            )}
+          </aside>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default MobileMenu;

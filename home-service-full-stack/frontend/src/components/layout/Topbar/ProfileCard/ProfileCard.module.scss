@@ -1,0 +1,32 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--button-border);
+  transition: 0.2s;
+
+  &:hover {
+    border-color: var(--primary-color);
+    background: var(--category-card-color);
+  }
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.email {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  color: var(--text-color);
+  opacity: 0.65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

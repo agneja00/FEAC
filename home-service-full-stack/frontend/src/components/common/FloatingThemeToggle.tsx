@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+
 const FloatingThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
 
@@ -10,16 +11,21 @@ const FloatingThemeToggle = () => {
     <Tooltip title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
       <IconButton
         onClick={toggleTheme}
-        color="inherit"
+        aria-label="Toggle theme"
         sx={{
           position: "fixed",
-          bottom: 16,
-          right: 20,
+          bottom: "1.5rem",
+          right: "1.5rem",
           zIndex: 9999,
-          bgcolor: "#8056eb",
-          color: "common.white",
+          width: 56,
+          height: 56,
+          background: "var(--gradient-brand)",
+          color: "#ffffff",
+          boxShadow: "0 0.5rem 1.25rem var(--shadow-hover)",
+          transition: "all 0.25s ease",
           "&:hover": {
-            bgcolor: "#6a4bc7",
+            background: "var(--gradient-brand-hover)",
+            transform: "translateY(-0.2rem)",
           },
         }}
       >

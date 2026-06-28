@@ -6,9 +6,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   small?: boolean;
   large?: boolean;
   cancel?: boolean;
-  language?: boolean;
   active?: boolean;
   update?: boolean;
+  outline?: boolean;
+  brand?: boolean;
 }
 
 const Button = ({
@@ -17,9 +18,10 @@ const Button = ({
   small,
   large,
   cancel,
-  language,
   active,
   update,
+  outline,
+  brand,
   ...props
 }: ButtonProps) => {
   return (
@@ -30,9 +32,10 @@ const Button = ({
         small && styles.small,
         large && styles.large,
         cancel && styles.cancel,
-        language && styles.language,
         active && styles.active,
         update && styles.update,
+        outline && styles.outline,
+        brand && styles.brand,
         className,
       )}
       {...props}

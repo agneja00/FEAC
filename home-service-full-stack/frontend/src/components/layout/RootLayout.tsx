@@ -1,6 +1,6 @@
 import styles from "./Layout.module.scss";
 import { Outlet, useLocation } from "react-router-dom";
-import Topbar from "./Topbar";
+import Topbar from "./Topbar/Topbar";
 import Footer from "../common/Footer";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CircularProgress from "@mui/material/CircularProgress";

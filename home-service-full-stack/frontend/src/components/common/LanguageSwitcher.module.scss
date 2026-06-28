@@ -1,3 +1,67 @@
-.buttonContainer {
+.wrapper {
+  position: relative;
+}
+
+.trigger {
   display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2.625rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: var(--tertiary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+.globus {
+  display: none;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 3.25rem;
+  width: 10.625rem;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  background: var(--card-bg);
+  border: 1px solid var(--button-border);
+  box-shadow: 0 1.125rem 2.5rem rgba(0, 0, 0, 0.12);
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: 0.2s;
+
+  &:hover {
+    background: rgba(108, 43, 217, 0.08);
+  }
+}
+
+.active {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+@media only screen and (min-width: 920px) {
+  .globus {
+    display: inline-block;
+  }
 }

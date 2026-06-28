@@ -9,7 +9,10 @@
     "error": "Something went wrong. Please try again."
   },
   "topbar": {
-    "services": "Services"
+    "home": "Home",
+    "services": "Services",
+    "theme": "Theme",
+    "language": "Language"
   },
   "accountModal": {
     "myAccount": "My Account",
@@ -44,7 +47,7 @@
     "readMore": "Read More",
     "showLess": "Show Less",
     "registerNow": "Register Now",
-    "loginOrSign": "Login / Sign Up",
+    "signUp": "Sign Up",
     "login": "Log in",
     "cancel": "Cancel",
     "update": "Update"
