@@ -18,12 +18,12 @@ import {
 import { MdOutlineHomeRepairService } from "react-icons/md";
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import { GrLanguage } from "react-icons/gr";
-import Button from "../../../common/Button";
-import ThemeToggle from "../../../common/ThemeToggle";
-import LanguageSwitcher from "../../../common/LanguageSwitcher";
+import Button from "@/components/common/Button";
+import ThemeToggle from "@/components/common/ThemeToggle";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 import { ROUTES } from "@/constants/routes";
-import { UserContext } from "../../../context/UserContext";
-import type { IUser } from "../../../user/types";
+import { UserContext } from "@/components/context/UserContext";
+import type { IUser } from "@/components/user/types";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 interface MobileMenuProps {

@@ -2,7 +2,7 @@ import styles from "./ProfileCard.module.scss";
 import { NavLink, generatePath, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Avatar from "../Avatar/Avatar";
-import type { IUser } from "../../../user/types";
+import type { IUser } from "@/components/user/types";
 import { ROUTES } from "@/constants/routes";
 
 interface ProfileCardProps {

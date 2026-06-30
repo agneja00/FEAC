@@ -1,5 +1,5 @@
 import styles from "./Avatar.module.scss";
-import ResponsiveImage from "../../../common/ResponsiveImage";
+import ResponsiveImage from "@/components/common/ResponsiveImage";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
