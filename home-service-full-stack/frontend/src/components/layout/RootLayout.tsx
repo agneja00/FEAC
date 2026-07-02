@@ -7,8 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useIsFetching } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
-import FloatingThemeToggle from "../common/FloatingThemeToggle";
-
+import ThemeToggle from "../common/ThemeToggle";
 const supportedLanguages = ["en", "lt", "ru"];
 
 const RootLayout = () => {
@@ -49,7 +48,7 @@ const RootLayout = () => {
         </main>
       )}
       {!isInvalidRoute && <Footer />}
-      <FloatingThemeToggle />
+      <ThemeToggle variant="floating"/>
     </div>
   );
 };

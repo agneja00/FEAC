@@ -39,3 +39,26 @@
     transition: transform 0.2s ease;
   }
 }
+
+.floatingButton {
+  display: none;
+}
+
+@media only screen and (min-width: 920px) {
+  .floatingButton {
+    position: fixed !important;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+    z-index: 5;
+    background: var(--gradient-brand) !important;
+    color: var(--white) !important;
+    box-shadow: 0 0.5rem 1.25rem var(--shadow-hover);
+    transition: all 0.25s ease !important;
+    &:hover {
+      background: var(--gradient-brand-hover) !important;
+      transform: translateY(-0.2rem);
+    }
+  }
+}
