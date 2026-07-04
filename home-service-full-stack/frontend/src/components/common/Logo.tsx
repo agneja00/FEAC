@@ -70,7 +70,7 @@ const Logo = ({ width = 220, height = 54, ...props }: LogoProps) => {
 
       <text
         x="220"
-        y="150"
+        y="140"
         fontFamily="Arial, Helvetica, sans-serif"
         fontWeight={800}
         fontSize={90}
