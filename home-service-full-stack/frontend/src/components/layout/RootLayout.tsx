@@ -23,12 +23,14 @@ const RootLayout = () => {
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
+
     if (isFetching > 0) {
       timer = setTimeout(() => setShowLoading(true), 300);
     } else {
       setShowLoading(false);
     }
+
     return () => clearTimeout(timer);
   }, [isFetching]);
 
@@ -48,7 +50,7 @@ const RootLayout = () => {
         </main>
       )}
       {!isInvalidRoute && <Footer />}
-      <ThemeToggle variant="floating"/>
+      <ThemeToggle variant="floating" />
     </div>
   );
 };
