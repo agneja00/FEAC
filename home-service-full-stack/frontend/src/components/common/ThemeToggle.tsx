@@ -16,9 +16,28 @@ const ThemeToggle = ({ variant = "default" }: ThemeToggleProps) => {
     return (
       <Tooltip title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
         <IconButton
-          className={styles.floatingButton}
           onClick={toggleTheme}
           aria-label="Toggle theme"
+          sx={{
+            display: "none",
+            "@media (min-width: 920px)": {
+              display: "inline-flex",
+            },
+            position: "fixed",
+            bottom: "1.5rem",
+            right: "1.5rem",
+            width: "3.5rem",
+            height: "3.5rem",
+            zIndex: 5,
+            background: "var(--gradient-brand)",
+            color: "var(--white)",
+            boxShadow: "0 0.5rem 1.25rem var(--shadow-hover)",
+            transition: "all 0.25s ease",
+            "&:hover": {
+              background: "var(--gradient-brand-hover)",
+              transform: "translateY(-0.2rem)",
+            },
+          }}
         >
           {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
         </IconButton>
