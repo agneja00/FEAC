@@ -1,6 +1,10 @@
 .button {
   @include button-style;
 
+  &.brand {
+    @include button-style-brand;
+  }
+
   &.large {
     padding: 1rem 1.5rem;
     font-size: 1rem;
@@ -31,10 +35,6 @@
       border-color: var(--primary-color);
       color: var(--primary-color);
     }
-  }
-
-  &.brand {
-    @include button-style-brand;
   }
 
   &.cancel {
