@@ -105,46 +105,51 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
     );
   };
 
-  return (
-    <>
-      {!open ? (
-        <IoMdMenu
-          className={styles.trigger}
-          fontSize={32}
-          tabIndex={0}
-          aria-label={t("alt.openMenu")}
-          onClick={() => setOpen(true)}
-        />
-      ) : (
-        <IoMdClose
-          className={styles.trigger}
-          fontSize={32}
-          tabIndex={0}
-          aria-label={t("alt.closeMenu")}
-          onClick={close}
-        />
-      )}
+return (
+  <>
+    {!open && (
+      <IoMdMenu
+        className={styles.trigger}
+        fontSize={32}
+        tabIndex={0}
+        aria-label={t("alt.openMenu")}
+        onClick={() => setOpen(true)}
+      />
+    )}
 
-      {open && (
-        <div className={styles.overlay} onClick={close}>
-          <aside className={styles.panel} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.menuSection}>
-              {HAMBURGER_LINKS.map(({ href, label, icon }) => (
-                <NavLink
-                  key={label}
-                  to={href}
-                  onClick={close}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `${styles.menuItem} ${styles.active}`
-                      : styles.menuItem
-                  }
-                >
-                  <span className={styles.icon}>{icon}</span>
-                  <span>{label}</span>
-                </NavLink>
-              ))}
-            </div>
+    {open && (
+      <div className={styles.overlay} onClick={close}>
+        <aside
+          className={styles.panel}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.panelHeader}>
+            <IoMdClose
+              className={styles.closeTrigger}
+              fontSize={32}
+              tabIndex={0}
+              aria-label={t("alt.closeMenu")}
+              onClick={close}
+            />
+          </div>
+
+          <div className={styles.menuSection}>
+            {HAMBURGER_LINKS.map(({ href, label, icon }) => (
+              <NavLink
+                key={label}
+                to={href}
+                onClick={close}
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.menuItem} ${styles.active}`
+                    : styles.menuItem
+                }
+              >
+                <span className={styles.icon}>{icon}</span>
+                <span>{label}</span>
+              </NavLink>
+            ))}
+          </div>
 
             <div className={styles.settings}>
               <div className={styles.settingRow}>

@@ -24,7 +24,6 @@
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -39,7 +38,7 @@
   width: 85%;
   max-width: 24rem;
   height: 100%;
-  padding: 6rem 1.5rem 2rem;
+  padding: 0 1.5rem 2rem;
   background: var(--card-bg);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
   animation: slide 0.25s ease;
@@ -50,9 +49,33 @@
   from {
     transform: translateX(100%);
   }
-
   to {
     transform: translateX(0);
+  }
+}
+
+.panelHeader {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem 0 1rem;
+  background: var(--card-bg);
+  z-index: 3;
+}
+
+.closeTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-color);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--primary-color);
   }
 }
 
@@ -117,7 +140,6 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
   font-weight: 600;
   color: var(--text-color);
 
