@@ -25,6 +25,7 @@ import { ROUTES } from "@/constants/routes";
 import { UserContext } from "@/components/context/UserContext";
 import type { IUser } from "@/components/user/types";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import { useLocation } from "react-router-dom";
 
 interface MobileMenuProps {
   user: IUser | null;
@@ -95,6 +96,20 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
     [lang, t, user?.email],
   );
 
+  const { pathname } = useLocation();
+
+  const activeHref = useMemo(() => {
+    const sorted = [...HAMBURGER_LINKS].sort(
+      (a, b) => b.href.length - a.href.length,
+    );
+
+    const match = sorted.find(
+      ({ href }) => pathname === href || pathname.startsWith(`${href}/`),
+    );
+
+    return match?.href;
+  }, [pathname, HAMBURGER_LINKS]);
+
   const handleLogout = () => {
     close();
     logout();
@@ -105,51 +120,48 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
     );
   };
 
-return (
-  <>
-    {!open && (
-      <IoMdMenu
-        className={styles.trigger}
-        fontSize={32}
-        tabIndex={0}
-        aria-label={t("alt.openMenu")}
-        onClick={() => setOpen(true)}
-      />
-    )}
+  return (
+    <>
+      {!open && (
+        <IoMdMenu
+          className={styles.trigger}
+          fontSize={32}
+          tabIndex={0}
+          aria-label={t("alt.openMenu")}
+          onClick={() => setOpen(true)}
+        />
+      )}
 
-    {open && (
-      <div className={styles.overlay} onClick={close}>
-        <aside
-          className={styles.panel}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className={styles.panelHeader}>
-            <IoMdClose
-              className={styles.closeTrigger}
-              fontSize={32}
-              tabIndex={0}
-              aria-label={t("alt.closeMenu")}
-              onClick={close}
-            />
-          </div>
-
-          <div className={styles.menuSection}>
-            {HAMBURGER_LINKS.map(({ href, label, icon }) => (
-              <NavLink
-                key={label}
-                to={href}
+      {open && (
+        <div className={styles.overlay} onClick={close}>
+          <aside className={styles.panel} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.panelHeader}>
+              <IoMdClose
+                className={styles.closeTrigger}
+                fontSize={32}
+                tabIndex={0}
+                aria-label={t("alt.closeMenu")}
                 onClick={close}
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.menuItem} ${styles.active}`
-                    : styles.menuItem
-                }
-              >
-                <span className={styles.icon}>{icon}</span>
-                <span>{label}</span>
-              </NavLink>
-            ))}
-          </div>
+              />
+            </div>
+
+            <div className={styles.menuSection}>
+              {HAMBURGER_LINKS.map(({ href, label, icon }) => (
+                <NavLink
+                  key={label}
+                  to={href}
+                  onClick={close}
+                  className={
+                    href === activeHref
+                      ? `${styles.menuItem} ${styles.active}`
+                      : styles.menuItem
+                  }
+                >
+                  <span className={styles.icon}>{icon}</span>
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </div>
 
             <div className={styles.settings}>
               <div className={styles.settingRow}>
