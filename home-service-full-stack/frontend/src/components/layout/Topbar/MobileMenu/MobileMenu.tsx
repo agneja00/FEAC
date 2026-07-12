@@ -26,6 +26,7 @@ import { UserContext } from "@/components/context/UserContext";
 import type { IUser } from "@/components/user/types";
 import ProfileCard from "../ProfileCard/ProfileCard";
 import { useLocation } from "react-router-dom";
+import SocialLinks from "@/components/common/SocialLinks";
 
 interface MobileMenuProps {
   user: IUser | null;
@@ -232,6 +233,7 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
                 </Button>
               </div>
             )}
+              <SocialLinks />
           </aside>
         </div>
       )}
