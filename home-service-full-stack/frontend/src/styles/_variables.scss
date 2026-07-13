@@ -139,14 +139,28 @@ body {
   justify-content: space-between;
 }
 
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-align-justify-center {
+  @include flex-align-center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @mixin label-style {
   color: var(--text-color);
   font-weight: 600;
 }
 
 @mixin input-container-style {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   width: 100%;
 }
 

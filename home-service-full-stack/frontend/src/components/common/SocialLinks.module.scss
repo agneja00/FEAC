@@ -1,15 +1,11 @@
 .socialLinks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-align-justify-center;
   gap: 0.75rem;
   margin-top: 3rem;
 }
 
 .socialLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-align-justify-center;
   width: 2.75rem;
   height: 2.75rem;
   flex-shrink: 0;

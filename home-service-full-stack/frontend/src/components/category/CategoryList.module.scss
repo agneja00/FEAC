@@ -1,14 +1,13 @@
 .container {
-  display: flex;
+  @include flex-align-center;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   margin-top: 2rem;
   gap: 1rem;
 }
 
 .card {
-  flex-direction: column;
+  @include flex-column;
   @include card-style;
 }
 

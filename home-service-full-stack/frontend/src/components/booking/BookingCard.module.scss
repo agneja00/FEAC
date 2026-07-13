@@ -1,6 +1,5 @@
 .cardContainer {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 1rem;
   border: 1px solid var(--button-border);
   padding: 0.8rem;
@@ -21,8 +20,7 @@
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 0.5rem;
   width: 60%;
 }
@@ -34,8 +32,7 @@
 }
 
 .info {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 0.5rem;
   font-size: 0.85rem;
 }

@@ -1,5 +1,5 @@
 .card {
-  flex-direction: column;
+  @include flex-column;
   @include card-style;
 }
 
@@ -11,8 +11,7 @@
 }
 
 .infoContainer {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: space-between;
   gap: 0.5rem;
   padding: 1rem;

@@ -1,7 +1,6 @@
 .container,
 .itemsContainer {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 1rem;
 }
 

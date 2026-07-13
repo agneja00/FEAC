@@ -5,14 +5,12 @@
 
 @media only screen and (min-width: 920px) {
   .userSection {
-    display: flex;
-    align-items: center;
+    @include flex-align-center;
     gap: 1.5rem;
   }
 
   .authButtons {
-    display: flex;
-    align-items: center;
+    @include flex-align-center;
     gap: 0.75rem;
   }
 }

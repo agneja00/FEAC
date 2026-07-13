@@ -10,8 +10,7 @@
 }
 
 .gallery {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 1.2rem;
 }
 

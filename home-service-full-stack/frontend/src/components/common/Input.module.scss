@@ -3,10 +3,8 @@
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include flex-align-justify-center;
+  @include flex-column;
   width: 100%;
   gap: 0.5rem;
   transition: all 0.3s ease;
@@ -66,8 +64,7 @@
 
 .inputWrapper {
   position: relative;
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
 }
 
 .eyeButton {

@@ -42,8 +42,7 @@
 }
 
 .button {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   justify-self: center;
   gap: 0.5rem;
 }

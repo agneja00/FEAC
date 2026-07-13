@@ -3,8 +3,7 @@
 }
 
 .trigger {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 0.35rem;
   background: none;
   border: none;
@@ -52,18 +51,12 @@
 }
 
 .profileCard {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 1rem;
-
   padding: 1rem;
-
   border-radius: 16px;
-
   background: var(--tertiary-color);
-
   border: 1px solid var(--button-border);
-
   transition: 0.2s ease;
 
   &:hover {
@@ -73,8 +66,7 @@
 }
 
 .dropdownHeader {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 0.75rem;
   padding-bottom: 1rem;
   margin-bottom: 0.6rem;
@@ -82,8 +74,7 @@
 }
 
 .profileText {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 0.5rem;
 }
 
@@ -106,8 +97,7 @@
 }
 
 .menuList {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 0.15rem;
   list-style: none;
 }

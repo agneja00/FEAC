@@ -1,6 +1,5 @@
 .card {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   justify-content: center;
   width: 45%;
   gap: 0.5rem;

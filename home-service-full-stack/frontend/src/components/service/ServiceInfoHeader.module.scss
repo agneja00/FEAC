@@ -1,13 +1,11 @@
 .infoServiceContainer {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 1.5rem;
   margin-bottom: 3rem;
 }
 
 .infoServiceContainerFirst {
-  display: flex;
-  flex-direction: row;
+  @include flex-column;
   justify-content: space-between;
 }
 
@@ -22,8 +20,7 @@
 
 .detailsContainerFirst,
 .detailsContainerSecond {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 0.9rem;
   font-size: 85%;
   font-weight: 500;
@@ -56,8 +53,7 @@
 }
 
 .infoContainer {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 0.3rem;
 }
 
@@ -67,9 +63,8 @@
 
 @media only screen and (min-width: 820px) {
   .infoServiceContainer {
+    @include flex-align-justify-center;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 4rem;
   }
 

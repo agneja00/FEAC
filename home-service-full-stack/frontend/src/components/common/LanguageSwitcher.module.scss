@@ -3,8 +3,7 @@
 }
 
 .trigger {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 0.45rem;
   height: 2.625rem;
   font-size: 1rem;

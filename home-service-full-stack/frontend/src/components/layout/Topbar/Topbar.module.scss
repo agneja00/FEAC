@@ -2,9 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flex-style;
   gap: 2rem;
   padding: 1.25rem 1.5rem;
   border-bottom: 0.125rem solid var(--button-border);
@@ -14,8 +12,7 @@
 }
 
 .logo {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   flex-shrink: 0;
 
   svg {

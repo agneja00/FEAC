@@ -1,7 +1,5 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-align-justify-center;
   height: 100vh;
   background-color: #f8f9fa;
 }
