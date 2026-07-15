@@ -1,0 +1,471 @@
+.hero {
+  width: 100%;
+  overflow: hidden;
+  background: var(--hero-bg);
+  padding: 2rem;
+}
+
+.container {
+  @include flex-column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 6rem;
+  width: 100%;
+}
+
+.content {
+  @include flex-column;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  background: var(--category-card-color);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  width: fit-content;
+}
+
+.badgeIcon {
+  font-size: 0.85rem;
+}
+
+.title {
+  color: var(--text-color);
+  font-size: 2.8rem;
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+.description {
+  margin: 1.25rem 0 1.5rem;
+  color: var(--text-color);
+  opacity: 0.72;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.searchWrapper {
+  width: 100%;
+  max-width: none;
+  padding: 0.35rem;
+  background-color: var(--card-bg);
+  border: 0.0625rem solid var(--button-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--shadow-color) 0 0.5rem 1.5rem;
+}
+
+.searchRow {
+  @include flex-align-center;
+  gap: 0.25rem;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.inputWrapper {
+  @include flex-align-center;
+  flex: 1;
+  min-width: 0;
+  gap: 0.65rem;
+  padding-left: 0.65rem;
+}
+
+.inputIcon {
+  flex-shrink: 0;
+  color: var(--text-color);
+  opacity: 0.55;
+  font-size: 1.15rem;
+}
+
+.inputWrapper input,
+.mobileLocation input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem 0;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  outline: none;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.inputWrapper input::placeholder,
+.mobileLocation input::placeholder {
+  color: var(--text-color);
+  opacity: 0.5;
+}
+
+.searchButton {
+  flex-shrink: 0;
+  padding: 0.75rem 1.1rem;
+  color: var(--tertiary-color);
+  background: var(--gradient-brand);
+  border: none;
+  border-radius: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+
+  &:hover {
+    background: var(--gradient-brand-hover);
+    transform: translateY(-0.05rem);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.mobileLocation {
+  @include flex-align-center;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+  padding: 0.1rem 0.65rem;
+  border-top: 0.0625rem solid var(--button-border);
+}
+
+.mobileLocation input {
+  flex: 1;
+  padding: 0.7rem 0;
+  font-size: 0.8rem;
+}
+
+.locationChevron {
+  flex-shrink: 0;
+  color: var(--text-color);
+  opacity: 0.65;
+}
+
+.benefits {
+  @include flex-column;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.benefit {
+  @include flex-align-center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.benefitIcon {
+  @include flex-align-justify-center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  color: var(--primary-color);
+  background-color: var(--category-card-color);
+  border-radius: 50%;
+  font-size: 1.15rem;
+}
+
+.benefitText {
+  @include flex-column;
+  gap: 0.5rem;
+}
+
+.benefitText strong {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.benefitText span {
+  color: var(--text-color);
+  opacity: 0.55;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.imageWrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.15 / 1;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.ratingCard {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  @include flex-column;
+  min-width: 7.5rem;
+  padding: 0.7rem 0.8rem;
+  background-color: var(--card-bg);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-color) 0 0.75rem 2rem;
+  transform: none;
+}
+
+.ratingTop {
+  @include flex-align-center;
+  gap: 0.4rem;
+}
+
+.ratingStar {
+  color: #f59e0b;
+  font-size: 1rem;
+}
+
+.ratingValue {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.reviewCount {
+  margin-top: 0.15rem;
+  color: var(--text-color);
+  opacity: 0.55;
+  font-size: 0.55rem;
+}
+
+.reviewers {
+  display: flex;
+  margin-top: 0.4rem;
+}
+
+.reviewers span {
+  @include flex-align-justify-center;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: -0.2rem;
+  color: var(--tertiary-color);
+  background: var(--gradient-brand);
+  border: 0.125rem solid var(--card-bg);
+  border-radius: 50%;
+  font-size: 0.45rem;
+  font-weight: 700;
+}
+
+.reviewers span:first-child {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 2rem 6.25rem;
+  }
+
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .content {
+    flex: 1 1 0;
+    max-width: 34rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+  }
+
+  .title {
+    font-size: clamp(2.3rem, 4vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .searchWrapper {
+    @include flex-align-center;
+    gap: 0.25rem;
+    max-width: 40rem;
+    padding: 0.3rem;
+    background-color: var(--card-bg);
+    border: 0.0625rem solid var(--button-border);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-color) 0 0.4rem 1.5rem;
+  }
+
+  .searchRow {
+    display: contents;
+  }
+
+  .inputWrapper {
+    order: 1;
+    flex: 1 1 auto;
+    padding: 0 0.75rem;
+  }
+
+  .inputWrapper input {
+    padding: 0.75rem 0;
+    font-size: 0.85rem;
+  }
+
+  .mobileLocation {
+    display: flex;
+    order: 2;
+    flex: 0 0 auto;
+    width: 14rem;
+    margin-top: 0;
+    padding: 0 0.75rem;
+    border-top: none;
+    border-left: 0.0625rem solid var(--button-border);
+  }
+
+  .mobileLocation input {
+    font-size: 0.85rem;
+  }
+
+  .searchButton {
+    order: 3;
+    padding: 0.8rem 1.6rem;
+  }
+
+  .benefits {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .benefit {
+    gap: 0.6rem;
+  }
+
+  .benefitIcon {
+    width: 2.35rem;
+    height: 2.35rem;
+    font-size: 1.1rem;
+  }
+
+  .benefitText strong {
+    font-size: 0.7rem;
+  }
+
+  .benefitText span {
+    font-size: 0.6rem;
+  }
+
+  .imageWrapper {
+    flex: 1 1 0;
+    max-width: 32rem;
+  }
+
+  .ratingCard {
+    top: 50%;
+    right: -1rem;
+    min-width: 8.5rem;
+    padding: 0.9rem 1rem;
+    transform: translateY(-50%);
+  }
+
+  .ratingStar {
+    font-size: 1.15rem;
+  }
+
+  .ratingValue {
+    font-size: 1.4rem;
+  }
+
+  .reviewCount {
+    font-size: 0.6rem;
+  }
+
+  .reviewers {
+    margin-top: 0.5rem;
+  }
+
+  .reviewers span {
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 0.5rem;
+  }
+}
+
+@media (min-width: 1001px) {
+  .container {
+    gap: 4rem;
+  }
+
+  .content {
+    max-width: 36rem;
+  }
+
+  .title {
+    font-size: clamp(2.6rem, 4vw, 4.1rem);
+  }
+
+  .description {
+    max-width: 31rem;
+  }
+
+  .benefits {
+    gap: 1.75rem;
+  }
+
+  .benefitText strong {
+    font-size: 0.75rem;
+  }
+
+  .benefitText span {
+    font-size: 0.68rem;
+  }
+
+  .imageWrapper {
+    max-width: 37rem;
+  }
+
+  .ratingCard {
+    right: -2.5rem;
+    min-width: 9rem;
+    padding: 1rem 1.15rem;
+  }
+
+  .ratingStar {
+    font-size: 1.25rem;
+  }
+
+  .ratingValue {
+    font-size: 1.5rem;
+  }
+
+  .reviewCount {
+    font-size: 0.65rem;
+  }
+
+  .reviewers {
+    margin-top: 0.6rem;
+  }
+
+  .reviewers span {
+    width: 1.45rem;
+    height: 1.45rem;
+    font-size: 0.55rem;
+  }
+}

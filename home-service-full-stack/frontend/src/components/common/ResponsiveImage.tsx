@@ -6,6 +6,8 @@ interface ResponsiveImageProps {
   src: string;
   alt: string;
   className?: string;
+  width?: number;
+  height?: number;
   sizes?: string;
   avatar?: boolean;
   onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
@@ -20,12 +22,15 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   sizes = "(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 1200px",
   avatar,
   onClick,
+  width = 600,
+  height = 400,
 }) => {
   if (!src) return null;
 
   const srcSet = breakpoints
     .map(
-      (w) => `${src.replace("/upload/", `/upload/w_${w},q_auto,f_auto/`)} ${w}w`
+      (w) =>
+        `${src.replace("/upload/", `/upload/w_${w},q_auto,f_auto/`)} ${w}w`,
     )
     .join(", ");
 
@@ -43,8 +48,8 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       loading="lazy"
       decoding="async"
       onClick={onClick}
-      width={600}
-      height={400}
+      width={width}
+      height={height}
     />
   );
 };

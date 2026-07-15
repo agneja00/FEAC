@@ -34,25 +34,29 @@ const RootLayout = () => {
     return () => clearTimeout(timer);
   }, [isFetching]);
 
-  return (
-    <div data-theme={theme}>
-      {showLoading && (
-        <div className={styles.loadingBackdrop}>
-          <CircularProgress size={80} thickness={4} />
-        </div>
-      )}
-      {!isInvalidRoute && <Topbar />}
-      {isInvalidRoute ? (
-        <ErrorPage />
-      ) : (
-        <main className={styles.rootContainer}>
-          <Outlet />
-        </main>
-      )}
-      {!isInvalidRoute && <Footer />}
-      <ThemeToggle variant="floating" />
-    </div>
-  );
+ return (
+  <div data-theme={theme}>
+    {showLoading && (
+      <div className={styles.loadingBackdrop}>
+        <CircularProgress size={80} thickness={4} />
+      </div>
+    )}
+
+    {!isInvalidRoute && <Topbar />}
+
+    {isInvalidRoute ? (
+      <ErrorPage />
+    ) : (
+      <main className={styles.rootContainer}>
+        <Outlet />
+      </main>
+    )}
+
+    {!isInvalidRoute && <Footer />}
+
+    <ThemeToggle variant="floating" />
+  </div>
+);
 };
 
 export default RootLayout;

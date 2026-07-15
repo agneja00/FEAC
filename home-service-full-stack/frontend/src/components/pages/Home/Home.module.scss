@@ -1,36 +1,17 @@
-.hero {
-  text-align: center;
-}
-
-.title {
-  font-size: 2rem;
-  line-height: 2.5rem;
-  margin-top: 1.5rem;
-}
-
-.primary {
-  color: var(--primary-color);
-}
-
-.subtitle {
-  color: var(--text-color);
-  opacity: 0.7;
-  line-height: 1.5rem;
-  padding: 1rem;
+.pageContent {
+  padding: 2rem;
 }
 
 .businessTitle {
-  font-size: 1.2rem;
-  margin: 2rem 0;
+  margin: 2rem 0 1rem;
 }
 
 @media only screen and (min-width: 768px) {
-  .title {
-    font-size: 3.5rem;
-    line-height: 5rem;
+  .pageContent {
+    padding: 2rem 6rem;
   }
 
-  .subtitle {
-    font-size: 1.5rem;
+  .businessTitle {
+    margin-top: 3rem;
   }
 }
