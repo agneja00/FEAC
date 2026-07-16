@@ -11,7 +11,7 @@ import {
   IoStar,
 } from "react-icons/io5";
 import ResponsiveImage from "@/components/common/ResponsiveImage";
-
+import Button from "./Button";
 const HERO_IMAGE =
   "https://res.cloudinary.com/dzssnmyzv/image/upload/v1786167645/hero_kncdcl.png";
 
@@ -73,9 +73,9 @@ const Hero = () => {
                 />
               </div>
 
-              <button type="button" className={styles.searchButton}>
+              <Button search >
                 {t("buttons.search", "Search")}
-              </button>
+              </Button>
             </div>
 
             <div className={styles.mobileLocation}>

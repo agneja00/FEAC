@@ -110,30 +110,6 @@
   opacity: 0.5;
 }
 
-.searchButton {
-  flex-shrink: 0;
-  padding: 0.75rem 1.1rem;
-  color: var(--tertiary-color);
-  background: var(--gradient-brand);
-  border: none;
-  border-radius: 0.55rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-
-  &:hover {
-    background: var(--gradient-brand-hover);
-    transform: translateY(-0.05rem);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
-
 .mobileLocation {
   @include flex-align-center;
   gap: 0.65rem;
@@ -340,11 +316,6 @@
 
   .mobileLocation input {
     font-size: 0.85rem;
-  }
-
-  .searchButton {
-    order: 3;
-    padding: 0.8rem 1.6rem;
   }
 
   .benefits {
