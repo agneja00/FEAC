@@ -182,9 +182,7 @@ body {
 }
 
 @mixin button-style {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-align-justify-center();
   font-weight: 600;
   background-color: var(--primary-color);
   color: var(--tertiary-color);
@@ -199,16 +197,8 @@ body {
 }
 
 @mixin button-style-brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
+  @include button-style();
   background: var(--gradient-brand);
-  color: #ffffff;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
 
   &:hover {
     background: var(--gradient-brand-hover);
