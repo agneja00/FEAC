@@ -254,7 +254,6 @@
   .container {
     flex-direction: row;
     justify-content: space-between;
-    gap: 3rem;
   }
 
   .content {
@@ -379,12 +378,8 @@
 }
 
 @media (min-width: 1001px) {
-  .container {
-    gap: 4rem;
-  }
-
   .content {
-    max-width: 36rem;
+    max-width: 40rem;
   }
 
   .title {
