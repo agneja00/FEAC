@@ -2,7 +2,7 @@
   width: 100%;
   overflow: hidden;
   background: var(--hero-bg);
-  padding: 2rem;
+  padding: 2.5rem 2rem;
 }
 
 .container {
@@ -248,7 +248,7 @@
 
 @media (min-width: 768px) {
   .hero {
-    padding: 2rem 6.25rem;
+    padding: 3rem 6.25rem;
   }
 
   .container {
