@@ -140,7 +140,6 @@
 .benefit {
   @include flex-align-center;
   gap: 0.75rem;
-  min-width: 0;
 }
 
 .benefitIcon {
@@ -151,7 +150,7 @@
   color: var(--primary-color);
   background-color: var(--category-card-color);
   border-radius: 50%;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 }
 
 .benefitText {
@@ -318,27 +317,12 @@
 
   .benefits {
     flex-direction: row;
-    justify-content: space-between;
-    gap: 1.5rem;
+    gap: 3rem;
     margin-top: 2rem;
   }
 
   .benefit {
     gap: 0.6rem;
-  }
-
-  .benefitIcon {
-    width: 2.35rem;
-    height: 2.35rem;
-    font-size: 1.1rem;
-  }
-
-  .benefitText strong {
-    font-size: 0.7rem;
-  }
-
-  .benefitText span {
-    font-size: 0.6rem;
   }
 
   .imageWrapper {
@@ -388,18 +372,6 @@
 
   .description {
     max-width: 31rem;
-  }
-
-  .benefits {
-    gap: 1.75rem;
-  }
-
-  .benefitText strong {
-    font-size: 0.75rem;
-  }
-
-  .benefitText span {
-    font-size: 0.68rem;
   }
 
   .imageWrapper {
