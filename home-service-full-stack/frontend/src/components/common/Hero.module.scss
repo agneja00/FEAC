@@ -46,7 +46,10 @@
 }
 
 .highlight {
-  color: var(--primary-color);
+  background: var(--gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .description {
