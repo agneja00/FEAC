@@ -220,10 +220,10 @@
 }
 
 .reviewCount {
-  margin-top: 0.15rem;
+  margin-top: 0.4rem;
   color: var(--text-color);
   opacity: 0.55;
-  font-size: 0.55rem;
+  font-size: 0.65rem;
 }
 
 .reviewers {
@@ -334,23 +334,23 @@
   }
 
   .ratingCard {
-    top: 50%;
-    right: -1rem;
-    min-width: 8.5rem;
-    padding: 0.9rem 1rem;
+    top: 30%;
+    right: -4rem;
+    min-width: 10rem;
+    padding: 1rem;
     transform: translateY(-50%);
   }
 
   .ratingStar {
-    font-size: 1.15rem;
+    font-size: 1.5rem;
   }
 
   .ratingValue {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .reviewCount {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
   }
 
   .reviewers {
@@ -358,8 +358,8 @@
   }
 
   .reviewers span {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.8rem;
+    height: 1.8rem;
     font-size: 0.5rem;
   }
 }
@@ -383,33 +383,5 @@
 
   .image {
     min-height: 30rem;
-  }
-
-  .ratingCard {
-    right: -2.5rem;
-    min-width: 9rem;
-    padding: 1rem 1.15rem;
-  }
-
-  .ratingStar {
-    font-size: 1.25rem;
-  }
-
-  .ratingValue {
-    font-size: 1.5rem;
-  }
-
-  .reviewCount {
-    font-size: 0.65rem;
-  }
-
-  .reviewers {
-    margin-top: 0.6rem;
-  }
-
-  .reviewers span {
-    width: 1.45rem;
-    height: 1.45rem;
-    font-size: 0.55rem;
   }
 }
