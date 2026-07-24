@@ -20,12 +20,22 @@
     "myFavorites": "Mėgstamiausi",
     "logOut": "Atsijungti"
   },
-  "homePage": {
-    "findHome": "Rasti namų",
-    "serviceRepair": "Paslaugą/Remontą",
-    "nearYou": "Netoli jūsų",
-    "explore": "Atraskite geriausias namų paslaugas ir remontą netoli jūsų",
-    "popularBusinesses": "Populiariausios paslaugos"
+  "hero": {
+    "trustedBadge": "Mumis pasitiki 1 000+ namų savininkų",
+    "titleLine1": "Raskite patikimus",
+    "titleLine2Before": "paslaugų ",
+    "titleLine2Accent": "specialistus",
+    "titleLine3Accent": "šalia",
+    "titleLine3After": " jūsų",
+    "description": "Bendraukite tik su patikrintais specialistais: aiškios kainos, akimirksniu gaunamas įvertis ir rezervacija per kelias minutes.",
+    "searchPlaceholder": "Kokios paslaugos ieškote?",
+    "locationPlaceholder": "Vilnius, Lietuva",
+    "verifiedProfessionals": "Patikrinti specialistai",
+    "backgroundChecked": "Patikrinta biografija",
+    "instantBooking": "Akimirksnio rezervacija",
+    "bookInMinutes": "Užsisakykite per minutes",
+    "securePayments": "Saugūs mokėjimai",
+    "protected": "100 % apsauga"
   },
   "categories": {
     "categories": "Kategorijos",
@@ -50,7 +60,8 @@
     "signUp": "Registruotis",
     "login": "Prisijungti",
     "cancel": "Atšaukti",
-    "update": "Atnaujinti"
+    "update": "Atnaujinti",
+    "search": "Ieškoti"
   },
   "messages": {
     "emailSendSuccess": "El. laiškas sėkmingai išsiųstas!",

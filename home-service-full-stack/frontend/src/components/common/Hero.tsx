@@ -12,6 +12,7 @@ import {
 } from "react-icons/io5";
 import ResponsiveImage from "@/components/common/ResponsiveImage";
 import Button from "./Button";
+
 const HERO_IMAGE =
   "https://res.cloudinary.com/dzssnmyzv/image/upload/v1786167645/hero_kncdcl.png";
 
@@ -27,31 +28,23 @@ const Hero = () => {
         <div className={styles.content}>
           <div className={styles.badge}>
             <IoStar className={styles.badgeIcon} />
-            <span>
-              {t("hero.trustedBadge", "Trusted by 1,000+ homeowners")}
-            </span>
+            <span>{t("hero.trustedBadge")}</span>
           </div>
-
           <h1 className={styles.title}>
-            {t("hero.titleStart", "Find Trusted")}
+            {t("hero.titleLine1")}
             <br />
-            Home{" "}
+            {t("hero.titleLine2Before")}
             <span className={styles.highlight}>
-              {t("hero.titleService", "Service")}
+              {t("hero.titleLine2Accent")}
             </span>
             <br />
             <span className={styles.highlight}>
-              {t("hero.titleExperts", "Experts")}
-            </span>{" "}
-            {t("hero.titleEnd", "Near You")}
+              {t("hero.titleLine3Accent")}
+            </span>
+            {t("hero.titleLine3After")}
           </h1>
 
-          <p className={styles.description}>
-            {t(
-              "hero.description",
-              "Connect with verified professionals for all your home needs. Book with confidence, every time.",
-            )}
-          </p>
+          <p className={styles.description}>{t("hero.description")}</p>
 
           <div className={styles.searchWrapper}>
             <div className={styles.searchRow}>
@@ -63,19 +56,15 @@ const Hero = () => {
                   value={service}
                   onChange={(event) => setService(event.target.value)}
                   placeholder={t(
-                    "hero.searchPlaceholder",
-                    "What service do you need?",
+                    "hero.searchPlaceholder"
                   )}
                   aria-label={t(
-                    "hero.searchPlaceholder",
-                    "What service do you need?",
+                    "hero.searchPlaceholder"
                   )}
                 />
               </div>
 
-              <Button search >
-                {t("buttons.search", "Search")}
-              </Button>
+              <Button search>{t("buttons.search")}</Button>
             </div>
 
             <div className={styles.mobileLocation}>
@@ -86,10 +75,9 @@ const Hero = () => {
                 value={location}
                 onChange={(event) => setLocation(event.target.value)}
                 placeholder={t(
-                  "hero.locationPlaceholder",
-                  "Vilnius, Lithuania",
+                  "hero.locationPlaceholder"
                 )}
-                aria-label={t("hero.locationPlaceholder", "Vilnius, Lithuania")}
+                aria-label={t("hero.locationPlaceholder")}
               />
 
               <IoChevronDown className={styles.locationChevron} />
@@ -104,10 +92,10 @@ const Hero = () => {
 
               <div className={styles.benefitText}>
                 <strong>
-                  {t("hero.verifiedProfessionals", "Verified Professionals")}
+                  {t("hero.verifiedProfessionals")}
                 </strong>
 
-                <span>{t("hero.backgroundChecked", "Background checked")}</span>
+                <span>{t("hero.backgroundChecked")}</span>
               </div>
             </div>
 
@@ -117,9 +105,9 @@ const Hero = () => {
               </div>
 
               <div className={styles.benefitText}>
-                <strong>{t("hero.instantBooking", "Instant Booking")}</strong>
+                <strong>{t("hero.instantBooking")}</strong>
 
-                <span>{t("hero.bookInMinutes", "Book in minutes")}</span>
+                <span>{t("hero.bookInMinutes")}</span>
               </div>
             </div>
 
@@ -129,9 +117,9 @@ const Hero = () => {
               </div>
 
               <div className={styles.benefitText}>
-                <strong>{t("hero.securePayments", "Secure Payments")}</strong>
+                <strong>{t("hero.securePayments")}</strong>
 
-                <span>{t("hero.protected", "100% protected")}</span>
+                <span>{t("hero.protected")}</span>
               </div>
             </div>
           </div>

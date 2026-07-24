@@ -20,12 +20,22 @@
     "myFavorites": "My Favorites",
     "logOut": "Logout"
   },
-  "homePage": {
-    "findHome": "Find Home",
-    "serviceRepair": "Service/Repair",
-    "nearYou": "Near You",
-    "explore": "Explore Best Home Service & Repair near you",
-    "popularBusinesses": "Popular businesses"
+  "hero": {
+    "trustedBadge": "Trusted by 1,000+ homeowners",
+    "titleLine1": "Find Trusted",
+    "titleLine2Before": "Home ",
+    "titleLine2Accent": "Service",
+    "titleLine3Accent": "Experts",
+    "titleLine3After": " Near You",
+    "description": "Connect with background-checked professionals for every home need. Get instant quotes, transparent pricing, and book in minutes.",
+    "searchPlaceholder": "What service do you need?",
+    "locationPlaceholder": "Vilnius, Lithuania",
+    "verifiedProfessionals": "Verified Professionals",
+    "backgroundChecked": "Background checked",
+    "instantBooking": "Instant Booking",
+    "bookInMinutes": "Book in minutes",
+    "securePayments": "Secure Payments",
+    "protected": "100% protected"
   },
   "categories": {
     "categories": "Categories",
@@ -50,7 +60,8 @@
     "signUp": "Sign Up",
     "login": "Log in",
     "cancel": "Cancel",
-    "update": "Update"
+    "update": "Update",
+    "search": "Search"
   },
   "messages": {
     "emailSendSuccess": "Email sent successfully!",
