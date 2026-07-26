@@ -138,11 +138,13 @@
   align-items: stretch;
   gap: 1.5rem;
   margin-top: 1.5rem;
+  min-width: 0;
 }
 
 .benefit {
   @include flex-align-center;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .benefitIcon {
@@ -159,11 +161,12 @@
 .benefitText {
   @include flex-column;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .benefitText strong {
   color: var(--text-color);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -171,7 +174,7 @@
 .benefitText span {
   color: var(--text-color);
   opacity: 0.55;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   white-space: nowrap;
 }
 
