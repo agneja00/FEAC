@@ -35,7 +35,8 @@
     "instantBooking": "Instant Booking",
     "bookInMinutes": "Book in minutes",
     "securePayments": "Secure Payments",
-    "protected": "100% protected"
+    "protected": "100% protected",
+    "reviewCount": "{{count}}+ reviews"
   },
   "categories": {
     "categories": "Categories",

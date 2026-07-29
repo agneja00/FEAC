@@ -55,12 +55,8 @@ const Hero = () => {
                   type="text"
                   value={service}
                   onChange={(event) => setService(event.target.value)}
-                  placeholder={t(
-                    "hero.searchPlaceholder"
-                  )}
-                  aria-label={t(
-                    "hero.searchPlaceholder"
-                  )}
+                  placeholder={t("hero.searchPlaceholder")}
+                  aria-label={t("hero.searchPlaceholder")}
                 />
               </div>
 
@@ -74,9 +70,7 @@ const Hero = () => {
                 type="text"
                 value={location}
                 onChange={(event) => setLocation(event.target.value)}
-                placeholder={t(
-                  "hero.locationPlaceholder"
-                )}
+                placeholder={t("hero.locationPlaceholder")}
                 aria-label={t("hero.locationPlaceholder")}
               />
 
@@ -91,9 +85,7 @@ const Hero = () => {
               </div>
 
               <div className={styles.benefitText}>
-                <strong>
-                  {t("hero.verifiedProfessionals")}
-                </strong>
+                <strong>{t("hero.verifiedProfessionals")}</strong>
 
                 <span>{t("hero.backgroundChecked")}</span>
               </div>
@@ -138,7 +130,9 @@ const Hero = () => {
               <span className={styles.ratingValue}>4.9</span>
             </div>
 
-            <span className={styles.reviewCount}>580+ reviews</span>
+            <span className={styles.reviewCount}>
+              {t("hero.reviewCount", { count: 580 })}
+            </span>
 
             <div className={styles.reviewers}>
               <span>A</span>

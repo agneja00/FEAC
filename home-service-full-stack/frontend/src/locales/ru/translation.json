@@ -35,7 +35,8 @@
     "instantBooking": "Мгновенная запись",
     "bookInMinutes": "Бронь за пару минут",
     "securePayments": "Безопасная оплата",
-    "protected": "100% защита платежа"
+    "protected": "100% защита платежа",
+    "reviewCount": "{{count}}+ отзывов"
   },
   "categories": {
     "categories": "Категории",

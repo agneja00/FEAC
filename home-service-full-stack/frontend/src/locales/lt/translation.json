@@ -35,7 +35,8 @@
     "instantBooking": "Akimirksnio rezervacija",
     "bookInMinutes": "Užsisakykite per minutes",
     "securePayments": "Saugūs mokėjimai",
-    "protected": "100% apsauga"
+    "protected": "100% apsauga",
+    "reviewCount": "{{count}}+ atsiliepimų"
   },
   "categories": {
     "categories": "Kategorijos",
