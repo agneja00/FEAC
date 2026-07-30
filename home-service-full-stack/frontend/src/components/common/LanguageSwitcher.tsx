@@ -20,7 +20,11 @@ const LANGUAGES = [
   },
 ];
 
-const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+  onSelect?: () => void;
+}
+
+const LanguageSwitcher = ({ onSelect }: LanguageSwitcherProps) => {
   const { i18n } = useTranslation();
 
   const navigate = useNavigate();
@@ -49,6 +53,7 @@ const LanguageSwitcher = () => {
     navigate(window.location.pathname.replace(`/${lang}`, `/${lng}`));
 
     setOpen(false);
+    onSelect?.();
   };
 
   const current = LANGUAGES.find((l) => l.code === lang) || LANGUAGES[0];

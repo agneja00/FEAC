@@ -178,7 +178,7 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
                   <GrLanguage />
                   {t("topbar.language")}
                 </span>
-                <LanguageSwitcher />
+                <LanguageSwitcher onSelect={close} />
               </div>
             </div>
 
@@ -233,7 +233,7 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
                 </Button>
               </div>
             )}
-              <SocialLinks />
+            <SocialLinks />
           </aside>
         </div>
       )}
