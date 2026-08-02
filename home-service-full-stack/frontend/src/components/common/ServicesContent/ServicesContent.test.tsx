@@ -7,12 +7,12 @@ import {
   useServicePath,
   useServices,
   useToggleFavorite,
-} from "../service/hooks";
+} from "../../service/hooks";
 import { generatePath, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IService, ServiceWithFavorite } from "../service/types";
-import { UserContext } from "../context/UserContext";
-import { IUser } from "../user/types";
+import { IService, ServiceWithFavorite } from "../../service/types";
+import { UserContext } from "../../context/UserContext";
+import { IUser } from "../../user/types";
 import { ROUTES } from "@/constants/routes";
 
 jest.mock("../service/hooks", () => ({

@@ -1,13 +1,13 @@
 import styles from "./Layout.module.scss";
 import { Outlet, useLocation } from "react-router-dom";
 import Topbar from "./Topbar/Topbar";
-import Footer from "../common/Footer";
+import Footer from "../common/Footer/Footer";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useIsFetching } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
-import ThemeToggle from "../common/ThemeToggle";
+import ThemeToggle from "../common/ThemeToggle/ThemeToggle";
 const supportedLanguages = ["en", "lt", "ru"];
 
 const RootLayout = () => {

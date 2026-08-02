@@ -10,8 +10,8 @@ import {
   IoLockClosedOutline,
   IoStar,
 } from "react-icons/io5";
-import ResponsiveImage from "@/components/common/ResponsiveImage";
-import Button from "./Button";
+import ResponsiveImage from "@/components/common/ResponsiveImage/ResponsiveImage";
+import Button from "../Button/Button";
 
 const HERO_IMAGE =
   "https://res.cloudinary.com/dzssnmyzv/image/upload/v1786167645/hero_kncdcl.png";

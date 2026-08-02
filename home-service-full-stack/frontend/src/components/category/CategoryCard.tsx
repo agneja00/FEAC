@@ -3,7 +3,7 @@ import { useNavigate, generatePath, useParams } from "react-router-dom";
 import classNames from "classnames";
 import { ROUTES } from "@/constants/routes";
 import { ICategory } from "./types";
-import UrlIcon from "../common/UrlIcon";
+import UrlIcon from "../common/UrlIcon/UrlIcon";
 import { useTranslation } from "react-i18next";
 
 const categoryTranslations: Record<string, Record<string, string>> = {

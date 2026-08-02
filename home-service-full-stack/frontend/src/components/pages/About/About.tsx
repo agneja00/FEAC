@@ -2,7 +2,7 @@ import styles from "./About.module.scss";
 import { Link, useParams } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
-import Button from "@/components/common/Button";
+import Button from "@/components/common/Button/Button";
 import { useTranslation } from "react-i18next";
 import PageTitle from "@/components/common/PageTitle";
 

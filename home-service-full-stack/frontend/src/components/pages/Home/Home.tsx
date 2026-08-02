@@ -1,6 +1,6 @@
 import styles from "./Home.module.scss";
 import PageTitle from "@/components/common/PageTitle";
-import Hero from "@/components/common/Hero";
+import Hero from "@/components/common/Hero/Hero";
 import CategoryList from "@/components/category/CategoryList";
 import ServiceList from "@/components/service/ServiceList";
 import { useServiceData } from "@/components/service/hooks";

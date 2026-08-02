@@ -1,5 +1,5 @@
 import { useParams, useNavigate, generatePath } from "react-router-dom";
-import FilteredList from "@/components/common/FilteredList";
+import FilteredList from "@/components/common/FilteredList/FilteredList";
 import BookingCard from "@/components/booking/BookingCard";
 import { useUserBookings } from "@/components/booking/hooks";
 import { TBookingStatus } from "@/components/booking/types";

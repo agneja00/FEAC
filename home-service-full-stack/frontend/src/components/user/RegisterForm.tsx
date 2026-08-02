@@ -1,7 +1,7 @@
 import styles from "./Form.module.scss";
 import { Form, Formik } from "formik";
 import { useSnackbar } from "notistack";
-import Button from "../common/Button";
+import Button from "../common/Button/Button";
 import { ROUTES } from "@/constants/routes";
 import { generatePath, Link, useNavigate, useParams } from "react-router-dom";
 import FormikField from "../common/FormikField";

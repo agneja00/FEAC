@@ -3,8 +3,8 @@ import styles from "./ServicesContent.module.scss";
 import ServiceList from "@/components/service/ServiceList";
 import VerticalCategoryList from "@/components/category/VerticalCategoryList";
 import { useMemo, useState } from "react";
-import Input from "../common/Input";
-import { useServiceData } from "../service/hooks";
+import Input from "../Input/Input";
+import { useServiceData } from "../../service/hooks";
 import { useTranslation } from "react-i18next";
 
 type TParams = {

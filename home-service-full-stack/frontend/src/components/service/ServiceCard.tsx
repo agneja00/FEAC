@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { IService } from "@/components/service/types";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import Button from "../common/Button";
+import Button from "../common/Button/Button";
 import styles from "./ServiceCard.module.scss";
 import { useToggleFavorite } from "./hooks";
 import { UserContext } from "../context/UserContext";
 import { useServicePath } from "./hooks";
 import { useTranslation } from "react-i18next";
-import ResponsiveImage from "../common/ResponsiveImage";
+import ResponsiveImage from "../common/ResponsiveImage/ResponsiveImage";
 
 interface ServiceCardProps {
   service?: IService | null;

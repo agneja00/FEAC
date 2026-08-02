@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import styles from "./Input.module.scss";
+import styles from "./Input/Input.module.scss";
 import { ErrorMessage, useField } from "formik";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

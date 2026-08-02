@@ -3,7 +3,7 @@ import { generatePath, Link, useParams } from "react-router-dom";
 import { useServices, useCurrentService } from "./hooks";
 import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
-import ResponsiveImage from "../common/ResponsiveImage";
+import ResponsiveImage from "../common/ResponsiveImage/ResponsiveImage";
 
 const SimilarService: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -16,7 +16,7 @@ const SimilarService: React.FC = () => {
   const similarService = services?.filter(
     (service) =>
       service.category === currentService?.category &&
-      service._id !== currentService._id
+      service._id !== currentService._id,
   );
 
   return (

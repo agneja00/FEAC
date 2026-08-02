@@ -6,7 +6,7 @@ import {
   ServiceRegisterValidationSchema,
   serviceRegisterInitialValues,
 } from "./consts";
-import Button from "../common/Button";
+import Button from "../common/Button/Button";
 import { NewService } from "./types";
 import { sendServiceEmail } from "./api";
 import { useTranslation } from "react-i18next";

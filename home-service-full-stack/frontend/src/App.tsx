@@ -23,7 +23,7 @@ import { UserProvider } from "./components/context/UserContext";
 import { ThemeProvider } from "./components/context/ThemeContext";
 import Services from "./components/pages/Services/Services";
 import FavoritesPage from "./components/pages/FavoritesPage/FavoritesPage";
-import LanguageValidator from "./components/common/LanguageValidator";
+import LanguageValidator from "./components/common/Language/LanguageValidator";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 

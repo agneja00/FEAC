@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./ServiceInfoSection.module.scss";
 import { useCurrentService } from "./hooks";
-import Modal from "../common/Modal";
+import Modal from "../common/Modal/Modal";
 import { useTranslation } from "react-i18next";
-import ResponsiveImage from "../common/ResponsiveImage";
+import ResponsiveImage from "../common/ResponsiveImage/ResponsiveImage";
 
 const ServiceInfoSection: React.FC = () => {
   const { t, i18n } = useTranslation();

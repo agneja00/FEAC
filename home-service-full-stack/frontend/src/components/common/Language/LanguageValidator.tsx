@@ -1,7 +1,7 @@
 import { useParams, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 const supportedLanguages = ["en", "lt", "ru"];
 

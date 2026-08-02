@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useParams, useNavigate, generatePath } from "react-router-dom";
 import { useFavoriteServices } from "../../service/hooks";
-import FilteredList from "@/components/common/FilteredList";
+import FilteredList from "@/components/common/FilteredList/FilteredList";
 import ServiceCard from "@/components/service/ServiceCard";
 import { UserContext } from "@/components/context/UserContext";
 import { ROUTES } from "@/constants/routes";

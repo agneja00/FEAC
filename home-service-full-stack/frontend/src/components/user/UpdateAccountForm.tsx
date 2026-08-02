@@ -7,7 +7,7 @@ import { IUpdateUserRequest, IUser } from "./types";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
 import FormikField from "../common/FormikField";
-import Button from "../common/Button";
+import Button from "../common/Button/Button";
 import { ErrorResponse } from "../types/error";
 import { useState, ChangeEvent, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";

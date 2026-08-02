@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "../About/About.module.scss";
 import ServiceRegisterForm from "@/components/service/ServiceRegisterForm";
-import Button from "@/components/common/Button";
+import Button from "@/components/common/Button/Button";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Modal from "@/components/common/Modal";
+import Modal from "@/components/common/Modal/Modal";
 import { useTranslation } from "react-i18next";
 import PageTitle from "@/components/common/PageTitle";
 

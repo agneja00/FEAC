@@ -3,7 +3,7 @@ import { useParams, useNavigate, generatePath } from "react-router-dom";
 import { useUserBookings } from "@/components/booking/hooks";
 import { useTranslation } from "react-i18next";
 import BookingsPage from "./BookingsPage";
-import FilteredList from "@/components/common/FilteredList";
+import FilteredList from "@/components/common/FilteredList/FilteredList";
 import BookingCard from "@/components/booking/BookingCard";
 
 jest.mock("react-router-dom", () => ({
@@ -55,7 +55,7 @@ describe("BookingsPage", () => {
     });
 
     mockFilteredList.mockImplementation(
-      ({ title, items, filters, activeFilter, onFilterChange, renderItem }) => (
+      ({ title, items, filters, onFilterChange, renderItem }) => (
         <div>
           <h1>{title}</h1>
           <div>
@@ -67,7 +67,7 @@ describe("BookingsPage", () => {
           </div>
           <div>
             {items.length > 0 ? (
-              items.map((item: any) => renderItem(item))
+              items.map((item: unknown) => renderItem(item))
             ) : (
               <p>No items to display.</p>
             )}

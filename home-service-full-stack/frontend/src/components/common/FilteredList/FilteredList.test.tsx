@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import FilteredList from "./FilteredList";
-import { ReactNode } from "react";
+import FilteredList from "../FilteredList/FilteredList";
+import { ReactNode, ComponentProps } from "react";
+import type ButtonType from "@/components/common/Button/Button";
 
 jest.mock("@/components/common/Button", () => ({
   __esModule: true,
-  default: ({ children, ...props }: any) => (
+  default: ({ children, ...props }: ComponentProps<typeof ButtonType>) => (
     <button {...props}>{children}</button>
   ),
 }));

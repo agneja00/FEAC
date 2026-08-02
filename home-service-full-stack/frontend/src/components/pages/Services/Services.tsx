@@ -1,5 +1,5 @@
 import PageTitle from "@/components/common/PageTitle";
-import ServicesContent from "../../common/ServicesContent";
+import ServicesContent from "../../common/ServicesContent/ServicesContent";
 
 const Services: React.FC = () => {
   return (

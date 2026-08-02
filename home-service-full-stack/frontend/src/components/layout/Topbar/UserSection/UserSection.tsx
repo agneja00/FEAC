@@ -1,8 +1,8 @@
 import styles from "./UserSection.module.scss";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Button from "@/components/common/Button";
-import LanguageSwitcher from "@/components/common/LanguageSwitcher";
+import Button from "@/components/common/Button/Button";
+import LanguageSwitcher from "@/components/common/Language/LanguageSwitcher";
 import AvatarMenu from "../AvatarMenu/AvatarMenu";
 import { ROUTES } from "@/constants/routes";
 import type { IUser } from "@/components/user/types";

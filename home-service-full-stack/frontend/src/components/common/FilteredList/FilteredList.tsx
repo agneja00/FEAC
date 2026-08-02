@@ -1,5 +1,5 @@
 import styles from "./FilteredList.module.scss";
-import Button from "@/components/common/Button";
+import Button from "@/components/common/Button/Button";
 import classNames from "classnames";
 import { ReactNode } from "react";
 

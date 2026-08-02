@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate, generatePath } from "react-router-dom";
 import styles from "./ErrorPage.module.scss";
-import Button from "@/components/common/Button";
+import Button from "@/components/common/Button/Button";
 import { ROUTES } from "@/constants/routes";
 import PageTitle from "@/components/common/PageTitle";
 

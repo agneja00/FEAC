@@ -1,5 +1,5 @@
 import styles from "./ServiceInfoHeader.module.scss";
-import Button from "../common/Button";
+import Button from "../common/Button/Button";
 import { CiLocationOn, CiMail } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
@@ -7,7 +7,7 @@ import { HiOutlineClock } from "react-icons/hi";
 import { useCurrentService } from "./hooks";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
-import ResponsiveImage from "../common/ResponsiveImage";
+import ResponsiveImage from "../common/ResponsiveImage/ResponsiveImage";
 
 const ServiceInfoHeader: React.FC = () => {
   const { t, i18n } = useTranslation();

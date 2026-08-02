@@ -1,4 +1,4 @@
-import ServicesContent from "../../common/ServicesContent";
+import ServicesContent from "../../common/ServicesContent/ServicesContent";
 
 const ServicesCategory: React.FC = () => {
   return <ServicesContent />;
