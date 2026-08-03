@@ -1,7 +1,7 @@
 import styles from "./Home.module.scss";
 import PageTitle from "@/components/common/PageTitle";
 import Hero from "@/components/common/Hero/Hero";
-import CategoryList from "@/components/category/CategoryList";
+import BrowseByCategory from "./BrowseByCategory/BrowseByCategory";
 import ServiceList from "@/components/service/ServiceList";
 import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
@@ -29,7 +29,7 @@ const Home = () => {
       <Hero />
 
       <div className={styles.pageContent}>
-        <CategoryList />
+        <BrowseByCategory />
 
         <h2 className={styles.businessTitle}>
           {t("homePage.popularBusinesses")}

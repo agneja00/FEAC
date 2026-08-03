@@ -20,6 +20,9 @@
     "myFavorites": "Мои избранные",
     "logOut": "Выйти"
   },
+  "homePage": {
+    "browseByCategory": "Категории услуг"
+  },
   "hero": {
     "trustedBadge": "Нам доверяют 1 000+ владельцев жилья",
     "titleLine1": "Найдите проверенных",
@@ -62,7 +65,8 @@
     "login": "Войти",
     "cancel": "Отмена",
     "update": "Обновить",
-    "search": "Найти"
+    "search": "Найти",
+    "viewAll": "Смотреть все"
   },
   "messages": {
     "emailSendSuccess": "Письмо успешно отправлено!",

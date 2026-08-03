@@ -20,6 +20,9 @@
     "myFavorites": "My Favorites",
     "logOut": "Logout"
   },
+  "homePage": {
+    "browseByCategory": "Browse by Category"
+  },
   "hero": {
     "trustedBadge": "Trusted by 1,000+ homeowners",
     "titleLine1": "Find Trusted",
@@ -62,7 +65,8 @@
     "login": "Log in",
     "cancel": "Cancel",
     "update": "Update",
-    "search": "Search"
+    "search": "Search",
+    "viewAll": "View all"
   },
   "messages": {
     "emailSendSuccess": "Email sent successfully!",

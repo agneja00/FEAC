@@ -20,6 +20,9 @@
     "myFavorites": "Mėgstamiausi",
     "logOut": "Atsijungti"
   },
+  "homePage": {
+    "browseByCategory": "Paslaugų kategorijos"
+  },
   "hero": {
     "trustedBadge": "Mumis pasitiki 1 000+ namų savininkų",
     "titleLine1": "Raskite patikimus",
@@ -62,7 +65,8 @@
     "login": "Prisijungti",
     "cancel": "Atšaukti",
     "update": "Atnaujinti",
-    "search": "Ieškoti"
+    "search": "Ieškoti",
+    "viewAll": "Žiūrėti visas"
   },
   "messages": {
     "emailSendSuccess": "El. laiškas sėkmingai išsiųstas!",

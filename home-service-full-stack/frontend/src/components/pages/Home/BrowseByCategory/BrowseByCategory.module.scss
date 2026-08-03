@@ -1,0 +1,28 @@
+.header {
+  @include flex-style;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.viewAll {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--primary-color-hover);
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 1.6rem;
+  }
+}
