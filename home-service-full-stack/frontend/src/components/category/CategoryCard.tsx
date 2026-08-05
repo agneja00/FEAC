@@ -22,7 +22,10 @@ interface CategoryCardProps {
   className?: string;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({
+  category,
+  className,
+}) => {
   const { t, i18n } = useTranslation();
   const params = useParams<{ lang?: string; category?: string }>();
   const navigate = useNavigate();
@@ -57,10 +60,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
       aria-label={t("alt.categoryImage", { categoryName: translatedName })}
       onKeyDown={handleKeyDown}
     >
-      <UrlIcon
-        src={category.url}
-        alt={t("alt.categoryImage", { categoryName: translatedName })}
-      />
+      <div className={styles.iconWrapper}>
+        <UrlIcon
+          src={category.url}
+          alt={t("alt.categoryImage", { categoryName: translatedName })}
+          className={styles.icon}
+        />
+      </div>
+
       <p className={styles.name}>{translatedName}</p>
     </div>
   );
