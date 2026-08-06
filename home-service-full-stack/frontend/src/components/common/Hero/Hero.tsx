@@ -28,23 +28,23 @@ const Hero = () => {
         <div className={styles.content}>
           <div className={styles.badge}>
             <IoStar className={styles.badgeIcon} />
-            <span>{t("hero.trustedBadge")}</span>
+            <span>{t("homePage.hero.trustedBadge")}</span>
           </div>
           <h1 className={styles.title}>
-            {t("hero.titleLine1")}
+            {t("homePage.hero.titleLine1")}
             <br />
-            {t("hero.titleLine2Before")}
+            {t("homePage.hero.titleLine2Before")}
             <span className={styles.highlight}>
-              {t("hero.titleLine2Accent")}
+              {t("homePage.hero.titleLine2Accent")}
             </span>
             <br />
             <span className={styles.highlight}>
-              {t("hero.titleLine3Accent")}
+              {t("homePage.hero.titleLine3Accent")}
             </span>
-            {t("hero.titleLine3After")}
+            {t("homePage.hero.titleLine3After")}
           </h1>
 
-          <p className={styles.description}>{t("hero.description")}</p>
+          <p className={styles.description}>{t("homePage.hero.description")}</p>
 
           <div className={styles.searchWrapper}>
             <div className={styles.searchRow}>
@@ -55,8 +55,8 @@ const Hero = () => {
                   type="text"
                   value={service}
                   onChange={(event) => setService(event.target.value)}
-                  placeholder={t("hero.searchPlaceholder")}
-                  aria-label={t("hero.searchPlaceholder")}
+                  placeholder={t("homePage.hero.searchPlaceholder")}
+                  aria-label={t("homePage.hero.searchPlaceholder")}
                 />
               </div>
 
@@ -70,8 +70,8 @@ const Hero = () => {
                 type="text"
                 value={location}
                 onChange={(event) => setLocation(event.target.value)}
-                placeholder={t("hero.locationPlaceholder")}
-                aria-label={t("hero.locationPlaceholder")}
+                placeholder={t("homePage.hero.locationPlaceholder")}
+                aria-label={t("homePage.hero.locationPlaceholder")}
               />
 
               <IoChevronDown className={styles.locationChevron} />
@@ -85,9 +85,9 @@ const Hero = () => {
               </div>
 
               <div className={styles.benefitText}>
-                <strong>{t("hero.verifiedProfessionals")}</strong>
+                <strong>{t("homePage.hero.verifiedProfessionals")}</strong>
 
-                <span>{t("hero.backgroundChecked")}</span>
+                <span>{t("homePage.hero.backgroundChecked")}</span>
               </div>
             </div>
 
@@ -97,9 +97,9 @@ const Hero = () => {
               </div>
 
               <div className={styles.benefitText}>
-                <strong>{t("hero.instantBooking")}</strong>
+                <strong>{t("homePage.hero.instantBooking")}</strong>
 
-                <span>{t("hero.bookInMinutes")}</span>
+                <span>{t("homePage.hero.bookInMinutes")}</span>
               </div>
             </div>
 
@@ -109,9 +109,9 @@ const Hero = () => {
               </div>
 
               <div className={styles.benefitText}>
-                <strong>{t("hero.securePayments")}</strong>
+                <strong>{t("homePage.hero.securePayments")}</strong>
 
-                <span>{t("hero.protected")}</span>
+                <span>{t("homePage.hero.protected")}</span>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ const Hero = () => {
             </div>
 
             <span className={styles.reviewCount}>
-              {t("hero.reviewCount", { count: 580 })}
+              {t("homePage.hero.reviewCount", { count: 580 })}
             </span>
 
             <div className={styles.reviewers}>

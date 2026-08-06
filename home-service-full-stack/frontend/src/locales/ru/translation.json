@@ -21,25 +21,25 @@
     "logOut": "Выйти"
   },
   "homePage": {
+    "hero": {
+      "trustedBadge": "Нам доверяют 1 000+ владельцев жилья",
+      "titleLine1": "Найдите проверенных",
+      "titleLine2Before": "мастеров ",
+      "titleLine2Accent": "для дома",
+      "titleLine3Accent": "рядом",
+      "titleLine3After": " с вами",
+      "description": "Работайте только с проверенными специалистами: прозрачные цены, мгновенный расчёт стоимости и запись в пару кликов.",
+      "searchPlaceholder": "Какая услуга вам нужна?",
+      "locationPlaceholder": "Вильнюс, Литва",
+      "verifiedProfessionals": "Проверенные специалисты",
+      "backgroundChecked": "Проверка биографии",
+      "instantBooking": "Мгновенная запись",
+      "bookInMinutes": "Бронь за пару минут",
+      "securePayments": "Безопасная оплата",
+      "protected": "100% защита платежа",
+      "reviewCount": "{{count}}+ отзывов"
+    },
     "browseByCategory": "Категории услуг"
-  },
-  "hero": {
-    "trustedBadge": "Нам доверяют 1 000+ владельцев жилья",
-    "titleLine1": "Найдите проверенных",
-    "titleLine2Before": "мастеров ",
-    "titleLine2Accent": "для дома",
-    "titleLine3Accent": "рядом",
-    "titleLine3After": " с вами",
-    "description": "Работайте только с проверенными специалистами: прозрачные цены, мгновенный расчёт стоимости и запись в пару кликов.",
-    "searchPlaceholder": "Какая услуга вам нужна?",
-    "locationPlaceholder": "Вильнюс, Литва",
-    "verifiedProfessionals": "Проверенные специалисты",
-    "backgroundChecked": "Проверка биографии",
-    "instantBooking": "Мгновенная запись",
-    "bookInMinutes": "Бронь за пару минут",
-    "securePayments": "Безопасная оплата",
-    "protected": "100% защита платежа",
-    "reviewCount": "{{count}}+ отзывов"
   },
   "categories": {
     "categories": "Категории",

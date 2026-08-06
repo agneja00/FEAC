@@ -21,25 +21,25 @@
     "logOut": "Logout"
   },
   "homePage": {
+    "hero": {
+      "trustedBadge": "Trusted by 1,000+ homeowners",
+      "titleLine1": "Find Trusted",
+      "titleLine2Before": "Home ",
+      "titleLine2Accent": "Service",
+      "titleLine3Accent": "Experts",
+      "titleLine3After": " Near You",
+      "description": "Connect with background-checked professionals for every home need. Get instant quotes, transparent pricing, and book in minutes.",
+      "searchPlaceholder": "What service do you need?",
+      "locationPlaceholder": "Vilnius, Lithuania",
+      "verifiedProfessionals": "Verified Professionals",
+      "backgroundChecked": "Background checked",
+      "instantBooking": "Instant Booking",
+      "bookInMinutes": "Book in minutes",
+      "securePayments": "Secure Payments",
+      "protected": "100% protected",
+      "reviewCount": "{{count}}+ reviews"
+    },
     "browseByCategory": "Browse by Category"
-  },
-  "hero": {
-    "trustedBadge": "Trusted by 1,000+ homeowners",
-    "titleLine1": "Find Trusted",
-    "titleLine2Before": "Home ",
-    "titleLine2Accent": "Service",
-    "titleLine3Accent": "Experts",
-    "titleLine3After": " Near You",
-    "description": "Connect with background-checked professionals for every home need. Get instant quotes, transparent pricing, and book in minutes.",
-    "searchPlaceholder": "What service do you need?",
-    "locationPlaceholder": "Vilnius, Lithuania",
-    "verifiedProfessionals": "Verified Professionals",
-    "backgroundChecked": "Background checked",
-    "instantBooking": "Instant Booking",
-    "bookInMinutes": "Book in minutes",
-    "securePayments": "Secure Payments",
-    "protected": "100% protected",
-    "reviewCount": "{{count}}+ reviews"
   },
   "categories": {
     "categories": "Categories",
