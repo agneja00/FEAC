@@ -1,6 +1,6 @@
 .header {
   @include flex-style;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .title {
@@ -10,15 +10,30 @@
 }
 
 .viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   color: var(--primary-color);
   font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1;
   white-space: nowrap;
+  transition:
+    gap 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
     color: var(--primary-color-hover);
     text-decoration: none;
+    gap: 0.45rem;
   }
+}
+
+.viewAllIcon {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.05rem;
 }
 
 @media (min-width: 768px) {

@@ -1,6 +1,7 @@
 import styles from "./BrowseByCategory.module.scss";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { IoChevronForward } from "react-icons/io5";
 import CategoryList from "@/components/category/CategoryList";
 import { ROUTES } from "@/constants/routes";
 
@@ -18,6 +19,7 @@ const BrowseByCategory = () => {
           className={styles.viewAll}
         >
           {t("buttons.viewAll")}
+           <IoChevronForward className={styles.viewAllIcon} />
         </Link>
       </div>
 
