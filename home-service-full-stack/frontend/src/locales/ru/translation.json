@@ -39,7 +39,8 @@
       "protected": "100% защита платежа",
       "reviewCount": "{{count}}+ отзывов"
     },
-    "browseByCategory": "Категории услуг"
+    "browseByCategory": "Категории услуг",
+    "popularServices": "Популярные услуги"
   },
   "categories": {
     "categories": "Категории",

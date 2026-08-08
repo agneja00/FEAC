@@ -39,7 +39,8 @@
       "protected": "100% apsauga",
       "reviewCount": "{{count}}+ atsiliepimų"
     },
-    "browseByCategory": "Paslaugų kategorijos"
+    "browseByCategory": "Paslaugų kategorijos",
+    "popularServices": "Populiarios paslaugos"
   },
   "categories": {
     "categories": "Kategorijos",

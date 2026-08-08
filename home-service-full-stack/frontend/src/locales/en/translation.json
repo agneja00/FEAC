@@ -39,7 +39,8 @@
       "protected": "100% protected",
       "reviewCount": "{{count}}+ reviews"
     },
-    "browseByCategory": "Browse by Category"
+    "browseByCategory": "Browse by Category",
+    "popularServices": "Popular Services"
   },
   "categories": {
     "categories": "Categories",
