@@ -2,12 +2,12 @@ import styles from "./Home.module.scss";
 import PageTitle from "@/components/common/PageTitle";
 import Hero from "@/components/common/Hero/Hero";
 import BrowseByCategory from "./BrowseByCategory/BrowseByCategory";
-import ServiceList from "@/components/service/ServiceList";
+import PopularServices from "./PopularServices/PopularServices";
 import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
-  const { allServices, isLoading, error } = useServiceData();
+  const { isLoading, error } = useServiceData();
   const { t } = useTranslation();
 
   if (isLoading) {
@@ -25,17 +25,10 @@ const Home = () => {
   return (
     <>
       <PageTitle title="Home" />
-
       <Hero />
-
       <div className={styles.pageContent}>
         <BrowseByCategory />
-
-        <h2 className={styles.businessTitle}>
-          {t("homePage.popularBusinesses")}
-        </h2>
-
-        <ServiceList services={allServices} />
+        <PopularServices />
       </div>
     </>
   );
