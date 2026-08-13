@@ -40,7 +40,18 @@
       "reviewCount": "{{count}}+ reviews"
     },
     "browseByCategory": "Browse by Category",
-    "popularServices": "Popular Services"
+    "popularServices": "Popular Services",
+    "howItWorks": {
+      "title": "How It Works",
+      "step1Title": "1. Search",
+      "step1Description": "Find the service you need from our wide range of categories.",
+      "step2Title": "2. Choose",
+      "step2Description": "Compare top-rated professionals and read reviews.",
+      "step3Title": "3. Book",
+      "step3Description": "Book your service in minutes with our easy online booking.",
+      "step4Title": "4. Relax",
+      "step4Description": "Sit back and enjoy quality service at your doorstep."
+    }
   },
   "categories": {
     "categories": "Categories",

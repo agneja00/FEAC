@@ -40,7 +40,18 @@
       "reviewCount": "{{count}}+ atsiliepimų"
     },
     "browseByCategory": "Paslaugų kategorijos",
-    "popularServices": "Populiarios paslaugos"
+    "popularServices": "Populiarios paslaugos",
+    "howItWorks": {
+      "title": "Kaip tai veikia",
+      "step1Title": "1. Ieškokite",
+      "step1Description": "Raskite reikiamą paslaugą iš plataus kategorijų pasirinkimo.",
+      "step2Title": "2. Rinkitės",
+      "step2Description": "Palyginkite geriausiai vertinamus specialistus ir perskaitykite atsiliepimus.",
+      "step3Title": "3. Rezervuokite",
+      "step3Description": "Užsisakykite paslaugą per kelias minutes su paprasta internetine rezervacija.",
+      "step4Title": "4. Atsipalaiduokite",
+      "step4Description": "Atsisėskite patogiai ir mėgaukitės kokybiška paslauga savo namuose."
+    }
   },
   "categories": {
     "categories": "Kategorijos",

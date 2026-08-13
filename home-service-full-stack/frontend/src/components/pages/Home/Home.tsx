@@ -3,6 +3,7 @@ import PageTitle from "@/components/common/PageTitle";
 import Hero from "@/components/common/Hero/Hero";
 import BrowseByCategory from "./BrowseByCategory/BrowseByCategory";
 import PopularServices from "./PopularServices/PopularServices";
+import HowItWorks from "./HowItWorks/HowItWorks";
 import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
 
@@ -29,6 +30,7 @@ const Home = () => {
       <div className={styles.pageContent}>
         <BrowseByCategory />
         <PopularServices />
+        <HowItWorks />
       </div>
     </>
   );
