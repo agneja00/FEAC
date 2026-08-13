@@ -6,6 +6,7 @@ import PopularServices from "./PopularServices/PopularServices";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
+import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
   const { isLoading, error } = useServiceData();
@@ -31,6 +32,7 @@ const Home = () => {
         <HowItWorks />
         <BrowseByCategory />
         <PopularServices />
+        <Testimonials />
       </div>
     </>
   );

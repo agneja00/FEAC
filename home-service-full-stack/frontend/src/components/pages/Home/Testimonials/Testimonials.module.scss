@@ -1,0 +1,162 @@
+.section {
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+.title {
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.carousel {
+  position: relative;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.arrow {
+  display: none;
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.card {
+  @include flex-column;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 82vw;
+  max-width: 20rem;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 0.0625rem solid var(--button-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-color) 0 0.25rem 0.75rem;
+}
+
+.stars {
+  @include flex-align-center;
+  gap: 0.15rem;
+}
+
+.star {
+  color: #f59e0b;
+  font-size: 1rem;
+}
+
+.text {
+  color: var(--text-color);
+  opacity: 0.85;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.author {
+  @include flex-align-center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+.authorInfo {
+  @include flex-column;
+  gap: 0.35rem;
+
+  strong {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  span {
+    color: var(--text-color);
+    opacity: 0.6;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    margin-bottom: 2.5rem;
+    font-size: 1.6rem;
+  }
+
+  .carousel {
+    padding: 0 3.5rem;
+  }
+
+  .arrow {
+    @include flex-align-justify-center;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 0.0625rem solid var(--button-border);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-color) 0 0.25rem 0.75rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    &:first-of-type {
+      left: 0;
+    }
+
+    &:last-of-type {
+      right: 0;
+    }
+  }
+
+  .track {
+    padding: 0.25rem 0;
+    scroll-padding-inline: 0;
+  }
+
+  .card {
+    width: 19rem;
+    max-width: none;
+    scroll-snap-align: start;
+  }
+}
+
+@media (min-width: 1001px) {
+  .carousel {
+    padding: 0 4.5rem;
+  }
+
+  .card {
+    width: 21rem;
+  }
+}
