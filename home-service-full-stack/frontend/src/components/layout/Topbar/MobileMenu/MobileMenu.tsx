@@ -170,7 +170,7 @@ const MobileMenu = ({ user }: MobileMenuProps) => {
                   <IoMoonOutline />
                   {t("topbar.theme")}
                 </span>
-                <ThemeToggle />
+                <ThemeToggle onSelect={close} />
               </div>
 
               <div className={styles.settingRow}>

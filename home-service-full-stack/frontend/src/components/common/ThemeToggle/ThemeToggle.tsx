@@ -7,16 +7,22 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 interface ThemeToggleProps {
   variant?: "default" | "floating";
+  onSelect?: () => void;
 }
 
-const ThemeToggle = ({ variant = "default" }: ThemeToggleProps) => {
+const ThemeToggle = ({ variant = "default", onSelect }: ThemeToggleProps) => {
   const { theme, toggleTheme } = useTheme();
+
+  const handleToggle = () => {
+    toggleTheme();
+    onSelect?.();
+  };
 
   if (variant === "floating") {
     return (
       <Tooltip title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
         <IconButton
-          onClick={toggleTheme}
+          onClick={handleToggle}
           aria-label="Toggle theme"
           sx={{
             display: "none",
@@ -33,6 +39,7 @@ const ThemeToggle = ({ variant = "default" }: ThemeToggleProps) => {
             color: "var(--white)",
             boxShadow: "0 0.5rem 1.25rem var(--shadow-hover)",
             transition: "all 0.25s ease",
+
             "&:hover": {
               background: "var(--gradient-brand-hover)",
               transform: "translateY(-0.2rem)",
@@ -50,9 +57,10 @@ const ThemeToggle = ({ variant = "default" }: ThemeToggleProps) => {
       <input
         type="checkbox"
         checked={theme === "dark"}
-        onChange={toggleTheme}
+        onChange={handleToggle}
         aria-label="Toggle theme"
       />
+
       <span className={styles.slider} />
     </label>
   );
