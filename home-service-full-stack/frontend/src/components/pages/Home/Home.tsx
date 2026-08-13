@@ -28,9 +28,9 @@ const Home = () => {
       <PageTitle title="Home" />
       <Hero />
       <div className={styles.pageContent}>
+        <HowItWorks />
         <BrowseByCategory />
         <PopularServices />
-        <HowItWorks />
       </div>
     </>
   );
