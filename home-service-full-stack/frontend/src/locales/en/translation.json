@@ -116,6 +116,19 @@
       "review15Name": "Simona N.",
       "review15Location": "Kaunas",
       "review15Text": "The electrician spotted a wiring issue we didn't even know about and fixed it safely. Very thorough."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1Question": "How do I book a service?",
+      "q1Answer": "Search for the service you need, pick a professional from the results, and choose an available date and time. You'll get instant confirmation by email.",
+      "q2Question": "Are the professionals background-checked?",
+      "q2Answer": "Yes. Every professional on our platform goes through identity verification and a background check before they can accept bookings.",
+      "q3Question": "Can I cancel or reschedule a booking?",
+      "q3Answer": "Yes, you can cancel or reschedule from your bookings page up until 24 hours before the appointment, free of charge.",
+      "q4Question": "How does payment work?",
+      "q4Answer": "Payment is securely processed through the platform once the service is completed. We never share your card details with the professional.",
+      "q5Question": "What if I'm not satisfied with the service?",
+      "q5Answer": "Contact our support team within 48 hours of the appointment and we'll help resolve the issue, including a refund if applicable."
     }
   },
   "categories": {

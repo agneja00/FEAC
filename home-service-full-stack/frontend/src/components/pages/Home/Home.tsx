@@ -4,9 +4,10 @@ import Hero from "@/components/common/Hero/Hero";
 import BrowseByCategory from "./BrowseByCategory/BrowseByCategory";
 import PopularServices from "./PopularServices/PopularServices";
 import HowItWorks from "./HowItWorks/HowItWorks";
+import Testimonials from "./Testimonials/Testimonials";
+import FAQ from "./FAQ/FAQ";
 import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
-import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
   const { isLoading, error } = useServiceData();
@@ -33,6 +34,7 @@ const Home = () => {
         <BrowseByCategory />
         <PopularServices />
         <Testimonials />
+        <FAQ />
       </div>
     </>
   );

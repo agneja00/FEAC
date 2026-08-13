@@ -116,6 +116,19 @@
       "review15Name": "Simona N.",
       "review15Location": "Kaunas",
       "review15Text": "Elektrikas pastebėjo laidų problemą, apie kurią net nežinojome, ir saugiai ją pašalino."
+    },
+    "faq": {
+      "title": "Dažniausiai užduodami klausimai",
+      "q1Question": "Kaip užsisakyti paslaugą?",
+      "q1Answer": "Susiraskite reikiamą paslaugą, pasirinkite specialistą iš rezultatų ir nurodykite jums patogią datą bei laiką. Rezervacija bus patvirtinta iškart el. paštu.",
+      "q2Question": "Ar specialistai patikrinami?",
+      "q2Answer": "Taip. Kiekvienas mūsų platformos specialistas praeina tapatybės ir biografijos patikrą prieš pradėdamas priimti užsakymus.",
+      "q3Question": "Ar galiu atšaukti arba perkelti rezervaciją?",
+      "q3Answer": "Taip, rezervaciją galite atšaukti arba perkelti savo rezervacijų puslapyje ne vėliau kaip likus 24 valandoms iki vizito, nemokamai.",
+      "q4Question": "Kaip vyksta apmokėjimas?",
+      "q4Answer": "Mokėjimas saugiai apdorojamas per platformą, kai paslauga jau atlikta. Jūsų kortelės duomenys niekada neperduodami specialistui tiesiogiai.",
+      "q5Question": "Ką daryti, jei paslauga netenkino?",
+      "q5Answer": "Susisiekite su mūsų pagalbos komanda per 48 valandas nuo vizito — padėsime išspręsti problemą, prireikus grąžinsime pinigus."
     }
   },
   "categories": {
