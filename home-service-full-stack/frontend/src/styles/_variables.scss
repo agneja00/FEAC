@@ -211,3 +211,13 @@ body {
     text-decoration: none;
   }
 }
+
+@mixin section-title {
+  font-size: 1.35rem;
+  color: var(--text-color);
+
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+    color: var(--text-color);
+  }
+}

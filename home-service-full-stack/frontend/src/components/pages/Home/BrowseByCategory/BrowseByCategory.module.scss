@@ -8,8 +8,7 @@
 }
 
 .title {
-  color: var(--text-color);
-  font-size: 1.2rem;
+  @include section-title;
 }
 
 .viewAll {
@@ -42,9 +41,5 @@
 @media (min-width: 768px) {
   .section {
     padding: 2.5rem 0;
-  }
-
-  .title {
-    font-size: 1.6rem;
   }
 }

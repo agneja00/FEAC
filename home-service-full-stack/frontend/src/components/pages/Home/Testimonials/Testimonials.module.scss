@@ -4,9 +4,8 @@
 }
 
 .title {
+  @include section-title;
   margin-bottom: 2rem;
-  color: var(--text-color);
-  font-size: 1.2rem;
   text-align: left;
 }
 
@@ -100,7 +99,6 @@
 
   .title {
     margin-bottom: 2.5rem;
-    font-size: 1.6rem;
   }
 
   .carousel {

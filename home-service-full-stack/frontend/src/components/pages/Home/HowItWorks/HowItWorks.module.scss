@@ -14,8 +14,7 @@
 }
 
 .title {
-  color: var(--text-color);
-  font-size: 1.2rem;
+  @include section-title;
 }
 
 .steps {
@@ -78,7 +77,6 @@
   }
 
   .title {
-    font-size: 1.6rem;
     text-align: center;
     margin-bottom: 1rem;
   }
