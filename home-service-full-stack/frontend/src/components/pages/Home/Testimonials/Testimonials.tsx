@@ -2,7 +2,7 @@ import { useRef } from "react";
 import styles from "./Testimonials.module.scss";
 import { useTranslation } from "react-i18next";
 import { IoStar, IoChevronBack, IoChevronForward } from "react-icons/io5";
-import Avatar from "../../../layout/Topbar/Avatar/Avatar";
+import Avatar from "@/components/common/Avatar/Avatar";
 
 const REVIEW_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 

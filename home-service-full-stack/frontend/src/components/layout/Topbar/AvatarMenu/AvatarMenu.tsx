@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useContext, useMemo } from "react";
 import { Link, useNavigate, generatePath, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { IoChevronDown } from "react-icons/io5";
-import Avatar from "../Avatar/Avatar";
+import Avatar from "@/components/common/Avatar/Avatar";
 import { UserContext } from "@/components/context/UserContext";
 import type { IUser } from "@/components/user/types";
 import { ROUTES } from "@/constants/routes";
