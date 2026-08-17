@@ -129,6 +129,11 @@
       "q4Answer": "Payment is securely processed through the platform once the service is completed. We never share your card details with the professional.",
       "q5Question": "What if I'm not satisfied with the service?",
       "q5Answer": "Contact our support team within 48 hours of the appointment and we'll help resolve the issue, including a refund if applicable."
+    },
+    "cta": {
+      "eyebrow": "Are you a service provider?",
+      "title": "Join Our Network of Trusted Professionals",
+      "description": "Grow your business, reach more customers and manage bookings effortlessly."
     }
   },
   "categories": {
@@ -156,7 +161,8 @@
     "cancel": "Cancel",
     "update": "Update",
     "search": "Search",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "becomeAPartner": "Become a Partner"
   },
   "messages": {
     "emailSendSuccess": "Email sent successfully!",

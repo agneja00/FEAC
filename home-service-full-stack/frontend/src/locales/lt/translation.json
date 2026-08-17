@@ -129,6 +129,11 @@
       "q4Answer": "Mokėjimas saugiai apdorojamas per platformą, kai paslauga jau atlikta. Jūsų kortelės duomenys niekada neperduodami specialistui tiesiogiai.",
       "q5Question": "Ką daryti, jei paslauga netenkino?",
       "q5Answer": "Susisiekite su mūsų pagalbos komanda per 48 valandas nuo vizito — padėsime išspręsti problemą, prireikus grąžinsime pinigus."
+    },
+    "cta": {
+      "eyebrow": "Teikiate paslaugas?",
+      "title": "Prisijunkite prie patikimų specialistų tinklo",
+      "description": "Auginkite verslą, pasiekite daugiau klientų ir lengvai valdykite rezervacijas."
     }
   },
   "categories": {
@@ -156,7 +161,8 @@
     "cancel": "Atšaukti",
     "update": "Atnaujinti",
     "search": "Ieškoti",
-    "viewAll": "Žiūrėti visas"
+    "viewAll": "Žiūrėti visas",
+    "becomeAPartner": "Tapti partneriu"
   },
   "messages": {
     "emailSendSuccess": "El. laiškas sėkmingai išsiųstas!",
