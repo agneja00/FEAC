@@ -8,6 +8,7 @@ import Testimonials from "./Testimonials/Testimonials";
 import FAQ from "./FAQ/FAQ";
 import { useServiceData } from "@/components/service/hooks";
 import { useTranslation } from "react-i18next";
+import PartnerCTA from "./PartnerCTA/PartnerCTA";
 
 const Home = () => {
   const { isLoading, error } = useServiceData();
@@ -35,6 +36,7 @@ const Home = () => {
         <PopularServices />
         <Testimonials />
         <FAQ />
+        <PartnerCTA />
       </div>
     </>
   );
